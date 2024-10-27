@@ -69,7 +69,7 @@ const GroupProfileSection = () => {
           return { ...prev, isMemember: false };
         });
       }
-      navigate(`/Feed`);
+      navigate(`/feed`);
     }
   };
 
@@ -106,7 +106,7 @@ const GroupProfileSection = () => {
                 <div className="absolute right-0 p-2">
                   {userContext.userInfo.UserId == groupInfo.adminId && (
                     <button
-                      onClick={() => navigate(`/GroupSettings/${groupInfo.id}`)}
+                      onClick={() => navigate(`/groupSettings/${groupInfo.id}`)}
                     >
                       <FaUserGear
                         className={`${colors.ButtonFont}`}

@@ -41,7 +41,7 @@ function RouterControler() {
                       <Route path="About" element={<About />} />
                       <Route path="Test" element={<TestSpace />} />
                       <Route
-                        path="Feed"
+                        path="feed"
                         element={
                           <ProtectedRoute>
                             <Feed />
@@ -49,7 +49,7 @@ function RouterControler() {
                         }
                       />
                       <Route
-                        path="Feed/:postId"
+                        path="feed/:postId"
                         element={
                           <ProtectedRoute>
                             <Feed />
@@ -65,7 +65,7 @@ function RouterControler() {
                         }
                       />
                       <Route
-                        path="Profile/:userId"
+                        path="profile/:userId"
                         element={
                           <ProtectedRoute>
                             <Profile />
@@ -73,7 +73,7 @@ function RouterControler() {
                         }
                       />
                       <Route
-                        path="Profile"
+                        path="profile"
                         element={
                           <ProtectedRoute>
                             <Profile />
@@ -81,7 +81,7 @@ function RouterControler() {
                         }
                       />
                       <Route
-                        path="Settings"
+                        path="settings"
                         element={
                           <ProtectedRoute>
                             <UserSettings />
@@ -89,7 +89,7 @@ function RouterControler() {
                         }
                       />
                       <Route
-                        path="Group"
+                        path="group"
                         element={
                           <ProtectedRoute>
                             <Group />
@@ -97,7 +97,7 @@ function RouterControler() {
                         }
                       />
                       <Route
-                        path="Group/:groupId"
+                        path="group/:groupId"
                         element={
                           <ProtectedRoute>
                             <Group />
@@ -105,7 +105,7 @@ function RouterControler() {
                         }
                       />
                       <Route
-                        path="GroupSettings/:groupId"
+                        path="groupSettings/:groupId"
                         element={
                           <ProtectedRoute>
                             <GroupSettings />
@@ -113,7 +113,7 @@ function RouterControler() {
                         }
                       />
                       <Route
-                        path="Register"
+                        path="register"
                         element={
                           <NoAuthRoute>
                             <Register />
@@ -121,11 +121,11 @@ function RouterControler() {
                         }
                       />
                       <Route
-                        path="Recover/:token"
+                        path="recover/:token"
                         element={<PasswordRecoveryPage />}
                       />
                       <Route
-                        path="Login"
+                        path="login"
                         element={
                           <NoAuthRoute>
                             <LoginPage />

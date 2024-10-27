@@ -56,7 +56,7 @@ const NotificationObject: React.FC<{
       chatContext.addChat(notification?.referenceId);
     }
     if (actionPathName == "Post" && notification?.referenceId) {
-      navigate(`/Feed/${notification?.referenceId}`);
+      navigate(`/feed/${notification?.referenceId}`);
     }
 
     if (notification?.id) {

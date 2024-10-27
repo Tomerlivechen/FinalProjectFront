@@ -46,7 +46,7 @@ function NavBar() {
         id="app-navbar"
         className={` fixed z-40 w-full flex-row md:shadow-2xl shadow-slate-800  text-black flex gap-3 ${colors.Nav} ${colors.NavText}`}
       >
-        <NavLink className="p-3" to="Feed">
+        <NavLink className="p-3" to="feed">
           <Tooltip title="Feed">
             <CgFeed className="md:hidden" size={24} />
             <p className="hidden md:block">Feed</p>
@@ -59,13 +59,13 @@ function NavBar() {
           </Tooltip>
         </NavLink>
 
-        <NavLink className="p-3" to="Profile">
+        <NavLink className="p-3" to="profile">
           <Tooltip title="Profile">
             <FaUser className="md:hidden" size={24} />
             <p className="hidden md:block">Profile</p>
           </Tooltip>
         </NavLink>
-        <NavLink className="p-3" to="Group">
+        <NavLink className="p-3" to="group">
           <Tooltip title="Group">
             <FaPeopleGroup className="md:hidden" size={24} />
             <p className="hidden md:block">Group</p>

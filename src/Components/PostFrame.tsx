@@ -70,7 +70,6 @@ const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
         );
       }
     };
-
     if (location.pathname.startsWith("/group") && groupIdState) {
       const groupPosts = await Posts.GetGroupPosts(groupIdState);
       updatePostListIfChanged(groupPosts?.data);

@@ -39,7 +39,7 @@ const ProfileGroupsList = () => {
   return (
     <>
       {!loading && groupCardData && (
-        <div className="flex flex-wrap">
+        <div className="grid grid-cols-1  min-[1600px]:grid-cols-2 gap-4">
           {groupCardData.map((group) => (
             <div className="p-2" key={group.id}>
               <GroupCard GroupCardData={group} />

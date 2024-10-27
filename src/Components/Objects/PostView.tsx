@@ -23,8 +23,12 @@ import { Posts } from "../../Services/post-service";
 import { useNavigate } from "react-router-dom";
 import { ISocialGroupDisplay } from "../../Models/SocialGroup";
 import { Groups } from "../../Services/group-service";
+import { useCopy } from "../../CustomHooks/useCopy";
+import { MdOutlineContentCopy } from "react-icons/md";
+import { Tooltip } from "react-bootstrap";
 
 const PostView: React.FC<IPostDisplay> = (postDisplay) => {
+  const copy = useCopy();
   const navagate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -67,6 +71,10 @@ const PostView: React.FC<IPostDisplay> = (postDisplay) => {
       setGroupAdminId(groupInfo.adminId);
     }
   }, []);
+
+  const handleCopy = async (postId: string) => {
+    await copy(postId);
+  };
 
   return (
     <>
@@ -177,6 +185,11 @@ const PostView: React.FC<IPostDisplay> = (postDisplay) => {
               </div>
             </div>
             <div className="flex items-center">
+              <Tooltip title="Copy post link">
+                <button onClick={() => handleCopy(postDisplay.id)}>
+                  <MdOutlineContentCopy size={24} />
+                </button>
+              </Tooltip>
               {!postDisplay.hasVoted && (
                 <>
                   <button

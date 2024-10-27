@@ -168,7 +168,7 @@ const GroupEditComponent = () => {
         updateGroupData.banerImageURL = bannerImageUrl;
       }
       await Groups.EditGroup(updateGroupData);
-      navigate(`/Group/${groupId}`);
+      navigate(`/group/${groupId}`);
     } else {
       initializeGroupData();
     }
