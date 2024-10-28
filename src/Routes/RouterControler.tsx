@@ -120,6 +120,7 @@ function RouterControler() {
                           </NoAuthRoute>
                         }
                       />
+                      <Route path="test" element={<TestSpace />} />
                       <Route
                         path="recover/:token"
                         element={<PasswordRecoveryPage />}

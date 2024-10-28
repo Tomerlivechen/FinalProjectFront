@@ -16,6 +16,7 @@ const Profile = () => {
   const [userIdState, setUserIdState] = useState<string | null>(null);
   const [loadingUsers, setLoadingUsers] = useState(true);
   const [usersList, setUsersList] = useState<IAppUserDisplay[] | null>(null);
+  const [imagesOpen, setImagesOpen] = useState(false);
 
   const GetFollowing = async (profileId: string) => {
     const response = await auth.GetUsersFollowing(profileId);

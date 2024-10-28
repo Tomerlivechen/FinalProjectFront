@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
 import { Groups } from "../Services/group-service";
 import { IConfirmJoinGoupProps } from "../Types/@GroupTypes";
+import { Images } from "../Services/image-service";
 
 const showErrorDialog = (message: string) =>
   Swal.fire({
@@ -17,7 +18,7 @@ const showSuccessDialog = (message: string) =>
     timer: 2000,
   });
 
-const ConfirmJoinGroup = (joinData: IConfirmJoinGoupProps) =>
+const ConfirmJoinGroup = async (joinData: IConfirmJoinGoupProps) =>
   Swal.fire({
     title: joinData.title,
     html: joinData.text,
@@ -30,6 +31,21 @@ const ConfirmJoinGroup = (joinData: IConfirmJoinGoupProps) =>
     if (result.isConfirmed) {
       await Groups.JoinGroup(joinData.groupId);
       return true;
+    }
+  });
+
+const ConfirmImageDelete = async (imageId: string) =>
+  Swal.fire({
+    title: "Are you sure?",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes",
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      const respons = await Images.DeleteImage(imageId);
+      return respons.status;
     }
   });
 
@@ -49,6 +65,21 @@ const getText = async (title: string, placeholder: string) => {
     Swal.fire(`Entered URL: ${url}`);
   }
   return url;
+};
+
+const getName = async () => {
+  const { value: name } = await Swal.fire({
+    input: "text",
+    title: `Submit new name`,
+    inputPlaceholder: "",
+    didOpen: () => {
+      const popup = document.querySelector(".swal2-popup");
+      if (popup) {
+        popup.setAttribute("id", "mySweetAlertModal");
+      }
+    },
+  });
+  return name;
 };
 
 const showImage = (title: string, image: string) =>
@@ -77,4 +108,6 @@ export const dialogs = {
   showImage,
   showtext,
   ConfirmJoinGroup,
+  ConfirmImageDelete,
+  getName,
 };
