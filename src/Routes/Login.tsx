@@ -12,7 +12,7 @@ import ElementFrame from "../Constructors/ElementFrame";
 import { FormikElementBuilder } from "../Constructors/FormikElementBuilder";
 import { RxEyeClosed } from "react-icons/rx";
 import { MYFormikValues } from "../Types/@StructureTypes";
-import { ReNewPasswordDTO, ReSetPassword, SendEmail } from "../Services/emailRecovery-servicets";
+import { ReNewPasswordDTO, ReSetPassword, SendRecoveyEmail } from "../Services/emailRecovery-servicets";
 
 const emailValues: MYFormikValues = {
   Title: "Email Address",
@@ -76,7 +76,7 @@ const forgotPassword = async () => {
     userInfo: user.data,
   }
 
-  await SendEmail(DTO)
+  await SendRecoveyEmail(DTO)
 }
 
   return (

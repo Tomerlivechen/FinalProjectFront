@@ -13,6 +13,7 @@ import { FormikElementBuilder } from "../Constructors/FormikElementBuilder";
 import { RxEyeClosed } from "react-icons/rx";
 import { MYFormikValues } from "../Types/@StructureTypes";
 import { PasswordRecovery } from "../Models/AuthModels";
+import { AxiosError } from "axios";
 
 const emailValues: MYFormikValues = {
   Title: "Email Address",
@@ -62,7 +63,7 @@ function PasswordRecoveryPage() {
     newPassword: "",
   };
 
-  const handleSubmit = (data: PasswordRecovery) => {
+  const handleSubmit =async (data: PasswordRecovery) => {
     setIsLoading(true);
     if (token) {
       const recoveryValues: PasswordRecovery = {
@@ -70,10 +71,18 @@ function PasswordRecoveryPage() {
         token: token,
         newPassword: data.newPassword,
       };
-
-      navigate("/login");
-      setIsLoading(false);
-    }
+try {
+const respons = await auth.SetNewPassword(recoveryValues)
+if (respons.status === 200) {
+  dialogs.success("Password reset successful")
+  navigate("/login");
+  setIsLoading(false);
+}
+}
+catch (eff) {
+  dialogs.error("Error setting new password");
+  setIsLoading(false);
+}
     setIsLoading(false);
   };
 

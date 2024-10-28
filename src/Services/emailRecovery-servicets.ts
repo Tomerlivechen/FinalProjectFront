@@ -14,12 +14,13 @@ export interface ReSetPassword {
     userInfo : IAppUserDisplay;
 }
 
-const SendEmail = async (paswwordReset : ReSetPassword) => {
-
+const SendRecoveyEmail = async (paswwordReset : ReSetPassword) => {
+  const basePath = window.location.origin;
   const templateParams = {
     to_name: paswwordReset.userInfo.first_Name,
     to_email: paswwordReset.userInfo.email,
-    message: `${paswwordReset.userInfo.first_Name} you have requested a reset passward for your account at Deinonychus , follow this link to reset your password ${paswwordReset.tokenDTO.token}`,
+    message: `${paswwordReset.userInfo.first_Name} you have requested a reset passward for your account at Deinonychus , follow this link to reset your password `,
+    url: `${basePath}/recover/${paswwordReset.tokenDTO.token}`,
     subject: `Password reset Deinonychus`,
   };
   try {
@@ -41,4 +42,4 @@ const SendEmail = async (paswwordReset : ReSetPassword) => {
   } catch (error ) { console.log("FAILED...",error);}
 };
 
-export { SendEmail };
+export { SendRecoveyEmail };

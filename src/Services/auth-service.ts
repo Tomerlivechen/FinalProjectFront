@@ -118,7 +118,7 @@ const login = (email: string, password: string) =>
                 const SetNewPassword = (ResetPasswordDTO : ReNewPasswordDTO) =>
                   request({
                     url: `${AuthURL}/SetNewPassword`,
-                    method: "GET",
+                    method: "PUT",
                     data: ResetPasswordDTO,
                   });
 
