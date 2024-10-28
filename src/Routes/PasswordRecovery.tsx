@@ -13,7 +13,7 @@ import { FormikElementBuilder } from "../Constructors/FormikElementBuilder";
 import { RxEyeClosed } from "react-icons/rx";
 import { MYFormikValues } from "../Types/@StructureTypes";
 import { PasswordRecovery } from "../Models/AuthModels";
-import { AxiosError } from "axios";
+
 
 const emailValues: MYFormikValues = {
   Title: "Email Address",
@@ -85,6 +85,7 @@ catch (eff) {
 }
     setIsLoading(false);
   };
+}
 
   return (
     <>
