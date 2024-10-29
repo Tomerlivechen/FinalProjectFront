@@ -42,7 +42,11 @@ const ResizableFrame: React.FC<ResizableFrameProps> = (
   }, []);
 
   useEffect(() => {
+    if (props.setShow){
+      props.setShow(!sizeSet.closed)
+    }
     setShow(!sizeSet.closed);
+
   }, [sizeSet]);
 
   const toggleBoolean = (size: "min" | "mid" | "max" | "closed") => {

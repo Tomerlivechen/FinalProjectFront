@@ -6,6 +6,7 @@
     overflowX?: boolean;
     title: string;
     show: boolean;
+    setShow? : React.Dispatch<React.SetStateAction<boolean>>
   }
   
   export interface ResizableFrameButtonProps {

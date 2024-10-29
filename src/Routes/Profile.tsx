@@ -9,6 +9,7 @@ import ResizableFrame from "../Components/Objects/ResizableFrame";
 import { UserTabList } from "../Components/Objects/UserTabList";
 import { IAppUserDisplay } from "../Models/UserModels";
 import { ProfileGroupsList } from "../Components/Objects/ProfileGroupsList";
+import { ImageList } from "../Components/Objects/ImageList";
 
 const Profile = () => {
   const userContext = useUser();
@@ -48,6 +49,7 @@ const Profile = () => {
           </div>
 
           <div className="flex  justify-between w-8/12 ">
+          {!imagesOpen && 
             <div className="hidden lg:block lg:w-fit pl-2 pr-2 h-1/2">
               <>
                 <ResizableFrame
@@ -59,7 +61,9 @@ const Profile = () => {
                   <ProfileGroupsList />
                 </ResizableFrame>
               </>
-            </div>
+            </div>}
+            <ImageList ImageListProps={{open:imagesOpen, setOpen:setImagesOpen}}/>
+            {!imagesOpen && <>
             <div className="hidden xl:block lg:w-fit pl-2 ">
               {!loadingUsers && usersList && (
                 <>
@@ -75,7 +79,7 @@ const Profile = () => {
             </div>
             <div className="w-fit lg:w-fit pl-2 pr-2">
               <PostFrame UserList={[]} />
-            </div>
+            </div></>}
           </div>
         </div>
       </div>

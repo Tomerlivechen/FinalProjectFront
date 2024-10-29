@@ -7,3 +7,8 @@ export interface IAppImage {
     title : string;
     Public : boolean;
   }
+
+export interface IImageListPops {
+  open: boolean;
+  setOpen: booleanReact.Dispatch<React.SetStateAction<boolean>>;
+} 

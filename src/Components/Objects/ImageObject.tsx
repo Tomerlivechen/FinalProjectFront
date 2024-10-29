@@ -5,13 +5,12 @@ import { IAppImage } from "../../Types/@ImageTypes";
 import { useUser } from "../../CustomHooks/useUser";
 import { colors } from "../../Constants/Patterns";
 import { Tooltip } from "react-bootstrap";
-import { IoClose, IoExpand } from "react-icons/io5";
+import { IoClose} from "react-icons/io5";
 import { dialogs } from "../../Constants/AlertsConstant";
 import { MdOutlineContentCopy } from "react-icons/md";
 import { BiEdit } from "react-icons/bi";
 import { Images } from "../../Services/image-service";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
-import { FaExpandArrowsAlt } from "react-icons/fa";
 import { RxOpenInNewWindow } from "react-icons/rx";
 
 const ImageObject: React.FC<{
