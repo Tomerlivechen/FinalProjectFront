@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import MainPage from "./MainPage";
 import About from "./About";
 import TestSpace from "./TestSpace";
 
