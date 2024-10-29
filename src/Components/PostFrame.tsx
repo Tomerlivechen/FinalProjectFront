@@ -47,8 +47,8 @@ const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
     comments: false,
   });
   const [feedDirection, setFeedDirection] = useState({
-    ascending: true,
-    descending: false,
+    ascending: false,
+    descending: true,
   });
 
   useEffect(() => {
@@ -82,13 +82,6 @@ const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
     } else if (location.pathname.startsWith("/profile") && userIdState) {
       const ProfilePosts = await Posts.GetAuthorPosts(userIdState);
       updatePostListIfChanged(ProfilePosts.data);
-    } else if (
-      location.pathname.startsWith("/profile") &&
-      !userIdState &&
-      userContex.userInfo.UserId
-    ) {
-      const userPosts = await Posts.GetAuthorPosts(userContex.userInfo.UserId);
-      updatePostListIfChanged(userPosts?.data);
     }
   };
 
@@ -103,7 +96,10 @@ const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
     if (location.pathname.startsWith("/feed") && postId) {
       setPostIdState(postId);
     }
-  }, []);
+    if (location.pathname.startsWith("/profile") && !userId) {
+      setUserIdState(userContex.userInfo.UserId);
+    }
+  }, [location.pathname, params, userContex.userInfo.UserId]);
 
   const intervalTime = 10000;
   useEffect(() => {

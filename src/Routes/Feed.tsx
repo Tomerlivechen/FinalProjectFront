@@ -102,7 +102,7 @@ const Feed = () => {
                 whidth={"100%"}
                 title={"People"}
                 show={true}
-                tailwindProps=" h-full"
+                tailwindProps=" h-auto "
               >
                 <div className={`${colors.ActiveText} text-center`}>
                   Following

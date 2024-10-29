@@ -4,7 +4,7 @@
   userId: string;
   userName: string;
   message: string;
-  Datetime: string;
+  datetime: string;
 }
 
  interface IChat {

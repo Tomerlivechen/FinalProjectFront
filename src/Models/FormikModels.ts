@@ -233,6 +233,7 @@ export const confirmPasswordValues: MYFormikValues = {
     element: "password",
     type: "text",
     placeholder: "Password",
+    textbox: true,
     required: true,
     hidden: false,
     width: "full",

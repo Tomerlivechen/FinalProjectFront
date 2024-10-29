@@ -48,38 +48,48 @@ const Profile = () => {
             <ProfileUserSection userId={userIdState} />
           </div>
 
-          <div className="flex  justify-between w-8/12 ">
-          {!imagesOpen && 
-            <div className="hidden lg:block lg:w-fit pl-2 pr-2 h-1/2">
-              <>
-                <ResizableFrame
-                  title={"Groups"}
-                  show={true}
-                  overflowX={false}
-                  tailwindProps="w-fit h-full"
-                >
-                  <ProfileGroupsList />
-                </ResizableFrame>
-              </>
-            </div>}
-            <ImageList ImageListProps={{open:imagesOpen, setOpen:setImagesOpen}}/>
-            {!imagesOpen && <>
-            <div className="hidden xl:block lg:w-fit pl-2 ">
-              {!loadingUsers && usersList && (
+          <div className="flex flex-col md:flex-row justify-between w-full md:w-8/12 ">
+            {!imagesOpen && (
+              <div className="hidden lg:block lg:w-fit pl-2 pr-2 h-1/2">
                 <>
                   <ResizableFrame
-                    title={"Following"}
+                    title={"Groups"}
                     show={true}
-                    tailwindProps="w-fit h-full"
+                    overflowX={false}
+                    tailwindProps="w-fit h-fit"
                   >
-                    <UserTabList users={usersList} />
+                    <ProfileGroupsList />
                   </ResizableFrame>
                 </>
-              )}
+              </div>
+            )}
+            <div
+              className={`${imagesOpen ? "md:w-full" : "md:w-fit"} w-[26rem] `}
+            >
+              <ImageList
+                ImageListProps={{ open: imagesOpen, setOpen: setImagesOpen }}
+              />
             </div>
-            <div className="w-fit lg:w-fit pl-2 pr-2">
-              <PostFrame UserList={[]} />
-            </div></>}
+            {!imagesOpen && (
+              <>
+                <div className="hidden xl:block lg:w-fit pl-2 ">
+                  {!loadingUsers && usersList && (
+                    <>
+                      <ResizableFrame
+                        title={"Following"}
+                        show={true}
+                        tailwindProps="w-fit h-fit"
+                      >
+                        <UserTabList users={usersList} />
+                      </ResizableFrame>
+                    </>
+                  )}
+                </div>
+                <div className="w-full lg:w-fit pl-2 pr-2">
+                  <PostFrame UserList={[]} />
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>

@@ -7,6 +7,7 @@ import { PiPlugsFill } from "react-icons/pi";
 import { GiChatBubble } from "react-icons/gi";
 import { useChat } from "../../CustomHooks/useChat";
 import { UserTabProps } from "../../Types/@UserTypes";
+import { Tooltip } from "react-bootstrap";
 
 const UserTab: React.FC<UserTabProps> = (TabProps: UserTabProps) => {
   const [following, setFollowings] = useState(TabProps.UserDisplay.following);
@@ -57,19 +58,23 @@ const UserTab: React.FC<UserTabProps> = (TabProps: UserTabProps) => {
               {userInfo.userName}
 
               {userInfo.chatId ? (
-                <button
-                  className="flex items-center"
-                  onClick={() => openNewChat()}
-                >
-                  <GiChatBubble size={24} />
-                </button>
+                <Tooltip title="Open Chat">
+                  <button
+                    className="flex items-center"
+                    onClick={() => openNewChat()}
+                  >
+                    <GiChatBubble size={24} />
+                  </button>
+                </Tooltip>
               ) : (
-                <button
-                  className="flex items-center"
-                  onClick={() => setUpChat()}
-                >
-                  <PiPlugsFill size={24} />
-                </button>
+                <Tooltip title="Make Contact">
+                  <button
+                    className="flex items-center"
+                    onClick={() => setUpChat()}
+                  >
+                    <PiPlugsFill size={24} />
+                  </button>
+                </Tooltip>
               )}
             </div>
             <div className=" ml-auto col-span-4 font-extrabold p-3 flex gap-3"></div>

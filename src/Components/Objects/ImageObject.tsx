@@ -5,7 +5,7 @@ import { IAppImage } from "../../Types/@ImageTypes";
 import { useUser } from "../../CustomHooks/useUser";
 import { colors } from "../../Constants/Patterns";
 import { Tooltip } from "react-bootstrap";
-import { IoClose} from "react-icons/io5";
+import { IoClose } from "react-icons/io5";
 import { dialogs } from "../../Constants/AlertsConstant";
 import { MdOutlineContentCopy } from "react-icons/md";
 import { BiEdit } from "react-icons/bi";
@@ -74,7 +74,7 @@ const ImageObject: React.FC<{
   useEffect(() => {
     setIsLoading(true);
     if (
-      ImageObjectProps.Public ||
+      ImageObjectProps.public ||
       userContext.userInfo.UserId == ImageObjectProps.userId
     ) {
       setImageObject(ImageObjectProps);
@@ -136,7 +136,7 @@ const ImageObject: React.FC<{
                 </div>
                 <Tooltip title={`Delete Image`}>
                   <button
-                    className={`${colors.Buttons} p-2 rounded-xl absolute bottom-2 right-2 z-10`}
+                    className={`${colors.Buttons} p-2 rounded-xl absolute bottom-6 right-2 z-10`}
                     onClick={copyImageLink}
                   >
                     <MdOutlineContentCopy />
@@ -146,14 +146,14 @@ const ImageObject: React.FC<{
                   userContext.userInfo.UserId == imageObject.userId) && (
                   <Tooltip
                     title={`Set privacy currently ${
-                      imageObject.Public ? "Public" : "Private"
+                      imageObject.public ? "Public" : "Private"
                     } `}
                   >
                     <button
-                      className={`${colors.Buttons} p-2 rounded-xl absolute bottom-2 left-2 z-10`}
+                      className={`${colors.Buttons} p-2 rounded-xl absolute bottom-6 left-2 z-10`}
                       onClick={togglePrivate}
                     >
-                      {imageObject.Public ? (
+                      {imageObject.public ? (
                         <FaEyeSlash size={18} />
                       ) : (
                         <FaEye size={18} />
@@ -163,12 +163,13 @@ const ImageObject: React.FC<{
                 )}
                 <Tooltip title={`Open in new tab`}>
                   <button
-                    className={`${colors.Buttons} p-2 rounded-xl absolute bottom-2 left-20 z-10`}
+                    className={`${colors.Buttons} p-2 rounded-xl absolute bottom-6 left-20 z-10`}
                     onClick={openInNewWindow}
                   >
                     <RxOpenInNewWindow size={18} />
                   </button>
                 </Tooltip>
+                <div className="h-6">{imageObject.datetime}</div>
               </ElementFrame>
             </Tooltip>
           </div>

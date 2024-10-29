@@ -7,35 +7,35 @@ const postImage = (imageURL: string) =>
     request({
       url: `${ImageURL}`,
       method: "POST",
-      data: imageURL,
+      data: {Input:imageURL},
   });
 
   const getUserImages = (userId: string) =>
     request({
-      url: `${ImageURL}/${userId}`,
+      url: `${ImageURL}/byId/${userId}`,
       method: "GET",
       data: null,
   });
 
   const DeleteImage = (imageId: string) =>
     request({
-      url: `${ImageURL}/${imageId}`,
+      url: `${ImageURL}/byId/${imageId}`,
       method: "DELETE",
       data: null,
   });
 
   const togglePrivat = (imageId: string) =>
     request({
-      url: `${ImageURL}/"togglePrivatebyId/${imageId}`,
+      url: `${ImageURL}/togglePrivatebyId/${imageId}`,
       method: "PUT",
       data: null,
   });
 
   const RenameImage = (imageId: string, name:string) =>
     request({
-      url: `${ImageURL}/${imageId}`,
+      url: `${ImageURL}/byId/${imageId}`,
       method: "PUT",
-      data: name,
+      data: {Input:name},
   });
 
   export const Images = {postImage, getUserImages, DeleteImage, RenameImage,togglePrivat}

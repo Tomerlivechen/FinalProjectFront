@@ -40,7 +40,7 @@ const MessageComponent: React.FC<IMessage> = (MessageDisplay) => {
               yours ? "text-end" : "text-start"
             }`}
           >
-            {MessageDisplay.Datetime}
+            {MessageDisplay.datetime}
           </div>
         </div>
       </ElementFrame>

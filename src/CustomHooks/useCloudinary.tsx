@@ -42,7 +42,8 @@ const useCloudinary = (): [
         formData
       );
       setImageURL(response.data.secure_url);
-      Images.postImage(response.data.secure_url);
+
+      await Images.postImage(response.data.secure_url);
     } catch (e) {
       console.error(e);
       dialogs.error("Image upload failed");

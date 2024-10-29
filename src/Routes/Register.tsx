@@ -148,7 +148,7 @@ function Register() {
               <div className="font-extralight form-group flex flex-col gap-2 w-1/2 mx-auto text-lg mt-5">
                 <label htmlFor="permissionlevel">User Type</label>
                 <Field
-                  className="rounded-md hover:border-2 border-2 px-2 py-2"
+                  className={`rounded-md hover:border-2 border-2 px-2 py-2 ${colors.TextBox}`}
                   id="permissionlevel"
                   name="permissionlevel"
                   as="select"

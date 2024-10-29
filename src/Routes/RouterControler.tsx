@@ -37,7 +37,7 @@ function RouterControler() {
                   <BackGround>
                     <AccessabilityPanel />
                     <Routes>
-                      <Route path="/" element={<MainPage />} />
+                      <Route path="/" element={<Feed />} />
                       <Route path="About" element={<About />} />
                       <Route path="Test" element={<TestSpace />} />
                       <Route
@@ -120,7 +120,6 @@ function RouterControler() {
                           </NoAuthRoute>
                         }
                       />
-                      <Route path="test" element={<TestSpace />} />
                       <Route
                         path="recover/:token"
                         element={<PasswordRecoveryPage />}

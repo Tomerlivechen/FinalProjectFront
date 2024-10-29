@@ -5,7 +5,8 @@ export interface IAppImage {
     url : string;
     datetime : string;
     title : string;
-    Public : boolean;
+    public : boolean;
+    datetime: string;
   }
 
 export interface IImageListPops {
