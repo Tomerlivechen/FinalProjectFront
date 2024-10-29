@@ -22,6 +22,7 @@ import { FooterBar } from "../Bars/Footer";
 import { Group } from "./Group";
 import GroupSettings from "./GroupSettings";
 import PasswordRecoveryPage from "./PasswordRecovery";
+import MainPage from "./MainPage";
 
 function RouterControler() {
   return (
@@ -36,7 +37,7 @@ function RouterControler() {
                   <BackGround>
                     <AccessabilityPanel />
                     <Routes>
-                      <Route path="/" element={<Feed />} />
+                      <Route path="/" element={<MainPage />} />
                       <Route path="About" element={<About />} />
                       <Route path="Test" element={<TestSpace />} />
                       <Route
