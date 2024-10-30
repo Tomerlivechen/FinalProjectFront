@@ -14,6 +14,7 @@ import { FaInfo } from "react-icons/fa";
 import { CgFeed } from "react-icons/cg";
 import { NotificationAlert } from "../Components/Objects/NotificationAlert";
 import { FaPeopleGroup } from "react-icons/fa6";
+import { AppLogo } from "../Components/Objects/AppLogo";
 function NavBar() {
   const navigate = useNavigate();
   const [filter, setFilter] = useState(false);
@@ -47,13 +48,8 @@ function NavBar() {
         className={` fixed z-40 w-full flex-row md:shadow-2xl shadow-slate-800  text-black flex gap-3 ${colors.Nav} ${colors.NavText}`}
       >
                             <Navbar.Brand href="feed">
-                        <img
-                            src={Theme == "dark" ? "/src/assets/dnmlogo.png" : "/src/assets/ddmlogo.png"}
-                            width="40"
-                            height="40"
-                            className="d-inline-block align-top pl-2 pt-2"
-                            alt="logo"
-                        />
+                              <div className="pt-1 pl-1">
+<AppLogo Size={"35"}/></div>
                     </Navbar.Brand>
         {isLoggedin && 
         <NavLink className="p-3" to="feed">
