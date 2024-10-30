@@ -46,19 +46,30 @@ function NavBar() {
         id="app-navbar"
         className={` fixed z-40 w-full flex-row md:shadow-2xl shadow-slate-800  text-black flex gap-3 ${colors.Nav} ${colors.NavText}`}
       >
+                            <Navbar.Brand href="feed">
+                        <img
+                            src={Theme == "dark" ? "/src/assets/dnmlogo.png" : "/src/assets/ddmlogo.png"}
+                            width="40"
+                            height="40"
+                            className="d-inline-block align-top pl-2 pt-2"
+                            alt="logo"
+                        />
+                    </Navbar.Brand>
+        {isLoggedin && 
         <NavLink className="p-3" to="feed">
           <Tooltip title="Feed">
             <CgFeed className="md:hidden" size={24} />
             <p className="hidden md:block">Feed</p>
           </Tooltip>
-        </NavLink>
+        </NavLink> }
         <NavLink className="p-3" to="About">
           <Tooltip title="About">
             <FaInfo className="md:hidden" size={24} />
             <p className="hidden md:block">About</p>
           </Tooltip>
         </NavLink>
-
+        {isLoggedin && 
+        <>
         <NavLink className="p-3" to="profile">
           <Tooltip title="Profile">
             <FaUser className="md:hidden" size={24} />
@@ -71,8 +82,8 @@ function NavBar() {
             <p className="hidden md:block">Group</p>
           </Tooltip>
         </NavLink>
-        {isLoggedin && (
-          <>
+        
+          
             <Tooltip title="Search">
               <button
                 className={` rounded-lg m-2 p-1  ${
@@ -86,7 +97,7 @@ function NavBar() {
               </button>
             </Tooltip>
           </>
-        )}
+        }
         <div className=" flex-1"></div>
 
         {!isLoggedin && (

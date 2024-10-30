@@ -109,7 +109,7 @@ const SearchProvider: React.FC<ProviderProps> = ({ children }) => {
         setUserList(Array.isArray(parsedUsers) ? parsedUsers : [parsedUsers]);
       })
       .catch((error) => {
-        catchError(error, "Getting users");
+        console.log(error, "Getting users");
       });
 
     Posts.getPosts()
@@ -119,7 +119,7 @@ const SearchProvider: React.FC<ProviderProps> = ({ children }) => {
         setPostList(Array.isArray(parsedPosts) ? parsedPosts : [parsedPosts]);
       })
       .catch((error) => {
-        catchError(error, "Getting Posts");
+        console.log(error, "Getting Posts");
       });
   };
 

@@ -32,7 +32,7 @@ const passwordValues: MYFormikValues = {
   hidden: false,
 };
 
-function LoginPage() {
+const LoginPage = () => {
   const [viewPassword, setviewPassword] = useState("password");
   passwordValues.type = viewPassword;
   const [isLoading, setIsLoading] = useState(false);
@@ -78,6 +78,8 @@ const forgotPassword = async () => {
 
   await SendRecoveyEmail(DTO)
 }
+
+
 
   return (
     <>
@@ -159,10 +161,19 @@ const forgotPassword = async () => {
                 >
                   Login
                 </button>
-                <button className={`${colors.ButtonFont}`} onClick={forgotPassword}> Forgot Password </button>
+                
               </div>
             </Form>
+
           </Formik>
+          <div className="flex flex-col items-center space-y-4">
+          <button className={`${colors.ButtonFont}`} onClick={forgotPassword}> Forgot Password </button>
+            <button
+                  onClick={()=>navigate("/register")}
+                  className={`${colors.Buttons} p-3 rounded-xl`}
+                >
+                  Create  New Account
+                </button></div>
         </ElementFrame>
       </div>
     </>
