@@ -4,7 +4,6 @@ import { IPostDisplay } from "../Models/Interaction";
 import { auth } from "../Services/auth-service";
 
 import {
-  catchError,
   stringToAppUserDisplay,
   stringToPostDisplay,
 } from "../Constants/Patterns";
