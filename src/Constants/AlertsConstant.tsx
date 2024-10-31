@@ -67,6 +67,19 @@ const getText = async (title: string, placeholder: string) => {
   return url;
 };
 
+const getEmail = async () => {
+  const { value: email } = await Swal.fire({
+    title: "Input email address",
+    input: "email",
+    inputLabel: "Your email address",
+    inputPlaceholder: "Enter your email address",
+  });
+  if (email) {
+    Swal.fire(`Entered email: ${email}`);
+  }
+  return email;
+};
+
 const getName = async () => {
   const { value: name } = await Swal.fire({
     input: "text",
@@ -110,4 +123,5 @@ export const dialogs = {
   ConfirmJoinGroup,
   ConfirmImageDelete,
   getName,
+  getEmail,
 };

@@ -66,7 +66,7 @@ const LoginPage = () => {
   };
 
   const forgotPassword = async () => {
-    const email = await dialogs.getText("your Email", "User Email");
+    const email = await dialogs.getEmail();
     const user = await auth.GetUserByEmail(email);
     const token = await auth.ResetPassword(email);
 
