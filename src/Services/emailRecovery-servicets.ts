@@ -15,12 +15,14 @@ export interface ReSetPassword {
 }
 
 const SendRecoveyEmail = async (paswwordReset : ReSetPassword) => {
+  // eslint-disable-next-line no-debugger
+  debugger
   const basePath = window.location.origin;
   const templateParams = {
     to_name: paswwordReset.userInfo.first_Name,
     to_email: paswwordReset.userInfo.email,
     message: `${paswwordReset.userInfo.first_Name} you have requested a reset passward for your account at Deinonychus , follow the link below to reset your password `,
-    url: `${basePath}/recover/${paswwordReset.tokenDTO.token}`,
+    url: `${basePath}/recover/${base64url(paswwordReset.tokenDTO.token)}`,
     subject: `Password reset Deinonychus`,
   };
   try {
@@ -43,3 +45,5 @@ const SendRecoveyEmail = async (paswwordReset : ReSetPassword) => {
 };
 
 export { SendRecoveyEmail };
+
+

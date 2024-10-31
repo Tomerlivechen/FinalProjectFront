@@ -14,7 +14,6 @@ import { RxEyeClosed } from "react-icons/rx";
 import { MYFormikValues } from "../Types/@StructureTypes";
 import { PasswordRecovery } from "../Models/AuthModels";
 
-
 const emailValues: MYFormikValues = {
   Title: "Email Address",
   element: "userEmail",
@@ -63,29 +62,28 @@ function PasswordRecoveryPage() {
     newPassword: "",
   };
 
-  const handleSubmit =async (data: PasswordRecovery) => {
+  const handleSubmit = async (data: PasswordRecovery) => {
     setIsLoading(true);
     if (token) {
       const recoveryValues: PasswordRecovery = {
         userEmail: data.userEmail,
-        token: token,
+        token: decodeURIComponent(token),
         newPassword: data.newPassword,
       };
-try {
-const respons = await auth.SetNewPassword(recoveryValues)
-if (respons.status === 200) {
-  dialogs.success("Password reset successful")
-  navigate("/login");
-  setIsLoading(false);
-}
-}
-catch (eff) {
-  dialogs.error("Error setting new password");
-  setIsLoading(false);
-}
-    setIsLoading(false);
+      try {
+        const respons = await auth.SetNewPassword(recoveryValues);
+        if (respons.status === 200) {
+          dialogs.success("Password reset successful");
+          navigate("/login");
+          setIsLoading(false);
+        }
+      } catch (eff) {
+        dialogs.error("Error setting new password");
+        setIsLoading(false);
+      }
+      setIsLoading(false);
+    }
   };
-}
 
   return (
     <>
