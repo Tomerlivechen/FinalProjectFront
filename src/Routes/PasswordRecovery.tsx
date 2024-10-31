@@ -13,6 +13,7 @@ import { FormikElementBuilder } from "../Constructors/FormikElementBuilder";
 import { RxEyeClosed } from "react-icons/rx";
 import { MYFormikValues } from "../Types/@StructureTypes";
 import { PasswordRecovery } from "../Models/AuthModels";
+import * as URLencode from "urlencode";
 
 const emailValues: MYFormikValues = {
   Title: "Email Address",
@@ -67,7 +68,7 @@ function PasswordRecoveryPage() {
     if (token) {
       const recoveryValues: PasswordRecovery = {
         userEmail: data.userEmail,
-        token: decodeURIComponent(token),
+        token: URLencode.decode(token),
         newPassword: data.newPassword,
       };
       try {
@@ -77,8 +78,8 @@ function PasswordRecoveryPage() {
           navigate("/login");
           setIsLoading(false);
         }
-      } catch (eff) {
-        dialogs.error("Error setting new password");
+      } catch (e) {
+        dialogs.error(`Error setting new password"  ${e}`);
         setIsLoading(false);
       }
       setIsLoading(false);

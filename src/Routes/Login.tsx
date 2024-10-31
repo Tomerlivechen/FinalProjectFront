@@ -66,8 +66,6 @@ const LoginPage = () => {
   };
 
   const forgotPassword = async () => {
-    // eslint-disable-next-line no-debugger
-    debugger;
     const email = await dialogs.getEmail();
     const user = await auth.GetUserByEmail(email);
     const token = await auth.ResetPassword(email);
