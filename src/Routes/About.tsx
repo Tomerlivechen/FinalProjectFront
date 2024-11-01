@@ -54,21 +54,22 @@ function About() {
         Enjoy the experience!
         <br />
       </p>
-      <div className="flex">
-        <p className="mb-4">
-          If you find any bugs, please reach out via chat to the <b>SysAdmin</b>{" "}
-          or by email at:ㅤ
-        </p>{" "}
-        <Tooltip title="Send Email to Dr. Tomer Che">
-          <a
-            href="mailto:TomerLiveChen@gmail.com"
-            className="font-bold underline decoration-teal-500 decoration-4"
+      <p className="mb-4">
+        If you find any bugs, please reach out via chat to the <b>SysAdmin</b>{" "}
+        or by email at:ㅤ
+        <a
+          href="mailto:TomerLiveChen@gmail.com"
+          className="font-bold underline decoration-teal-500 decoration-4 inline"
+        >
+          <Tooltip
+            title="Send Email to Dr. Tomer Chen"
+            placement="top"
+            className="inline"
           >
-            TomerLiveChen@gmail.com
-          </a>
-          .
-        </Tooltip>
-      </div>
+            TomerLiveChen@gmail.com.
+          </Tooltip>
+        </a>
+      </p>
     </ElementFrame>
   );
 }
