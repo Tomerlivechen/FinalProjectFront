@@ -4,14 +4,11 @@ import { colors } from "../Constants/Patterns";
 const BackGround: React.FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <>
-      <div
-        className={` w-full h-20 bg-cover bg-center overflow-y-auto" ${colors.ElementFrame} `}
-      ></div>
       <div className="relative">
         <div
-          className={` w-full min-h-screen h-fit bg-cover bg-center overflow-y-auto" ${colors.ElementFrame} `}
+          className={` inset-0 w-fit min-w-full min-h-screen h-fit bg-cover bg-center overflow-y-auto overflow-x-visible=false " ${colors.ElementFrame} `}
         >
-          {children}
+          <div className="pt-14">{children}</div>
         </div>
       </div>
     </>

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { FaRegEye } from "react-icons/fa";
@@ -17,6 +17,8 @@ import {
   ReSetPassword,
   SendRecoveyEmail,
 } from "../Services/emailRecovery-servicets";
+import { useLogin } from "../CustomHooks/useLogin";
+import { useUser } from "../CustomHooks/useUser";
 
 const emailValues: MYFormikValues = {
   Title: "Email Address",
@@ -39,6 +41,8 @@ const passwordValues: MYFormikValues = {
 const LoginPage = () => {
   const [viewPassword, setviewPassword] = useState("password");
   passwordValues.type = viewPassword;
+  const loginContext = useLogin();
+  const userContext = useUser();
   const [isLoading, setIsLoading] = useState(false);
   const { login } = useContext(LoggedInContext);
   const navigate = useNavigate();
@@ -83,12 +87,28 @@ const LoginPage = () => {
     await SendRecoveyEmail(DTO);
   };
 
+  useEffect(() => {
+    if (
+      loginContext.isLoggedin &&
+      loginContext.token &&
+      loginContext.token.length > 1 &&
+      userContext.userInfo.UserId &&
+      userContext.userInfo.UserId.length > 1
+    ) {
+      navigate("/feed");
+    }
+  }, [
+    loginContext.isLoggedin,
+    loginContext.token,
+    userContext.userInfo.UserId,
+  ]);
+
   return (
     <>
       <div className="flex justify-center items-center">
         <ElementFrame
           tailwind="h-fit"
-          width="500px"
+          width="400px"
           overflowY="auto"
           padding="0 pb-4"
         >
@@ -107,7 +127,6 @@ const LoginPage = () => {
                 .then((response) => {
                   dialogs.success("Login Succefull").then(() => {
                     login(response.data.token);
-                    navigate("/feed");
                   });
                 })
                 .catch((error) => {
@@ -135,7 +154,7 @@ const LoginPage = () => {
                   <FormikElementBuilder {...emailValues} />
                 </div>
                 <div className="w-full pl-6">
-                  <div className="w-1/12 absolute  mt-6 m-28 ">
+                  <div className="w-1/12 absolute  mt-6 m-28 ml-9 ">
                     {viewPassword == "text" ? (
                       <FaRegEye size={25} onClick={viewPass} />
                     ) : (

@@ -45,41 +45,42 @@ function NavBar() {
     <>
       <Navbar
         id="app-navbar"
-        className={` fixed z-40 w-full flex-row md:shadow-2xl shadow-slate-800  text-black flex gap-3 ${colors.Nav} ${colors.NavText}`}
+        className={` fixed z-40 w-full flex-row shadow-2xl shadow-slate-800  text-black flex gap-3 ${colors.Nav} ${colors.NavText}`}
       >
-                            <Navbar.Brand href="feed">
-                              <div className="pt-1 pl-1">
-<AppLogo Size={"35"}/></div>
-                    </Navbar.Brand>
-        {isLoggedin && 
-        <NavLink className="p-3" to="feed">
-          <Tooltip title="Feed">
-            <CgFeed className="md:hidden" size={24} />
-            <p className="hidden md:block">Feed</p>
-          </Tooltip>
-        </NavLink> }
+        <Navbar.Brand href="feed" className="flex-shrink-0">
+          <div className="pt-1 pl-1">
+            <AppLogo Size={"35"} />
+          </div>
+        </Navbar.Brand>
+        {isLoggedin && (
+          <NavLink className="p-3" to="feed">
+            <Tooltip title="Feed">
+              <CgFeed className="md:hidden" size={24} />
+              <p className="hidden md:block">Feed</p>
+            </Tooltip>
+          </NavLink>
+        )}
         <NavLink className="p-3" to="About">
           <Tooltip title="About">
             <FaInfo className="md:hidden" size={24} />
             <p className="hidden md:block">About</p>
           </Tooltip>
         </NavLink>
-        {isLoggedin && 
-        <>
-        <NavLink className="p-3" to="profile">
-          <Tooltip title="Profile">
-            <FaUser className="md:hidden" size={24} />
-            <p className="hidden md:block">Profile</p>
-          </Tooltip>
-        </NavLink>
-        <NavLink className="p-3" to="group">
-          <Tooltip title="Group">
-            <FaPeopleGroup className="md:hidden" size={24} />
-            <p className="hidden md:block">Group</p>
-          </Tooltip>
-        </NavLink>
-        
-          
+        {isLoggedin && (
+          <>
+            <NavLink className="p-3" to="profile">
+              <Tooltip title="Profile">
+                <FaUser className="md:hidden" size={24} />
+                <p className="hidden md:block">Profile</p>
+              </Tooltip>
+            </NavLink>
+            <NavLink className="p-3" to="group">
+              <Tooltip title="Group">
+                <FaPeopleGroup className="md:hidden" size={24} />
+                <p className="hidden md:block">Group</p>
+              </Tooltip>
+            </NavLink>
+
             <Tooltip title="Search">
               <button
                 className={` rounded-lg m-2 p-1  ${
@@ -93,7 +94,7 @@ function NavBar() {
               </button>
             </Tooltip>
           </>
-        }
+        )}
         <div className=" flex-1"></div>
 
         {!isLoggedin && (

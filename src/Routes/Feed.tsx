@@ -46,29 +46,35 @@ const Feed = () => {
 
   const intervalTime = 5000;
   useEffect(() => {
-    const interval = setInterval(() => {
-      getInteractingUsersLists();
-    }, intervalTime);
-    return () => clearInterval(interval);
-  }, []);
+    if (userContext.userInfo.UserId) {
+      const interval = setInterval(() => {
+        getInteractingUsersLists();
+      }, intervalTime);
+      return () => clearInterval(interval);
+    }
+  }, [userContext.userInfo.UserId]);
 
   const getInteractingUsersLists = async () => {
     if (userContext.userInfo.UserId) {
-      const response = await Chat.GetNotFollowingChats();
-      setTempChattingUsers(response.data);
       const fRespons = await auth.GetUsersFollowing(
         userContext.userInfo.UserId
       );
+      const response = await Chat.GetNotFollowingChats();
+      setTempChattingUsers(response.data);
       setTempFollowingUsers(fRespons.data);
     }
   };
 
   useEffect(() => {
-    if (!isEqual(tempFollowingUsers, followingUsers)) {
-      setFollowingUsers(tempFollowingUsers);
+    if (tempFollowingUsers) {
+      if (!isEqual(tempFollowingUsers, followingUsers)) {
+        setFollowingUsers(tempFollowingUsers);
+      }
     }
-    if (!isEqual(tempChattingUsers, chattingUsers)) {
-      setChattingUsers(tempChattingUsers);
+    if (tempChattingUsers) {
+      if (!isEqual(tempChattingUsers, chattingUsers)) {
+        setChattingUsers(tempChattingUsers);
+      }
     }
   }, [chattingUsers, followingUsers, tempChattingUsers, tempFollowingUsers]);
 

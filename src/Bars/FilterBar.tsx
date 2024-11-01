@@ -1,11 +1,15 @@
 import { useState } from "react";
-import { Navbar } from "react-bootstrap";
+import { Navbar, Tooltip } from "react-bootstrap";
 import { colors } from "../Constants/Patterns";
 import { useSearch } from "../CustomHooks/useSearch";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaUserTag } from "react-icons/fa";
 
 import { IUserSelector } from "../Types/@UserTypes";
 import { IPostSelector } from "../Types/@StructureTypes";
+import { FaKey, FaUser } from "react-icons/fa6";
+import { AiOutlineUserDelete, AiOutlineUsergroupDelete } from "react-icons/ai";
+import { MdOutlineTitle } from "react-icons/md";
+import { RiSignpostFill } from "react-icons/ri";
 
 function FilterBar() {
   const [selectedUser, setSelectedUser] = useState(false);
@@ -85,13 +89,16 @@ function FilterBar() {
     <>
       <Navbar
         id="app-filter-bar"
-        className={`fixed top-12 z-40 w-full md:shadow-2xl shadow-slate-800 text-black flex gap-3 ${colors.Filter} ${colors.NavText}`}
+        className={`fixed top-12 z-40 w-full shadow-2xl shadow-slate-800 text-black flex gap-3 ${colors.Filter} ${colors.NavText}`}
       >
         <button
           className={`${selectedUser ? colors.ActiveText : null} text-lg p-2`}
           onClick={toggleUser}
         >
-          User
+          <Tooltip title="User">
+            <FaUser className="md:hidden" size={24} />
+            <p className="hidden md:block">User</p>
+          </Tooltip>
         </button>
         {selectedUser && (
           <>
@@ -101,7 +108,10 @@ function FilterBar() {
               } p-1 mt-1 text-sm`}
               onClick={() => toggleUserSelector("UserName")}
             >
-              UserName
+              <Tooltip title="UserName">
+                <FaUserTag className="md:hidden" size={20} />
+                <p className="hidden md:block">UserName</p>
+              </Tooltip>
             </button>
             <button
               className={` ${
@@ -109,7 +119,10 @@ function FilterBar() {
               } p-1 mt-1 text-sm`}
               onClick={() => toggleUserSelector("FirstName")}
             >
-              First Name
+              <Tooltip title="First Name">
+                <AiOutlineUserDelete className="md:hidden" size={20} />
+                <p className="hidden md:block">First Name</p>
+              </Tooltip>
             </button>
             <button
               className={` ${
@@ -117,7 +130,10 @@ function FilterBar() {
               } p-1 mt-1 text-sm`}
               onClick={() => toggleUserSelector("LastName")}
             >
-              Last Name
+              <Tooltip title="Last Name">
+                <AiOutlineUsergroupDelete className="md:hidden" size={20} />
+                <p className="hidden md:block">Last Name</p>
+              </Tooltip>
             </button>
           </>
         )}
@@ -125,7 +141,10 @@ function FilterBar() {
           className={`${selectedPost ? colors.ActiveText : null}  text-lg p-2`}
           onClick={togglePost}
         >
-          Post
+          <Tooltip title="Post">
+            <RiSignpostFill className="md:hidden" size={28} />
+            <p className="hidden md:block">Post</p>
+          </Tooltip>
         </button>
         {selectedPost && (
           <>
@@ -135,7 +154,10 @@ function FilterBar() {
               } p-1 mt-1 text-sm`}
               onClick={() => togglePostSelector("UserName")}
             >
-              UserName
+              <Tooltip title="UserName">
+                <FaUserTag className="md:hidden" size={20} />
+                <p className="hidden md:block">UserName</p>
+              </Tooltip>
             </button>
             <button
               className={` ${
@@ -143,7 +165,10 @@ function FilterBar() {
               } p-1 mt-1 text-sm`}
               onClick={() => togglePostSelector("Title")}
             >
-              Title
+              <Tooltip title="Title">
+                <MdOutlineTitle className="md:hidden" size={20} />
+                <p className="hidden md:block">Title</p>
+              </Tooltip>
             </button>
             <button
               className={` ${
@@ -151,13 +176,16 @@ function FilterBar() {
               } p-1 mt-1 text-sm`}
               onClick={() => togglePostSelector("KeyWords")}
             >
-              Key Words
+              <Tooltip title="Key Words">
+                <FaKey className="md:hidden" size={18} />
+                <p className="hidden md:block">Key Words</p>
+              </Tooltip>
             </button>
           </>
         )}
-        <div style={{ position: "absolute", left: "40%" }}>
+        <div className="absolute md:left-[40%] md:center-auto left-auto right-4">
           <input
-            className="m-0.5 p-2 w-72 text-black"
+            className="m-0.5 p-2 w-20 md:w-72 text-black"
             id="searchBar"
             type="search"
             placeholder="Search"
