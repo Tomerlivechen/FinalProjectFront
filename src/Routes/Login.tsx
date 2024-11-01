@@ -85,10 +85,10 @@ const LoginPage = () => {
 
   return (
     <>
-      <div className="flex justify-center">
+      <div className="flex justify-center items-center">
         <ElementFrame
           tailwind="h-fit"
-          width="700px"
+          width="500px"
           overflowY="auto"
           padding="0 pb-4"
         >
