@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 import About from "./About";
 import TestSpace from "./TestSpace";
 
@@ -124,6 +129,7 @@ function RouterControler() {
                         path="recover/:token"
                         element={<PasswordRecoveryPage />}
                       />
+
                       <Route
                         path="login"
                         element={
@@ -131,6 +137,10 @@ function RouterControler() {
                             <LoginPage />
                           </NoAuthRoute>
                         }
+                      />
+                      <Route
+                        path="*"
+                        element={<Navigate to="/feed" replace />}
                       />
                     </Routes>
                   </BackGround>
