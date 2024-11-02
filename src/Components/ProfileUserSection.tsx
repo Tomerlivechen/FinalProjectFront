@@ -125,7 +125,11 @@ const ProfileUserSection: React.FC<ProfileUserSectionProps> = ({ userId }) => {
                 />
                 <div className="absolute -bottom-12 left-6 flex items-center space-x-4">
                   <img
-                    src={user.imageURL}
+                    src={
+                      user.imageURL
+                        ? user.imageURL
+                        : "https://res.cloudinary.com/dhle9hj3n/image/upload/v1729955566/isdaejsdshqjsjmvdy14.jpg"
+                    }
                     alt="User profile"
                     className="w-24 h-24 rounded-full border-4 border-white shadow-md"
                   />

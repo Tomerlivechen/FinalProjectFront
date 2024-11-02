@@ -47,7 +47,11 @@ const UserTab: React.FC<UserTabProps> = (TabProps: UserTabProps) => {
           >
             <img
               className="rounded-full border-2 h-14 w-14 shadow-2xl p-1 "
-              src={userInfo.imageURL}
+              src={
+                userInfo.imageURL
+                  ? userInfo.imageURL
+                  : "https://res.cloudinary.com/dhle9hj3n/image/upload/v1729955566/isdaejsdshqjsjmvdy14.jpg"
+              }
               onClick={() => navigate(`/profile/${userInfo.id}`)}
               aria-description={`Profile picture of ${userInfo.first_Name} ${userInfo.last_Name}`}
             />
