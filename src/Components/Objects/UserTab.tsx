@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { IAppUserDisplay } from "../../Models/UserModels";
 import ElementFrame from "../../Constructors/ElementFrame";
-import { colors } from "../../Constants/Patterns";
+import { colors, isValidURL } from "../../Constants/Patterns";
 import { useNavigate } from "react-router-dom";
 import { PiPlugsFill } from "react-icons/pi";
 import { GiChatBubble } from "react-icons/gi";
@@ -39,7 +39,7 @@ const UserTab: React.FC<UserTabProps> = (TabProps: UserTabProps) => {
   return (
     <>
       {!blockedYou ? (
-        <ElementFrame height="62px" width="200px" padding="0">
+        <ElementFrame tailwind="h-fit" width="200px" padding="2">
           <div
             className={`flex  ${
               blocking && "bg-stone-500 bg-opacity-15 rounded-full"
@@ -48,7 +48,7 @@ const UserTab: React.FC<UserTabProps> = (TabProps: UserTabProps) => {
             <img
               className="rounded-full border-2 h-14 w-14 shadow-2xl p-1 "
               src={
-                userInfo.imageURL.length > 2
+                isValidURL(userInfo.imageURL)
                   ? userInfo.imageURL
                   : "https://res.cloudinary.com/dhle9hj3n/image/upload/v1729955566/isdaejsdshqjsjmvdy14.jpg"
               }

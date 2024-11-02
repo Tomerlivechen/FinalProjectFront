@@ -4,7 +4,7 @@ import { auth } from "../Services/auth-service";
 import { useUser } from "../CustomHooks/useUser";
 import ClimbBoxSpinner from "../Spinners/ClimbBoxSpinner";
 
-import { colors } from "../Constants/Patterns";
+import { colors, isValidURL } from "../Constants/Patterns";
 import { ProfileUserSectionProps } from "../Types/@UserTypes";
 
 const UserLane: React.FC<ProfileUserSectionProps> = ({ userId }) => {
@@ -51,7 +51,7 @@ const UserLane: React.FC<ProfileUserSectionProps> = ({ userId }) => {
                 <div className="absolute -bottom-12 left-1/2 flex transform -translate-x-1/2 items-center space-x-4">
                   <img
                     src={
-                      user.imageURL.length > 2
+                      isValidURL(user.imageURL)
                         ? user.imageURL
                         : "https://res.cloudinary.com/dhle9hj3n/image/upload/v1729955566/isdaejsdshqjsjmvdy14.jpg"
                     }

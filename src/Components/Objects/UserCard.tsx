@@ -4,7 +4,7 @@ import ElementFrame from "../../Constructors/ElementFrame";
 import { auth } from "../../Services/auth-service";
 import { useLogin } from "../../CustomHooks/useLogin";
 import { dialogs } from "../../Constants/AlertsConstant";
-import { catchError } from "../../Constants/Patterns";
+import { catchError, isValidURL } from "../../Constants/Patterns";
 import { useUser } from "../../CustomHooks/useUser";
 import { useNavigate } from "react-router-dom";
 import { UserCardProps } from "../../Types/@UserTypes";
@@ -94,7 +94,7 @@ const UserCard: React.FC<UserCardProps> = ({ UserDisplay }) => {
   } else {
     return (
       <>
-        <ElementFrame height="60px" width="650px" padding="5">
+        <ElementFrame tailwind="h-fit w-[200px] md:w-[550px]" padding="2">
           <div className="flex">
             <div className=" col-span-2">
               <img
@@ -102,7 +102,7 @@ const UserCard: React.FC<UserCardProps> = ({ UserDisplay }) => {
                 width={60}
                 className="rounded-full border-2 shadow-2xl"
                 src={
-                  UserDisplay.imageURL.length > 2
+                  isValidURL(UserDisplay.imageURL)
                     ? UserDisplay.imageURL
                     : "https://res.cloudinary.com/dhle9hj3n/image/upload/v1729955566/isdaejsdshqjsjmvdy14.jpg"
                 }
@@ -113,33 +113,35 @@ const UserCard: React.FC<UserCardProps> = ({ UserDisplay }) => {
             <div className=" ml-6 col-span-4 font-extrabold text-emerald-800 p-3">
               {UserDisplay.userName}
             </div>
-            {!UserDisplay.hideName && (
-              <div className=" ml-4 col-span-4 font-extrabold p-3">
-                {`${UserDisplay.prefix}. ${UserDisplay.first_Name} 
+            <div className="hidden md:flex">
+              {!UserDisplay.hideName && (
+                <div className=" ml-4 col-span-4 font-extrabold p-3">
+                  {`${UserDisplay.prefix}. ${UserDisplay.first_Name} 
           ${UserDisplay.last_Name} (${UserDisplay.pronouns})`}
-              </div>
-            )}
-            <div className=" ml-auto col-span-4 font-extrabold p-3 flex gap-3">
-              {!UserDisplay.blockedYou &&
-                userContext.userInfo.UserId !== UserDisplay.id && (
-                  <>
-                    {following ? (
-                      <button onClick={handleUnfollow}>Unfollow</button>
-                    ) : (
-                      <button onClick={handleFollow}>Follow</button>
-                    )}
-                    {blocking ? (
-                      <button onClick={handleUnBlock}>Unblock</button>
-                    ) : (
-                      <button onClick={handleBlock}>Block</button>
-                    )}
-                  </>
-                )}
-              {UserDisplay.blockedYou && (
-                <div className="text-sm text-zinc-600">
-                  You Have been blocked
                 </div>
               )}
+              <div className=" ml-auto col-span-4 font-extrabold p-3 flex gap-3">
+                {!UserDisplay.blockedYou &&
+                  userContext.userInfo.UserId !== UserDisplay.id && (
+                    <>
+                      {following ? (
+                        <button onClick={handleUnfollow}>Unfollow</button>
+                      ) : (
+                        <button onClick={handleFollow}>Follow</button>
+                      )}
+                      {blocking ? (
+                        <button onClick={handleUnBlock}>Unblock</button>
+                      ) : (
+                        <button onClick={handleBlock}>Block</button>
+                      )}
+                    </>
+                  )}
+                {UserDisplay.blockedYou && (
+                  <div className="text-sm text-zinc-600">
+                    You Have been blocked
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </ElementFrame>

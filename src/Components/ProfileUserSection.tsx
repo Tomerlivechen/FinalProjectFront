@@ -4,7 +4,7 @@ import { auth } from "../Services/auth-service";
 import { useUser } from "../CustomHooks/useUser";
 import ClimbBoxSpinner from "../Spinners/ClimbBoxSpinner";
 import { FaUserGear } from "react-icons/fa6";
-import { colors } from "../Constants/Patterns";
+import { colors, isValidURL } from "../Constants/Patterns";
 import { useNavigate } from "react-router-dom";
 import { FaHandshakeSlash } from "react-icons/fa";
 import { FaHandshake } from "react-icons/fa";
@@ -126,7 +126,7 @@ const ProfileUserSection: React.FC<ProfileUserSectionProps> = ({ userId }) => {
                 <div className="absolute -bottom-12 left-6 flex items-center space-x-4">
                   <img
                     src={
-                      user.imageURL
+                      isValidURL(user.imageURL)
                         ? user.imageURL
                         : "https://res.cloudinary.com/dhle9hj3n/image/upload/v1729955566/isdaejsdshqjsjmvdy14.jpg"
                     }

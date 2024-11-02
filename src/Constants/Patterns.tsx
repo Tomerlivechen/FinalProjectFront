@@ -82,6 +82,17 @@ export const sortByProperty = <T,>(
   };
 };
 
+export const isValidURL = (url: string) => {
+  try {
+    new URL(url);
+    return true;
+  } catch (error) {
+    if (error instanceof Error) {
+      return false;
+    }
+  }
+};
+
 export const getFlowingPosts = async (userlist: string[] | null) => {
   const JWTtoken = localStorage.getItem("token");
   let newAuthState: IUserValues = {
