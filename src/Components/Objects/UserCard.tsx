@@ -102,7 +102,7 @@ const UserCard: React.FC<UserCardProps> = ({ UserDisplay }) => {
                 width={60}
                 className="rounded-full border-2 shadow-2xl"
                 src={
-                  UserDisplay.imageURL
+                  UserDisplay.imageURL.length > 2
                     ? UserDisplay.imageURL
                     : "https://res.cloudinary.com/dhle9hj3n/image/upload/v1729955566/isdaejsdshqjsjmvdy14.jpg"
                 }

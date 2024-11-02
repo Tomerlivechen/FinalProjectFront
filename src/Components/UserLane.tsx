@@ -51,7 +51,7 @@ const UserLane: React.FC<ProfileUserSectionProps> = ({ userId }) => {
                 <div className="absolute -bottom-12 left-1/2 flex transform -translate-x-1/2 items-center space-x-4">
                   <img
                     src={
-                      user.imageURL
+                      user.imageURL.length > 2
                         ? user.imageURL
                         : "https://res.cloudinary.com/dhle9hj3n/image/upload/v1729955566/isdaejsdshqjsjmvdy14.jpg"
                     }
