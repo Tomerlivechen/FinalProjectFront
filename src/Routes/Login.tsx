@@ -25,6 +25,7 @@ const emailValues: MYFormikValues = {
   element: "email",
   type: "text",
   placeholder: "Email Address",
+  textbox: true,
   required: true,
   hidden: false,
 };
@@ -34,6 +35,7 @@ const passwordValues: MYFormikValues = {
   element: "password",
   type: "password",
   placeholder: "Password",
+  textbox: true,
   required: true,
   hidden: false,
 };
