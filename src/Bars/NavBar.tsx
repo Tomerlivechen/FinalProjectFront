@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Navbar, Tooltip } from "react-bootstrap";
 import "../Css/Navbar.scss";
 import { ThemeContext } from "../ContextAPI/ThemeContext";
-import { LuLogOut } from "react-icons/lu";
+import { LuLogIn, LuLogOut } from "react-icons/lu";
 import { useNavigate, useLocation, NavLink } from "react-router-dom";
 import { BsFillLightbulbFill, BsFillLightbulbOffFill } from "react-icons/bs";
 import { colors } from "../Constants/Patterns";
@@ -45,7 +45,7 @@ function NavBar() {
     <>
       <Navbar
         id="app-navbar"
-        className={` fixed z-40 w-full flex-row shadow-2xl shadow-slate-800  text-black flex gap-3 ${colors.Nav} ${colors.NavText}`}
+        className={` fixed z-40 w-full flex-row shadow-2xl shadow-slate-800  text-black flex md:gap-3 gap-0 ${colors.Nav} ${colors.NavText}`}
       >
         <Navbar.Brand href="feed" className="flex-shrink-0">
           <div className="pt-1 pl-1">
@@ -53,14 +53,14 @@ function NavBar() {
           </div>
         </Navbar.Brand>
         {isLoggedin && (
-          <NavLink className="p-3" to="feed">
+          <NavLink className="md:p-3 p-1 pt-2" to="feed">
             <Tooltip title="Feed">
               <CgFeed className="md:hidden" size={24} />
               <p className="hidden md:block">Feed</p>
             </Tooltip>
           </NavLink>
         )}
-        <NavLink className="p-3" to="about">
+        <NavLink className="md:p-3 p-1 pt-2" to="about">
           <Tooltip title="About">
             <FaInfo className="md:hidden" size={24} />
             <p className="hidden md:block">About</p>
@@ -68,13 +68,13 @@ function NavBar() {
         </NavLink>
         {isLoggedin && (
           <>
-            <NavLink className="p-3" to="profile">
+            <NavLink className="md:p-3 p-1 pt-2" to="profile">
               <Tooltip title="Profile">
                 <FaUser className="md:hidden" size={24} />
                 <p className="hidden md:block">Profile</p>
               </Tooltip>
             </NavLink>
-            <NavLink className="p-3" to="group">
+            <NavLink className="md:p-3 p-1 pt-2" to="group">
               <Tooltip title="Group">
                 <FaPeopleGroup className="md:hidden" size={24} />
                 <p className="hidden md:block">Group</p>
@@ -99,12 +99,15 @@ function NavBar() {
 
         {!isLoggedin && (
           <>
-            <NavLink className="p-3" to="register">
+            <NavLink className="md:p-3 p-1 pt-2" to="register">
               Register
             </NavLink>
-            <NavLink className="p-3" to="login">
-              Login
+            <NavLink className="md:p-3 p-1 pt-2" to="login">
+            <Tooltip title="Log In">
+                <LuLogIn size={24} />
+              </Tooltip>
             </NavLink>
+
           </>
         )}
         {isLoggedin && (
@@ -112,7 +115,7 @@ function NavBar() {
             <div className="mr-6">
               <NotificationAlert />
             </div>
-            <button className="p-3" onClick={handelLogout}>
+            <button className="md:p-3 p-1 pt-2" onClick={handelLogout}>
               <Tooltip title="Log out">
                 <LuLogOut size={24} />
               </Tooltip>
