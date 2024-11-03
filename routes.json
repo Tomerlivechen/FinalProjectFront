@@ -2,67 +2,115 @@
     "routes": [
       {
         "route": "/",
-        "serve": "/index.html"
+        "serve": "/index.html",
+        "headers": {
+          "cache-control": "no-cache"
+        }
       },
       {
         "route": "/about",
-        "serve": "/index.html"
+        "serve": "/index.html",
+        "headers": {
+          "cache-control": "no-cache"
+        }
       },
       {
         "route": "/test",
-        "serve": "/index.html"
+        "serve": "/index.html",
+        "headers": {
+          "cache-control": "no-cache"
+        }
       },
       {
         "route": "/feed",
-        "serve": "/index.html"
+        "serve": "/index.html",
+        "headers": {
+          "cache-control": "no-cache"
+        }
       },
       {
         "route": "/feed/*",
-        "serve": "/index.html"
+        "serve": "/index.html",
+        "headers": {
+          "cache-control": "no-cache"
+        }
       },
       {
         "route": "/search",
-        "serve": "/index.html"
+        "serve": "/index.html",
+        "headers": {
+          "cache-control": "no-cache"
+        }
       },
       {
         "route": "/profile",
-        "serve": "/index.html"
+        "serve": "/index.html",
+        "headers": {
+          "cache-control": "no-cache"
+        }
       },
       {
         "route": "/profile/*",
-        "serve": "/index.html"
+        "serve": "/index.html",
+        "headers": {
+          "cache-control": "no-cache"
+        }
       },
       {
         "route": "/settings",
-        "serve": "/index.html"
+        "serve": "/index.html",
+        "headers": {
+          "cache-control": "no-cache"
+        }
       },
       {
         "route": "/group",
-        "serve": "/index.html"
+        "serve": "/index.html",
+        "headers": {
+          "cache-control": "no-cache"
+        }
       },
       {
         "route": "/group/*",
-        "serve": "/index.html"
+        "serve": "/index.html",
+        "headers": {
+          "cache-control": "no-cache"
+        }
       },
       {
         "route": "/groupSettings/*",
-        "serve": "/index.html"
+        "serve": "/index.html",
+        "headers": {
+          "cache-control": "no-cache"
+        }
       },
       {
         "route": "/register",
-        "serve": "/index.html"
+        "serve": "/index.html",
+        "headers": {
+          "cache-control": "no-cache"
+        }
       },
       {
         "route": "/recover/*",
-        "serve": "/index.html"
+        "serve": "/index.html",
+        "headers": {
+          "cache-control": "no-cache"
+        }
       },
       {
         "route": "/login",
-        "serve": "/index.html"
+        "serve": "/index.html",
+        "headers": {
+          "cache-control": "no-cache"
+        }
       },
       {
         "route": "/*",
-        "serve": "/index.html"
+        "serve": "/index.html",
+        "headers": {
+          "cache-control": "no-cache"
+        }
       }
     ]
   }
