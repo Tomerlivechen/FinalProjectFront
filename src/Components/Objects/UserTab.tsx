@@ -46,7 +46,7 @@ const UserTab: React.FC<UserTabProps> = (TabProps: UserTabProps) => {
             } ${following && "bg-green-400 bg-opacity-15 rounded-full"} `}
           >
             <img
-              className="rounded-full border-2 h-14 w-14 shadow-2xl p-1 "
+              className="rounded-full border-2 h-14 w-14 shadow-2xl p-1 flex-shrink-0"
               src={
                 isValidURL(userInfo.imageURL)
                   ? userInfo.imageURL

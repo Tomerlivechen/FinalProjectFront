@@ -100,7 +100,7 @@ const UserCard: React.FC<UserCardProps> = ({ UserDisplay }) => {
               <img
                 height={100}
                 width={60}
-                className="rounded-full border-2 shadow-2xl"
+                className="rounded-full border-2 shadow-2xl flex-shrink-0"
                 src={
                   isValidURL(UserDisplay.imageURL)
                     ? UserDisplay.imageURL
