@@ -15,7 +15,6 @@ import { IDecodedToken, IUserValues } from "../Types/@UserTypes";
 const colors = {
   NavBarColor: "bg-blue-300 dark:bg-gray-800",
   NavBarText: "dark:text-gray-100 text-gray-900",
-
   Nav: "bg-blue-300 dark:bg-gray-800", // Blue for professionalism and trust, with a neutral dark gray for dark mode
   Filter: "bg-blue-300  dark:bg-gray-700", // Orange adds energy and warmth to the more serious blue, creating contrast
   NavText: "dark:text-gray-100 text-gray-900", // Gray tones for text to remain neutral and readable

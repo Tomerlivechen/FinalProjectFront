@@ -60,7 +60,7 @@ function NavBar() {
             </Tooltip>
           </NavLink>
         )}
-        <NavLink className="p-3" to="About">
+        <NavLink className="p-3" to="about">
           <Tooltip title="About">
             <FaInfo className="md:hidden" size={24} />
             <p className="hidden md:block">About</p>
@@ -81,7 +81,7 @@ function NavBar() {
               </Tooltip>
             </NavLink>
 
-            <Tooltip title="Search">
+            <Tooltip title="search">
               <button
                 className={` rounded-lg m-2 p-1  ${
                   !filter ? colors.Nav : colors.SearchButtonActive
@@ -99,10 +99,10 @@ function NavBar() {
 
         {!isLoggedin && (
           <>
-            <NavLink className="p-3" to="Register">
+            <NavLink className="p-3" to="register">
               Register
             </NavLink>
-            <NavLink className="p-3" to="Login">
+            <NavLink className="p-3" to="login">
               Login
             </NavLink>
           </>

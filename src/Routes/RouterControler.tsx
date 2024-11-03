@@ -43,8 +43,8 @@ function RouterControler() {
                     <AccessabilityPanel />
                     <Routes>
                       <Route path="/" element={<MainPage />} />
-                      <Route path="About" element={<About />} />
-                      <Route path="Test" element={<TestSpace />} />
+                      <Route path="about" element={<About />} />
+                      <Route path="test" element={<TestSpace />} />
                       <Route
                         path="feed"
                         element={
