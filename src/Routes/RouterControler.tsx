@@ -2,7 +2,6 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
-  Navigate,
 } from "react-router-dom";
 import About from "./About";
 import TestSpace from "./TestSpace";
@@ -28,6 +27,7 @@ import { Group } from "./Group";
 import GroupSettings from "./GroupSettings";
 import PasswordRecoveryPage from "./PasswordRecovery";
 import MainPage from "./MainPage";
+import { NotFound } from "./NotFould";
 
 function RouterControler() {
   return (
@@ -140,7 +140,7 @@ function RouterControler() {
                       />
                       <Route
                         path="*"
-                        element={<Navigate to="/feed" replace />}
+                        element={<NotFound/>}
                       />
                     </Routes>
                   </BackGround>
