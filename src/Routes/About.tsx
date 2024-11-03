@@ -3,7 +3,7 @@ import ElementFrame from "../Constructors/ElementFrame";
 
 function About() {
   return (
-    <ElementFrame tailwind="p-6 max-w-5xl mx-auto">
+    <ElementFrame tailwind="p-6 max-w-5xl md:mx-auto sm:ml-7 md:justify-center md:ml-7 ml-7">
       <h1 className="text-3xl font-bold mb-4">About This Project</h1>
       <p className="mb-4">
         Welcome to Dr. Tomer Chen's final project for the .NET course at
