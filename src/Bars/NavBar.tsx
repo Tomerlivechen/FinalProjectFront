@@ -47,7 +47,7 @@ function NavBar() {
         id="app-navbar"
         className={` fixed z-40 w-full flex-row shadow-2xl shadow-slate-800  text-black flex md:gap-3 gap-0 ${colors.Nav} ${colors.NavText}`}
       >
-        <Navbar.Brand href="feed" className="flex-shrink-0">
+        <Navbar.Brand href="/feed" className="flex-shrink-0">
           <div className="pt-1 pl-1">
             <AppLogo Size={"35"} />
           </div>
