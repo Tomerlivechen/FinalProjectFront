@@ -13,7 +13,7 @@ import { useUser } from "../../CustomHooks/useUser";
 const ImageList: React.FC<{
   ImageListProps: IImageListPops;
 }> = ({ ImageListProps }) => {
-  const { UserId } = useParams();
+  const { userId } = useParams();
   const userContext = useUser();
   const [userIdState, setUserIdState] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -27,8 +27,8 @@ const ImageList: React.FC<{
   };
 
   useEffect(() => {
-    if (UserId) {
-      setUserIdState(UserId);
+    if (userId) {
+      setUserIdState(userId);
     } else {
       if (userContext.userInfo.UserId) {
         setUserIdState(userContext.userInfo.UserId);
@@ -45,7 +45,7 @@ const ImageList: React.FC<{
     if (displayImageList) {
       setIsLoading(false);
     }
-  }, [displayImageList, UserId, imageList]);
+  }, [displayImageList, userId, imageList]);
 
   useEffect(() => {
     if (userIdState) {
