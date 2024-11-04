@@ -30,6 +30,7 @@ const Profile = () => {
       setUserIdState(userId);
     } else if (userContext.userInfo.UserId) {
       GetFollowing(userContext.userInfo.UserId);
+      setUserIdState(userContext.userInfo.UserId);
     }
   }, [userId]);
 
@@ -41,56 +42,58 @@ const Profile = () => {
 
   return (
     <>
-      <div className="flex flex-wrap ">
-        <div className="w-16 pl-2 pr-2"></div>
-        <div className="w-11/12 lg:block lg:w-11/12 pl-2 pr-2">
-          <div className="w-full min-w-[40rem] pr-2 pl-2">
-          {userIdState &&
-            <ProfileUserSection userId={userIdState} />}
+      <div className="flex flex-wrap overflow-hidden w-full">
+        <div className="w-full md:w-1/12 px-2"></div>
+        <div className="w-full md:w-11/12 px-2">
+          <div className=" w-full px-2 min-w-[40rem]  sm:w-[40rem] md:w-[55rem] lg:w-[72rem] xl:w-[99rem] ">
+            {userIdState && <ProfileUserSection userId={userIdState} />}
           </div>
-
-          <div className="flex flex-col md:flex-row justify-between w-full md:w-8/12 ">
-            {!imagesOpen && (
-              <div className="hidden lg:block lg:w-fit pl-2 pr-2 h-1/2">
-                <>
-                  <ResizableFrame
-                    title={"Groups"}
-                    show={true}
-                    overflowX={false}
-                    tailwindProps="w-fit h-fit"
-                  >
-                    <ProfileGroupsList />
-                  </ResizableFrame>
-                </>
+          <div className=" w-full px-2 min-w-[40rem]  sm:w-[40rem] md:w-[55rem] lg:w-[72rem] xl:w-[99rem] ">
+            <div className="flex flex-col md:flex-row justify-between w-full md:w-8/12   ">
+              {!imagesOpen && (
+                <div className="hidden lg:block lg:w-fit pl-2 pr-2 h-1/2">
+                  <>
+                    <ResizableFrame
+                      title={"Groups"}
+                      show={true}
+                      overflowX={false}
+                      tailwindProps="w-fit h-fit"
+                    >
+                      <ProfileGroupsList />
+                    </ResizableFrame>
+                  </>
+                </div>
+              )}
+              <div
+                className={`${
+                  imagesOpen ? "md:w-full" : "md:w-fit"
+                } w-[26rem] `}
+              >
+                <ImageList
+                  ImageListProps={{ open: imagesOpen, setOpen: setImagesOpen }}
+                />
               </div>
-            )}
-            <div
-              className={`${imagesOpen ? "md:w-full" : "md:w-fit"} w-[26rem] `}
-            >
-              <ImageList
-                ImageListProps={{ open: imagesOpen, setOpen: setImagesOpen }}
-              />
+              {!imagesOpen && (
+                <>
+                  <div className="hidden xl:block lg:w-fit pl-2 ">
+                    {!loadingUsers && usersList && (
+                      <>
+                        <ResizableFrame
+                          title={"Following"}
+                          show={true}
+                          tailwindProps="w-fit h-fit"
+                        >
+                          <UserTabList users={usersList} />
+                        </ResizableFrame>
+                      </>
+                    )}
+                  </div>
+                  <div className="w-full lg:w-fit pl-2 pr-2">
+                    <PostFrame UserList={[]} />
+                  </div>
+                </>
+              )}
             </div>
-            {!imagesOpen && (
-              <>
-                <div className="hidden xl:block lg:w-fit pl-2 ">
-                  {!loadingUsers && usersList && (
-                    <>
-                      <ResizableFrame
-                        title={"Following"}
-                        show={true}
-                        tailwindProps="w-fit h-fit"
-                      >
-                        <UserTabList users={usersList} />
-                      </ResizableFrame>
-                    </>
-                  )}
-                </div>
-                <div className="w-full lg:w-fit pl-2 pr-2">
-                  <PostFrame UserList={[]} />
-                </div>
-              </>
-            )}
           </div>
         </div>
       </div>

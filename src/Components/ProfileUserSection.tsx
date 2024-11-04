@@ -22,7 +22,7 @@ const ProfileUserSection: React.FC<ProfileUserSectionProps> = ({ userId }) => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const userdata = useUser();
-  const [, setYours] = useState(false);
+  const [yours, setYours] = useState(false);
   const chatContext = useChat();
   useEffect(() => {
     if (userId) {
@@ -31,18 +31,18 @@ const ProfileUserSection: React.FC<ProfileUserSectionProps> = ({ userId }) => {
       getUser(userdata.userInfo.UserId);
       setYours(true);
     }
-  }, [userId, userdata.userInfo.UserId]);
+  }, [userId, userdata.userInfo.UserId, user]);
 
   const getUser = async (id: string) => {
-    console.log(id);
-    await auth
-      .getUser(id)
-      .then((response) => {
-        console.log(response);
-        setUser(response.data);
-      })
-      .finally(() => setLoading(false));
+    const response = await auth.getUser(id);
+    setUser(response.data);
   };
+
+  useEffect(() => {
+    if (user || yours) {
+      setLoading(false);
+    }
+  }, [user, yours]);
 
   const toggleBioMore = () => {
     setBioMore((prev) => !prev);
