@@ -94,12 +94,12 @@ const UserCard: React.FC<UserCardProps> = ({ UserDisplay }) => {
   } else {
     return (
       <>
-        <ElementFrame tailwind="h-fit w-[200px] md:w-[650px]" padding="2">
+        <ElementFrame tailwind="h-fit w-[260px] md:w-[650px]" padding="2">
           <div className="flex">
-            <div className=" col-span-2 w-24">
+            <div className="col-span-5 md:col-span-2 md:w-24 flex items-center justify-center ">
               <img
 
-                className="rounded-full border-1 shadow-2xl flex-shrink-0 w-full flex items-center justify-center"
+                className="rounded-full  border-1 shadow-2xl  w-24 flex "
                 src={
                   isValidURL(UserDisplay.imageURL)
                     ? UserDisplay.imageURL
@@ -109,9 +109,9 @@ const UserCard: React.FC<UserCardProps> = ({ UserDisplay }) => {
                 aria-description={`Profile picture of ${UserDisplay.first_Name} ${UserDisplay.last_Name}`}
               />
             </div>
-            <div className=" ml-6 col-span-4 font-extrabold text-emerald-800 md:flex p-3 items-center">
-              {UserDisplay.userName.slice(0, 20)}
-              {UserDisplay.userName.length > 20 && "..."}
+            <div className=" ml-6 col-span-5 md:col-span-4 font-extrabold text-emerald-800 md:flex p-3 items-center">
+              {UserDisplay.userName.slice(0, 15)}
+              {UserDisplay.userName.length > 15 && "..."}
             </div>
             <div className="hidden md:flex items-center">
               {!UserDisplay.hideName && (
@@ -121,7 +121,7 @@ const UserCard: React.FC<UserCardProps> = ({ UserDisplay }) => {
               ${(UserDisplay.last_Name.length > 10) ? "...":""} (${UserDisplay.pronouns})`}
                 </div>
               )}
-              <div className=" ml-auto col-span-4 font-extrabold p-3 flex gap-3">
+              <div className=" ml-auto col-span-2 font-extrabold p-3 flex gap-3">
                 {!UserDisplay.blockedYou &&
                   userContext.userInfo.UserId !== UserDisplay.id && (
                     <>

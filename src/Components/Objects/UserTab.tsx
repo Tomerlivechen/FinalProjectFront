@@ -39,7 +39,7 @@ const UserTab: React.FC<UserTabProps> = (TabProps: UserTabProps) => {
   return (
     <>
       {!blockedYou ? (
-        <ElementFrame tailwind="h-fit" width="200px" padding="2">
+        <ElementFrame tailwind="h-fit w-[260px]"  padding="2">
           <div
             className={`flex  ${
               blocking && "bg-stone-500 bg-opacity-15 rounded-full"
@@ -59,7 +59,8 @@ const UserTab: React.FC<UserTabProps> = (TabProps: UserTabProps) => {
             <div
               className={`col-span-4 font-extrabold p-4 flex items-center gap-2 ${colors.ButtonFont}`}
             >
-              {userInfo.userName}
+                           {userInfo.userName.slice(0, 15)}
+                           {userInfo.userName.length > 15 && "..."}
 
               {userInfo.chatId ? (
                 <Tooltip title="Open Chat">

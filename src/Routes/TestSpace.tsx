@@ -1,5 +1,6 @@
 
 import UserCard from "../Components/Objects/UserCard";
+import UserTab from "../Components/Objects/UserTab";
 import { IAppUserDisplay } from "../Models/UserModels";
 
 const card : IAppUserDisplay= {
@@ -7,7 +8,7 @@ const card : IAppUserDisplay= {
   prefix: "rrrrr",
   first_Name: "rfffffffffrrrr",
   last_Name: "rrrrfffffffffrrrrrr",
-  userName: "rrrffffffffffffrrrr",
+  userName: "rrrffffffffgggggggggggffffrrrr",
   email: "",
   imageURL: "",
   following: false,
@@ -33,6 +34,8 @@ function TestSpace() {
       <div className="flex flex-wrap">
         <div className="p-10"></div>
 <UserCard UserDisplay={card}/>
+<div className="p-10"></div>
+<UserTab UserDisplay={card}/> 
 
       </div>
       <div>---------------------------</div>
