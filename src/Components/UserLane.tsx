@@ -1,43 +1,40 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { IAppUserDisplay } from "../Models/UserModels";
 import { auth } from "../Services/auth-service";
 import { useUser } from "../CustomHooks/useUser";
 import ClimbBoxSpinner from "../Spinners/ClimbBoxSpinner";
 
 import { colors, isValidURL } from "../Constants/Patterns";
-import { ProfileUserSectionProps } from "../Types/@UserTypes";
 
-const UserLane: React.FC<ProfileUserSectionProps> = ({ userId }) => {
+
+const UserLane = () => {
   const [user, setUser] = useState<IAppUserDisplay | null>(null);
   const [loading, setLoading] = useState(false);
 
   const userdata = useUser();
-  const [, setYours] = useState(false);
+
   useEffect(() => {
-    if (userId) {
-      getUser(userId);
-    } else if (userdata.userInfo.UserId) {
+    if(userdata.userInfo.UserId){
       getUser(userdata.userInfo.UserId);
-      setYours(true);
     }
-  }, [userId, userdata.userInfo.UserId]);
+  }, [userdata.userInfo.UserId]);
 
   const getUser = async (id: string) => {
-    console.log(id);
-    await auth
-      .getUser(id)
-      .then((response) => {
-        console.log(response);
-        setUser(response.data);
-      })
-      .finally(() => setLoading(false));
-  };
+   const response =  await auth.getUser(id);
+   setUser(response.data)
+      }
+      
+useEffect(() => {
+if(user){
+  setLoading(false)
+}
+},[user]);
 
   return (
     <>
       <div className="p-1">
         {loading && <ClimbBoxSpinner />}
-        {!loading && user && !user.blockedYou && (
+        {!loading && user && (
           <>
             <div
               className={`${colors.ElementFrame} shadow-lg rounded-lg overflow-hidden w-full`}

@@ -84,7 +84,7 @@ const Feed = () => {
         <div className="w-16 "></div>
         <div className="flex flex-wrap w-11/12 justify-between ">
           <div className="hidden lg:block lg:w-fit xl:w-fit pr-2 pl-2">
-            <UserLane userId={null} />
+            <UserLane />
             <ResizableFrame
               whidth={"auto"}
               title={"Groups"}

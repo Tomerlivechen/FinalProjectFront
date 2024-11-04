@@ -45,7 +45,8 @@ const Profile = () => {
         <div className="w-16 pl-2 pr-2"></div>
         <div className="w-11/12 lg:block lg:w-11/12 pl-2 pr-2">
           <div className="w-full min-w-[40rem] pr-2 pl-2">
-            <ProfileUserSection userId={userIdState} />
+          {userIdState &&
+            <ProfileUserSection userId={userIdState} />}
           </div>
 
           <div className="flex flex-col md:flex-row justify-between w-full md:w-8/12 ">

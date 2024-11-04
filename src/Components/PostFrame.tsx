@@ -262,8 +262,9 @@ const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
         </select>
         {!userIdState && <SendPostComponent />}
         <div className="w-full">
+          {(postList && postList.posts.length == 0) && (<div><p>no</p></div>)}
           {!loadingPosts && postList && <PostList postListValue={postList} />}
-          {loadingPosts && (
+          {(loadingPosts && !postList) && (
             <div className="flex ml-40 ">
               <ClipSpinner />
             </div>

@@ -94,13 +94,12 @@ const UserCard: React.FC<UserCardProps> = ({ UserDisplay }) => {
   } else {
     return (
       <>
-        <ElementFrame tailwind="h-fit w-[200px] md:w-[550px]" padding="2">
+        <ElementFrame tailwind="h-fit w-[200px] md:w-[650px]" padding="2">
           <div className="flex">
-            <div className=" col-span-2">
+            <div className=" col-span-2 w-24">
               <img
-                height={100}
-                width={60}
-                className="rounded-full border-2 shadow-2xl flex-shrink-0"
+
+                className="rounded-full border-1 shadow-2xl flex-shrink-0 w-full flex items-center justify-center"
                 src={
                   isValidURL(UserDisplay.imageURL)
                     ? UserDisplay.imageURL
@@ -110,14 +109,16 @@ const UserCard: React.FC<UserCardProps> = ({ UserDisplay }) => {
                 aria-description={`Profile picture of ${UserDisplay.first_Name} ${UserDisplay.last_Name}`}
               />
             </div>
-            <div className=" ml-6 col-span-4 font-extrabold text-emerald-800 p-3">
-              {UserDisplay.userName}
+            <div className=" ml-6 col-span-4 font-extrabold text-emerald-800 md:flex p-3 items-center">
+              {UserDisplay.userName.slice(0, 20)}
+              {UserDisplay.userName.length > 20 && "..."}
             </div>
-            <div className="hidden md:flex">
+            <div className="hidden md:flex items-center">
               {!UserDisplay.hideName && (
-                <div className=" ml-4 col-span-4 font-extrabold p-3">
-                  {`${UserDisplay.prefix}. ${UserDisplay.first_Name} 
-          ${UserDisplay.last_Name} (${UserDisplay.pronouns})`}
+                <div className=" ml-4 col-span-4 font-extrabold p-3 ">
+                  {`${UserDisplay.prefix}. ${UserDisplay.first_Name.slice(0, 10)}
+              ${(UserDisplay.first_Name.length > 10) ? "...":""} ${UserDisplay.last_Name.slice(0, 10)}
+              ${(UserDisplay.last_Name.length > 10) ? "...":""} (${UserDisplay.pronouns})`}
                 </div>
               )}
               <div className=" ml-auto col-span-4 font-extrabold p-3 flex gap-3">

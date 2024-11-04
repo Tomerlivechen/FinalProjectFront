@@ -93,9 +93,9 @@ const LoginPage = () => {
     if (
       loginContext.isLoggedin &&
       loginContext.token &&
-      loginContext.token.length > 1 &&
+      loginContext.token.length > 10 &&
       userContext.userInfo.UserId &&
-      userContext.userInfo.UserId.length > 1
+      userContext.userInfo.UserId.length > 10
     ) {
       navigate("/feed");
     }
