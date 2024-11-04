@@ -26,6 +26,7 @@ import {
   IPostSortingProps,
   PostListValues,
 } from "../Types/@PostTypes";
+import { NoMorePosts } from "./Objects/NoMorePosts";
 
 const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
   const location = useLocation();
@@ -262,7 +263,7 @@ const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
         </select>
         {!userIdState && <SendPostComponent />}
         <div className="w-full">
-          {(postList && postList.posts.length == 0) && (<div><p>no</p></div>)}
+          {(postList && postList.posts.length == 0) && (<div><NoMorePosts/></div>)}
           {!loadingPosts && postList && <PostList postListValue={postList} />}
           {(loadingPosts && !postList) && (
             <div className="flex ml-40 ">
