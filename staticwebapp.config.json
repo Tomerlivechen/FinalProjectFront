@@ -1,0 +1,21 @@
+{
+    "routes": [
+      {
+        "route": "/feed/:slug",
+        "rewrite": "/feed/:slug"
+      },
+      {
+        "route": "/profile/:slug",
+        "rewrite": "/profile/:slug"
+      },
+      {
+        "route": "/group/:slug",
+        "rewrite": "/group/:slug"
+      },
+      {
+        "route": "/*",
+        "rewrite": "/"
+      }
+    ]
+  }
+  
