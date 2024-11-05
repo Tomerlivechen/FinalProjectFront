@@ -5,7 +5,7 @@ import { useUser } from "../CustomHooks/useUser";
 import ClimbBoxSpinner from "../Spinners/ClimbBoxSpinner";
 import { FaUserGear } from "react-icons/fa6";
 import { colors, isValidURL } from "../Constants/Patterns";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { FaHandshakeSlash } from "react-icons/fa";
 import { FaHandshake } from "react-icons/fa";
 import { FaHandHolding } from "react-icons/fa";
@@ -17,6 +17,7 @@ import { ProfileUserSectionProps } from "../Types/@UserTypes";
 
 const ProfileUserSection: React.FC<ProfileUserSectionProps> = ({ userId }) => {
   const userContex = useUser();
+  const params = useParams();
   const [bioMore, setBioMore] = useState(false);
   const [user, setUser] = useState<IAppUserDisplay | null>(null);
   const [loading, setLoading] = useState(true);
@@ -32,6 +33,13 @@ const ProfileUserSection: React.FC<ProfileUserSectionProps> = ({ userId }) => {
       setYours(true);
     }
   }, [userId, userdata.userInfo.UserId, user]);
+
+  useEffect(() => {
+    if (!params.userId && userdata.userInfo.UserId) {
+      getUser(userdata.userInfo.UserId);
+      setYours(true);
+    }
+  }, [params, userdata.userInfo.UserId]);
 
   const getUser = async (id: string) => {
     const response = await auth.getUser(id);
