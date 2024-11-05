@@ -63,6 +63,10 @@
       {
         "route": "/{*}",
         "rewrite": "/index.html"
+      },
+      {
+        "route": "/{*}.{extension}",
+        "rewrite": "/index.html"
       }
     ]
   }
