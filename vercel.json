@@ -1,9 +1,20 @@
 {
-    "rewrites":  [
-        { "source": "/feed/(.*)", "destination": "/feed" },
-        { "source": "/profile/(.*)", "destination": "/profile" },
-        { "source": "/group/(.*)", "destination": "/group" },
-      {"source": "/(.*)", "destination": "/"}
-
+    "rewrites": [
+      { "source": "/", "destination": "/" },
+      { "source": "/about", "destination": "/about" },
+      { "source": "/test", "destination": "/test" },
+      { "source": "/feed", "destination": "/feed" },
+      { "source": "/feed/(.*)", "destination": "/feed/:postId" },
+      { "source": "/search", "destination": "/search" },
+      { "source": "/profile", "destination": "/profile" },
+      { "source": "/profile/(.*)", "destination": "/profile/:userId" },
+      { "source": "/settings", "destination": "/settings" },
+      { "source": "/group", "destination": "/group" },
+      { "source": "/group/(.*)", "destination": "/group/:groupId" },
+      { "source": "/groupSettings/(.*)", "destination": "/groupSettings/:groupId" },
+      { "source": "/register", "destination": "/register" },
+      { "source": "/recover/(.*)", "destination": "/recover/:token" },
+      { "source": "/login", "destination": "/login" },
+      { "source": "/(.*)", "destination": "/" }
     ]
   }
