@@ -1,17 +1,8 @@
 {
     "rewrites":  [
-        {
-            "source": "/feed/:slug",
-            "destination": "/feed/:slug"
-          },
-          {
-            "source": "/profile/:slug",
-            "destination": "/profile/:slug"
-          },
-          {
-            "source": "/group/:slug",
-            "destination": "/group/:slug"
-          },
+        { "source": "/feed/(.*)", "destination": "/feed" },
+        { "source": "/profile/(.*)", "destination": "/profile" },
+        { "source": "/group/(.*)", "destination": "/group" },
       {"source": "/(.*)", "destination": "/"}
 
     ]
