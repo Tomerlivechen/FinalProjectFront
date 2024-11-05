@@ -1,17 +1,5 @@
 {
     "routes": [
-        {
-            "route": "/feed/*",
-            "rewrite": "/feed"
-          },
-          {
-            "route": "/profile/*",
-            "rewrite": "/profile"
-          },
-          {
-            "route": "/group/*",
-            "rewrite": "/group"
-          },
       {
         "route": "/*",
         "rewrite": "/"
