@@ -1,0 +1,69 @@
+{
+    "routes": [
+      {
+        "route": "/",
+        "rewrite": "/index.html"
+      },
+      {
+        "route": "/about",
+        "rewrite": "/index.html"
+      },
+      {
+        "route": "/test",
+        "rewrite": "/index.html"
+      },
+      {
+        "route": "/feed",
+        "rewrite": "/index.html"
+      },
+      {
+        "route": "/feed/{postId}",
+        "rewrite": "/index.html"
+      },
+      {
+        "route": "/search",
+        "rewrite": "/index.html"
+      },
+      {
+        "route": "/profile",
+        "rewrite": "/index.html"
+      },
+      {
+        "route": "/profile/{userId}",
+        "rewrite": "/index.html"
+      },
+      {
+        "route": "/settings",
+        "rewrite": "/index.html"
+      },
+      {
+        "route": "/group",
+        "rewrite": "/index.html"
+      },
+      {
+        "route": "/group/{groupId}",
+        "rewrite": "/index.html"
+      },
+      {
+        "route": "/groupSettings/{groupId}",
+        "rewrite": "/index.html"
+      },
+      {
+        "route": "/register",
+        "rewrite": "/index.html"
+      },
+      {
+        "route": "/recover/{token}",
+        "rewrite": "/index.html"
+      },
+      {
+        "route": "/login",
+        "rewrite": "/index.html"
+      },
+      {
+        "route": "/{*}",
+        "rewrite": "/index.html"
+      }
+    ]
+  }
+  
