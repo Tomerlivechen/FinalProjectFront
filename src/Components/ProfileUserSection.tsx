@@ -25,21 +25,16 @@ const ProfileUserSection: React.FC<ProfileUserSectionProps> = ({ userId }) => {
   const userdata = useUser();
   const [yours, setYours] = useState(false);
   const chatContext = useChat();
-  useEffect(() => {
-    if (userId) {
-      getUser(userId);
-    } else if (userdata.userInfo.UserId) {
-      getUser(userdata.userInfo.UserId);
-      setYours(true);
-    }
-  }, [userId, userdata.userInfo.UserId, user]);
 
   useEffect(() => {
-    if (!params.userId && userdata.userInfo.UserId) {
-      getUser(userdata.userInfo.UserId);
-      setYours(true);
+    if (userdata.userInfo.UserId) {
+      const effectiveUserId = userId || userdata.userInfo.UserId;
+      if (effectiveUserId) {
+        getUser(effectiveUserId);
+        setYours(!userId);
+      }
     }
-  }, [params, userdata.userInfo.UserId]);
+  }, [userId, userdata.userInfo.UserId, params]);
 
   const getUser = async (id: string) => {
     const response = await auth.getUser(id);
