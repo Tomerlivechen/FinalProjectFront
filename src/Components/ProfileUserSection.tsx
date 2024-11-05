@@ -17,7 +17,7 @@ import { ProfileUserSectionProps } from "../Types/@UserTypes";
 
 const ProfileUserSection: React.FC<ProfileUserSectionProps> = ({ userId }) => {
   const userContex = useUser();
-  const params = useParams();
+  const { userId: paramUserId } = useParams();
   const [bioMore, setBioMore] = useState(false);
   const [user, setUser] = useState<IAppUserDisplay | null>(null);
   const [loading, setLoading] = useState(true);
@@ -28,13 +28,13 @@ const ProfileUserSection: React.FC<ProfileUserSectionProps> = ({ userId }) => {
 
   useEffect(() => {
     if (userdata.userInfo.UserId) {
-      const effectiveUserId = userId || userdata.userInfo.UserId;
+      const effectiveUserId = userId || paramUserId || userdata.userInfo.UserId;
       if (effectiveUserId) {
         getUser(effectiveUserId);
         setYours(!userId);
       }
     }
-  }, [userId, userdata.userInfo.UserId, params]);
+  }, [userId, userdata.userInfo.UserId, paramUserId]);
 
   const getUser = async (id: string) => {
     const response = await auth.getUser(id);
@@ -42,7 +42,7 @@ const ProfileUserSection: React.FC<ProfileUserSectionProps> = ({ userId }) => {
   };
 
   useEffect(() => {
-    if (user || yours) {
+    if (user) {
       setLoading(false);
     }
   }, [user, yours]);
