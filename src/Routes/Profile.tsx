@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ProfileUserSection from "../Components/ProfileUserSection";
 import { auth } from "../Services/auth-service";
 
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useUser } from "../CustomHooks/useUser";
 import { PostFrame } from "../Components/PostFrame";
 import ResizableFrame from "../Components/Objects/ResizableFrame";
@@ -13,6 +13,7 @@ import { ImageList } from "../Components/Objects/ImageList";
 
 const Profile = () => {
   const userContext = useUser();
+  const location = useLocation();
   const { userId } = useParams();
   const [userIdState, setUserIdState] = useState<string | null>(null);
   const [loadingUsers, setLoadingUsers] = useState(true);
@@ -26,13 +27,17 @@ const Profile = () => {
 
   useEffect(() => {
     if (userId) {
-      GetFollowing(userId);
       setUserIdState(userId);
     } else if (userContext.userInfo.UserId) {
-      GetFollowing(userContext.userInfo.UserId);
       setUserIdState(userContext.userInfo.UserId);
     }
-  }, [userId]);
+  }, [userId,location]);
+
+  useEffect(()=>{
+    if(userIdState){
+          GetFollowing(userIdState);
+          }
+  },[userIdState])
 
   useEffect(() => {
     if (usersList) {
@@ -57,8 +62,7 @@ const Profile = () => {
                       title={"Groups"}
                       show={true}
                       overflowX={false}
-                      tailwindProps="w-fit h-fit"
-                    >
+                      tailwindProps="w-fit h-fit">
                       <ProfileGroupsList />
                     </ResizableFrame>
                   </>
