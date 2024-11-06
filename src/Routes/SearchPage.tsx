@@ -7,6 +7,7 @@ import PostCard from "../Components/Objects/PostCard";
 import ElementFrame from "../Constructors/ElementFrame";
 import { colors } from "../Constants/Patterns";
 import { FaLongArrowAltUp } from "react-icons/fa";
+import { SearchBackGround } from "../Components/Objects/SearchBackGround";
 
 function SearchPage() {
   const searchContext = useSearch();
@@ -34,7 +35,7 @@ function SearchPage() {
 
       {searchContext.loadingData && (
         <div className=" flex flex-col items-center">
-          <ClimbBoxSpinner /> <br />
+          <SearchBackGround />
         </div>
       )}
       {!activeSearch && (

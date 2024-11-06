@@ -7,6 +7,7 @@
     title: string;
     show: boolean;
     setShow? : React.Dispatch<React.SetStateAction<boolean>>
+    noMid? : boolean
   }
   
   export interface ResizableFrameButtonProps {

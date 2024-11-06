@@ -97,7 +97,7 @@ const LoginPage = () => {
       userContext.userInfo.UserId &&
       userContext.userInfo.UserId.length > 10
     ) {
-      navigate("/feed");
+      navigate("feed");
     }
   }, [
     loginContext.isLoggedin,

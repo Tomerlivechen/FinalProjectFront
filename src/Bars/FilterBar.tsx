@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Navbar, Tooltip } from "react-bootstrap";
 import { colors } from "../Constants/Patterns";
 import { useSearch } from "../CustomHooks/useSearch";
@@ -25,6 +25,7 @@ function FilterBar() {
     Title: false,
     KeyWords: false,
   });
+  const [searchActive, setSearchActive] = useState(false);
 
   const handleSearch = () => {
     if (selectedUser) {
@@ -34,6 +35,40 @@ function FilterBar() {
       searchFilter.filterPosts();
     }
   };
+
+  useEffect(() => {
+    if (selectedUser) {
+      if (
+        userSelector.FirstName ||
+        userSelector.LastName ||
+        userSelector.UserName
+      ) {
+        setSearchActive(true);
+      } else {
+        setSearchActive(false);
+      }
+    }
+    if (selectedPost) {
+      if (
+        postSelector.KeyWords ||
+        postSelector.Title ||
+        postSelector.UserName
+      ) {
+        setSearchActive(true);
+      } else {
+        setSearchActive(false);
+      }
+    }
+  }, [
+    postSelector.KeyWords,
+    postSelector.Title,
+    postSelector.UserName,
+    selectedPost,
+    selectedUser,
+    userSelector.FirstName,
+    userSelector.LastName,
+    userSelector.UserName,
+  ]);
 
   const handleKeyDown = (event: { key: string }) => {
     if (event.key === "Enter") {
@@ -183,6 +218,11 @@ function FilterBar() {
             </button>
           </>
         )}
+        {!searchActive && (
+          <div className={`animate-pulse ${colors.ActiveText} pt-2`}>
+            Select Search Category and Subcategory
+          </div>
+        )}
         <div className="absolute md:left-[40%] md:center-auto left-auto right-4">
           <input
             className="m-0.5 p-2 w-20 md:w-72 text-black"
@@ -193,9 +233,10 @@ function FilterBar() {
             onChange={(e) => searchFilter.setSearchValue(e.target.value)}
             onKeyDown={handleKeyDown}
             value={searchFilter.searchValue}
+            disabled={!searchActive}
           />
           <button className=" pl-3" onClick={handleSearch}>
-            <FaSearch />
+            {searchActive && <FaSearch />}
           </button>
         </div>
       </Navbar>

@@ -5,7 +5,7 @@ import { useUser } from "../CustomHooks/useUser";
 import ClimbBoxSpinner from "../Spinners/ClimbBoxSpinner";
 import { FaUserGear } from "react-icons/fa6";
 import { colors, isValidURL } from "../Constants/Patterns";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { FaHandshakeSlash } from "react-icons/fa";
 import { FaHandshake } from "react-icons/fa";
 import { FaHandHolding } from "react-icons/fa";
@@ -25,6 +25,7 @@ const ProfileUserSection: React.FC<ProfileUserSectionProps> = ({ userId }) => {
   const userdata = useUser();
   const [yours, setYours] = useState(false);
   const chatContext = useChat();
+  const location = useLocation();
 
   useEffect(() => {
     if (userdata.userInfo.UserId) {
@@ -34,7 +35,7 @@ const ProfileUserSection: React.FC<ProfileUserSectionProps> = ({ userId }) => {
         setYours(!userId);
       }
     }
-  }, [userId, userdata.userInfo.UserId, paramUserId]);
+  }, [userId, userdata.userInfo.UserId, paramUserId, location.pathname]);
 
   const getUser = async (id: string) => {
     const response = await auth.getUser(id);

@@ -3,6 +3,7 @@ import { sortByProperty } from "../../Constants/Patterns";
 import { IAppUserDisplay } from "../../Models/UserModels";
 import UserTab from "./UserTab";
 import ClimbBoxSpinner from "../../Spinners/ClimbBoxSpinner";
+import { useLocation, useParams } from "react-router-dom";
 
 interface UserTabListValues {
   sortElement?: keyof IAppUserDisplay;
@@ -15,6 +16,7 @@ interface UserTabListValues {
 const UserTabList: React.FC<UserTabListValues> = (
   UserListValue: UserTabListValues
 ) => {
+  const { userId } = useParams();
   const [users, setUsers] = useState<IAppUserDisplay[]>(UserListValue.users);
   const [order, setOrder] = useState(UserListValue.orderBy);
   const [sortBy, setSortBy] = useState(UserListValue.sortElement);
@@ -23,8 +25,21 @@ const UserTabList: React.FC<UserTabListValues> = (
     null
   );
   const [loading, setLoading] = useState(true);
+  const location = useLocation();
+
+  const intervalTime = 5000;
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fillLists();
+    }, intervalTime);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
+    fillLists();
+  }, [UserListValue, userId, location]);
+
+  const fillLists = () => {
     setUsers(UserListValue.users);
     if (order && sortBy) {
       setSortedUsers(users.sort(sortByProperty(sortBy, order)));
@@ -34,18 +49,19 @@ const UserTabList: React.FC<UserTabListValues> = (
     } else {
       setSortedUsers(users);
     }
-  }, [UserListValue]);
+  };
+
   useEffect(() => {
     setOrder(UserListValue.orderBy);
     setSortBy(UserListValue.sortElement);
     setFilterBy(UserListValue.filter);
-  }, [UserListValue]);
+  }, [UserListValue, userId]);
 
   useEffect(() => {
     if (sortedUsers) {
       setLoading(false);
     }
-  }, [sortedUsers]);
+  }, [sortedUsers, userId]);
 
   return (
     <>

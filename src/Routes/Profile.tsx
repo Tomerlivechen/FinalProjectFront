@@ -26,25 +26,47 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    if (userId) {
-      setUserIdState(userId);
-    } else if (userContext.userInfo.UserId) {
-      setUserIdState(userContext.userInfo.UserId);
-    }
-  }, [userId,location]);
+    setUsersList(null);
+    setUserIdState(null);
+    setLoadingUsers(true);
+  }, [location.pathname]);
 
-  useEffect(()=>{
-    if(userIdState){
-          GetFollowing(userIdState);
-          }
-  },[userIdState])
+  useEffect(() => {
+    if (loadingUsers) {
+      if (userId) {
+        setUserIdState(userId);
+      } else if (userContext.userInfo.UserId) {
+        setUserIdState(userContext.userInfo.UserId);
+      }
+    }
+  }, [loadingUsers]);
+
+  useEffect(() => {
+    const fetchFollowing = async () => {
+      if (userIdState) {
+        setLoadingUsers(true);
+        await GetFollowing(userIdState);
+        setLoadingUsers(false);
+      }
+    };
+    fetchFollowing();
+  }, [userIdState]);
+
+  const intervalTime = 5000;
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (userIdState) {
+        GetFollowing(userIdState);
+      }
+    }, intervalTime);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     if (usersList) {
       setLoadingUsers(false);
     }
   }, [usersList]);
-
   return (
     <>
       <div className="flex flex-wrap overflow-hidden w-full">
@@ -62,7 +84,8 @@ const Profile = () => {
                       title={"Groups"}
                       show={true}
                       overflowX={false}
-                      tailwindProps="w-fit h-fit">
+                      tailwindProps="w-fit h-fit"
+                    >
                       <ProfileGroupsList />
                     </ResizableFrame>
                   </>

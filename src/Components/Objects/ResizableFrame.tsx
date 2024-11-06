@@ -19,8 +19,8 @@ const ResizableFrame: React.FC<ResizableFrameProps> = (
   const [show, setShow] = useState(false);
   const [sizeSet, setsizeSet] = useState({
     min: false,
-    mid: true,
-    max: false,
+    mid: props.noMid ? false : true,
+    max: props.noMid ? true : false,
     closed: false,
   });
   const [frameHeight, setFrameHeight] = useState("50vh");
@@ -42,11 +42,10 @@ const ResizableFrame: React.FC<ResizableFrameProps> = (
   }, []);
 
   useEffect(() => {
-    if (props.setShow){
-      props.setShow(!sizeSet.closed)
+    if (props.setShow) {
+      props.setShow(!sizeSet.closed);
     }
     setShow(!sizeSet.closed);
-
   }, [sizeSet]);
 
   const toggleBoolean = (size: "min" | "mid" | "max" | "closed") => {
@@ -100,11 +99,13 @@ const ResizableFrame: React.FC<ResizableFrameProps> = (
                   activeHook={sizeSet.min}
                   size="min"
                 />
-                <IconButton
-                  icon={SlSizeActual}
-                  activeHook={sizeSet.mid}
-                  size="mid"
-                />
+                {!props.noMid && (
+                  <IconButton
+                    icon={SlSizeActual}
+                    activeHook={sizeSet.mid}
+                    size="mid"
+                  />
+                )}
                 <IconButton
                   icon={SlSizeFullscreen}
                   activeHook={sizeSet.max}
