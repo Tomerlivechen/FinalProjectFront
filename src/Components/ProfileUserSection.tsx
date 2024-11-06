@@ -158,7 +158,7 @@ const ProfileUserSection: React.FC<ProfileUserSectionProps> = ({ userId }) => {
                   <div className="w-9/12 pr-4 ">
                     <div className="text-center">
                       {!user.hideName && (
-                        <h2 className="text-xl font-bold text-left">{`${user.prefix}. ${user.first_Name} ${user.last_Name}`}</h2>
+                        <h2 className="text-xl font-bold text-left">{`${user.prefix}. ${user.first_Name} ${user.last_Name} (${user.pronouns})`}</h2>
                       )}
                       {!user.hideEmail && (
                         <p className=" text-left">{user.email}</p>
