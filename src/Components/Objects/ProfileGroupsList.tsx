@@ -28,7 +28,7 @@ const ProfileGroupsList = () => {
     } else if (userContext.userInfo.UserId) {
       GetUserGroups(userContext.userInfo.UserId);
     }
-  }, []);
+  }, [userId,userContext.userInfo.UserId]);
 
   useEffect(() => {
     if (groupCardData) {

@@ -143,7 +143,7 @@ const ChatFrame: React.FC<ChatFrameProps> = ({ chatID }) => {
             className={`${colors.ElementFrame} ${frameHeight}   pb-4 gap-4 rounded-b-xl overflow-y-auto`}
           >
             {chatInfo?.messages ? (
-              chatInfo.messages.map((message) => (
+              chatInfo.messages.slice().reverse().map((message) => (
                 <MessageComponent key={message.id} {...message} />
               ))
             ) : (

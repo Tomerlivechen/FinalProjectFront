@@ -90,7 +90,7 @@ const EditPostModal: React.FC<EditPostModalProps> = ({
     if (loggedInContext.token) {
       console.log("Form submitted with values: ", values);
       setIsLoading(true);
-      let updatedValues;
+      let updatedValues = {...values}
       if (postValues.keyWords.length > 0) {
         const parsedKeyWords = processKeywords(postValues.keyWords.toString());
         updatedValues = { ...values, keyWords: parsedKeyWords };

@@ -57,14 +57,13 @@ const EditCommentModal: React.FC<EditCommentModalProps> = ({
     }
   };
 
-  const handleSubmit = async (values: ICommentDisplay) => {
-    setCommentValues(values);
+  const handleSubmit = async () => {
     if (loggedInContext.token) {
       if (holdFile) {
         setImageURL(holdFile);
         setIsLoading(true);
       } else {
-        await postComment(values);
+        await postComment(commentValues);
       }
     } else {
       dialogs.error("Comment not sent user not logged in");
@@ -138,8 +137,8 @@ const EditCommentModal: React.FC<EditCommentModalProps> = ({
                 validationSchema={validationScheme}
                 onSubmit={handleSubmit}
               >
-                {({ handleSubmit }) => (
-                  <Form className="mt-1" onSubmit={handleSubmit}>
+                {() => (
+                  <Form className="mt-1" >
                     <div className="font-extralight form-group flex flex-col gap-2 w-full mx-auto text-lg mt-1">
                       <div className="flex justify-evenly">
                         <label className="text-2xl font-bold  text-center">

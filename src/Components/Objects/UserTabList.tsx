@@ -5,6 +5,7 @@ import { sortByProperty } from "../../Constants/Patterns";
 import { IAppUserDisplay } from "../../Models/UserModels";
 import UserTab from "./UserTab";
 import ClimbBoxSpinner from "../../Spinners/ClimbBoxSpinner";
+import { useParams } from "react-router-dom";
 
 interface UserTabListValues {
   sortElement?: keyof IAppUserDisplay;
@@ -36,12 +37,12 @@ const UserTabList: React.FC<UserTabListValues> = (
     } else {
       setSortedUsers(users);
     }
-  }, []);
+  }, [UserListValue]);
   useEffect(() => {
     setOrder(UserListValue.orderBy);
     setSortBy(UserListValue.sortElement);
     setFilterBy(UserListValue.filter);
-  }, []);
+  }, [UserListValue]);
 
   useEffect(() => {
     if (sortedUsers) {
