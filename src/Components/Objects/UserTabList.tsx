@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
-
 import { sortByProperty } from "../../Constants/Patterns";
-
 import { IAppUserDisplay } from "../../Models/UserModels";
 import UserTab from "./UserTab";
 import ClimbBoxSpinner from "../../Spinners/ClimbBoxSpinner";
-import { useParams } from "react-router-dom";
 
 interface UserTabListValues {
   sortElement?: keyof IAppUserDisplay;
