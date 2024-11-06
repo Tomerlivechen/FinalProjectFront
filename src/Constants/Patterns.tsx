@@ -58,6 +58,12 @@ export const sortByProperty = <T,>(
     const valueA = a[property];
     const valueB = b[property];
 
+    if (property === "datetime") {
+      const dateA = new Date(valueA as string).getTime();
+      const dateB = new Date(valueB as string).getTime();
+      return order === "asc" ? dateA - dateB : dateB - dateA;
+    }
+    
     if (property === "comments") {
       const commentsA = (valueA as ICommentDisplay[] | null)?.length || 0;
       const commentsB = (valueB as ICommentDisplay[] | null)?.length || 0;

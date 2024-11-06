@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { colors } from "../Constants/Patterns";
+import { colors, sortByProperty } from "../Constants/Patterns";
 
-import { IChat } from "../Models/ChatModels";
+import { IChat, IMessage } from "../Models/ChatModels";
 import { SendMessageComponent } from "./Objects/SendMessageComponent";
 import { MdOpenInNew } from "react-icons/md";
 
@@ -143,8 +143,11 @@ const ChatFrame: React.FC<ChatFrameProps> = ({ chatID }) => {
             className={`${colors.ElementFrame} ${frameHeight}   pb-4 gap-4 rounded-b-xl overflow-y-auto`}
           >
             {chatInfo?.messages ? (
-              chatInfo.messages.slice().reverse().map((message) => (
-                <MessageComponent key={message.id} {...message} />
+             chatInfo.messages
+             .slice()
+             .sort(sortByProperty<IMessage>("datetime", "asc"))
+             .map((message) => (
+               <MessageComponent key={message.id} {...message} />
               ))
             ) : (
               <div className="flex items-center justify-center h-full">
