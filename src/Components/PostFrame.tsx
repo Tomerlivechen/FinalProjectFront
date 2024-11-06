@@ -241,7 +241,7 @@ const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
           />
         </div>
         <select
-          className={`rounded-md border-2 px-2 py-2  ${colors.ElementFrame} font-bold w-[25rem] `}
+          className={`rounded-md border-1 px-2 py-2  ${colors.ElementFrame} font-bold w-[25rem] `}
           id="category"
           name="category"
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
@@ -263,9 +263,13 @@ const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
         </select>
         {!userIdState && <SendPostComponent />}
         <div className="w-full">
-          {(postList && postList.posts.length == 0) && (<div><NoMorePosts/></div>)}
+          {postList && postList.posts.length == 0 && (
+            <div>
+              <NoMorePosts />
+            </div>
+          )}
           {!loadingPosts && postList && <PostList postListValue={postList} />}
-          {(loadingPosts && !postList) && (
+          {loadingPosts && !postList && (
             <div className="flex ml-40 ">
               <ClipSpinner />
             </div>

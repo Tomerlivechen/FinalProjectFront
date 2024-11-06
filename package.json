@@ -34,7 +34,6 @@
     "sass": "^1.79.3",
     "sweetalert2": "^11.14.1",
     "urlencode": "^2.0.0",
-    "uuidv4": "^6.2.13",
     "yup": "^1.4.0"
   },
   "devDependencies": {
