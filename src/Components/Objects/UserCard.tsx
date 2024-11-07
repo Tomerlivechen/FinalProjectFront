@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import ElementFrame from "../../Constructors/ElementFrame";
 import { auth } from "../../Services/auth-service";
@@ -88,6 +88,30 @@ const UserCard: React.FC<UserCardProps> = ({ UserDisplay }) => {
         catchError(error, "Unblocking");
       });
   };
+  const [loggedIn, setLoggedIn] = useState(false)
+
+  const updateLoggedin = () => {
+    if(UserDisplay.lastActive){
+      const lastActive = new Date(UserDisplay.lastActive as string).getTime();
+      const now = new Date().getTime()
+      const timeDifferenceInMinutes = (now - lastActive) / (1000 * 60);
+      if (timeDifferenceInMinutes >= 3){
+        setLoggedIn(false)
+      }
+      else if (timeDifferenceInMinutes < 3){
+        setLoggedIn(true)
+      }
+    }
+    }
+
+  const intervalTime = 1000;
+useEffect(() => {
+  const interval = setInterval(() => {
+    updateLoggedin();
+  }, intervalTime);
+  return () => clearInterval(interval);
+}, []);
+
 
   if (UserDisplay.blockedYou && UserDisplay.hideBlocked) {
     return null;
@@ -97,9 +121,10 @@ const UserCard: React.FC<UserCardProps> = ({ UserDisplay }) => {
         <ElementFrame tailwind="h-fit w-[260px] md:w-[650px]" padding="2">
           <div className="flex">
             <div className="col-span-5 md:col-span-2 md:w-24 flex items-center justify-center ">
+
               <img
 
-                className="rounded-full  border-1 shadow-2xl  w-24 flex "
+                className={`rounded-full  border-1 shadow-2xl  w-24 flex ${loggedIn ? `border-4 border-emerald-500` : `border-4 border-amber-500`} ` }
                 src={
                   isValidURL(UserDisplay.imageURL)
                     ? UserDisplay.imageURL

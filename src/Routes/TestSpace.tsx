@@ -20,7 +20,7 @@ const card : IAppUserDisplay= {
   hideEmail: false,
   hideName: false,
   hideBlocked: false,
-  lastActive: "",
+  lastActive: "2024-11-07 14:45",
   chatId: "",
   votedOn: []
 }

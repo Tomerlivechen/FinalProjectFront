@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSearch } from "../CustomHooks/useSearch";
 import UserCard from "../Components/Objects/UserCard";
-import ClimbBoxSpinner from "../Spinners/ClimbBoxSpinner";
 import SearchTitleComponent from "../Components/SearchTitleComponent";
 import PostCard from "../Components/Objects/PostCard";
 import ElementFrame from "../Constructors/ElementFrame";
