@@ -20,6 +20,7 @@
     "buffer": "^6.0.3",
     "cloudinary": "^2.5.0",
     "emailjs-com": "^3.2.0",
+    "events": "^3.3.0",
     "formik": "^2.4.6",
     "jwt-decode": "^4.0.0",
     "lodash": "^4.17.21",
@@ -32,8 +33,10 @@
     "router-dom": "^2.2.11",
     "routing-controllers": "^0.10.4",
     "sass": "^1.79.3",
+    "stream-browserify": "^3.0.0",
     "sweetalert2": "^11.14.1",
     "urlencode": "^2.0.0",
+    "util": "^0.12.5",
     "yup": "^1.4.0"
   },
   "devDependencies": {
