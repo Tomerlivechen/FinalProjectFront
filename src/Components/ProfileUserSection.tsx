@@ -203,11 +203,15 @@ const ProfileUserSection: React.FC<ProfileUserSectionProps> = ({ userId }) => {
                               </button>
                             ) : (
                               <button
-                                className={`${colors.ElementFrame} ${colors.ActiveText} p-2 rounded-xl flex items-center gap-2 hover:animate-bounce`}
+                                className={`${colors.ElementFrame} ${colors.ActiveText} p-2 rounded-xl `}
                                 onClick={toggleFollow}
                               >
-                                <FaHandHoldingHeart size={25} />
-                                <span> Follow</span>
+                                <div
+                                  className={`hover:text-emerald-600 flex items-center gap-2`}
+                                >
+                                  <FaHandHoldingHeart size={25} />
+                                  Follow
+                                </div>
                               </button>
                             )}
                             {user.blocked ? (

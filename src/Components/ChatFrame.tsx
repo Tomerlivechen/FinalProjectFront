@@ -13,6 +13,7 @@ import { AiOutlineLoading } from "react-icons/ai";
 import { VscLoading } from "react-icons/vsc";
 import { ChatFrameProps, ISendMessageComponent } from "../Types/@ChatTypes";
 import { MessageComponent } from "./Objects/MessageComponent";
+import { isEqual } from "lodash";
 
 const ChatFrame: React.FC<ChatFrameProps> = ({ chatID }) => {
   const chatContext = useChat();
@@ -60,7 +61,7 @@ const ChatFrame: React.FC<ChatFrameProps> = ({ chatID }) => {
   }, [chatID]);
 
   useEffect(() => {
-    if (chatRespons != chatInfo) {
+    if (!isEqual(chatRespons, chatInfo)) {
       setLoading(true);
       setChatInfo(chatRespons);
     }
@@ -143,12 +144,12 @@ const ChatFrame: React.FC<ChatFrameProps> = ({ chatID }) => {
             className={`${colors.ElementFrame} ${frameHeight}   pb-4 gap-4 rounded-b-xl overflow-y-auto`}
           >
             {chatInfo?.messages ? (
-             chatInfo.messages
-             .slice()
-             .sort(sortByProperty<IMessage>("datetime", "asc"))
-             .map((message) => (
-               <MessageComponent key={message.id} {...message} />
-              ))
+              chatInfo.messages
+                .slice()
+                .sort(sortByProperty<IMessage>("datetime", "asc"))
+                .map((message) => (
+                  <MessageComponent key={message.id} {...message} />
+                ))
             ) : (
               <div className="flex items-center justify-center h-full">
                 <VscLoading className="animate-spin" size={35} />

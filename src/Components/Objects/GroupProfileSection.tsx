@@ -10,6 +10,8 @@ import { BsPersonFillDash } from "react-icons/bs";
 import { IAppUserDisplay } from "../../Models/UserModels";
 import { auth } from "../../Services/auth-service";
 import { Tooltip } from "react-bootstrap";
+import { GiClawHammer } from "react-icons/gi";
+import { dialogs } from "../../Constants/AlertsConstant";
 
 const GroupProfileSection = () => {
   const { groupId } = useParams();
@@ -72,6 +74,11 @@ const GroupProfileSection = () => {
       navigate(`/feed`);
     }
   };
+  const ShowRules = () => {
+    if (groupInfo?.groupRules) {
+      dialogs.showtext(groupInfo?.groupRules);
+    }
+  };
 
   return (
     <>
@@ -114,6 +121,13 @@ const GroupProfileSection = () => {
                       />
                     </button>
                   )}
+                  <button
+                    className={`${colors.ElementFrame} mt-2 p-2 rounded-xl flex items-center gap-2`}
+                    onClick={ShowRules}
+                  >
+                    <GiClawHammer size={25} />
+                    <span> Rules</span>
+                  </button>
                 </div>
               </div>
               <div className={` pt-16 px-6 pb-6 ${colors.ButtonFont}`}>

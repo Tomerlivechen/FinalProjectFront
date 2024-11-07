@@ -3,9 +3,12 @@ import { colors } from "../Constants/Patterns";
 import { MYFormikValues } from "../Types/@StructureTypes";
 
 const FormikElementBuilder = (initalValues: MYFormikValues) => {
-  const divClassName = colors.FormikDiv;
+  let divClassName = colors.FormikDiv;
   const fieldClassName = colors.ForkikField;
   const textboxParams = colors.TextBox;
+  if (initalValues.Title) {
+    divClassName = colors.FormikDivTight;
+  }
 
   return (
     <>

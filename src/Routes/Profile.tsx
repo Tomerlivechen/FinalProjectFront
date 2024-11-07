@@ -10,6 +10,7 @@ import { UserTabList } from "../Components/Objects/UserTabList";
 import { IAppUserDisplay } from "../Models/UserModels";
 import { ProfileGroupsList } from "../Components/Objects/ProfileGroupsList";
 import { ImageList } from "../Components/Objects/ImageList";
+import { InteractingUsersLists } from "../Components/InteractingUsersLists";
 
 const Profile = () => {
   const userContext = useUser();
@@ -39,7 +40,7 @@ const Profile = () => {
         setUserIdState(userContext.userInfo.UserId);
       }
     }
-  }, [loadingUsers]);
+  }, [loadingUsers, userId]);
 
   useEffect(() => {
     const fetchFollowing = async () => {
@@ -74,6 +75,9 @@ const Profile = () => {
         <div className="w-full md:w-11/12 px-2">
           <div className=" w-full px-2 min-w-[40rem]  sm:w-[40rem] md:w-[55rem] lg:w-[72rem] xl:w-[99rem] ">
             {userIdState && <ProfileUserSection userId={userIdState} />}
+          </div>
+          <div className={` hidden md:block absolute right-5 top-14`}>
+            <InteractingUsersLists />
           </div>
           <div className=" w-full px-2 min-w-[40rem]  sm:w-[40rem] md:w-[55rem] lg:w-[72rem] xl:w-[99rem] ">
             <div className="flex flex-col md:flex-row justify-between w-full md:w-8/12   ">

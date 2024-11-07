@@ -90,7 +90,7 @@ const EditPostModal: React.FC<EditPostModalProps> = ({
     if (loggedInContext.token) {
       console.log("Form submitted with values: ", values);
       setIsLoading(true);
-      let updatedValues = {...values}
+      let updatedValues = { ...values };
       if (postValues.keyWords.length > 0) {
         const parsedKeyWords = processKeywords(postValues.keyWords.toString());
         updatedValues = { ...values, keyWords: parsedKeyWords };
@@ -149,7 +149,7 @@ const EditPostModal: React.FC<EditPostModalProps> = ({
     <>
       <Modal show={show} onHide={handleclose} className="comment-modal">
         <>
-          <ElementFrame height="460px" width="300px" padding="1">
+          <ElementFrame tailwind="h-fit" width="300px" padding="1">
             <>
               <Formik
                 initialValues={postValues}

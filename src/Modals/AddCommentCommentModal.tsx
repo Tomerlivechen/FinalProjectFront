@@ -128,7 +128,7 @@ const AddCommentCommentModal: React.FC<AddCommentCommentModalProps> = ({
     <>
       <Modal show={show} onHide={onHide} className="comment-modal">
         <>
-          <ElementFrame height="400px" width="300px" padding="1">
+          <ElementFrame tailwind="h-fit" width="300px" padding="1">
             <>
               <Formik
                 initialValues={NewComment}

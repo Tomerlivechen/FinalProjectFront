@@ -33,6 +33,8 @@ const colors = {
   InteractionText: "text-blue-900 dark:text-orange-400",
   FormikDiv:
     "font-extralight form-group flex flex-col gap-2 mx-auto text-lg mt-5",
+  FormikDivTight:
+    "font-extralight form-group flex flex-col gap-2 mx-auto text-lg",
   ForkikField: "rounded-md hover:border-2 border-2 px-2 py-2",
 };
 export const categories: ICategory[] = [
@@ -63,7 +65,7 @@ export const sortByProperty = <T,>(
       const dateB = new Date(valueB as string).getTime();
       return order === "asc" ? dateA - dateB : dateB - dateA;
     }
-    
+
     if (property === "comments") {
       const commentsA = (valueA as ICommentDisplay[] | null)?.length || 0;
       const commentsB = (valueB as ICommentDisplay[] | null)?.length || 0;

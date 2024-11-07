@@ -125,7 +125,7 @@ const AddPostCommentModal: React.FC<AddPostCommentModalProps> = ({
     <>
       <Modal show={show} onHide={handleclose} className="comment-modal">
         <>
-          <ElementFrame height="390px" width="300px" padding="1">
+          <ElementFrame tailwind="h-fit" width="300px" padding="1">
             <>
               <Formik
                 initialValues={NewComment}
@@ -133,7 +133,7 @@ const AddPostCommentModal: React.FC<AddPostCommentModalProps> = ({
                 onSubmit={handleSubmit}
               >
                 {() => (
-                  <Form className="mt-1" >
+                  <Form className="mt-1">
                     <div className="font-extralight form-group flex flex-col gap-2 w-full mx-auto text-lg mt-1">
                       <div className="flex justify-evenly">
                         <label className="text-2xl font-bold  text-center">

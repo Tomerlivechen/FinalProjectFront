@@ -180,6 +180,7 @@ export const confirmPasswordValues: MYFormikValues = {
     width: "full",
   };
   export const linkFieldValues: MYFormikValues = {
+    Title:"Link",
     element: "link",
     type: "text",
     placeholder: "Link (optional)",
@@ -190,6 +191,7 @@ export const confirmPasswordValues: MYFormikValues = {
   };
   
   export const titleFieldValues: MYFormikValues = {
+    Title:"Title",
     element: "title",
     type: "text",
     placeholder: "Title",
@@ -200,6 +202,7 @@ export const confirmPasswordValues: MYFormikValues = {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => e.target.value,
   };
   export const keyFieldValues: MYFormikValues = {
+    Title:"Key-Words",
     element: "keyWords",
     type: "text",
     placeholder: "Key Words (optional)",
@@ -217,6 +220,7 @@ export const confirmPasswordValues: MYFormikValues = {
   };
   
   export const textFieldValues: MYFormikValues = {
+    Title:"Text",
     element: "text",
     type: "text",
     placeholder: "Text",

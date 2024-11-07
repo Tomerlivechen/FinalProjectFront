@@ -130,7 +130,7 @@ const EditCommentModal: React.FC<EditCommentModalProps> = ({
     <>
       <Modal show={show} onHide={handleclose} className="comment-modal">
         <>
-          <ElementFrame height="390px" width="300px" padding="1">
+          <ElementFrame tailwind="h-fit" width="300px" padding="1">
             <>
               <Formik
                 initialValues={commentValues}
@@ -138,7 +138,7 @@ const EditCommentModal: React.FC<EditCommentModalProps> = ({
                 onSubmit={handleSubmit}
               >
                 {() => (
-                  <Form className="mt-1" >
+                  <Form className="mt-1">
                     <div className="font-extralight form-group flex flex-col gap-2 w-full mx-auto text-lg mt-1">
                       <div className="flex justify-evenly">
                         <label className="text-2xl font-bold  text-center">
@@ -146,7 +146,6 @@ const EditCommentModal: React.FC<EditCommentModalProps> = ({
                         </label>
                       </div>
                     </div>
-
                     <FormikElementBuilder
                       {...textFieldValues}
                       value={`${commentValues.text}`}
@@ -154,6 +153,7 @@ const EditCommentModal: React.FC<EditCommentModalProps> = ({
                         fieldChange(e, "text")
                       }
                     />
+
                     <FormikElementBuilder
                       {...linkFieldValues}
                       value={`${commentValues.link}`}

@@ -184,8 +184,7 @@ const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
         posts: mainPostList,
         filter: catFilter == 0 ? null : catFilter,
       };
-
-      if (JSON.stringify(newPostList) !== JSON.stringify(postList)) {
+      if (!isEqual(newPostList, postList)) {
         setPostList(newPostList);
       }
     }

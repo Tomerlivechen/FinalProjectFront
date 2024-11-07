@@ -15,9 +15,13 @@ import { CgFeed } from "react-icons/cg";
 import { NotificationAlert } from "../Components/Objects/NotificationAlert";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { AppLogo } from "../Components/Objects/AppLogo";
+
+import { GiChatBubble } from "react-icons/gi";
+import { InteractingUsersLists } from "../Components/InteractingUsersLists";
 function NavBar() {
   const navigate = useNavigate();
   const [filter, setFilter] = useState(false);
+  const [chatFrame, setChatFrame] = useState(false);
   const location = useLocation();
   const { Theme, toggleTheme } = useContext(ThemeContext);
   const { isLoggedin, logout } = useContext(LoggedInContext);
@@ -43,6 +47,10 @@ function NavBar() {
 
   const brandNav = () => {
     navigate("feed");
+  };
+
+  const toggleChat = () => {
+    setChatFrame((prev) => !prev);
   };
 
   return (
@@ -100,6 +108,22 @@ function NavBar() {
                 <p className="hidden md:block">Search</p>
               </button>
             </Tooltip>
+            <Tooltip title="chat">
+              <button
+                className={` rounded-lg m-2 p-1  ${
+                  !filter ? colors.Nav : colors.SearchButtonActive
+                } 
+              `}
+                onClick={toggleChat}
+              >
+                <GiChatBubble className="block md:hidden" size={24} />
+              </button>
+            </Tooltip>
+            {chatFrame && (
+              <div className={` block md:hidden absolute right-5 top-14`}>
+                <InteractingUsersLists />
+              </div>
+            )}
           </>
         )}
         <div className=" flex-1"></div>
