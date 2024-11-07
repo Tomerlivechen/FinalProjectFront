@@ -110,7 +110,7 @@ const GroupProfileSection = () => {
                     </Tooltip>
                   </div>
                 </div>
-                <div className="absolute right-0 p-2">
+                <div className="absolute right-0 p-2 flex flex-col items-end">
                   {userContext.userInfo.UserId == groupInfo.adminId && (
                     <button
                       onClick={() => navigate(`/groupSettings/${groupInfo.id}`)}
@@ -122,7 +122,13 @@ const GroupProfileSection = () => {
                     </button>
                   )}
                   <button
-                    className={`${colors.ElementFrame} mt-2 p-2 rounded-xl flex items-center gap-2`}
+                    className={`${
+                      colors.ElementFrame
+                    } mt-2 p-2 rounded-xl flex items-center gap-2 ${
+                      userContext.userInfo.UserId == groupInfo.adminId
+                        ? ""
+                        : "mt-20 mr-4"
+                    }  `}
                     onClick={ShowRules}
                   >
                     <GiClawHammer size={25} />
