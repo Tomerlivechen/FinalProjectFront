@@ -41,9 +41,37 @@ function NavBar() {
     }
   }, [location]);
 
-const brandNav =() =>{
-  navigate("feed");
-}
+  const brandNav = () => {
+    navigate("feed");
+  };
+
+  const setMaxZoomOut = () => {
+    const metaTag = document.querySelector('meta[name="viewport"]');
+    if (!metaTag) return;
+    const currentContent = metaTag.getAttribute("content");
+    if (currentContent && currentContent.includes("initial-scale")) {
+      return;
+    }
+
+    const smallScreenThreshold = 768;
+    const width = window.innerWidth;
+    if (width > smallScreenThreshold) {
+      return;
+    }
+    const deviceWidth = Math.min(1024, width);
+    const scale = deviceWidth / 320;
+    const initialScale = Math.min(1, scale);
+    const maxScale = 5;
+
+    metaTag.setAttribute(
+      "content",
+      `width=device-width, initial-scale=${initialScale}, maximum-scale=${maxScale}, user-scalable=yes`
+    );
+  };
+
+  useEffect(() => {
+    setMaxZoomOut();
+  }, [location]);
 
   return (
     <>
@@ -51,7 +79,10 @@ const brandNav =() =>{
         id="app-navbar"
         className={` fixed z-40 w-full flex-row shadow-2xl shadow-slate-800  text-black flex md:gap-3 gap-0 ${colors.Nav} ${colors.NavText}`}
       >
-        <Navbar.Brand onClick={brandNav} className="flex-shrink-0 hover:cursor-pointer">
+        <Navbar.Brand
+          onClick={brandNav}
+          className="flex-shrink-0 hover:cursor-pointer"
+        >
           <div className="pt-1 pl-1">
             <AppLogo Size={"35"} />
           </div>
@@ -107,11 +138,10 @@ const brandNav =() =>{
               Register
             </NavLink>
             <NavLink className="md:p-3 p-1 pt-2" to="login">
-            <Tooltip title="Log In">
+              <Tooltip title="Log In">
                 <LuLogIn size={24} />
               </Tooltip>
             </NavLink>
-
           </>
         )}
         {isLoggedin && (
