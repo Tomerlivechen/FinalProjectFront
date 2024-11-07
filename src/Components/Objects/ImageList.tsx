@@ -34,8 +34,9 @@ const ImageList: React.FC<{
         setUserIdState(userContext.userInfo.UserId);
       }
     }
-    setOpen(ImageListProps.open);
+    setOpen(ImageListProps.open);},[userId]);
 
+useEffect(() => {
     if (imageList) {
       if (!isEqual(imageList, displayImageList)) {
         setIsLoading(true);
