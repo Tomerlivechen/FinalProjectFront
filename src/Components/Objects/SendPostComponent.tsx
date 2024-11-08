@@ -98,6 +98,7 @@ function SendPostComponent() {
       console.log("Form submitted with values: ", values);
       setIsLoading(true);
       try {
+        values.link = Url;
         values.imageURL = imageUrl;
         clear();
         const response = await Posts.postPost(values);

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Tooltip } from "react-bootstrap";
 import { IoIosColorPalette } from "react-icons/io";
 import { IoAccessibilitySharp } from "react-icons/io5";
@@ -24,10 +24,12 @@ const AccessabilityPanel = () => {
     if (contrast.color) {
       setcontrast((prev) => ({ ...prev, color: false, blackAndWhite: true }));
       document.body.classList.toggle("blackAndWhite");
+      localStorage.setItem("blackAndWhite", "false");
     }
     if (contrast.blackAndWhite) {
       setcontrast((prev) => ({ ...prev, color: true, blackAndWhite: false }));
       document.body.classList.toggle("blackAndWhite");
+      localStorage.setItem("blackAndWhite", "true");
     }
   };
 
@@ -35,12 +37,25 @@ const AccessabilityPanel = () => {
     if (contrast.colorContrast) {
       setcontrast((prev) => ({ ...prev, colorContrast: false }));
       document.body.classList.toggle("setContrast");
+      localStorage.setItem("contrast", "true");
     }
     if (!contrast.colorContrast) {
       setcontrast((prev) => ({ ...prev, colorContrast: true }));
       document.body.classList.toggle("setContrast");
+      localStorage.setItem("contrast", "false");
     }
   };
+
+  useEffect(() => {
+    const contrast = localStorage.getItem("contrast")?.toString();
+    const BnW = localStorage.getItem("blackAndWhite")?.toString();
+    if (contrast == "true") {
+      document.body.classList.toggle("setContrast");
+    }
+    if (BnW == "true") {
+      document.body.classList.toggle("setContrast");
+    }
+  }, []);
 
   const toggleZoom = () => {
     const newZoom = (zoom.zoom + 0.2) % 3;

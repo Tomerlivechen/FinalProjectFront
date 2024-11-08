@@ -42,6 +42,8 @@ function NavBar() {
   useEffect(() => {
     if (location.pathname != "/search") {
       setFilter(false);
+    } else {
+      setFilter(true);
     }
   }, [location]);
 
@@ -108,11 +110,10 @@ function NavBar() {
                 <p className="hidden md:block">Search</p>
               </button>
             </Tooltip>
+
             <Tooltip title="chat">
               <button
-                className={` rounded-lg m-2 p-1  ${
-                  !filter ? colors.Nav : colors.SearchButtonActive
-                } 
+                className={` rounded-lg m-2 p-1  ${colors.Nav} 
               `}
                 onClick={toggleChat}
               >
