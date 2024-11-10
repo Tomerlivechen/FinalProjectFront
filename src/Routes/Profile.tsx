@@ -30,7 +30,7 @@ const Profile = () => {
     if(userId){
       setUserId(userId)
       }
-  },[searchParams]);
+  },[searchParams,location.pathname]);
 
   const GetFollowing = async (profileId: string) => {
     const response = await auth.GetUsersFollowing(profileId);
