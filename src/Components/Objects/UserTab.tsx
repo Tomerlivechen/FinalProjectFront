@@ -36,42 +36,21 @@ const UserTab: React.FC<UserTabProps> = (TabProps: UserTabProps) => {
     setblockedYou(TabProps.UserDisplay.blockedYou);
   }, []);
 
-const [loggedIn, setLoggedIn] = useState(false)
-
-const updateLoggedin = () => {
-if(userInfo.lastActive){
-  const lastActive = new Date(userInfo.lastActive as string).getTime();
-  const now = new Date().getTime()
-  const timeDifferenceInMinutes = (now - lastActive) / (1000 * 60 );
-  if (timeDifferenceInMinutes >= 3){
-    setLoggedIn(false)
-  }
-  else if (timeDifferenceInMinutes < 3){
-    setLoggedIn(true)
-  }
-}
-}
-
-const intervalTime = 600;
-useEffect(() => {
-  const interval = setInterval(() => {
-    updateLoggedin();
-  }, intervalTime);
-  return () => clearInterval(interval);
-}, []);
-
-
   return (
     <>
       {!blockedYou ? (
-        <ElementFrame tailwind="h-fit w-[260px]"  padding="2">
+        <ElementFrame tailwind="h-fit w-[260px]" padding="2">
           <div
             className={`flex  ${
               blocking && "bg-stone-500 bg-opacity-15 rounded-full"
             } ${following && "bg-green-400 bg-opacity-15 rounded-full"} `}
           >
             <img
-              className={`rounded-full h-14 w-14 shadow-2xl  flex-shrink-0 ${loggedIn ? `border-4 border-emerald-500` : `border-4 border-amber-500`} `}
+              className={`rounded-full h-14 w-14 shadow-2xl  flex-shrink-0 ${
+                userInfo.online
+                  ? `border-4 border-emerald-500`
+                  : `border-4 border-amber-500`
+              } `}
               src={
                 isValidURL(userInfo.imageURL)
                   ? userInfo.imageURL
@@ -84,8 +63,8 @@ useEffect(() => {
             <div
               className={`col-span-4 font-extrabold p-4 flex items-center gap-2 ${colors.ButtonFont}`}
             >
-                           {userInfo.userName.slice(0, 15)}
-                           {userInfo.userName.length > 15 && "..."}
+              {userInfo.userName.slice(0, 15)}
+              {userInfo.userName.length > 15 && "..."}
 
               {userInfo.chatId ? (
                 <Tooltip title="Open Chat">

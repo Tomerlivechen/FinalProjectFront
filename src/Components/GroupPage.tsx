@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import {  useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 import { Groups } from "../Services/group-service";
 
@@ -11,16 +11,24 @@ import { ISocialGroupDisplay } from "../Models/SocialGroup";
 import GroupProfileSection from "./Objects/GroupProfileSection";
 import ResizableFrame from "./Objects/ResizableFrame";
 import { PostFrame } from "./PostFrame";
+import { isEqual } from "lodash";
 
 const GroupPage = () => {
-  const [searchParams] = useSearchParams()
-  const [groupId,setGroupId] = useState<null|string>(null)
+  const [searchParams] = useSearchParams();
+  const [groupId, setGroupId] = useState<null | string>(null);
+
   useEffect(() => {
-    const groupId = searchParams.get('groupId');
-    if(groupId){
-    setGroupId(groupId)
+    getSearchParams();
+  }, [searchParams]);
+
+  const getSearchParams = () => {
+    const _groupId = searchParams.get("groupId");
+    if (_groupId) {
+      if (!isEqual(groupId, _groupId)) {
+        setGroupId(_groupId);
+      }
     }
-  },[searchParams]);
+  };
 
   const [groupState, setGroupState] = useState<ISocialGroupDisplay | null>(
     null
@@ -42,7 +50,7 @@ const GroupPage = () => {
       GetMembers(groupId);
       GetGroupInfo(groupId);
     }
-  }, [groupId]);
+  }, [groupId, searchParams]);
 
   useEffect(() => {
     if (MemberList) {

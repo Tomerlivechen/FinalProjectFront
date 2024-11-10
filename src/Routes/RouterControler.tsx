@@ -1,8 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import About from "./About";
 import TestSpace from "./TestSpace";
 
@@ -138,10 +134,7 @@ function RouterControler() {
                           </NoAuthRoute>
                         }
                       />
-                      <Route
-                        path="*"
-                        element={<NotFound/>}
-                      />
+                      <Route path="*" element={<NotFound />} />
                     </Routes>
                   </BackGround>
                 </Router>

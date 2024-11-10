@@ -1,4 +1,4 @@
-import {  useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
@@ -14,6 +14,7 @@ import { RxEyeClosed } from "react-icons/rx";
 import { MYFormikValues } from "../Types/@StructureTypes";
 import { PasswordRecovery } from "../Models/AuthModels";
 import * as URLencode from "urlencode";
+import { isEqual } from "lodash";
 
 const emailValues: MYFormikValues = {
   Title: "Email Address",
@@ -39,14 +40,18 @@ function PasswordRecoveryPage() {
   passwordValues.type = viewPassword;
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  const [token,setToken] = useState<null|string>(null)
+  const [token, setToken] = useState<null | string>(null);
 
   useEffect(() => {
-    const token = searchParams.get('token');
-    if(token){
-      setToken(token)
-      }
-  },[searchParams]);
+    getSearchParams();
+  }, [searchParams]);
+
+  const getSearchParams = () => {
+    const _token = searchParams.get("token");
+    if (_token) {
+      if (!isEqual(token, _token)) setToken(_token);
+    }
+  };
 
   const viewPass = () => {
     setviewPassword((prevviewPassword) =>

@@ -3,7 +3,8 @@ import { sortByProperty } from "../../Constants/Patterns";
 import { IAppUserDisplay } from "../../Models/UserModels";
 import UserTab from "./UserTab";
 import ClimbBoxSpinner from "../../Spinners/ClimbBoxSpinner";
-import { useLocation,  useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
+import { isEqual } from "lodash";
 
 interface UserTabListValues {
   sortElement?: keyof IAppUserDisplay;
@@ -16,8 +17,7 @@ interface UserTabListValues {
 const UserTabList: React.FC<UserTabListValues> = (
   UserListValue: UserTabListValues
 ) => {
-
-  const [searchParams] = useSearchParams()
+  const [searchParams] = useSearchParams();
   const [users, setUsers] = useState<IAppUserDisplay[]>(UserListValue.users);
   const [order, setOrder] = useState(UserListValue.orderBy);
   const [sortBy, setSortBy] = useState(UserListValue.sortElement);
@@ -28,14 +28,20 @@ const UserTabList: React.FC<UserTabListValues> = (
   const [loading, setLoading] = useState(true);
   const location = useLocation();
 
-  const [userId,setUserId] = useState<null|string>(null)
+  const [userId, setUserId] = useState<null | string>(null);
 
   useEffect(() => {
-    const userId = searchParams.get('userId');
-    if(userId){
-      setUserId(userId)
-      }
-  },[searchParams]);
+    getSearchParams();
+  }, [searchParams]);
+
+  const getSearchParams = () => {
+    const _userId = searchParams.get("userId");
+    if (_userId && !isEqual(userId, _userId)) {
+      setUserId(_userId);
+    } else {
+      setUserId(null);
+    }
+  };
 
   const intervalTime = 5000;
   useEffect(() => {
@@ -47,7 +53,7 @@ const UserTabList: React.FC<UserTabListValues> = (
 
   useEffect(() => {
     fillLists();
-  }, [UserListValue, userId, location]);
+  }, [UserListValue, userId, location, searchParams]);
 
   const fillLists = () => {
     setUsers(UserListValue.users);
@@ -65,13 +71,13 @@ const UserTabList: React.FC<UserTabListValues> = (
     setOrder(UserListValue.orderBy);
     setSortBy(UserListValue.sortElement);
     setFilterBy(UserListValue.filter);
-  }, [UserListValue, userId]);
+  }, [UserListValue, userId, searchParams]);
 
   useEffect(() => {
     if (sortedUsers) {
       setLoading(false);
     }
-  }, [sortedUsers, userId]);
+  }, [sortedUsers, userId, searchParams]);
 
   return (
     <>

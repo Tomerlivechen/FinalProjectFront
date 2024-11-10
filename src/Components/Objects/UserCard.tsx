@@ -88,30 +88,6 @@ const UserCard: React.FC<UserCardProps> = ({ UserDisplay }) => {
         catchError(error, "Unblocking");
       });
   };
-  const [loggedIn, setLoggedIn] = useState(false)
-
-  const updateLoggedin = () => {
-    if(UserDisplay.lastActive){
-      const lastActive = new Date(UserDisplay.lastActive as string).getTime();
-      const now = new Date().getTime()
-      const timeDifferenceInMinutes = (now - lastActive) / (1000 * 60);
-      if (timeDifferenceInMinutes >= 3){
-        setLoggedIn(false)
-      }
-      else if (timeDifferenceInMinutes < 3){
-        setLoggedIn(true)
-      }
-    }
-    }
-
-  const intervalTime = 1000;
-useEffect(() => {
-  const interval = setInterval(() => {
-    updateLoggedin();
-  }, intervalTime);
-  return () => clearInterval(interval);
-}, []);
-
 
   if (UserDisplay.blockedYou && UserDisplay.hideBlocked) {
     return null;
@@ -121,10 +97,12 @@ useEffect(() => {
         <ElementFrame tailwind="h-fit w-[260px] md:w-[650px]" padding="2">
           <div className="flex">
             <div className="col-span-5 md:col-span-2 md:w-24 flex items-center justify-center ">
-
               <img
-
-                className={`rounded-full  border-1 shadow-2xl  w-24 flex ${loggedIn ? `border-4 border-emerald-500` : `border-4 border-amber-500`} ` }
+                className={`rounded-full  border-1 shadow-2xl  w-24 flex ${
+                  UserDisplay.online
+                    ? `border-4 border-emerald-500`
+                    : `border-4 border-amber-500`
+                } `}
                 src={
                   isValidURL(UserDisplay.imageURL)
                     ? UserDisplay.imageURL
@@ -141,9 +119,16 @@ useEffect(() => {
             <div className="hidden md:flex items-center">
               {!UserDisplay.hideName && (
                 <div className=" ml-4 col-span-4 font-extrabold p-3 ">
-                  {`${UserDisplay.prefix}. ${UserDisplay.first_Name.slice(0, 10)}
-              ${(UserDisplay.first_Name.length > 10) ? "...":""} ${UserDisplay.last_Name.slice(0, 10)}
-              ${(UserDisplay.last_Name.length > 10) ? "...":""} (${UserDisplay.pronouns})`}
+                  {`${UserDisplay.prefix}. ${UserDisplay.first_Name.slice(
+                    0,
+                    10
+                  )}
+              ${
+                UserDisplay.first_Name.length > 10 ? "..." : ""
+              } ${UserDisplay.last_Name.slice(0, 10)}
+              ${UserDisplay.last_Name.length > 10 ? "..." : ""} (${
+                    UserDisplay.pronouns
+                  })`}
                 </div>
               )}
               <div className=" ml-auto col-span-2 font-extrabold p-3 flex gap-3">

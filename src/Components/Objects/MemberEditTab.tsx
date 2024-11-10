@@ -7,6 +7,7 @@ import { MdPersonOff } from "react-icons/md";
 import { Groups } from "../../Services/group-service";
 import ClipSpinner from "../../Spinners/ClipSpinner";
 import { IMemberEditTabProps } from "../../Types/@GroupTypes";
+import { dialogs } from "../../Constants/AlertsConstant";
 
 const MemberEditTab: React.FC<{ METProps: IMemberEditTabProps }> = ({
   METProps,
@@ -28,14 +29,18 @@ const MemberEditTab: React.FC<{ METProps: IMemberEditTabProps }> = ({
 
   const deleteUser = async () => {
     if (userData) {
-      await Groups.RemoveMember(groupId, userData.id);
+      const confirm = await dialogs.ConfirmRemoveFromGroup(userData);
+      if (confirm) {
+        await Groups.RemoveMember(groupId, userData.id);
+        dialogs.success("User Removed successfully");
+      }
     }
   };
 
   return (
     <>
       {!loading && userData && !userData.blockedYou ? (
-        <ElementFrame height="62px" width="200px" padding="0">
+        <ElementFrame height="62px" tailwind="w-fit" padding="0">
           <div className={`flex `}>
             <img
               className="rounded-full border-2 h-14 w-14 shadow-2xl p-1 "

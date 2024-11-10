@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ProfileUserSection from "../Components/ProfileUserSection";
 import { auth } from "../Services/auth-service";
 
-import { useLocation,  useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import { useUser } from "../CustomHooks/useUser";
 import { PostFrame } from "../Components/PostFrame";
 import ResizableFrame from "../Components/Objects/ResizableFrame";
@@ -11,26 +11,32 @@ import { IAppUserDisplay } from "../Models/UserModels";
 import { ProfileGroupsList } from "../Components/Objects/ProfileGroupsList";
 import { ImageList } from "../Components/Objects/ImageList";
 import { InteractingUsersLists } from "../Components/InteractingUsersLists";
+import { isEqual } from "lodash";
 
 const Profile = () => {
   const userContext = useUser();
   const location = useLocation();
-  const [searchParams] = useSearchParams()
+  const [searchParams] = useSearchParams();
 
   const [userIdState, setUserIdState] = useState<string | null>(null);
   const [loadingUsers, setLoadingUsers] = useState(true);
   const [usersList, setUsersList] = useState<IAppUserDisplay[] | null>(null);
   const [imagesOpen, setImagesOpen] = useState(false);
 
-
-  const [userId,setUserId] = useState<null|string>(null)
+  const [userId, setUserId] = useState<null | string>(null);
 
   useEffect(() => {
-    const userId = searchParams.get('userId');
-    if(userId){
-      setUserId(userId)
-      }
-  },[searchParams,location.pathname]);
+    getSearchParams();
+  }, [searchParams]);
+
+  const getSearchParams = () => {
+    const _userId = searchParams.get("userId");
+    if (_userId && !isEqual(userId, _userId)) {
+      setUserId(_userId);
+    } else {
+      setUserId(null);
+    }
+  };
 
   const GetFollowing = async (profileId: string) => {
     const response = await auth.GetUsersFollowing(profileId);
@@ -41,7 +47,7 @@ const Profile = () => {
     setUsersList(null);
     setUserIdState(null);
     setLoadingUsers(true);
-  }, [location.pathname]);
+  }, [location.pathname, searchParams]);
 
   useEffect(() => {
     if (loadingUsers) {
@@ -87,9 +93,7 @@ const Profile = () => {
           <div className=" w-full px-2 min-w-[40rem]  sm:w-[40rem] md:w-[55rem] lg:w-[72rem] xl:w-[99rem] ">
             {userIdState && <ProfileUserSection userId={userIdState} />}
           </div>
-          <div className={` hidden md:block absolute right-5 top-14`}>
-            <InteractingUsersLists />
-          </div>
+
           <div className=" w-full px-2 min-w-[40rem]  sm:w-[40rem] md:w-[55rem] lg:w-[72rem] xl:w-[99rem] ">
             <div className="flex flex-col md:flex-row justify-between w-full md:w-8/12   ">
               {!imagesOpen && (

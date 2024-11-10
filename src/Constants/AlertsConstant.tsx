@@ -2,6 +2,7 @@ import Swal from "sweetalert2";
 import { Groups } from "../Services/group-service";
 import { IConfirmJoinGoupProps } from "../Types/@GroupTypes";
 import { Images } from "../Services/image-service";
+import { IAppUserDisplay } from "../Models/UserModels";
 
 const showErrorDialog = (message: string) =>
   Swal.fire({
@@ -31,6 +32,23 @@ const ConfirmJoinGroup = async (joinData: IConfirmJoinGoupProps) =>
     if (result.isConfirmed) {
       await Groups.JoinGroup(joinData.groupId);
       return true;
+    }
+  });
+
+const ConfirmRemoveFromGroup = async (User: IAppUserDisplay) =>
+  Swal.fire({
+    title: "Are you sure?",
+    html: `Confirm Remove ${User.userName} From Group`,
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: `Confirm`,
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      return true;
+    } else {
+      return false;
     }
   });
 
@@ -124,4 +142,5 @@ export const dialogs = {
   ConfirmImageDelete,
   getName,
   getEmail,
+  ConfirmRemoveFromGroup,
 };

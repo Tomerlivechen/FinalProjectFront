@@ -4,10 +4,11 @@ import { ISocialGroupCard } from "../../Models/SocialGroup";
 import { GroupCard } from "./GroupCard";
 import { auth } from "../../Services/auth-service";
 import { useUser } from "../../CustomHooks/useUser";
-import {  useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
+import { isEqual } from "lodash";
 
 const ProfileGroupsList = () => {
-  const [searchParams] = useSearchParams()
+  const [searchParams] = useSearchParams();
 
   const userContext = useUser();
   const [loading, setLoading] = useState(true);
@@ -15,15 +16,20 @@ const ProfileGroupsList = () => {
     null
   );
 
-  const [userId,setUserId] = useState<null|string>(null)
+  const [userId, setUserId] = useState<null | string>(null);
+
+  const getSearchParams = () => {
+    const _userId = searchParams.get("userId");
+    if (_userId) {
+      if (!isEqual(userId, _userId)) {
+        setUserId(_userId);
+      }
+    }
+  };
 
   useEffect(() => {
-    const userId = searchParams.get('userId');
-    if(userId){
-      setUserId(userId)
-      }
-  },[searchParams]);
-
+    getSearchParams();
+  }, [searchParams]);
 
   const GetUserGroups = async (userId: string) => {
     if (userContext.userInfo.UserId) {
@@ -39,7 +45,7 @@ const ProfileGroupsList = () => {
     } else if (userContext.userInfo.UserId) {
       GetUserGroups(userContext.userInfo.UserId);
     }
-  }, [userId,userContext.userInfo.UserId]);
+  }, [userId, userContext.userInfo.UserId, searchParams]);
 
   useEffect(() => {
     if (groupCardData) {

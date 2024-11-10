@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { IAppImage, IImageListPops } from "../../Types/@ImageTypes";
-import {  useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { Images } from "../../Services/image-service";
 import { isEqual } from "lodash";
 import { ImageObject } from "./ImageObject";
@@ -13,8 +13,7 @@ import { useUser } from "../../CustomHooks/useUser";
 const ImageList: React.FC<{
   ImageListProps: IImageListPops;
 }> = ({ ImageListProps }) => {
-  const [searchParams] = useSearchParams()
-
+  const [searchParams] = useSearchParams();
 
   const userContext = useUser();
   const [userIdState, setUserIdState] = useState("");
@@ -23,16 +22,23 @@ const ImageList: React.FC<{
   const [displayImageList, setDisplayImageList] = useState<IAppImage[]>();
   const [open, setOpen] = useState(false);
 
-  const [userId,setUserId] = useState<null|string>(null)
+  const [userId, setUserId] = useState<null | string>(null);
 
-  useEffect(() => {
-    const userId = searchParams.get('userId');
-    if(userId){
-      setUserId(userId)
+  const getSearchParams = () => {
+    const _userId = searchParams.get("userId");
+    if (_userId) {
+      if (!isEqual(userId, _userId)) {
+        setUserId(_userId);
       }
-  },[searchParams]);
-
-
+    }
+  };
+  const refreshParamas = 1000;
+  useEffect(() => {
+    const interval = setInterval(() => {
+      getSearchParams();
+    }, refreshParamas);
+    return () => clearInterval(interval);
+  }, []);
 
   const getImages = async (userId: string) => {
     const respons = await Images.getUserImages(userId);
@@ -47,9 +53,10 @@ const ImageList: React.FC<{
         setUserIdState(userContext.userInfo.UserId);
       }
     }
-    setOpen(ImageListProps.open);},[userId]);
+    setOpen(ImageListProps.open);
+  }, [userId]);
 
-useEffect(() => {
+  useEffect(() => {
     if (imageList) {
       if (!isEqual(imageList, displayImageList)) {
         setIsLoading(true);

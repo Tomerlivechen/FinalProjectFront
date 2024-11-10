@@ -14,29 +14,33 @@ import { HiLink } from "react-icons/hi2";
 import ElementFrame from "../../Constructors/ElementFrame";
 import { useCloudinary } from "../../CustomHooks/useCloudinary";
 import { FcAddImage, FcEditImage, FcRemoveImage } from "react-icons/fc";
-import { useLocation,  useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import { AxiosError } from "axios";
+import { isEqual } from "lodash";
 
 function SendPostComponent() {
   const location = useLocation();
-  const [searchParams] = useSearchParams()
+  const [searchParams] = useSearchParams();
   const [groupIdState, setGroupIdState] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const loggedInContext = useLogin();
   const [Url, setUrl] = useState("");
 
+  const [groupId, setGroupId] = useState<null | string>(null);
 
-
-  const [groupId,setGroupId] = useState<null|string>(null)
+  const getSearchParams = () => {
+    const _groupId = searchParams.get("groupId");
+    if (_groupId && !isEqual(groupId, _groupId)) {
+      setGroupId(_groupId);
+    } else {
+      setGroupId(null);
+    }
+  };
 
   useEffect(() => {
-    const groupId = searchParams.get('groupId');
-    if(groupId){
-    setGroupId(groupId)
-    }
-  },[searchParams]);
-
+    getSearchParams();
+  }, [searchParams]);
 
   const [imageUrl, holdFile, setHoldFile, setImageURL, clear] = useCloudinary();
   const toggelOpen = () => {
@@ -58,7 +62,7 @@ function SendPostComponent() {
     if (location.pathname.startsWith("/group") && groupId) {
       setGroupIdState(groupId);
     }
-  }, [groupId]);
+  }, [groupId, searchParams]);
 
   const NewPost: INewPost = {
     id: "",

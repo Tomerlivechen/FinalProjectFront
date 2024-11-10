@@ -18,6 +18,7 @@ import { AppLogo } from "../Components/Objects/AppLogo";
 
 import { GiChatBubble } from "react-icons/gi";
 import { InteractingUsersLists } from "../Components/InteractingUsersLists";
+import { useUser } from "../CustomHooks/useUser";
 function NavBar() {
   const navigate = useNavigate();
   const [filter, setFilter] = useState(false);
@@ -25,6 +26,8 @@ function NavBar() {
   const location = useLocation();
   const { Theme, toggleTheme } = useContext(ThemeContext);
   const { isLoggedin, logout } = useContext(LoggedInContext);
+  const [notFeedOrSearch, setNotFeedOrSearch] = useState(false);
+  const userinfo = useUser();
   const handelLogout = () => {
     logout();
     navigate("/");
@@ -44,6 +47,11 @@ function NavBar() {
       setFilter(false);
     } else {
       setFilter(true);
+    }
+    if (location.pathname === "/feed" || location.pathname == "/search") {
+      setNotFeedOrSearch(false);
+    } else {
+      setNotFeedOrSearch(true);
     }
   }, [location]);
 
@@ -85,7 +93,10 @@ function NavBar() {
         </NavLink>
         {isLoggedin && (
           <>
-            <NavLink className="md:p-3 p-1 pt-2" to="profile">
+            <NavLink
+              className="md:p-3 p-1 pt-2"
+              to={`/profile?userId=${userinfo.userInfo.UserId}`}
+            >
               <Tooltip title="Profile">
                 <FaUser className="md:hidden" size={24} />
                 <p className="hidden md:block">Profile</p>
@@ -110,20 +121,24 @@ function NavBar() {
                 <p className="hidden md:block">Search</p>
               </button>
             </Tooltip>
-
-            <Tooltip title="chat">
-              <button
-                className={` rounded-lg m-2 p-1  ${colors.Nav} 
+            {notFeedOrSearch && (
+              <>
+                <Tooltip title="chat">
+                  <button
+                    className={` rounded-lg m-2 p-1  ${colors.Nav} 
               `}
-                onClick={toggleChat}
-              >
-                <GiChatBubble className="block md:hidden" size={24} />
-              </button>
-            </Tooltip>
-            {chatFrame && (
-              <div className={` block md:hidden absolute right-5 top-14`}>
-                <InteractingUsersLists />
-              </div>
+                    onClick={toggleChat}
+                  >
+                    <p className="hidden md:block">Chat</p>
+                    <GiChatBubble className="block md:hidden" size={24} />
+                  </button>
+                </Tooltip>
+                {chatFrame && (
+                  <div className={` block absolute right-5 top-14 z-50`}>
+                    <InteractingUsersLists />
+                  </div>
+                )}
+              </>
             )}
           </>
         )}

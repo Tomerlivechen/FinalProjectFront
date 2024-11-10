@@ -5,7 +5,7 @@ import { useUser } from "../CustomHooks/useUser";
 import ClimbBoxSpinner from "../Spinners/ClimbBoxSpinner";
 import { FaUserGear } from "react-icons/fa6";
 import { colors, isValidURL } from "../Constants/Patterns";
-import { useLocation, useNavigate,  useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { FaHandshakeSlash } from "react-icons/fa";
 import { FaHandshake } from "react-icons/fa";
 import { FaHandHolding } from "react-icons/fa";
@@ -14,10 +14,11 @@ import { GiChatBubble } from "react-icons/gi";
 import { PiPlugsFill } from "react-icons/pi";
 import { useChat } from "../CustomHooks/useChat";
 import { ProfileUserSectionProps } from "../Types/@UserTypes";
+import { isEqual } from "lodash";
 
 const ProfileUserSection: React.FC<ProfileUserSectionProps> = ({ userId }) => {
   const userContex = useUser();
-  const [searchParams] = useSearchParams()
+  const [searchParams] = useSearchParams();
 
   const [bioMore, setBioMore] = useState(false);
   const [user, setUser] = useState<IAppUserDisplay | null>(null);
@@ -28,15 +29,20 @@ const ProfileUserSection: React.FC<ProfileUserSectionProps> = ({ userId }) => {
   const chatContext = useChat();
   const location = useLocation();
 
-  const [paramUserId,setUserId] = useState<null|string>(null)
+  const [paramUserId, setUserId] = useState<null | string>(null);
 
   useEffect(() => {
-    const userId = searchParams.get('userId');
-    if(userId){
-      setUserId(userId)
-      }
-  },[searchParams]);
+    getSearchParams();
+  }, [searchParams]);
 
+  const getSearchParams = () => {
+    const _userId = searchParams.get("userId");
+    if (_userId && !isEqual(userId, _userId)) {
+      setUserId(_userId);
+    } else {
+      setUserId(null);
+    }
+  };
 
   useEffect(() => {
     if (userdata.userInfo.UserId) {
@@ -46,7 +52,13 @@ const ProfileUserSection: React.FC<ProfileUserSectionProps> = ({ userId }) => {
         setYours(!userId);
       }
     }
-  }, [userId, userdata.userInfo.UserId, paramUserId, location.pathname]);
+  }, [
+    userId,
+    userdata.userInfo.UserId,
+    paramUserId,
+    location.pathname,
+    searchParams,
+  ]);
 
   const getUser = async (id: string) => {
     const response = await auth.getUser(id);

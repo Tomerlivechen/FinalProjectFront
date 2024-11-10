@@ -23,12 +23,12 @@ const AccessabilityPanel = () => {
   const toggleGrayscale = () => {
     if (contrast.color) {
       setcontrast((prev) => ({ ...prev, color: false, blackAndWhite: true }));
-      document.body.classList.toggle("blackAndWhite");
+      document.body.classList.add("blackAndWhite");
       localStorage.setItem("blackAndWhite", "false");
     }
     if (contrast.blackAndWhite) {
       setcontrast((prev) => ({ ...prev, color: true, blackAndWhite: false }));
-      document.body.classList.toggle("blackAndWhite");
+      document.body.classList.remove("blackAndWhite");
       localStorage.setItem("blackAndWhite", "true");
     }
   };
@@ -36,12 +36,12 @@ const AccessabilityPanel = () => {
   const toggleContrast = () => {
     if (contrast.colorContrast) {
       setcontrast((prev) => ({ ...prev, colorContrast: false }));
-      document.body.classList.toggle("setContrast");
+      document.body.classList.remove("setContrast");
       localStorage.setItem("contrast", "true");
     }
     if (!contrast.colorContrast) {
       setcontrast((prev) => ({ ...prev, colorContrast: true }));
-      document.body.classList.toggle("setContrast");
+      document.body.classList.add("setContrast");
       localStorage.setItem("contrast", "false");
     }
   };
@@ -88,7 +88,7 @@ const AccessabilityPanel = () => {
   };
   return (
     <>
-      <button className="absolute top-40 left-0  z-50 ">
+      <button className="fixed top-40 left-0 z-50 ">
         <Tooltip
           title="Accessibility"
           aria-description="Accessibility Panel"
@@ -106,7 +106,7 @@ const AccessabilityPanel = () => {
             height="250px"
             width="250px"
             padding="2"
-            tailwind="absolute top-36 left-10 border-2  border-orange-500"
+            tailwind="fixed top-36 left-10 border-2  border-orange-500"
             zindex={1000}
           >
             <div

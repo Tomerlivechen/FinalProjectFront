@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate,  useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { ISocialGroupDisplay, ISocialGroupEdit } from "../Models/SocialGroup";
 import { Groups } from "../Services/group-service";
 import { useCloudinary } from "../CustomHooks/useCloudinary";
@@ -15,17 +15,25 @@ import {
   GroupNewAdminEmailValues,
   GroupRulesValues,
 } from "../Models/FormikModels";
+import { isEqual } from "lodash";
 
 const GroupEditComponent = () => {
-  const [searchParams] = useSearchParams()
-  const [groupId,setGroupId] = useState<null|string>(null)
+  const [searchParams] = useSearchParams();
+  const [groupId, setGroupId] = useState<null | string>(null);
+
   useEffect(() => {
-    const groupId = searchParams.get('groupId');
-    if(groupId){
-    setGroupId(groupId)
+    getSearchParams();
+  }, [searchParams]);
+
+  const getSearchParams = () => {
+    const _groupId = searchParams.get("groupId");
+    if (_groupId && !isEqual(groupId, _groupId)) {
+      setGroupId(_groupId);
+    } else {
+      setGroupId(null);
     }
-  },[searchParams]);
-  
+  };
+
   const [newGroupData, setNewGroupData] = useState<ISocialGroupEdit | null>(
     null
   );
@@ -67,7 +75,7 @@ const GroupEditComponent = () => {
     if (groupId) {
       getGroupDisplay(groupId);
     }
-  }, []);
+  }, [groupId]);
 
   useEffect(() => {
     if (newGroupData) {

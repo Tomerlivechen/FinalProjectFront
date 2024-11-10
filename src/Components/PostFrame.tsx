@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Tooltip } from "react-bootstrap";
-import { useLocation,  useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import {
   categories,
   colors,
@@ -31,7 +31,7 @@ import { NoMorePosts } from "./Objects/NoMorePosts";
 const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
   const location = useLocation();
   const userContex = useUser();
-  const [searchParams] = useSearchParams()
+  const [searchParams] = useSearchParams();
   const [userIdState, setUserIdState] = useState<string | null>(null);
   const [groupIdState, setGroupIdState] = useState<string | null>(null);
   const [postIdState, setPostIdState] = useState<string | null>(null);
@@ -43,24 +43,63 @@ const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
   const [mainPostList, setMainPostList] = useState<IPostDisplay[] | null>();
   const [catFilter, setCatFilter] = useState<number>(0);
 
-  const [userId,setUserId] = useState<null|string>(null)
-  const [groupId,setGroupId] = useState<null|string>(null)
-  const [postId,setPostId] = useState<null|string>(null)
-  useEffect(() => {
-    const userId = searchParams.get('userId');
-    const groupId = searchParams.get('groupId');
-    const postId = searchParams.get('postId');
-    if(groupId){
-    setGroupId(groupId)
-    }
-    if(userId){
-      setUserId(userId)
-      }
-      if(postId){
-        setPostId(postId)
-        }
-  },[searchParams]);
+  const [userId, setUserId] = useState<null | string>(null);
+  const [groupId, setGroupId] = useState<null | string>(null);
+  const [postId, setPostId] = useState<null | string>(null);
 
+  useEffect(() => {
+    getSearchParams();
+  }, []);
+
+  useEffect(() => {
+    if (PostFrameParams) {
+      setusersIds(PostFrameParams.UserList);
+    } else {
+      getSearchParams();
+    }
+  }, [PostFrameParams]);
+
+  useEffect(() => {
+    if (searchParams) {
+      getSearchParams();
+    }
+  }, [searchParams, PostFrameParams]);
+
+  const getSearchParams = async () => {
+    const _userId = searchParams.get("userId");
+    const _groupId = searchParams.get("groupId");
+    const _postId = searchParams.get("postId");
+    if (_groupId && !isEqual(groupId, _groupId)) {
+      setGroupId(_groupId);
+    } else if (!_groupId) {
+      setGroupId(null);
+    }
+    if (_userId && !isEqual(userId, _userId)) {
+      setUserId(_userId);
+    } else if (!_userId) {
+      setUserId(null);
+    }
+    if (_postId && !isEqual(postId, _postId)) {
+      setPostId(_postId);
+    } else if (!_postId) {
+      setPostId(null);
+    }
+  };
+
+  useEffect(() => {
+    if (location.pathname.startsWith("/profile") && userId) {
+      setUserIdState(userId);
+    }
+    if (location.pathname.startsWith("/group") && groupId) {
+      setGroupIdState(groupId);
+    }
+    if (location.pathname.startsWith("/feed") && postId) {
+      setPostIdState(postId);
+    }
+    if (location.pathname.startsWith("/profile") && !userId) {
+      setUserIdState(userContex.userInfo.UserId);
+    }
+  }, [location.pathname, userId, groupId, postId, userContex.userInfo.UserId]);
 
   const [feedSort, setFeedSort] = useState({
     totalVotes: false,
@@ -73,19 +112,15 @@ const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
   });
 
   useEffect(() => {
-    updatePostList();
-  }, [userIdState, groupIdState, postIdState]);
-
-  useEffect(() => {
-    if (PostFrameParams) {
-      setusersIds(PostFrameParams.UserList);
+    if (userIdState || groupIdState || postIdState) {
+      updatePostList();
     }
-  }, [PostFrameParams]);
+  }, [userIdState, groupIdState, postIdState]);
 
   const updatePostList = async () => {
     const updatePostListIfChanged = (posts: IPostDisplay[]) => {
       const parsedPosts = stringToPostDisplay(posts);
-      if (parsedPosts !== postList?.posts) {
+      if (!isEqual(parsedPosts, mainPostList)) {
         setMainPostList(
           Array.isArray(parsedPosts) ? parsedPosts : [parsedPosts]
         );
@@ -105,23 +140,6 @@ const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
       updatePostListIfChanged(ProfilePosts.data);
     }
   };
-
-
-  useEffect(() => {
-
-    if (location.pathname.startsWith("/profile") && userId) {
-      setUserIdState(userId);
-    }
-    if (location.pathname.startsWith("/group") && groupId) {
-      setGroupIdState(groupId);
-    }
-    if (location.pathname.startsWith("/feed") && postId) {
-      setPostIdState(postId);
-    }
-    if (location.pathname.startsWith("/profile") && !userId) {
-      setUserIdState(userContex.userInfo.UserId);
-    }
-  }, [location.pathname, searchParams, userContex.userInfo.UserId]);
 
   const intervalTime = 10000;
   useEffect(() => {

@@ -40,7 +40,7 @@ const MemberEditTabList: React.FC<{ GroupId: string }> = ({ GroupId }) => {
     }
   }, [GroupId, groupId, memberList, tempMemberList]);
 
-  const intervalTime = 10000;
+  const intervalTime = 5000;
   useEffect(() => {
     const interval = setInterval(() => {
       getMembersList();
