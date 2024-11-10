@@ -126,7 +126,7 @@ function RouterControler() {
                         }
                       />
                       <Route
-                        path="recover/:token"
+                        path="recover"
                         element={<PasswordRecoveryPage />}
                       />
 
