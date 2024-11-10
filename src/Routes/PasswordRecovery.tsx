@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import {  useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
@@ -34,11 +34,13 @@ const passwordValues: MYFormikValues = {
 };
 
 function PasswordRecoveryPage() {
-  const { token } = useParams();
+  const [searchParams] = useSearchParams();
   const [viewPassword, setviewPassword] = useState("password");
   passwordValues.type = viewPassword;
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const token = searchParams.get('token');
+
   const viewPass = () => {
     setviewPassword((prevviewPassword) =>
       prevviewPassword === "password" ? "text" : "password"
