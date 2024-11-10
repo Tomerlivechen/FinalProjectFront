@@ -77,7 +77,7 @@ useEffect(() => {
                   ? userInfo.imageURL
                   : "https://res.cloudinary.com/dhle9hj3n/image/upload/v1729955566/isdaejsdshqjsjmvdy14.jpg"
               }
-              onClick={() => navigate(`/profile/${userInfo.id}`)}
+              onClick={() => navigate(`/profile?userId=${userInfo.id}`)}
               aria-description={`Profile picture of ${userInfo.first_Name} ${userInfo.last_Name}`}
             />
 

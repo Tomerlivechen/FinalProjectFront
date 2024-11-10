@@ -5,7 +5,7 @@ import { useUser } from "../CustomHooks/useUser";
 import ClimbBoxSpinner from "../Spinners/ClimbBoxSpinner";
 import { FaUserGear } from "react-icons/fa6";
 import { colors, isValidURL } from "../Constants/Patterns";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate,  useSearchParams } from "react-router-dom";
 import { FaHandshakeSlash } from "react-icons/fa";
 import { FaHandshake } from "react-icons/fa";
 import { FaHandHolding } from "react-icons/fa";
@@ -17,7 +17,8 @@ import { ProfileUserSectionProps } from "../Types/@UserTypes";
 
 const ProfileUserSection: React.FC<ProfileUserSectionProps> = ({ userId }) => {
   const userContex = useUser();
-  const { userId: paramUserId } = useParams();
+  const [searchParams] = useSearchParams()
+
   const [bioMore, setBioMore] = useState(false);
   const [user, setUser] = useState<IAppUserDisplay | null>(null);
   const [loading, setLoading] = useState(true);
@@ -26,6 +27,16 @@ const ProfileUserSection: React.FC<ProfileUserSectionProps> = ({ userId }) => {
   const [yours, setYours] = useState(false);
   const chatContext = useChat();
   const location = useLocation();
+
+  const [paramUserId,setUserId] = useState<null|string>(null)
+
+  useEffect(() => {
+    const userId = searchParams.get('userId');
+    if(userId){
+      setUserId(userId)
+      }
+  },[searchParams]);
+
 
   useEffect(() => {
     if (userdata.userInfo.UserId) {

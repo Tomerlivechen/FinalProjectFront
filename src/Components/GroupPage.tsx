@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { useParams } from "react-router-dom";
+import {  useSearchParams } from "react-router-dom";
 
 import { Groups } from "../Services/group-service";
 
@@ -13,7 +13,15 @@ import ResizableFrame from "./Objects/ResizableFrame";
 import { PostFrame } from "./PostFrame";
 
 const GroupPage = () => {
-  const { groupId } = useParams();
+  const [searchParams] = useSearchParams()
+  const [groupId,setGroupId] = useState<null|string>(null)
+  useEffect(() => {
+    const groupId = searchParams.get('groupId');
+    if(groupId){
+    setGroupId(groupId)
+    }
+  },[searchParams]);
+
   const [groupState, setGroupState] = useState<ISocialGroupDisplay | null>(
     null
   );

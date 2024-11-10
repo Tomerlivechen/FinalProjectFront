@@ -1,5 +1,5 @@
 import {  useSearchParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { FaRegEye } from "react-icons/fa";
@@ -39,7 +39,14 @@ function PasswordRecoveryPage() {
   passwordValues.type = viewPassword;
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  const token = searchParams.get('token');
+  const [token,setToken] = useState<null|string>(null)
+
+  useEffect(() => {
+    const token = searchParams.get('token');
+    if(token){
+      setToken(token)
+      }
+  },[searchParams]);
 
   const viewPass = () => {
     setviewPassword((prevviewPassword) =>

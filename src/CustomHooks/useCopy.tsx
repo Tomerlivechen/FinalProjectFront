@@ -3,7 +3,7 @@ import { dialogs } from "../Constants/AlertsConstant";
 const useCopy = () => {
   return async (postId: string) => {
     const basePath = window.location.origin;
-    const postLink = `${basePath}/feed/${postId}`;
+    const postLink = `${basePath}/feed?postId=${postId}`;
     try {
       await navigator.clipboard.writeText(postLink);
       dialogs.success("link copied to clipboard!");

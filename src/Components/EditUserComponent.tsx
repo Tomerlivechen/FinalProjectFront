@@ -191,7 +191,7 @@ const EditUserComponent: React.FC<{ userInfo: IAppUserDisplay }> = ({
       } finally {
         setUserValues(userValues);
         setIsLoading(false);
-        navigate(`/Profile/${values.id}`);
+        navigate(`/Profile?userId=${values.id}`);
       }
     } else {
       dialogs.error("Comment not sent user not logged in");

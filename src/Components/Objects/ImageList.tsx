@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { IAppImage, IImageListPops } from "../../Types/@ImageTypes";
-import { useParams } from "react-router-dom";
+import {  useSearchParams } from "react-router-dom";
 import { Images } from "../../Services/image-service";
 import { isEqual } from "lodash";
 import { ImageObject } from "./ImageObject";
@@ -13,13 +13,26 @@ import { useUser } from "../../CustomHooks/useUser";
 const ImageList: React.FC<{
   ImageListProps: IImageListPops;
 }> = ({ ImageListProps }) => {
-  const { userId } = useParams();
+  const [searchParams] = useSearchParams()
+
+
   const userContext = useUser();
   const [userIdState, setUserIdState] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [imageList, setImageList] = useState<IAppImage[] | null>();
   const [displayImageList, setDisplayImageList] = useState<IAppImage[]>();
   const [open, setOpen] = useState(false);
+
+  const [userId,setUserId] = useState<null|string>(null)
+
+  useEffect(() => {
+    const userId = searchParams.get('userId');
+    if(userId){
+      setUserId(userId)
+      }
+  },[searchParams]);
+
+
 
   const getImages = async (userId: string) => {
     const respons = await Images.getUserImages(userId);

@@ -3,13 +3,25 @@ import { useEffect, useState } from "react";
 import ClimbBoxSpinner from "../Spinners/ClimbBoxSpinner";
 
 import { GroupEditComponent } from "../Components/GroupEditComponent";
-import { useParams } from "react-router-dom";
+import {  useSearchParams } from "react-router-dom";
 import { MemberEditTabList } from "../Components/MemberEditTabList";
 
 const GroupSettings = () => {
-  const { groupId } = useParams();
+  const [searchParams] = useSearchParams()
+
   const [loading, setLoading] = useState(true);
   const [GroupId, setGroupId] = useState("");
+
+
+  const [groupId,setgroupId] = useState<null|string>(null)
+
+  useEffect(() => {
+    const groupId = searchParams.get('groupId');
+    if(groupId){
+      setgroupId(groupId)
+    }
+  },[searchParams]);
+
 
   useEffect(() => {
     if (groupId) {

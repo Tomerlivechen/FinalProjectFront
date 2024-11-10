@@ -54,7 +54,7 @@ function RouterControler() {
                         }
                       />
                       <Route
-                        path="feed/:postId"
+                        path="feed"
                         element={
                           <ProtectedRoute>
                             <Feed />
@@ -70,7 +70,7 @@ function RouterControler() {
                         }
                       />
                       <Route
-                        path="profile/:userId"
+                        path="profile"
                         element={
                           <ProtectedRoute>
                             <Profile />
@@ -102,7 +102,7 @@ function RouterControler() {
                         }
                       />
                       <Route
-                        path="group/:groupId"
+                        path="group"
                         element={
                           <ProtectedRoute>
                             <Group />
@@ -110,7 +110,7 @@ function RouterControler() {
                         }
                       />
                       <Route
-                        path="groupSettings/:groupId"
+                        path="groupSettings"
                         element={
                           <ProtectedRoute>
                             <GroupSettings />

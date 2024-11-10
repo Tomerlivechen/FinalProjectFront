@@ -55,7 +55,7 @@ const PostView: React.FC<IPostDisplay> = (postDisplay) => {
   const handleDelete = () => Posts.DeletePost(postDisplay.id);
 
   const GoToUser = () => {
-    navagate(`/profile/${postDisplay.authorId}`);
+    navagate(`/profile?userId=${postDisplay.authorId}`);
   };
 
   const getGroupInfo = async (groupId: string) => {

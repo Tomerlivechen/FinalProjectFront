@@ -4,15 +4,26 @@ import { ISocialGroupCard } from "../../Models/SocialGroup";
 import { GroupCard } from "./GroupCard";
 import { auth } from "../../Services/auth-service";
 import { useUser } from "../../CustomHooks/useUser";
-import { useParams } from "react-router-dom";
+import {  useSearchParams } from "react-router-dom";
 
 const ProfileGroupsList = () => {
-  const { userId } = useParams();
+  const [searchParams] = useSearchParams()
+
   const userContext = useUser();
   const [loading, setLoading] = useState(true);
   const [groupCardData, setGroupCardData] = useState<ISocialGroupCard[] | null>(
     null
   );
+
+  const [userId,setUserId] = useState<null|string>(null)
+
+  useEffect(() => {
+    const userId = searchParams.get('userId');
+    if(userId){
+      setUserId(userId)
+      }
+  },[searchParams]);
+
 
   const GetUserGroups = async (userId: string) => {
     if (userContext.userInfo.UserId) {

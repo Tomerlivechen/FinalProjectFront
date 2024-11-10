@@ -130,7 +130,7 @@ useEffect(() => {
                     ? UserDisplay.imageURL
                     : "https://res.cloudinary.com/dhle9hj3n/image/upload/v1729955566/isdaejsdshqjsjmvdy14.jpg"
                 }
-                onClick={() => navigate(`/profile/${UserDisplay.id}`)}
+                onClick={() => navigate(`/profile?userId=${UserDisplay.id}`)}
                 aria-description={`Profile picture of ${UserDisplay.first_Name} ${UserDisplay.last_Name}`}
               />
             </div>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Tooltip } from "react-bootstrap";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation,  useSearchParams } from "react-router-dom";
 import {
   categories,
   colors,
@@ -31,7 +31,7 @@ import { NoMorePosts } from "./Objects/NoMorePosts";
 const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
   const location = useLocation();
   const userContex = useUser();
-  const params = useParams();
+  const [searchParams] = useSearchParams()
   const [userIdState, setUserIdState] = useState<string | null>(null);
   const [groupIdState, setGroupIdState] = useState<string | null>(null);
   const [postIdState, setPostIdState] = useState<string | null>(null);
@@ -42,6 +42,26 @@ const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
   const [postList, setPostList] = useState<PostListValues | null>();
   const [mainPostList, setMainPostList] = useState<IPostDisplay[] | null>();
   const [catFilter, setCatFilter] = useState<number>(0);
+
+  const [userId,setUserId] = useState<null|string>(null)
+  const [groupId,setGroupId] = useState<null|string>(null)
+  const [postId,setPostId] = useState<null|string>(null)
+  useEffect(() => {
+    const userId = searchParams.get('userId');
+    const groupId = searchParams.get('groupId');
+    const postId = searchParams.get('postId');
+    if(groupId){
+    setGroupId(groupId)
+    }
+    if(userId){
+      setUserId(userId)
+      }
+      if(postId){
+        setPostId(postId)
+        }
+  },[searchParams]);
+
+
   const [feedSort, setFeedSort] = useState({
     totalVotes: false,
     datetime: true,
@@ -86,8 +106,9 @@ const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
     }
   };
 
+
   useEffect(() => {
-    const { userId, groupId, postId } = params;
+
     if (location.pathname.startsWith("/profile") && userId) {
       setUserIdState(userId);
     }
@@ -100,7 +121,7 @@ const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
     if (location.pathname.startsWith("/profile") && !userId) {
       setUserIdState(userContex.userInfo.UserId);
     }
-  }, [location.pathname, params, userContex.userInfo.UserId]);
+  }, [location.pathname, searchParams, userContex.userInfo.UserId]);
 
   const intervalTime = 10000;
   useEffect(() => {

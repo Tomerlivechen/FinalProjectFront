@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ResizableFrame from "../Components/Objects/ResizableFrame";
 import UserLane from "../Components/UserLane";
 import { PostFrame } from "../Components/PostFrame";
-import { useParams } from "react-router-dom";
+import {  useSearchParams } from "react-router-dom";
 import { IPostDisplay } from "../Models/Interaction";
 import { Posts } from "../Services/post-service";
 import PostView from "../Components/Objects/PostView";
@@ -10,8 +10,19 @@ import { ProfileGroupsList } from "../Components/Objects/ProfileGroupsList";
 import { InteractingUsersLists } from "../Components/InteractingUsersLists";
 
 const Feed = () => {
-  const { postId } = useParams();
+  const [searchParams] = useSearchParams()
+
   const [singularPost, setSingularPost] = useState<IPostDisplay | null>(null);
+
+
+  const [postId,setPostId] = useState<null|string>(null)
+  useEffect(() => {
+    const postId = searchParams.get('postId');
+      if(postId){
+        setPostId(postId)
+        }
+  },[searchParams]);
+
 
   useEffect(() => {
     const getSinglePost = async () => {

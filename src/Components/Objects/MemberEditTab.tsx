@@ -40,7 +40,7 @@ const MemberEditTab: React.FC<{ METProps: IMemberEditTabProps }> = ({
             <img
               className="rounded-full border-2 h-14 w-14 shadow-2xl p-1 "
               src={userData.imageURL}
-              onClick={() => navagate(`/profile/${userData.id}`)}
+              onClick={() => navagate(`/profile?userId=${userData.id}`)}
               aria-description={`Profile picture of ${userData.first_Name} ${userData.last_Name}`}
             />
 

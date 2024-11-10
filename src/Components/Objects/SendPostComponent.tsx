@@ -14,17 +14,29 @@ import { HiLink } from "react-icons/hi2";
 import ElementFrame from "../../Constructors/ElementFrame";
 import { useCloudinary } from "../../CustomHooks/useCloudinary";
 import { FcAddImage, FcEditImage, FcRemoveImage } from "react-icons/fc";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation,  useSearchParams } from "react-router-dom";
 import { AxiosError } from "axios";
 
 function SendPostComponent() {
   const location = useLocation();
-  const { groupId } = useParams();
+  const [searchParams] = useSearchParams()
   const [groupIdState, setGroupIdState] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const loggedInContext = useLogin();
   const [Url, setUrl] = useState("");
+
+
+
+  const [groupId,setGroupId] = useState<null|string>(null)
+
+  useEffect(() => {
+    const groupId = searchParams.get('groupId');
+    if(groupId){
+    setGroupId(groupId)
+    }
+  },[searchParams]);
+
 
   const [imageUrl, holdFile, setHoldFile, setImageURL, clear] = useCloudinary();
   const toggelOpen = () => {

@@ -42,7 +42,7 @@ const NotificationObject: React.FC<{
 
   const GoToUser = () => {
     console.log(`${notification?.notifierId}`);
-    navigate(`/Profile/${notification?.notifierId}`);
+    navigate(`/Profile?userId=${notification?.notifierId}`);
   };
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const NotificationObject: React.FC<{
       chatContext.addChat(notification?.referenceId);
     }
     if (actionPathName == "Post" && notification?.referenceId) {
-      navigate(`/feed/${notification?.referenceId}`);
+      navigate(`/feed?postId=${notification?.referenceId}`);
     }
 
     if (notification?.id) {

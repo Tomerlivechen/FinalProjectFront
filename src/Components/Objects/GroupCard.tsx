@@ -52,7 +52,7 @@ const GroupCard: React.FC<{
 
   const goToGroup = () => {
     if (GroupCard?.isMemember) {
-      navigate(`/group/${GroupCard?.id}`);
+      navigate(`/group?groupId=${GroupCard?.id}`);
     }
   };
 
@@ -60,7 +60,7 @@ const GroupCard: React.FC<{
     if (modalProps) {
       const respons = await dialogs.ConfirmJoinGroup(modalProps);
       if (respons) {
-        navigate(`/group/${GroupCard?.id}`);
+        navigate(`/group?groupId=${GroupCard?.id}`);
       }
     }
   };

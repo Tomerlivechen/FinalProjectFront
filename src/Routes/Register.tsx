@@ -77,7 +77,7 @@ function Register() {
     const response = await auth.register(user);
     if (response.status === 200) {
       dialogs.success("Register Succefull").then(() => {
-        navigate("/login/");
+        navigate("/login");
       });
     }
     setIsLoading(false);

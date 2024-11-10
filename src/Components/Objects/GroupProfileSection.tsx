@@ -3,7 +3,7 @@ import { useUser } from "../../CustomHooks/useUser";
 import ClimbBoxSpinner from "../../Spinners/ClimbBoxSpinner";
 import { FaUserGear } from "react-icons/fa6";
 import { colors } from "../../Constants/Patterns";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate,  useSearchParams } from "react-router-dom";
 import { ISocialGroupDisplay } from "../../Models/SocialGroup";
 import { Groups } from "../../Services/group-service";
 import { BsPersonFillDash } from "react-icons/bs";
@@ -14,7 +14,9 @@ import { GiClawHammer } from "react-icons/gi";
 import { dialogs } from "../../Constants/AlertsConstant";
 
 const GroupProfileSection = () => {
-  const { groupId } = useParams();
+  const [searchParams] = useSearchParams()
+
+
   const [bioMore, setBioMore] = useState(false);
 
   const [groupInfo, SetGroupInfo] = useState<ISocialGroupDisplay | null>();
@@ -22,6 +24,17 @@ const GroupProfileSection = () => {
   const userContext = useUser();
   const navigate = useNavigate();
   const [groupAdmin, setGroupAdmin] = useState<IAppUserDisplay | null>(null);
+
+
+  const [groupId,setGroupId] = useState<null|string>(null)
+
+  useEffect(() => {
+    const groupId = searchParams.get('groupId');
+    if(groupId){
+    setGroupId(groupId)
+    }
+  },[searchParams]);
+
 
   const getGroupInfo = async (GroupId: string) => {
     const response = await Groups.GetGroupbyId(GroupId);
@@ -113,7 +126,7 @@ const GroupProfileSection = () => {
                 <div className="absolute right-0 p-2 flex flex-col items-end">
                   {userContext.userInfo.UserId == groupInfo.adminId && (
                     <button
-                      onClick={() => navigate(`/groupSettings/${groupInfo.id}`)}
+                      onClick={() => navigate(`/groupSettings?groupId=${groupInfo.id}`)}
                     >
                       <FaUserGear
                         className={`${colors.ButtonFont}`}

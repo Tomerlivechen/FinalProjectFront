@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate,  useSearchParams } from "react-router-dom";
 import { ISocialGroupDisplay, ISocialGroupEdit } from "../Models/SocialGroup";
 import { Groups } from "../Services/group-service";
 import { useCloudinary } from "../CustomHooks/useCloudinary";
@@ -17,7 +17,15 @@ import {
 } from "../Models/FormikModels";
 
 const GroupEditComponent = () => {
-  const { groupId } = useParams();
+  const [searchParams] = useSearchParams()
+  const [groupId,setGroupId] = useState<null|string>(null)
+  useEffect(() => {
+    const groupId = searchParams.get('groupId');
+    if(groupId){
+    setGroupId(groupId)
+    }
+  },[searchParams]);
+  
   const [newGroupData, setNewGroupData] = useState<ISocialGroupEdit | null>(
     null
   );
@@ -168,7 +176,7 @@ const GroupEditComponent = () => {
         updateGroupData.banerImageURL = bannerImageUrl;
       }
       await Groups.EditGroup(updateGroupData);
-      navigate(`/group/${groupId}`);
+      navigate(`/group?groupId=${groupId}`);
     } else {
       initializeGroupData();
     }

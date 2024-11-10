@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ProfileUserSection from "../Components/ProfileUserSection";
 import { auth } from "../Services/auth-service";
 
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation,  useSearchParams } from "react-router-dom";
 import { useUser } from "../CustomHooks/useUser";
 import { PostFrame } from "../Components/PostFrame";
 import ResizableFrame from "../Components/Objects/ResizableFrame";
@@ -15,11 +15,22 @@ import { InteractingUsersLists } from "../Components/InteractingUsersLists";
 const Profile = () => {
   const userContext = useUser();
   const location = useLocation();
-  const { userId } = useParams();
+  const [searchParams] = useSearchParams()
+
   const [userIdState, setUserIdState] = useState<string | null>(null);
   const [loadingUsers, setLoadingUsers] = useState(true);
   const [usersList, setUsersList] = useState<IAppUserDisplay[] | null>(null);
   const [imagesOpen, setImagesOpen] = useState(false);
+
+
+  const [userId,setUserId] = useState<null|string>(null)
+
+  useEffect(() => {
+    const userId = searchParams.get('userId');
+    if(userId){
+      setUserId(userId)
+      }
+  },[searchParams]);
 
   const GetFollowing = async (profileId: string) => {
     const response = await auth.GetUsersFollowing(profileId);
