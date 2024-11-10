@@ -12,6 +12,7 @@
   "dependencies": {
     "@cloudinary/react": "^1.13.0",
     "@cloudinary/url-gen": "^1.21.0",
+    "@types/react-router-dom": "^5.3.3",
     "axios": "^1.7.7",
     "base64-url": "^2.3.3",
     "base64url": "^3.0.1",
