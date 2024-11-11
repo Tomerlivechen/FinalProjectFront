@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
-
-import ClimbBoxSpinner from "../Spinners/ClimbBoxSpinner";
-
 import { GroupEditComponent } from "../Components/GroupEditComponent";
 import { useSearchParams } from "react-router-dom";
 import { MemberEditTabList } from "../Components/MemberEditTabList";
 import { isEqual } from "lodash";
+import DinoSpinner from "../Spinners/DinoSpinner";
 
 const GroupSettings = () => {
   const [searchParams] = useSearchParams();
@@ -40,7 +38,7 @@ const GroupSettings = () => {
   return (
     <>
       {loading && groupId ? (
-        <ClimbBoxSpinner />
+        <DinoSpinner size={30} />
       ) : (
         <>
           <div className="flex justify-center items-start space-x-4 mt-8">

@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { Groups } from "../Services/group-service";
 import { IAppUserDisplay } from "../Models/UserModels";
-
-import ClimbBoxSpinner from "../Spinners/ClimbBoxSpinner";
 import { colors } from "../Constants/Patterns";
 import { isEqual } from "lodash";
 import { MemberEditTab } from "./Objects/MemberEditTab";
+import DinoSpinner from "../Spinners/DinoSpinner";
 
 const MemberEditTabList: React.FC<{ GroupId: string }> = ({ GroupId }) => {
   const [groupId, setGroupId] = useState("");
@@ -67,7 +66,7 @@ const MemberEditTabList: React.FC<{ GroupId: string }> = ({ GroupId }) => {
         </div>
       ) : (
         <div>
-          <ClimbBoxSpinner />
+          <DinoSpinner size={30} />
         </div>
       )}
     </>

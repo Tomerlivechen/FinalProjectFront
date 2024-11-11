@@ -5,7 +5,6 @@ import { FaRegEye } from "react-icons/fa";
 import { auth } from "../Services/auth-service";
 import { dialogs } from "../Constants/AlertsConstant";
 import { useNavigate } from "react-router-dom";
-import ClimbBoxSpinner from "../Spinners/ClimbBoxSpinner";
 import ElementFrame from "../Constructors/ElementFrame";
 import { colors } from "../Constants/Patterns";
 import { FormikElementBuilder } from "../Constructors/FormikElementBuilder";
@@ -21,6 +20,7 @@ import {
   pronounsValues,
   userNameValues,
 } from "../Models/FormikModels";
+import DinoSpinner from "../Spinners/DinoSpinner";
 
 function Register() {
   const [viewPassword, setviewPassword] = useState("password");
@@ -116,14 +116,14 @@ function Register() {
               <div className="flex flex-wrap md:justify-between justify-center">
                 <div className="md:w-6/12 w-7/12 md:pl-2 pr-2">
                   <FormikElementBuilder {...passwordValues} />
-               </div>
+                </div>
                 <div className="md:w-1/12 w-7/12  md:mt-6 md:-ml-16 -mt-20 ml-52">
                   {viewPassword == "text" ? (
                     <FaRegEye size={25} onClick={viewPass} />
                   ) : (
                     <RxEyeClosed size={25} onClick={viewPass} />
                   )}
-                </div> 
+                </div>
                 <div className="md:w-6/12 w-7/12 pr-2">
                   <FormikElementBuilder {...confirmPasswordValues} />
                 </div>
@@ -168,7 +168,7 @@ function Register() {
               {isLoading && (
                 <>
                   <div className=" flex flex-col items-center">
-                    <ClimbBoxSpinner /> <br />
+                    <DinoSpinner size={40} /> <br />
                   </div>
                 </>
               )}

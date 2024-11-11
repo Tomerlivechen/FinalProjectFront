@@ -5,7 +5,6 @@ import { FaRegEye } from "react-icons/fa";
 import { auth } from "../Services/auth-service";
 import { dialogs } from "../Constants/AlertsConstant";
 import { useNavigate } from "react-router-dom";
-import ClimbBoxSpinner from "../Spinners/ClimbBoxSpinner";
 import { LoggedInContext } from "../ContextAPI/LoggedInContext";
 import { colors } from "../Constants/Patterns";
 import ElementFrame from "../Constructors/ElementFrame";
@@ -19,6 +18,7 @@ import {
 } from "../Services/emailRecovery-servicets";
 import { useLogin } from "../CustomHooks/useLogin";
 import { useUser } from "../CustomHooks/useUser";
+import DinoSpinner from "../Spinners/DinoSpinner";
 
 const emailValues: MYFormikValues = {
   Title: "Email Address",
@@ -172,7 +172,7 @@ const LoginPage = () => {
               {isLoading && (
                 <>
                   <div className=" flex flex-col items-center">
-                    <ClimbBoxSpinner /> <br />
+                    <DinoSpinner size={40} /> <br />
                   </div>
                 </>
               )}

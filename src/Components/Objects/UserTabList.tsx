@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { sortByProperty } from "../../Constants/Patterns";
 import { IAppUserDisplay } from "../../Models/UserModels";
 import UserTab from "./UserTab";
-import ClimbBoxSpinner from "../../Spinners/ClimbBoxSpinner";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { isEqual } from "lodash";
+import DinoSpinner from "../../Spinners/DinoSpinner";
 
 interface UserTabListValues {
   sortElement?: keyof IAppUserDisplay;
@@ -91,7 +91,7 @@ const UserTabList: React.FC<UserTabListValues> = (
         </div>
       ) : (
         <div>
-          <ClimbBoxSpinner />
+          <DinoSpinner size={20} />
         </div>
       )}
     </>

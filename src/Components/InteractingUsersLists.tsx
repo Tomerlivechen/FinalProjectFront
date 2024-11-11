@@ -6,8 +6,8 @@ import { Chat } from "../Services/chat-service";
 import { isEqual } from "lodash";
 import ResizableFrame from "./Objects/ResizableFrame";
 import { UserTabList } from "./Objects/UserTabList";
-import ClipSpinner from "../Spinners/ClipSpinner";
 import { colors } from "../Constants/Patterns";
+import DinoSpinner from "../Spinners/DinoSpinner";
 
 const InteractingUsersLists = () => {
   const userContext = useUser();
@@ -69,7 +69,7 @@ const InteractingUsersLists = () => {
         <div className={`${colors.ActiveText} text-center`}>Following</div>
         {!followingUsers && (
           <div className=" flex items-center justify-center">
-            <ClipSpinner />
+            <DinoSpinner size={20} />
           </div>
         )}
         {followingUsers && <UserTabList users={followingUsers} />}
@@ -77,7 +77,7 @@ const InteractingUsersLists = () => {
         <div className={`${colors.ActiveText} text-center`}>Open Chats</div>
         {!chattingUsers && (
           <div className=" flex items-center justify-center">
-            <ClipSpinner />
+            <DinoSpinner size={20} />
           </div>
         )}
         {chattingUsers && <UserTabList users={chattingUsers} />}

@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-
 import { dialogs } from "../../Constants/AlertsConstant";
-
-import ClimbBoxSpinner from "../../Spinners/ClimbBoxSpinner";
 import { INewPost } from "../../Models/Interaction";
 import { Posts } from "../../Services/post-service";
 import { useLogin } from "../../CustomHooks/useLogin";
@@ -338,7 +335,8 @@ function SendPostComponent() {
                   {isLoading && (
                     <>
                       <div className=" flex flex-col items-center">
-                        <ClimbBoxSpinner /> <br />
+                        <DinoSpinner size={30} />
+                        <br />
                       </div>
                     </>
                   )}

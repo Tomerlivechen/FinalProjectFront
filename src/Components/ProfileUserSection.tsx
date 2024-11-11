@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { IAppUserDisplay } from "../Models/UserModels";
 import { auth } from "../Services/auth-service";
 import { useUser } from "../CustomHooks/useUser";
-import ClimbBoxSpinner from "../Spinners/ClimbBoxSpinner";
 import { FaUserGear } from "react-icons/fa6";
 import { colors, isValidURL } from "../Constants/Patterns";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
@@ -15,6 +14,7 @@ import { PiPlugsFill } from "react-icons/pi";
 import { useChat } from "../CustomHooks/useChat";
 import { ProfileUserSectionProps } from "../Types/@UserTypes";
 import { isEqual } from "lodash";
+import DinoSpinner from "../Spinners/DinoSpinner";
 
 const ProfileUserSection: React.FC<ProfileUserSectionProps> = ({ userId }) => {
   const userContex = useUser();
@@ -138,7 +138,7 @@ const ProfileUserSection: React.FC<ProfileUserSectionProps> = ({ userId }) => {
   return (
     <>
       <div className="p-1">
-        {loading && <ClimbBoxSpinner />}
+        {loading && <DinoSpinner size={80} />}
         {!loading && user && !user.blockedYou && (
           <>
             <div

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { ISocialGroupCard } from "../../Models/SocialGroup";
 import ElementFrame from "../../Constructors/ElementFrame";
-import ClipSpinner from "../../Spinners/ClipSpinner";
 import { Tooltip } from "react-bootstrap";
 import { IoClose } from "react-icons/io5";
 import { colors } from "../../Constants/Patterns";
@@ -10,6 +9,7 @@ import { Groups } from "../../Services/group-service";
 import { useNavigate } from "react-router-dom";
 import { IConfirmJoinGoupProps } from "../../Types/@GroupTypes";
 import { dialogs } from "../../Constants/AlertsConstant";
+import DinoSpinner from "../../Spinners/DinoSpinner";
 
 const GroupCard: React.FC<{
   GroupCardData: ISocialGroupCard;
@@ -67,7 +67,7 @@ const GroupCard: React.FC<{
 
   return (
     <>
-      {loading && <ClipSpinner />}
+      {loading && <DinoSpinner size={30} />}
       {!loading && GroupCard && (
         <>
           <div className="hover:cursor-pointer" onClick={() => goToGroup()}>

@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { auth } from "../Services/auth-service";
 import { useUser } from "../CustomHooks/useUser";
 import EditUserComponent from "../Components/EditUserComponent";
-import ClimbBoxSpinner from "../Spinners/ClimbBoxSpinner";
 import { IAppUserDisplay } from "../Models/UserModels";
+import DinoSpinner from "../Spinners/DinoSpinner";
 
 const UserSettings = () => {
   const userinfo = useUser();
@@ -30,7 +30,7 @@ const UserSettings = () => {
   return (
     <>
       {loading ? (
-        <ClimbBoxSpinner />
+        <DinoSpinner size={60} />
       ) : (
         <EditUserComponent userInfo={editedUser as IAppUserDisplay} />
       )}

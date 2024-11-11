@@ -49,16 +49,6 @@ const Profile = () => {
   }, [location.pathname, searchParams]);
 
   useEffect(() => {
-    if (loadingUsers) {
-      if (userId) {
-        setUserIdState(userId);
-      } else if (userContext.userInfo.UserId) {
-        setUserIdState(userContext.userInfo.UserId);
-      }
-    }
-  }, [loadingUsers, userId]);
-
-  useEffect(() => {
     const fetchFollowing = async () => {
       if (userIdState) {
         setLoadingUsers(true);
@@ -68,6 +58,14 @@ const Profile = () => {
     };
     fetchFollowing();
   }, [userIdState]);
+
+  useEffect(() => {
+    if (loadingUsers) {
+      if (userId) {
+        setUserIdState(userId);
+      }
+    }
+  }, [loadingUsers, userId]);
 
   const intervalTime = 5000;
   useEffect(() => {

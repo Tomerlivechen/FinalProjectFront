@@ -5,9 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { colors } from "../../Constants/Patterns";
 import { MdPersonOff } from "react-icons/md";
 import { Groups } from "../../Services/group-service";
-import ClipSpinner from "../../Spinners/ClipSpinner";
+
 import { IMemberEditTabProps } from "../../Types/@GroupTypes";
 import { dialogs } from "../../Constants/AlertsConstant";
+import DinoSpinner from "../../Spinners/DinoSpinner";
 
 const MemberEditTab: React.FC<{ METProps: IMemberEditTabProps }> = ({
   METProps,
@@ -64,7 +65,7 @@ const MemberEditTab: React.FC<{ METProps: IMemberEditTabProps }> = ({
           </div>
         </ElementFrame>
       ) : null}
-      {loading && <ClipSpinner />}
+      {loading && <DinoSpinner size={25} />}
     </>
   );
 };

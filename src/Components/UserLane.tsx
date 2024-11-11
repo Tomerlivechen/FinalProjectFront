@@ -1,11 +1,8 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { IAppUserDisplay } from "../Models/UserModels";
 import { auth } from "../Services/auth-service";
 import { useUser } from "../CustomHooks/useUser";
-import ClimbBoxSpinner from "../Spinners/ClimbBoxSpinner";
-
 import { colors, isValidURL } from "../Constants/Patterns";
-
 
 const UserLane = () => {
   const [user, setUser] = useState<IAppUserDisplay | null>(null);
@@ -14,26 +11,26 @@ const UserLane = () => {
   const userdata = useUser();
 
   useEffect(() => {
-    if(userdata.userInfo.UserId){
+    if (userdata.userInfo.UserId) {
       getUser(userdata.userInfo.UserId);
     }
   }, [userdata.userInfo.UserId]);
 
   const getUser = async (id: string) => {
-   const response =  await auth.getUser(id);
-   setUser(response.data)
-      }
-      
-useEffect(() => {
-if(user){
-  setLoading(false)
-}
-},[user]);
+    const response = await auth.getUser(id);
+    setUser(response.data);
+  };
+
+  useEffect(() => {
+    if (user) {
+      setLoading(false);
+    }
+  }, [user]);
 
   return (
     <>
       <div className="p-1">
-        {loading && <ClimbBoxSpinner />}
+        {loading && <DinoSpinner size={30} />}
         {!loading && user && (
           <>
             <div

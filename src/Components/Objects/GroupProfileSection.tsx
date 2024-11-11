@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useUser } from "../../CustomHooks/useUser";
-import ClimbBoxSpinner from "../../Spinners/ClimbBoxSpinner";
 import { FaUserGear } from "react-icons/fa6";
 import { colors } from "../../Constants/Patterns";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -13,6 +12,7 @@ import { Tooltip } from "react-bootstrap";
 import { GiClawHammer } from "react-icons/gi";
 import { dialogs } from "../../Constants/AlertsConstant";
 import { isEqual } from "lodash";
+import DinoSpinner from "../../Spinners/DinoSpinner";
 
 const GroupProfileSection = () => {
   const [searchParams] = useSearchParams();
@@ -100,7 +100,7 @@ const GroupProfileSection = () => {
   return (
     <>
       <div className="p-1">
-        {loading && <ClimbBoxSpinner />}
+        {loading && <DinoSpinner size={60} />}
         {!loading && groupInfo && !groupAdmin?.blockedYou && (
           <>
             <div

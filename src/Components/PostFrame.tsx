@@ -16,9 +16,8 @@ import { FaAngleDoubleDown, FaAngleDoubleUp } from "react-icons/fa";
 import SendPostComponent from "./Objects/SendPostComponent";
 import { PostList } from "./Objects/PostList";
 import { Posts } from "../Services/post-service";
-import { useUser } from "../CustomHooks/useUser";
 import { IPostDisplay } from "../Models/Interaction";
-import ClipSpinner from "../Spinners/ClipSpinner";
+
 import { isEqual } from "lodash";
 import {
   IPostFrameParams,
@@ -27,10 +26,10 @@ import {
   PostListValues,
 } from "../Types/@PostTypes";
 import { NoMorePosts } from "./Objects/NoMorePosts";
+import DinoSpinner from "../Spinners/DinoSpinner";
 
 const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
   const location = useLocation();
-  const userContex = useUser();
   const [searchParams] = useSearchParams();
   const [userIdState, setUserIdState] = useState<string | null>(null);
   const [groupIdState, setGroupIdState] = useState<string | null>(null);
@@ -39,8 +38,8 @@ const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
     PostFrameParams?.UserList ? PostFrameParams?.UserList : null
   );
   const [loadingPosts, setLoadingPosts] = useState(true);
-  const [postList, setPostList] = useState<PostListValues | null>();
-  const [mainPostList, setMainPostList] = useState<IPostDisplay[] | null>();
+  const [postList, setPostList] = useState<PostListValues | null>(null);
+  const [mainPostList, setMainPostList] = useState<IPostDisplay[] | null>(null);
   const [catFilter, setCatFilter] = useState<number>(0);
 
   const [userId, setUserId] = useState<null | string>(null);
@@ -49,6 +48,8 @@ const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
 
   useEffect(() => {
     getSearchParams();
+    setPostList(null);
+    setMainPostList(null);
   }, []);
 
   useEffect(() => {
@@ -60,9 +61,7 @@ const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
   }, [PostFrameParams]);
 
   useEffect(() => {
-    if (searchParams) {
-      getSearchParams();
-    }
+    getSearchParams();
   }, [searchParams, PostFrameParams]);
 
   const getSearchParams = async () => {
@@ -96,10 +95,7 @@ const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
     if (location.pathname.startsWith("/feed") && postId) {
       setPostIdState(postId);
     }
-    if (location.pathname.startsWith("/profile") && !userId) {
-      setUserIdState(userContex.userInfo.UserId);
-    }
-  }, [location.pathname, userId, groupId, postId, userContex.userInfo.UserId]);
+  }, [location.pathname, userId, groupId, postId]);
 
   const [feedSort, setFeedSort] = useState({
     totalVotes: false,
@@ -309,7 +305,7 @@ const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
           {!loadingPosts && postList && <PostList postListValue={postList} />}
           {loadingPosts && !postList && (
             <div className="flex ml-40 ">
-              <ClipSpinner />
+              <DinoSpinner size={50} />
             </div>
           )}
         </div>

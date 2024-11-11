@@ -14,10 +14,11 @@ import { INewComment } from "../Models/CommentModels";
 import { FormikElementBuilder } from "../Constructors/FormikElementBuilder";
 import { CommentService } from "../Services/comment-service";
 import { useCloudinary } from "../CustomHooks/useCloudinary";
-import ClipSpinner from "../Spinners/ClipSpinner";
+
 import { FcAddImage, FcEditImage, FcRemoveImage } from "react-icons/fc";
 import { AxiosError } from "axios";
 import { linkFieldValues, textFieldValues } from "../Models/FormikModels";
+import DinoSpinner from "../Spinners/DinoSpinner";
 
 interface AddCommentCommentModalProps {
   commentId: string;
@@ -201,7 +202,7 @@ const AddCommentCommentModal: React.FC<AddCommentCommentModalProps> = ({
                     {isLoading && (
                       <>
                         <div className=" flex flex-col items-center">
-                          <ClipSpinner />
+                          <DinoSpinner size={30} />
                         </div>
                       </>
                     )}

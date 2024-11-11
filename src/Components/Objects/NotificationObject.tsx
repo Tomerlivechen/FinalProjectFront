@@ -22,7 +22,7 @@ const NotificationObject: React.FC<{
   const [nameOfNotifier, setNameOfNotifier] = useState("");
   const [notificationTypeText, setNotificationTypeText] = useState("");
   const [actionPathName, setActionPathName] = useState("");
-  const [postDisplay, setPostDisplay] = useState<IPostDisplay|null>(null);
+  const [postDisplay, setPostDisplay] = useState<IPostDisplay | null>(null);
 
   useEffect(() => {
     const getUsername = async () => {
@@ -31,8 +31,8 @@ const NotificationObject: React.FC<{
 
         setNameOfNotifier(Notifier.data.userName);
         if (notification.type == "Comment") {
-          const post = await Posts.getPostById(notification.referenceId)
-          setPostDisplay(post.data)
+          const post = await Posts.getPostById(notification.referenceId);
+          setPostDisplay(post.data);
           setNotificationTypeText(" has commented on your post ");
           setActionPathName("Post");
         }
@@ -45,10 +45,9 @@ const NotificationObject: React.FC<{
     getUsername();
   }, [notification]);
 
-
   const GoToUser = () => {
     console.log(`${notification?.notifierId}`);
-    navigate(`/Profile?userId=${notification?.notifierId}`);
+    navigate(`/profile?userId=${notification?.notifierId}`);
   };
 
   useEffect(() => {
@@ -99,10 +98,10 @@ const NotificationObject: React.FC<{
           <button
             className={`${colors.ActiveText}`}
             onClick={activateNotification}
-          >{actionPathName}{" "}
-                      {postDisplay && postDisplay.title.slice(0, 15)}
-                      {postDisplay && postDisplay.title.length > 15 && "..."}
-            
+          >
+            {" "}
+            {postDisplay && postDisplay.title.slice(0, 15)}
+            {postDisplay && postDisplay.title.length > 15 && "..."}
           </button>
           <div className="text-xs absolute right-0">{notification?.date}</div>
         </div>

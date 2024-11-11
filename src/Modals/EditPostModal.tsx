@@ -14,7 +14,7 @@ import { FcRemoveImage } from "react-icons/fc";
 import { FcEditImage } from "react-icons/fc";
 
 import { FormikElementBuilder } from "../Constructors/FormikElementBuilder";
-import ClipSpinner from "../Spinners/ClipSpinner";
+
 import { useCloudinary } from "../CustomHooks/useCloudinary";
 import { FcAddImage } from "react-icons/fc";
 import { IPostDisplay } from "../Models/Interaction";
@@ -26,6 +26,7 @@ import {
   textFieldValues,
   titleFieldValues,
 } from "../Models/FormikModels";
+import DinoSpinner from "../Spinners/DinoSpinner";
 
 interface EditPostModalProps {
   Mshow: boolean;
@@ -250,7 +251,7 @@ const EditPostModal: React.FC<EditPostModalProps> = ({
                   {isLoading && (
                     <>
                       <div className=" flex flex-col items-center">
-                        <ClipSpinner />
+                        <DinoSpinner size={30} />
                       </div>
                     </>
                   )}

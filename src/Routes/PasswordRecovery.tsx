@@ -6,7 +6,6 @@ import { FaRegEye } from "react-icons/fa";
 import { auth } from "../Services/auth-service";
 import { dialogs } from "../Constants/AlertsConstant";
 import { useNavigate } from "react-router-dom";
-import ClimbBoxSpinner from "../Spinners/ClimbBoxSpinner";
 import { colors } from "../Constants/Patterns";
 import ElementFrame from "../Constructors/ElementFrame";
 import { FormikElementBuilder } from "../Constructors/FormikElementBuilder";
@@ -15,6 +14,7 @@ import { MYFormikValues } from "../Types/@StructureTypes";
 import { PasswordRecovery } from "../Models/AuthModels";
 import * as URLencode from "urlencode";
 import { isEqual } from "lodash";
+import DinoSpinner from "../Spinners/DinoSpinner";
 
 const emailValues: MYFormikValues = {
   Title: "Email Address",
@@ -143,7 +143,7 @@ function PasswordRecoveryPage() {
               {isLoading && (
                 <>
                   <div className=" flex flex-col items-center">
-                    <ClimbBoxSpinner /> <br />
+                    <DinoSpinner size={50} /> <br />
                   </div>
                 </>
               )}

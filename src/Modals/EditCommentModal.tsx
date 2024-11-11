@@ -14,12 +14,13 @@ import { FcRemoveImage } from "react-icons/fc";
 import { FcEditImage } from "react-icons/fc";
 import { CommentService } from "../Services/comment-service";
 import { FormikElementBuilder } from "../Constructors/FormikElementBuilder";
-import ClipSpinner from "../Spinners/ClipSpinner";
+
 import { useCloudinary } from "../CustomHooks/useCloudinary";
 import { FcAddImage } from "react-icons/fc";
 import { ICommentDisplay } from "../Models/Interaction";
 import { AxiosError } from "axios";
 import { linkFieldValues, textFieldValues } from "../Models/FormikModels";
+import DinoSpinner from "../Spinners/DinoSpinner";
 
 interface EditCommentModalProps {
   Mshow: boolean;
@@ -221,7 +222,7 @@ const EditCommentModal: React.FC<EditCommentModalProps> = ({
                     {isLoading && (
                       <>
                         <div className=" flex flex-col items-center">
-                          <ClipSpinner />
+                          <DinoSpinner size={30} />
                         </div>
                       </>
                     )}

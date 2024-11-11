@@ -5,7 +5,6 @@ import * as Yup from "yup";
 import { auth } from "../Services/auth-service";
 import { dialogs } from "../Constants/AlertsConstant";
 import { useNavigate } from "react-router-dom";
-import ClimbBoxSpinner from "../Spinners/ClimbBoxSpinner";
 import ElementFrame from "../Constructors/ElementFrame";
 import { catchError, colors } from "../Constants/Patterns";
 import { FormikElementBuilder } from "../Constructors/FormikElementBuilder";
@@ -28,6 +27,7 @@ import {
   userNameValues,
 } from "../Models/FormikModels";
 import { AdvancedSettingsComponentProps } from "../Types/@UserTypes";
+import DinoSpinner from "../Spinners/DinoSpinner";
 
 const EditUserComponent: React.FC<{ userInfo: IAppUserDisplay }> = ({
   userInfo,
@@ -191,7 +191,7 @@ const EditUserComponent: React.FC<{ userInfo: IAppUserDisplay }> = ({
       } finally {
         setUserValues(userValues);
         setIsLoading(false);
-        navigate(`/Profile?userId=${values.id}`);
+        navigate(`/profile?userId=${values.id}`);
       }
     } else {
       dialogs.error("Comment not sent user not logged in");
@@ -399,7 +399,7 @@ const EditUserComponent: React.FC<{ userInfo: IAppUserDisplay }> = ({
               {isLoading && (
                 <>
                   <div className=" flex flex-col items-center">
-                    <ClimbBoxSpinner /> <br />
+                    <DinoSpinner size={50} /> <br />
                   </div>
                 </>
               )}

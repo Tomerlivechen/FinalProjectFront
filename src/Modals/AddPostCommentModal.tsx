@@ -11,11 +11,12 @@ import ElementFrame from "../Constructors/ElementFrame";
 import { INewComment } from "../Models/CommentModels";
 import { CommentService } from "../Services/comment-service";
 import { FormikElementBuilder } from "../Constructors/FormikElementBuilder";
-import ClipSpinner from "../Spinners/ClipSpinner";
+
 import { useCloudinary } from "../CustomHooks/useCloudinary";
 import { FcAddImage, FcEditImage, FcRemoveImage } from "react-icons/fc";
 import { AxiosError } from "axios";
 import { linkFieldValues, textFieldValues } from "../Models/FormikModels";
+import DinoSpinner from "../Spinners/DinoSpinner";
 
 interface AddPostCommentModalProps {
   postId: string;
@@ -199,7 +200,7 @@ const AddPostCommentModal: React.FC<AddPostCommentModalProps> = ({
                     {isLoading && (
                       <>
                         <div className=" flex flex-col items-center">
-                          <ClipSpinner />
+                          <DinoSpinner size={30} />
                         </div>
                       </>
                     )}
