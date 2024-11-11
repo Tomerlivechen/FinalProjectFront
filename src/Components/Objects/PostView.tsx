@@ -27,6 +27,8 @@ import { useCopy } from "../../CustomHooks/useCopy";
 import { MdOutlineContentCopy } from "react-icons/md";
 import { Tooltip } from "react-bootstrap";
 
+import { TbMobiledataOff } from "react-icons/tb";
+
 const PostView: React.FC<IPostDisplay> = (postDisplay) => {
   const copy = useCopy();
   const navagate = useNavigate();
@@ -34,28 +36,51 @@ const PostView: React.FC<IPostDisplay> = (postDisplay) => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [groupInfo, setGroupInfo] = useState<ISocialGroupDisplay | null>(null);
   const [groupAdminId, setGroupAdminId] = useState("");
-  const handleShow = () => setShowModal((prevshowModal) => !prevshowModal);
-
+  const [postDisplayState, setPostDisplayState] = useState<IPostDisplay | null>(
+    null
+  );
   const handleClose = () => setShowModal(false);
   const userContext = useUser();
   const loginContex = useLogin();
   const postAPI = Posts;
+  const handleShow = () => setShowModal((prevshowModal) => !prevshowModal);
+
+  useEffect(() => {
+    if (postDisplay) {
+      setPostDisplayState(postDisplay);
+    }
+  }, []);
+
+  const unvote = async () => {
+    if (postDisplayState) {
+      const respons = await Posts.unvotePost(postDisplayState.id);
+      setPostDisplayState(respons.data);
+    }
+  };
+
   const handelImage = () => {
-    dialogs.showImage("", postDisplay.imageURL);
+    if (postDisplayState) {
+      dialogs.showImage("", postDisplayState.imageURL);
+    }
   };
   const handleShowEdit = () =>
     setShowEditModal((prevshowEditModal) => !prevshowEditModal);
   const handleVote = async (vote: number) => {
-    if (loginContex.token) {
-      await postAPI.VoteOnPost(postDisplay.id, vote);
-      postDisplay.hasVoted = true;
-      postDisplay.totalVotes += vote;
+    if (loginContex.token && postDisplayState) {
+      const respons = await postAPI.VoteOnPost(postDisplayState.id, vote);
+      setPostDisplayState(respons.data);
     }
   };
-  const handleDelete = () => Posts.DeletePost(postDisplay.id);
+  const handleDelete = () => {
+    if (postDisplayState) {
+      Posts.DeletePost(postDisplayState.id);
+    }
+  };
 
   const GoToUser = () => {
-    navagate(`/profile?userId=${postDisplay.authorId}`);
+    if (postDisplayState) {
+      navagate(`/profile?userId=${postDisplayState.authorId}`);
+    }
   };
 
   const getGroupInfo = async (groupId: string) => {
@@ -64,8 +89,8 @@ const PostView: React.FC<IPostDisplay> = (postDisplay) => {
   };
 
   useEffect(() => {
-    if (postDisplay && postDisplay.groupId.length > 0) {
-      getGroupInfo(postDisplay.groupId);
+    if (postDisplayState && postDisplayState.groupId.length > 0) {
+      getGroupInfo(postDisplayState.groupId);
     }
     if (groupInfo) {
       setGroupAdminId(groupInfo.adminId);
@@ -79,7 +104,7 @@ const PostView: React.FC<IPostDisplay> = (postDisplay) => {
   return (
     <>
       <ElementFrame
-        height={`${postDisplay.imageURL ? "450px" : "230px"}`}
+        height={`${postDisplayState?.imageURL ? "450px" : "230px"}`}
         width="400px"
         padding="2 mt-2"
       >
@@ -89,9 +114,9 @@ const PostView: React.FC<IPostDisplay> = (postDisplay) => {
               className=" text-sm font-bold pl-10"
               onClick={() => GoToUser()}
             >
-              {postDisplay.authorName}
+              {postDisplayState?.authorName}
             </button>
-            {(postDisplay.authorId == userContext.userInfo.UserId ||
+            {(postDisplayState?.authorId == userContext.userInfo.UserId ||
               userContext.userInfo.IsAdmin == "true" ||
               groupAdminId == userContext.userInfo.UserId) && (
               <>
@@ -100,11 +125,13 @@ const PostView: React.FC<IPostDisplay> = (postDisplay) => {
                     <button className="ml-auto mb-2" onClick={handleShowEdit}>
                       <MdEdit size={22} />
                     </button>
-                    <EditPostModal
-                      Mshow={showEditModal}
-                      onHide={handleShowEdit}
-                      post={postDisplay}
-                    />
+                    {postDisplayState && (
+                      <EditPostModal
+                        Mshow={showEditModal}
+                        onHide={handleShowEdit}
+                        post={postDisplayState}
+                      />
+                    )}
                     <button className="ml-auto mb-2">
                       <TiDelete size={22} onClick={handleDelete} />
                     </button>
@@ -122,14 +149,14 @@ const PostView: React.FC<IPostDisplay> = (postDisplay) => {
               whiteSpace: "pre-wrap",
             }}
           >
-            {postDisplay.title}
+            {postDisplayState?.title}
           </div>
 
           <div className="relative  " />
           <div className="flex justify-evenly ">
-            {postDisplay.imageURL && (
+            {postDisplayState?.imageURL && (
               <button className="" onClick={handelImage}>
-                <img className="h-56 " src={postDisplay.imageURL} />
+                <img className="h-56 " src={postDisplayState.imageURL} />
               </button>
             )}
           </div>
@@ -143,26 +170,26 @@ const PostView: React.FC<IPostDisplay> = (postDisplay) => {
               whiteSpace: "pre-wrap",
             }}
           >
-            {postDisplay.text}
+            {postDisplayState?.text}
           </div>
           <div
             className="flex pt-2 justify-between w-full"
             style={{ position: "sticky" }}
           >
             <div className="flex items-center">
-              {postDisplay.link && (
+              {postDisplayState?.link && (
                 <button
                   className="pl-3"
-                  onClick={() => window.open(postDisplay.link, "_blank")}
+                  onClick={() => window.open(postDisplayState.link, "_blank")}
                 >
                   <HiLink size={22} />
                 </button>
               )}
-              {postDisplay.keyWords.length > 0 && (
+              {postDisplayState && postDisplayState.keyWords.length > 0 && (
                 <button
                   className="pl-3"
                   onClick={() =>
-                    dialogs.showtext(postDisplay.keyWords.toString())
+                    dialogs.showtext(postDisplayState.keyWords.toString())
                   }
                 >
                   <FaKey size={22} />
@@ -176,21 +203,35 @@ const PostView: React.FC<IPostDisplay> = (postDisplay) => {
                 >
                   <FaCommentMedical size={21} aria-description="add comment" />
                 </button>
-
-                <AddPostCommentModal
-                  Mshow={showModal}
-                  onHide={handleClose}
-                  postId={postDisplay.id}
-                />
+                {postDisplayState && (
+                  <AddPostCommentModal
+                    Mshow={showModal}
+                    onHide={handleClose}
+                    postId={postDisplayState.id}
+                  />
+                )}
               </div>
             </div>
             <div className="flex items-center">
               <Tooltip title="Copy post link">
-                <button onClick={() => handleCopy(postDisplay.id)}>
+                <button
+                  onClick={() =>
+                    handleCopy(postDisplayState ? postDisplayState.id : "")
+                  }
+                >
                   <MdOutlineContentCopy size={24} />
                 </button>
               </Tooltip>
-              {!postDisplay.hasVoted && (
+              {postDisplayState?.hasVoted && (
+                <button
+                  onClick={() => {
+                    unvote();
+                  }}
+                >
+                  <TbMobiledataOff size={24} className="ml-3 " />
+                </button>
+              )}
+              {!postDisplayState?.hasVoted && (
                 <>
                   <button
                     onClick={() => {
@@ -210,7 +251,7 @@ const PostView: React.FC<IPostDisplay> = (postDisplay) => {
               )}
               <div className="flex justify-evenly">
                 <div className="pl-4 pr-3 font-bold">
-                  {postDisplay.totalVotes}
+                  {postDisplayState?.totalVotes}
                 </div>
               </div>
             </div>
@@ -218,16 +259,16 @@ const PostView: React.FC<IPostDisplay> = (postDisplay) => {
         </div>
         <div className="flex justify-between items-center">
           <div className={` font-bold ${colors.InteractionText} ml-16 -mt-2`}>
-            {postDisplay.comments &&
-              postDisplay.comments.length > 0 &&
-              postDisplay.comments.length}
+            {postDisplayState?.comments &&
+              postDisplayState.comments.length > 0 &&
+              postDisplayState.comments.length}
           </div>
-          <div className="flex justify-end">{postDisplay.datetime}</div>
+          <div className="flex justify-end">{postDisplayState?.datetime}</div>
         </div>
       </ElementFrame>
 
       <div className="-mt-8 relative z-10 ">
-        <CommentList index={0} commmentList={postDisplay.comments} />
+        <CommentList index={0} commmentList={postDisplayState?.comments} />
       </div>
     </>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ICommentDisplay } from "../../Models/Interaction";
 import { HiLink } from "react-icons/hi2";
 import { IoImage } from "react-icons/io5";
@@ -17,6 +17,7 @@ import AddCommentCommentModal from "../../Modals/AddCommentCommentModal";
 import { FaCommentMedical } from "react-icons/fa";
 import { colors } from "../../Constants/Patterns";
 import EditCommentModal from "../../Modals/EditCommentModal";
+import { TbMobiledataOff } from "react-icons/tb";
 
 const CommentView: React.FC<ICommentDisplay> = (commentDisplay) => {
   const [showModal, setShowModal] = useState(false);
@@ -26,21 +27,47 @@ const CommentView: React.FC<ICommentDisplay> = (commentDisplay) => {
   const handleClose = () => setShowModal(false);
   const userContext = useUser();
   const loginContex = useLogin();
+  const [
+    commentDisplayState,
+    setCommentDisplayState,
+  ] = useState<ICommentDisplay | null>(null);
   const CommentAPI = CommentService;
+
+  const unvote = async () => {
+    if (commentDisplayState) {
+      const respons = await CommentService.unvoteComment(
+        commentDisplayState.id
+      );
+      setCommentDisplayState(respons.data);
+    }
+  };
+
+  useEffect(() => {
+    if (commentDisplay) setCommentDisplayState(commentDisplay);
+  }, []);
+
   const handelImage = () => {
-    dialogs.showImage("", commentDisplay.imageURL);
+    if (commentDisplayState) {
+      dialogs.showImage("", commentDisplayState.imageURL);
+    }
   };
 
   const handleVote = async (vote: number) => {
-    if (loginContex.token) {
-      await CommentAPI.VoteOnComment(commentDisplay.id, vote);
-      commentDisplay.hasVoted = true;
-      commentDisplay.totalVotes += vote;
+    if (loginContex.token && commentDisplayState) {
+      const respons = await CommentAPI.VoteOnComment(
+        commentDisplayState.id,
+        vote
+      );
+      setCommentDisplayState(respons.data);
     }
   };
   const handleShowEdit = () =>
     setShowEditModal((prevshowEditModal) => !prevshowEditModal);
-  const handleDelete = () => CommentService.DeleteComment(commentDisplay.id);
+  const handleDelete = () => {
+    if (commentDisplayState) {
+      CommentService.DeleteComment(commentDisplayState.id);
+    }
+  };
 
   return (
     <>
@@ -54,9 +81,9 @@ const CommentView: React.FC<ICommentDisplay> = (commentDisplay) => {
         <div>
           <div className="flex justify-between items-center">
             <button className=" text-sm font-bold">
-              {commentDisplay.authorName}
+              {commentDisplayState?.authorName}
             </button>
-            {(commentDisplay.authorId == userContext.userInfo.UserId ||
+            {(commentDisplayState?.authorId == userContext.userInfo.UserId ||
               userContext.userInfo.IsAdmin == "true") && (
               <>
                 <div className="flex">
@@ -64,11 +91,13 @@ const CommentView: React.FC<ICommentDisplay> = (commentDisplay) => {
                     <button className="ml-auto mb-2" onClick={handleShowEdit}>
                       <MdEdit size={22} />
                     </button>
-                    <EditCommentModal
-                      Mshow={showEditModal}
-                      onHide={handleShowEdit}
-                      comment={commentDisplay}
-                    />
+                    {commentDisplayState && (
+                      <EditCommentModal
+                        Mshow={showEditModal}
+                        onHide={handleShowEdit}
+                        comment={commentDisplayState}
+                      />
+                    )}
                     <button className="ml-auto mb-2">
                       <TiDelete size={22} onClick={handleDelete} />
                     </button>
@@ -85,19 +114,21 @@ const CommentView: React.FC<ICommentDisplay> = (commentDisplay) => {
               whiteSpace: "pre-wrap",
             }}
           >
-            {commentDisplay.text}
+            {commentDisplayState?.text}
           </div>
           <div className="flex pt-2 justify-between w-full">
             <div className="flex items-center">
-              {commentDisplay.link && (
+              {commentDisplayState?.link && (
                 <button
                   className="pl-3"
-                  onClick={() => window.open(commentDisplay.link, "_blank")}
+                  onClick={() =>
+                    window.open(commentDisplayState.link, "_blank")
+                  }
                 >
                   <HiLink size={20} />
                 </button>
               )}
-              {commentDisplay.imageURL && (
+              {commentDisplayState?.imageURL && (
                 <button className="pl-3" onClick={handelImage}>
                   <IoImage size={20} />
                 </button>
@@ -110,15 +141,26 @@ const CommentView: React.FC<ICommentDisplay> = (commentDisplay) => {
                 >
                   <FaCommentMedical size={21} aria-description="add comment" />
                 </button>
-                <AddCommentCommentModal
-                  Mshow={showModal}
-                  onHide={handleClose}
-                  commentId={commentDisplay.id}
-                />
+                {commentDisplayState && (
+                  <AddCommentCommentModal
+                    Mshow={showModal}
+                    onHide={handleClose}
+                    commentId={commentDisplayState.id}
+                  />
+                )}
               </div>
             </div>
             <div className="flex items-center">
-              {!commentDisplay.hasVoted && (
+              {commentDisplayState?.hasVoted && (
+                <button
+                  onClick={() => {
+                    unvote();
+                  }}
+                >
+                  <TbMobiledataOff size={24} className="ml-3 " />
+                </button>
+              )}
+              {!commentDisplayState?.hasVoted && (
                 <>
                   <button
                     onClick={() => {
@@ -138,7 +180,7 @@ const CommentView: React.FC<ICommentDisplay> = (commentDisplay) => {
               )}
               <div className="flex justify-evenly">
                 <div className="pl-4 pr-3 font-bold">
-                  {commentDisplay.totalVotes}
+                  {commentDisplayState?.totalVotes}
                 </div>
               </div>
             </div>
@@ -146,11 +188,14 @@ const CommentView: React.FC<ICommentDisplay> = (commentDisplay) => {
         </div>
         <div className="flex justify-between items-center">
           <div className={` font-bold ${colors.InteractionText} ml-16 mt-4`}>
-            {commentDisplay.comments &&
-              commentDisplay.comments.length > 0 &&
-              commentDisplay.comments.length}
+            {commentDisplayState &&
+              commentDisplayState.comments &&
+              commentDisplayState.comments.length > 0 &&
+              commentDisplayState.comments.length}
           </div>
-          <div className="flex justify-end">{commentDisplay.datetime}</div>
+          <div className="flex justify-end">
+            {commentDisplayState?.datetime}
+          </div>
         </div>
       </ElementFrame>
 
@@ -158,7 +203,7 @@ const CommentView: React.FC<ICommentDisplay> = (commentDisplay) => {
         className={`-mt-7 font-bold ${colors.InteractionText}`}
         style={{ position: "relative", zIndex: 100 }}
       >
-        <CommentList index={0} commmentList={commentDisplay.comments} />
+        <CommentList index={0} commmentList={commentDisplayState?.comments} />
       </div>
     </>
   );

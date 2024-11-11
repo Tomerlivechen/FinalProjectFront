@@ -33,5 +33,11 @@ const VoteOnComment = (Id: string, vote: number) =>
       });
     }
 
+    const unvoteComment = (PostId: string) =>
+      request({
+        url: `${CommentURL}/UnVoteById/${PostId}`,
+        method: "Put",
+        data: null,
+      });
 
-export const CommentService = { VoteOnComment, PostComment , PutComment,DeleteComment };
+export const CommentService = { VoteOnComment, PostComment , PutComment,DeleteComment,unvoteComment };

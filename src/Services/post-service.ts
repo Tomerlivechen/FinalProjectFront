@@ -33,6 +33,13 @@ const getPosts = () =>
         data: null,
       });
 
+      const unvotePost = (PostId: string) =>
+        request({
+          url: `${postURL}/UnVoteById/${PostId}`,
+          method: "Put",
+          data: null,
+        });
+
     const VoteOnPost = (Id: string, vote: number) =>
       request({
         url: `${postURL}/VoteById/${Id}`,
@@ -64,4 +71,4 @@ const getPosts = () =>
 
 export { getPosts, postPost, VoteOnPost , EditPost,DeletePost };
 
-export const Posts = { getPosts, postPost, VoteOnPost , EditPost, DeletePost,GetAuthorPosts,GetGroupPosts,getPostById };
+export const Posts = { getPosts, postPost, VoteOnPost , EditPost, DeletePost,GetAuthorPosts,GetGroupPosts,getPostById,unvotePost };
