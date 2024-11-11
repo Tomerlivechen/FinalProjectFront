@@ -46,17 +46,18 @@ const getSinglePost = async () => {
   }, [postId]);
 
 useEffect(() => {
+  const _postId = searchParams.get("postId");
 if (postId && singularPost){
   setLoading(false);
 }
-else if (!searchParams && !postId){
+else if (!_postId){
   setLoading(false);
 }
 else {
   setLoading(true)
 }
 
-},[postId,singularPost, searchParams ]);
+},[postId,singularPost]);
 
 
 
