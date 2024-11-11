@@ -3,6 +3,7 @@ import { IAppUserDisplay } from "../Models/UserModels";
 import { auth } from "../Services/auth-service";
 import { useUser } from "../CustomHooks/useUser";
 import { colors, isValidURL } from "../Constants/Patterns";
+import DinoSpinner from "../Spinners/DinoSpinner";
 
 const UserLane = () => {
   const [user, setUser] = useState<IAppUserDisplay | null>(null);

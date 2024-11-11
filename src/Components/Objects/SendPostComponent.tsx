@@ -14,6 +14,7 @@ import { FcAddImage, FcEditImage, FcRemoveImage } from "react-icons/fc";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { AxiosError } from "axios";
 import { isEqual } from "lodash";
+import DinoSpinner from "../../Spinners/DinoSpinner";
 
 function SendPostComponent() {
   const location = useLocation();

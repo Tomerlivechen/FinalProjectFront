@@ -3,7 +3,6 @@ import ProfileUserSection from "../Components/ProfileUserSection";
 import { auth } from "../Services/auth-service";
 
 import { useLocation, useSearchParams } from "react-router-dom";
-import { useUser } from "../CustomHooks/useUser";
 import { PostFrame } from "../Components/PostFrame";
 import ResizableFrame from "../Components/Objects/ResizableFrame";
 import { UserTabList } from "../Components/Objects/UserTabList";
@@ -13,7 +12,6 @@ import { ImageList } from "../Components/Objects/ImageList";
 import { isEqual } from "lodash";
 
 const Profile = () => {
-  const userContext = useUser();
   const location = useLocation();
   const [searchParams] = useSearchParams();
 
