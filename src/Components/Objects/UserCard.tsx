@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import ElementFrame from "../../Constructors/ElementFrame";
 import { auth } from "../../Services/auth-service";
@@ -15,6 +15,7 @@ const UserCard: React.FC<UserCardProps> = ({ UserDisplay }) => {
   const loginContext = useLogin();
   const userContext = useUser();
   const navigate = useNavigate();
+  
   const handleFollow = () => {
     console.log(loginContext.token ?? "", UserDisplay.id);
     auth

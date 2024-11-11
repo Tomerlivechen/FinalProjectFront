@@ -10,7 +10,6 @@ import { UserTabList } from "../Components/Objects/UserTabList";
 import { IAppUserDisplay } from "../Models/UserModels";
 import { ProfileGroupsList } from "../Components/Objects/ProfileGroupsList";
 import { ImageList } from "../Components/Objects/ImageList";
-import { InteractingUsersLists } from "../Components/InteractingUsersLists";
 import { isEqual } from "lodash";
 
 const Profile = () => {

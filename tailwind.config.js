@@ -5,9 +5,11 @@ export default {
   blackAndWhiteMode: "class",
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-
-    
-    extend: {},
+    extend: {
+      animation: {
+        'spin-slow': 'spin 5s linear infinite',
+        'spin-fast': 'spin 0.5s linear infinite',
+      },},
     variants: {
       extend: {
       },
@@ -15,3 +17,5 @@ export default {
   },
   plugins: [],
 };
+
+

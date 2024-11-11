@@ -8,6 +8,7 @@ import { Notification } from "../../Services/notification-service";
 import { IoClose } from "react-icons/io5";
 import { Tooltip } from "react-bootstrap";
 import { INotificationDisplay } from "../../Types/@NotificationTyoe";
+import { Posts } from "../../Services/post-service";
 
 const NotificationObject: React.FC<{
   NotificationData: INotificationDisplay;
@@ -20,13 +21,17 @@ const NotificationObject: React.FC<{
   const [nameOfNotifier, setNameOfNotifier] = useState("");
   const [notificationTypeText, setNotificationTypeText] = useState("");
   const [actionPathName, setActionPathName] = useState("");
+  const [postTitle, setPostTitle] = useState("");
 
   useEffect(() => {
     const getUsername = async () => {
       if (notification) {
         const Notifier = await auth.getUser(notification.notifierId);
+
         setNameOfNotifier(Notifier.data.userName);
         if (notification.type == "Comment") {
+          const posttitle = await Posts.getPostById(notification.referenceId)
+          setPostTitle(posttitle.data.title)
           setNotificationTypeText("Has commented on your post ");
           setActionPathName("Post");
         }
@@ -36,9 +41,9 @@ const NotificationObject: React.FC<{
         }
       }
     };
-
     getUsername();
   }, [notification]);
+
 
   const GoToUser = () => {
     console.log(`${notification?.notifierId}`);
@@ -73,7 +78,7 @@ const NotificationObject: React.FC<{
   return (
     <>
       <div>
-        <div className={`${colors.ElementFrame} h-20 w-48 p-2 m-1 relative`}>
+        <div className={`${colors.ElementFrame} h-24 w-64 p-2 m-1 relative`}>
           <div className="absolute top-1 right-0">
             <button
               className={`${colors.CommentColors}`}
@@ -89,6 +94,8 @@ const NotificationObject: React.FC<{
             {nameOfNotifier}
           </button>
           {notificationTypeText}
+          {postTitle.slice(0, 15)}
+          {postTitle.length > 15 && "..."}
           <button
             className={`${colors.ActiveText}`}
             onClick={activateNotification}
