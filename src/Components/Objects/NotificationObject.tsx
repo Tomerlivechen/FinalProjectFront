@@ -9,6 +9,7 @@ import { IoClose } from "react-icons/io5";
 import { Tooltip } from "react-bootstrap";
 import { INotificationDisplay } from "../../Types/@NotificationTyoe";
 import { Posts } from "../../Services/post-service";
+import { IPostDisplay } from "../../Models/Interaction";
 
 const NotificationObject: React.FC<{
   NotificationData: INotificationDisplay;
@@ -21,7 +22,7 @@ const NotificationObject: React.FC<{
   const [nameOfNotifier, setNameOfNotifier] = useState("");
   const [notificationTypeText, setNotificationTypeText] = useState("");
   const [actionPathName, setActionPathName] = useState("");
-  const [postTitle, setPostTitle] = useState("");
+  const [postDisplay, setPostDisplay] = useState<IPostDisplay|null>(null);
 
   useEffect(() => {
     const getUsername = async () => {
@@ -30,13 +31,13 @@ const NotificationObject: React.FC<{
 
         setNameOfNotifier(Notifier.data.userName);
         if (notification.type == "Comment") {
-          const posttitle = await Posts.getPostById(notification.referenceId)
-          setPostTitle(posttitle.data.title)
-          setNotificationTypeText("Has commented on your post ");
+          const post = await Posts.getPostById(notification.referenceId)
+          setPostDisplay(post.data)
+          setNotificationTypeText(" has commented on your post ");
           setActionPathName("Post");
         }
         if (notification.type == "Message") {
-          setNotificationTypeText("Has sent you a message ");
+          setNotificationTypeText(" has sent you a message ");
           setActionPathName("Chat");
         }
       }
@@ -94,13 +95,14 @@ const NotificationObject: React.FC<{
             {nameOfNotifier}
           </button>
           {notificationTypeText}
-          {postTitle.slice(0, 15)}
-          {postTitle.length > 15 && "..."}
+
           <button
             className={`${colors.ActiveText}`}
             onClick={activateNotification}
-          >
-            {actionPathName}
+          >{actionPathName}{" "}
+                      {postDisplay && postDisplay.title.slice(0, 15)}
+                      {postDisplay && postDisplay.title.length > 15 && "..."}
+            
           </button>
           <div className="text-xs absolute right-0">{notification?.date}</div>
         </div>
