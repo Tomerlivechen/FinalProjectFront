@@ -16,11 +16,24 @@ const sendMessage = (newMessage: INewMessage) =>
       data: newMessage,
   });
 
+  const updateMessage = (newMessage: string, MessageId:string) =>
+    request({
+      url: `${ChatURL}/EditMessage/${MessageId}`,
+      method: "PUT",
+      data: {Input:newMessage},
+  });
 
 const getChat = (ChatID: string) =>
     request({
       url: `${ChatURL}/ByChatId/${ChatID}`,
       method: "GET",
+      data: null,
+  });
+
+  const deleteMessage = (MessageId:string) =>
+    request({
+      url: `${ChatURL}/DeleteMessage/${MessageId}`,
+      method: "DELETE",
       data: null,
   });
 
@@ -38,4 +51,4 @@ const getChat = (ChatID: string) =>
       data: {id:userid},
   });
 
-  export const Chat = {sendMessage, getChat, CreatChat, GetNotFollowingChats}
+  export const Chat = {sendMessage, getChat, CreatChat, GetNotFollowingChats, updateMessage,deleteMessage}

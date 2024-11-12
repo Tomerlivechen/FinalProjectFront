@@ -67,7 +67,7 @@ const ConfirmImageDelete = async (imageId: string) =>
     }
   });
 
-const getText = async (title: string, placeholder: string) => {
+const getURL = async (title: string, placeholder: string) => {
   const { value: url } = await Swal.fire({
     input: "url",
     inputLabel: `Submit ${title}`,
@@ -83,6 +83,27 @@ const getText = async (title: string, placeholder: string) => {
     Swal.fire(`Entered URL: ${url}`);
   }
   return url;
+};
+
+const getText = async (
+  title: string,
+  placeholder: string,
+  textValue?: string
+) => {
+  const inputValue = textValue;
+  const { value: text } = await Swal.fire({
+    input: "text",
+    inputLabel: `Submit ${title}`,
+    inputValue,
+    inputPlaceholder: placeholder,
+    didOpen: () => {
+      const popup = document.querySelector(".swal2-popup");
+      if (popup) {
+        popup.setAttribute("id", "mySweetAlertModal");
+      }
+    },
+  });
+  return text;
 };
 
 const getEmail = async () => {
@@ -127,7 +148,7 @@ const showtext = (text: string) => {
 export default {
   showErrorDialog,
   showSuccessDialog,
-  getText,
+  getURL,
   showImage,
   showtext,
   ConfirmJoinGroup,
@@ -135,6 +156,7 @@ export default {
 export const dialogs = {
   error: showErrorDialog,
   success: showSuccessDialog,
+  getURL,
   getText,
   showImage,
   showtext,

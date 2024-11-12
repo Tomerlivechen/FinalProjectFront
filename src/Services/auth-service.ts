@@ -40,7 +40,13 @@ const login = (email: string, password: string) =>
         data: null,
     });
 
-
+    
+const toggleInactivation = (userId: string) =>
+  request({
+    url: `${AuthURL}/ToggleInactivationById/${userId}`,
+    method: "Delete",
+    data: null,
+});
     
 
     const getUsers = () =>
@@ -151,4 +157,5 @@ export const auth = {
   GetUserByEmail,
   ResetPassword,
   SetNewPassword,
+  toggleInactivation
 };

@@ -52,7 +52,7 @@ function SendPostComponent() {
   });
 
   const handelAddUrl = async () => {
-    const getUrl = await dialogs.getText("Link", "Enter the URL");
+    const getUrl = await dialogs.getURL("Link", "Enter the URL");
     setUrl(getUrl);
   };
 

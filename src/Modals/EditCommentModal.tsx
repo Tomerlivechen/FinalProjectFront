@@ -21,6 +21,7 @@ import { ICommentDisplay } from "../Models/Interaction";
 import { AxiosError } from "axios";
 import { linkFieldValues, textFieldValues } from "../Models/FormikModels";
 import DinoSpinner from "../Spinners/DinoSpinner";
+import { isEqual } from "lodash";
 
 interface EditCommentModalProps {
   Mshow: boolean;
@@ -37,20 +38,33 @@ const EditCommentModal: React.FC<EditCommentModalProps> = ({
   const [isLoading, setIsLoading] = useState(false);
   const loggedInContext = useLogin();
   const [imageUrl, holdFile, setHoldFile, setImageURL, clear] = useCloudinary();
-  const CommentToEdit: ICommentDisplay = comment;
+  const [CommentToEdit, setCommentToEdit] = useState(comment);
   const handleclose = () => {
     setCommentValues(CommentToEdit);
     onHide();
   };
 
+  useEffect(() => {
+    updateComment();
+  }, [Mshow]);
+
+  useEffect(() => {
+    if (!isEqual(CommentToEdit, commentValues)) {
+      setCommentValues(CommentToEdit);
+    }
+  }, [CommentToEdit]);
+
+  const updateComment = async () => {
+    const respons = await CommentService.GetCommentByID(comment.id);
+    setCommentToEdit(respons.data);
+  };
+  const [commentValues, setCommentValues] = useState<ICommentDisplay>(
+    CommentToEdit
+  );
   const validationScheme = Yup.object({
     link: Yup.string().url(),
     text: Yup.string().min(2).required("Must have some text"),
   });
-
-  const [commentValues, setCommentValues] = useState<ICommentDisplay>(
-    CommentToEdit
-  );
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {

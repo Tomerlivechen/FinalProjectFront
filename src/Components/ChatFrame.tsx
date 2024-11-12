@@ -37,7 +37,7 @@ const ChatFrame: React.FC<ChatFrameProps> = ({ chatID }) => {
     setChatRespons(chatValues.data);
   };
 
-  const intervalTime = 10000;
+  const intervalTime = 5000;
   useEffect(() => {
     const interval = setInterval(() => {
       if (chatID) {

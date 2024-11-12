@@ -44,8 +44,8 @@ const PostCard: React.FC<IPostDisplay> = (postDisplay) => {
               <button className=" text-sm font-bold pl-10">
                 {postDisplay.authorName}
               </button>
-              {(postDisplay.authorId == userContext.userInfo.UserId ||
-                userContext.userInfo.IsAdmin) && (
+              {(postDisplay?.authorId == userContext.userInfo.UserId ||
+                userContext.userInfo.IsAdmin == "true") && (
                 <button className="ml-auto mb-2">
                   <TiDelete size={22} onClick={handleDelete} />
                 </button>

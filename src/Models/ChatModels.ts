@@ -5,6 +5,7 @@
   userName: string;
   message: string;
   datetime: string;
+  editable : boolean;
 }
 
  interface IChat {

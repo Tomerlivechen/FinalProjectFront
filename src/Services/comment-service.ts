@@ -13,6 +13,13 @@ const VoteOnComment = (Id: string, vote: number) =>
     data: {vote},
   });
 
+
+  const GetCommentByID = (CommentID: string) =>
+    request({
+      url: `${CommentURL}/ByCommentId/${CommentID}`,
+      method: "GET",
+      data: null,
+    });
   const DeleteComment = (Id: string) =>
     request({
       url: `${CommentURL}/${Id}`,
@@ -40,4 +47,4 @@ const VoteOnComment = (Id: string, vote: number) =>
         data: null,
       });
 
-export const CommentService = { VoteOnComment, PostComment , PutComment,DeleteComment,unvoteComment };
+export const CommentService = { VoteOnComment, PostComment , PutComment,DeleteComment,unvoteComment,GetCommentByID };

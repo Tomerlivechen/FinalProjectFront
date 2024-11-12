@@ -23,6 +23,7 @@ interface IAppUserDisplay {
   chatId : string;
   votedOn: string[];
   online : boolean;
+  isActive : boolean;
 }
 
 interface IEditUser {

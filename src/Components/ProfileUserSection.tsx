@@ -9,7 +9,7 @@ import { FaHandshakeSlash } from "react-icons/fa";
 import { FaHandshake } from "react-icons/fa";
 import { FaHandHolding } from "react-icons/fa";
 import { FaHandHoldingHeart } from "react-icons/fa";
-import { GiChatBubble } from "react-icons/gi";
+import { GiBurningMeteor, GiChatBubble, GiEggEye } from "react-icons/gi";
 import { PiPlugsFill } from "react-icons/pi";
 import { useChat } from "../CustomHooks/useChat";
 import { ProfileUserSectionProps } from "../Types/@UserTypes";
@@ -63,6 +63,13 @@ const ProfileUserSection: React.FC<ProfileUserSectionProps> = ({ userId }) => {
   const getUser = async (id: string) => {
     const response = await auth.getUser(id);
     setUser(response.data);
+  };
+
+  const toggleBan = async () => {
+    if (userId) {
+      const response = await auth.toggleInactivation(userId);
+      setUser(response.data);
+    }
   };
 
   useEffect(() => {
@@ -163,7 +170,24 @@ const ProfileUserSection: React.FC<ProfileUserSectionProps> = ({ userId }) => {
                   <p
                     className={`text-2xl font-bold text-left mt-5 ${colors.ButtonFont}`}
                   >
-                    {user.userName}
+                    {user.userName.slice(0, 25)}
+                    {user.userName.length > 25 && "..."}
+                    {userContex.userInfo.IsAdmin == "true" && (
+                      <button
+                        onClick={toggleBan}
+                        className={`inline-flex items-center ml-3 mt-4 ${colors.ElementFrame} border-2 rounded-md border-red-700`}
+                      >
+                        {user.isActive ? (
+                          <span className="inline-flex items-center">
+                            <GiBurningMeteor size={25} /> Ban
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center">
+                            <GiEggEye size={25} /> Unban
+                          </span>
+                        )}
+                      </button>
+                    )}
                   </p>
                 </div>
                 <div className="absolute right-0 p-2">

@@ -43,7 +43,9 @@ const CommentView: React.FC<ICommentDisplay> = (commentDisplay) => {
   };
 
   useEffect(() => {
-    if (commentDisplay) setCommentDisplayState(commentDisplay);
+    if (commentDisplay) {
+      updateComment();
+    }
   }, []);
 
   const handelImage = () => {
@@ -61,150 +63,181 @@ const CommentView: React.FC<ICommentDisplay> = (commentDisplay) => {
       setCommentDisplayState(respons.data);
     }
   };
-  const handleShowEdit = () =>
+  const handleShowEdit = async () => {
+    await updateComment();
     setShowEditModal((prevshowEditModal) => !prevshowEditModal);
-  const handleDelete = () => {
+  };
+
+  const updateComment = async () => {
+    const respons = await CommentService.GetCommentByID(commentDisplay.id);
+    setCommentDisplayState(respons.data);
+  };
+
+  useEffect(() => {
+    updateComment();
+  }, [showEditModal, showModal]);
+
+  const handleDelete = async () => {
     if (commentDisplayState) {
-      CommentService.DeleteComment(commentDisplayState.id);
+      const respons = await CommentService.DeleteComment(
+        commentDisplayState.id
+      );
+      if (respons.status === 200) {
+        setCommentDisplayState(null);
+      }
     }
   };
 
   return (
     <>
-      <ElementFrame
-        height="190px"
-        width="400px"
-        padding="2"
-        position="relative"
-        margin="t-2"
-      >
-        <div>
-          <div className="flex justify-between items-center">
-            <button className=" text-sm font-bold">
-              {commentDisplayState?.authorName}
-            </button>
-            {(commentDisplayState?.authorId == userContext.userInfo.UserId ||
-              userContext.userInfo.IsAdmin == "true") && (
-              <>
-                <div className="flex">
-                  <div className="flex space-x-2">
-                    <button className="ml-auto mb-2" onClick={handleShowEdit}>
-                      <MdEdit size={22} />
-                    </button>
-                    {commentDisplayState && (
-                      <EditCommentModal
-                        Mshow={showEditModal}
-                        onHide={handleShowEdit}
-                        comment={commentDisplayState}
-                      />
-                    )}
-                    <button className="ml-auto mb-2">
-                      <TiDelete size={22} onClick={handleDelete} />
-                    </button>
-                  </div>
-                </div>
-              </>
-            )}
-          </div>
-          <div
-            className={`${colors.TextBox}`}
-            style={{
-              height: "80px",
-              overflowY: "auto",
-              whiteSpace: "pre-wrap",
-            }}
+      {commentDisplayState && (
+        <>
+          <ElementFrame
+            height="190px"
+            width="400px"
+            padding="2"
+            position="relative"
+            margin="t-2"
           >
-            {commentDisplayState?.text}
-          </div>
-          <div className="flex pt-2 justify-between w-full">
-            <div className="flex items-center">
-              {commentDisplayState?.link && (
-                <button
-                  className="pl-3"
-                  onClick={() =>
-                    window.open(commentDisplayState.link, "_blank")
-                  }
-                >
-                  <HiLink size={20} />
+            <div>
+              <div className="flex justify-between items-center">
+                <button className=" text-sm font-bold">
+                  {commentDisplayState?.authorName}
                 </button>
-              )}
-              {commentDisplayState?.imageURL && (
-                <button className="pl-3" onClick={handelImage}>
-                  <IoImage size={20} />
-                </button>
-              )}
+                {(commentDisplayState?.authorId ==
+                  userContext.userInfo.UserId ||
+                  userContext.userInfo.IsAdmin == "true") && (
+                  <>
+                    <div className="flex">
+                      <div className="flex space-x-2">
+                        <button
+                          className="ml-auto mb-2"
+                          onClick={handleShowEdit}
+                        >
+                          <MdEdit size={22} />
+                        </button>
 
-              <div className="flex items-center pl-4">
-                <button
-                  className={`flex items-center pl-3`}
-                  onClick={handleShow}
-                >
-                  <FaCommentMedical size={21} aria-description="add comment" />
-                </button>
-                {commentDisplayState && (
-                  <AddCommentCommentModal
-                    Mshow={showModal}
-                    onHide={handleClose}
-                    commentId={commentDisplayState.id}
-                  />
+                        <EditCommentModal
+                          Mshow={showEditModal}
+                          onHide={handleShowEdit}
+                          comment={commentDisplayState}
+                        />
+
+                        <button className="ml-auto mb-2">
+                          <TiDelete size={22} onClick={handleDelete} />
+                        </button>
+                      </div>
+                    </div>
+                  </>
                 )}
               </div>
-            </div>
-            <div className="flex items-center">
-              {commentDisplayState?.hasVoted && (
-                <button
-                  onClick={() => {
-                    unvote();
-                  }}
-                >
-                  <TbMobiledataOff size={24} className="ml-3 " />
-                </button>
-              )}
-              {!commentDisplayState?.hasVoted && (
-                <>
-                  <button
-                    onClick={() => {
-                      handleVote(1);
-                    }}
-                  >
-                    <BiSolidUpvote size={20} />
-                  </button>
-                  <button
-                    onClick={() => {
-                      handleVote(-1);
-                    }}
-                  >
-                    <BiSolidDownvote size={20} />
-                  </button>
-                </>
-              )}
-              <div className="flex justify-evenly">
-                <div className="pl-4 pr-3 font-bold">
-                  {commentDisplayState?.totalVotes}
+              <div
+                className={`${colors.TextBox}`}
+                style={{
+                  height: "80px",
+                  overflowY: "auto",
+                  whiteSpace: "pre-wrap",
+                }}
+              >
+                {commentDisplayState?.text}
+              </div>
+              <div className="flex pt-2 justify-between w-full">
+                <div className="flex items-center">
+                  {commentDisplayState?.link && (
+                    <button
+                      className="pl-3"
+                      onClick={() =>
+                        window.open(commentDisplayState.link, "_blank")
+                      }
+                    >
+                      <HiLink size={20} />
+                    </button>
+                  )}
+                  {commentDisplayState?.imageURL && (
+                    <button className="pl-3" onClick={handelImage}>
+                      <IoImage size={20} />
+                    </button>
+                  )}
+
+                  <div className="flex items-center pl-4">
+                    <button
+                      className={`flex items-center pl-3`}
+                      onClick={handleShow}
+                    >
+                      <FaCommentMedical
+                        size={21}
+                        aria-description="add comment"
+                      />
+                    </button>
+
+                    <AddCommentCommentModal
+                      Mshow={showModal}
+                      onHide={handleClose}
+                      commentId={commentDisplayState.id}
+                    />
+                  </div>
+                </div>
+                <div className="flex items-center">
+                  {commentDisplayState?.hasVoted && (
+                    <button
+                      onClick={() => {
+                        unvote();
+                      }}
+                    >
+                      <TbMobiledataOff size={24} className="ml-3 " />
+                    </button>
+                  )}
+                  {!commentDisplayState?.hasVoted && (
+                    <>
+                      <button
+                        onClick={() => {
+                          handleVote(1);
+                        }}
+                      >
+                        <BiSolidUpvote size={20} />
+                      </button>
+                      <button
+                        onClick={() => {
+                          handleVote(-1);
+                        }}
+                      >
+                        <BiSolidDownvote size={20} />
+                      </button>
+                    </>
+                  )}
+                  <div className="flex justify-evenly">
+                    <div className="pl-4 pr-3 font-bold">
+                      {commentDisplayState?.totalVotes}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div className="flex justify-between items-center">
-          <div className={` font-bold ${colors.InteractionText} ml-16 mt-4`}>
-            {commentDisplayState &&
-              commentDisplayState.comments &&
-              commentDisplayState.comments.length > 0 &&
-              commentDisplayState.comments.length}
-          </div>
-          <div className="flex justify-end">
-            {commentDisplayState?.datetime}
-          </div>
-        </div>
-      </ElementFrame>
+            <div className="flex justify-between items-center">
+              <div
+                className={` font-bold ${colors.InteractionText} ml-16 mt-4`}
+              >
+                {commentDisplayState.comments &&
+                  commentDisplayState.comments.length > 0 &&
+                  commentDisplayState.comments.length}
+              </div>
+              <div className="flex justify-end">
+                {commentDisplayState?.datetime}
+              </div>
+            </div>
+          </ElementFrame>
 
-      <div
-        className={`-mt-7 font-bold ${colors.InteractionText}`}
-        style={{ position: "relative", zIndex: 100 }}
-      >
-        <CommentList index={0} commmentList={commentDisplayState?.comments} />
-      </div>
+          <div
+            className={`-mt-7 font-bold ${colors.InteractionText}`}
+            style={{ position: "relative", zIndex: 100 }}
+          >
+            <CommentList
+              index={0}
+              commmentList={commentDisplayState?.comments}
+            />
+          </div>
+        </>
+      )}
     </>
   );
 };

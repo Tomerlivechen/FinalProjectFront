@@ -27,6 +27,7 @@ import {
   titleFieldValues,
 } from "../Models/FormikModels";
 import DinoSpinner from "../Spinners/DinoSpinner";
+import { isEqual } from "lodash";
 
 interface EditPostModalProps {
   Mshow: boolean;
@@ -43,10 +44,26 @@ const EditPostModal: React.FC<EditPostModalProps> = ({
   const [isLoading, setIsLoading] = useState(false);
   const loggedInContext = useLogin();
   const [imageUrl, holdFile, setHoldFile, setImageURL, clear] = useCloudinary();
-  const PostToEdit: IPostDisplay = post;
+  const [PostToEdit, setPostToEdit] = useState(post);
+
   const handleclose = () => {
     setPostValues(PostToEdit);
     onHide();
+  };
+
+  useEffect(() => {
+    getUpdatedPost();
+  }, [Mshow]);
+
+  useEffect(() => {
+    if (!isEqual(PostToEdit, postValues)) {
+      setPostValues(PostToEdit);
+    }
+  }, [PostToEdit]);
+
+  const getUpdatedPost = async () => {
+    const response = await Posts.getPostById(post.id);
+    setPostToEdit(response.data);
   };
 
   const validationScheme = Yup.object({
