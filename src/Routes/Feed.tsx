@@ -18,22 +18,28 @@ const Feed = () => {
 
   const [postId, setPostId] = useState<null | string>(null);
 
-  useEffect(() => {
-    getSearchParams();
-  }, [searchParams.toString()]);
 
   const getSearchParams = () => {
     const _postId = searchParams.get("postId");
     if (_postId && !isEqual(postId, _postId)) {
       setPostId(_postId);
+      getSinglePost(_postId)
     } else {
       setPostId(null);
       setSingularPost(null)
     }
   };
 
-const getSinglePost = async () => {
-      if (postId) {
+  useEffect(() => {
+    getSearchParams();
+  }, [searchParams]);
+
+const getSinglePost = async (postParams : string|null) => {
+  if (postParams) {
+    const SinglePost = await Posts.getPostById(postParams);
+    setSingularPost(SinglePost.data);
+  }
+    else  if (postId) {
         const SinglePost = await Posts.getPostById(postId);
         setSingularPost(SinglePost.data);
       }
@@ -41,7 +47,7 @@ const getSinglePost = async () => {
 
   useEffect(() => {
     if (postId){
-    getSinglePost();
+    getSinglePost(null);
     }
   }, [postId]);
 
