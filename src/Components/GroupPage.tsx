@@ -19,6 +19,7 @@ const GroupPage = () => {
 
   useEffect(() => {
     getSearchParams();
+    setGroupState(null);
   }, [searchParams]);
 
   const getSearchParams = () => {

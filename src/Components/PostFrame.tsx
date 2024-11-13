@@ -1,12 +1,7 @@
 import { useEffect, useState } from "react";
 import { Tooltip } from "react-bootstrap";
 import { useLocation, useSearchParams } from "react-router-dom";
-import {
-  categories,
-  colors,
-  getFlowingPosts,
-  stringToPostDisplay,
-} from "../Constants/Patterns";
+import { categories, colors, getFlowingPosts } from "../Constants/Patterns";
 
 import { FaCircleUp } from "react-icons/fa6";
 import { IoSparkles } from "react-icons/io5";
@@ -47,12 +42,6 @@ const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
   const [postId, setPostId] = useState<null | string>(null);
 
   useEffect(() => {
-    getSearchParams();
-    setPostList(null);
-    setMainPostList(null);
-  }, []);
-
-  useEffect(() => {
     if (PostFrameParams) {
       setusersIds(PostFrameParams.UserList);
     } else {
@@ -60,7 +49,22 @@ const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
     }
   }, [PostFrameParams]);
 
+  const clearAllElements = () => {
+    setLoadingPosts(true);
+    setUserIdState(null);
+    setGroupIdState(null);
+    setPostIdState(null);
+    setusersIds(null);
+    setPostList(null);
+    setMainPostList(null);
+    setCatFilter(0);
+    setUserId(null);
+    setGroupId(null);
+    setPostId(null);
+  };
+
   useEffect(() => {
+    clearAllElements();
     getSearchParams();
   }, [searchParams, PostFrameParams]);
 
@@ -95,6 +99,9 @@ const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
     if (location.pathname.startsWith("/feed") && postId) {
       setPostIdState(postId);
     }
+    if (location.pathname.startsWith("/feed") && !postId) {
+      updatePostList();
+    }
   }, [location.pathname, userId, groupId, postId]);
 
   const [feedSort, setFeedSort] = useState({
@@ -114,12 +121,9 @@ const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
   }, [userIdState, groupIdState, postIdState]);
 
   const updatePostList = async () => {
-    const updatePostListIfChanged = (posts: IPostDisplay[]) => {
-      const parsedPosts = stringToPostDisplay(posts);
+    const updatePostListIfChanged = (parsedPosts: IPostDisplay[]) => {
       if (!isEqual(parsedPosts, mainPostList)) {
-        setMainPostList(
-          Array.isArray(parsedPosts) ? parsedPosts : [parsedPosts]
-        );
+        setMainPostList(parsedPosts);
       }
     };
     if (location.pathname.startsWith("/group") && groupIdState) {
@@ -137,14 +141,6 @@ const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
     }
   };
 
-  const intervalTime = 10000;
-  useEffect(() => {
-    const interval = setInterval(() => {
-      updatePostList();
-    }, intervalTime);
-    return () => clearInterval(interval);
-  }, []);
-
   useEffect(() => {
     if (mainPostList && !isEqual(mainPostList, postList?.posts)) {
       setPostList((prevPostList) => ({
@@ -154,6 +150,47 @@ const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
     }
   }, [mainPostList]);
 
+  const getSoretElement = () => {
+    let element: string | null;
+    if (feedSort.totalVotes == true) {
+      element = "totalVotes";
+    } else if (feedSort.datetime == true) {
+      element = "datetime";
+    } else if (feedSort.comments == true) {
+      element = "comments";
+    } else {
+      element = "datetime";
+    }
+    return element;
+  };
+
+  useEffect(() => {
+    if (mainPostList) {
+      const sortelement = getSoretElement();
+      const newPostList: PostListValues = {
+        sortElement: sortelement,
+        orderBy: feedDirection.ascending ? "asc" : "desc",
+        posts: mainPostList,
+        filter: catFilter == 0 ? null : catFilter,
+      };
+      if (!isEqual(newPostList, postList)) {
+        setLoadingPosts(true);
+        setPostList(newPostList);
+        setLoadingPosts(false);
+      }
+      setLoadingPosts(false);
+    }
+  }, [feedDirection, feedSort, mainPostList, catFilter, postList]);
+
+  useEffect(() => {
+    if (postList) {
+      setLoadingPosts(false);
+    }
+    if (mainPostList && mainPostList.length < 0) {
+      setLoadingPosts(false);
+    }
+  }, [postList, mainPostList]);
+
   const toggleSort = (type: "totalVotes" | "datetime" | "comments") => {
     setFeedSort({
       totalVotes: false,
@@ -161,7 +198,6 @@ const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
       comments: false,
       [type]: true,
     });
-    updatePostList();
   };
   const toggleDirection = (type: "ascending" | "descending") => {
     setFeedDirection({
@@ -169,7 +205,6 @@ const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
       descending: false,
       [type]: true,
     });
-    updatePostList();
   };
 
   const IconSortButton: React.FC<IPostSortingProps> = (e) => {
@@ -207,29 +242,6 @@ const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
       </button>
     );
   };
-  useEffect(() => {
-    if (mainPostList) {
-      const newPostList: PostListValues = {
-        sortElement: feedSort.totalVotes
-          ? "totalVotes"
-          : feedSort.datetime
-          ? "datetime"
-          : "comments",
-        orderBy: feedDirection.ascending ? "asc" : "desc",
-        posts: mainPostList,
-        filter: catFilter == 0 ? null : catFilter,
-      };
-      if (!isEqual(newPostList, postList)) {
-        setPostList(newPostList);
-      }
-    }
-  }, [feedDirection, feedSort, mainPostList, catFilter]);
-
-  useEffect(() => {
-    if (postList && postList.posts.length > 0) {
-      setLoadingPosts(false);
-    }
-  }, [postList]);
 
   return (
     <>
@@ -297,7 +309,7 @@ const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
         </select>
         {!userIdState && <SendPostComponent />}
         <div className="w-full">
-          {postList && postList.posts.length == 0 && (
+          {mainPostList && mainPostList?.length < 1 && (
             <div>
               <NoMorePosts />
             </div>

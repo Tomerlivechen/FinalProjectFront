@@ -58,7 +58,7 @@ const UserTabList: React.FC<UserTabListValues> = (
   const fillLists = () => {
     setUsers(UserListValue.users);
     if (order && sortBy) {
-      setSortedUsers(users.sort(sortByProperty(sortBy, order)));
+      setSortedUsers(users.slice().sort(sortByProperty(sortBy, order)));
     } else if (filterBy) {
       const filtered = users.filter((u) => u[filterBy] === true);
       setSortedUsers(filtered);

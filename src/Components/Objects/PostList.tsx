@@ -16,7 +16,9 @@ const PostList: React.FC<{ postListValue: PostListValues }> = ({
   );
   useEffect(() => {
     if (order && sort) {
-      const sorted = postListValue.posts.sort(sortByProperty(sort, order));
+      const sorted = postListValue.posts
+        .slice()
+        .sort(sortByProperty(sort, order));
       setSortedPosts(sorted);
       if (filterId) {
         const filtered = sorted.filter((post) => post.categoryId === filterId);

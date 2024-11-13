@@ -23,17 +23,17 @@ const ResizableFrame: React.FC<ResizableFrameProps> = (
     max: props.noMid ? true : false,
     closed: false,
   });
-  const [frameHeight, setFrameHeight] = useState("50vh");
+  const [frameHeight, setFrameHeight] = useState("h-fit");
 
   useEffect(() => {
     if (selectedSize === "min" || selectedSize === "closed") {
-      setFrameHeight("0px");
+      setFrameHeight("h-0");
     }
     if (selectedSize === "mid") {
-      setFrameHeight("50%");
+      setFrameHeight("h-fit max-h-[50vh]");
     }
     if (selectedSize === "max") {
-      setFrameHeight("100%");
+      setFrameHeight("h-screen");
     }
   }, [selectedSize]);
 
@@ -115,7 +115,7 @@ const ResizableFrame: React.FC<ResizableFrameProps> = (
             </div>
           </div>
           <ElementFrame
-            height={frameHeight}
+            tailwind={frameHeight}
             width={props.whidth}
             padding="0 rounded-b-xl"
             overflowX={props.overflowX ? "auto" : "hidden"}

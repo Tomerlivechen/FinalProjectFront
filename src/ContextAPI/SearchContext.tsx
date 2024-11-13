@@ -97,7 +97,7 @@ const SearchProvider: React.FC<ProviderProps> = ({ children }) => {
   useEffect(() => {
     setFilterUserList([]);
     setFilterPostList([]);
-    setVotedOnePosts([])
+    setVotedOnePosts([]);
   }, [userSearch, postSearch]);
 
   useEffect(() => {
@@ -105,7 +105,7 @@ const SearchProvider: React.FC<ProviderProps> = ({ children }) => {
   }, [postSearch, userSearch]);
 
   const fillLists = async () => {
-   await auth
+    await auth
       .getUsers()
       .then((response) => {
         console.log("respons", response);
@@ -116,7 +116,7 @@ const SearchProvider: React.FC<ProviderProps> = ({ children }) => {
         console.log(error, "Getting users");
       });
 
-      await Posts.getPosts()
+    await Posts.getPosts()
       .then((response) => {
         console.log("respons", response);
         const parsedPosts = stringToPostDisplay(response.data);
@@ -126,7 +126,7 @@ const SearchProvider: React.FC<ProviderProps> = ({ children }) => {
         console.log(error, "Getting Posts");
       });
 
-      await getVotedon()
+    await getVotedon();
   };
 
   const filterUsers = () => {
@@ -156,13 +156,10 @@ const SearchProvider: React.FC<ProviderProps> = ({ children }) => {
     }
   };
 
-const getVotedon = async () => {
-const respons = await Posts.GetVotedOn();
-setVotedOnePosts(respons.data as IPostDisplay[]);
-
-}
-
-
+  const getVotedon = async () => {
+    const respons = await Posts.GetVotedOn();
+    setVotedOnePosts(respons.data as IPostDisplay[]);
+  };
 
   const filterPosts = async () => {
     setloadingData(true);
@@ -188,15 +185,16 @@ setVotedOnePosts(respons.data as IPostDisplay[]);
       }
       if (postSearch.Voted) {
         let firstFilter;
-        if (searchValue.length>1){
+        if (searchValue.length > 1) {
           firstFilter = votedOnePosts.filter((post) =>
-            post.title.toLowerCase().includes(searchValue.toLowerCase()));
+            post.title.toLowerCase().includes(searchValue.toLowerCase())
+          );
+        } else {
+          firstFilter = votedOnePosts
+            .slice()
+            .sort(sortByProperty<IPostDisplay>("datetime", "desc"));
         }
-        else {
-        firstFilter = votedOnePosts.slice()
-        .sort(sortByProperty<IPostDisplay>("datetime", "desc"))
-        }
-        filtering = firstFilter
+        filtering = firstFilter;
       }
       console.log(searchValue);
       console.log(userSearch);

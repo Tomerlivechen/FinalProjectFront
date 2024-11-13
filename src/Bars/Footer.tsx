@@ -14,11 +14,11 @@ const FooterBar = () => {
 
   return (
     <>
-      <div className="fixed bottom-0 right-0 flex gap-4">
+      <div className=" fixed bottom-0 right-0 flex gap-4">
         {chats.map((chat, index) => (
           <div
             key={chat}
-            className={`absolute bottom-0 w-80`}
+            className={`fixed bottom-0 w-80`}
             style={{ right: index * 350 }}
           >
             <ChatFrame chatID={chat} />
