@@ -32,7 +32,8 @@ const Feed = () => {
 
   useEffect(() => {
     getSearchParams();
-  }, [searchParams.toString()]);
+    setLoading(true);
+  }, [searchParams]);
 
 const getSinglePost = async (postParams : string|null) => {
   if (postParams) {
@@ -45,16 +46,6 @@ const getSinglePost = async (postParams : string|null) => {
       }
     };
 
-    const intervalTime = 1000;
-    useEffect(() => {
-      const interval = setInterval(() => {
-        const _postId = searchParams.get("postId");
-        if (_postId) {
-          getSinglePost(_postId);
-        }
-      }, intervalTime);
-      return () => clearInterval(interval);
-    });
 
 
   useEffect(() => {
