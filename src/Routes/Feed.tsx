@@ -54,7 +54,7 @@ const getSinglePost = async (postParams : string|null) => {
         }
       }, intervalTime);
       return () => clearInterval(interval);
-    }, []);
+    });
 
 
   useEffect(() => {
