@@ -24,12 +24,6 @@
   
   
 
-  export interface IUserSelector {
-    UserName: boolean;
-    FirstName: boolean;
-    LastName: boolean;
-  }
-
   export interface IAuthinitalValues {
     isLoggedin: boolean;
     token: string | null;

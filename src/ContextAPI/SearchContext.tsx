@@ -4,6 +4,7 @@ import { IPostDisplay } from "../Models/Interaction";
 import { auth } from "../Services/auth-service";
 
 import {
+  sortByProperty,
   stringToAppUserDisplay,
   stringToPostDisplay,
 } from "../Constants/Patterns";
@@ -20,12 +21,14 @@ export interface IPostSelector {
   UserName: boolean;
   Title: boolean;
   KeyWords: boolean;
+  Voted: boolean;
 }
 
 const ValuesPost: IPostSelector = {
   UserName: false,
   Title: false,
   KeyWords: false,
+  Voted: false,
 };
 
 const ValuesUser: IUserSelector = {
@@ -149,7 +152,15 @@ const SearchProvider: React.FC<ProviderProps> = ({ children }) => {
     }
   };
 
-  const filterPosts = () => {
+const getVotedon = async () => {
+const respons = await Posts.GetVotedOn();
+return respons.data as IPostDisplay[];
+
+}
+
+
+
+  const filterPosts = async () => {
     setloadingData(true);
     let filtering = postList;
     if (postList != null) {
@@ -170,6 +181,11 @@ const SearchProvider: React.FC<ProviderProps> = ({ children }) => {
             keyword.toLowerCase().includes(searchValue.toLowerCase())
           )
         );
+      }
+      if (postSearch.Voted) {
+        const firstFilter = await getVotedon();
+        filtering = firstFilter.slice()
+        .sort(sortByProperty<IPostDisplay>("datetime", "desc"))
       }
       console.log(searchValue);
       console.log(userSearch);
@@ -202,12 +218,14 @@ const SearchProvider: React.FC<ProviderProps> = ({ children }) => {
         UserName: false,
         Title: false,
         KeyWords: false,
+        Voted: false,
       });
     } else {
       setPostSearch({
         UserName: false,
         Title: false,
         KeyWords: false,
+        Voted: false,
         [key]: true,
       });
     }

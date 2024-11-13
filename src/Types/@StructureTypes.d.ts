@@ -77,17 +77,7 @@
     children: ReactNode;
   }
 
-  export interface IUserSelector {
-    UserName: boolean;
-    FirstName: boolean;
-    LastName: boolean;
-  }
-  
-  export interface IPostSelector {
-    UserName: boolean;
-    Title: boolean;
-    KeyWords: boolean;
-  }
+
   
 
 

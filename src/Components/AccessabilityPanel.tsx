@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Tooltip } from "react-bootstrap";
 import { IoIosColorPalette } from "react-icons/io";
 import { IoAccessibilitySharp } from "react-icons/io5";
@@ -19,6 +19,7 @@ const AccessabilityPanel = () => {
   });
   const [open, setOpen] = useState(false);
   const [zoom, setZoom] = useState<IZoomProps>({ zoom: 1 });
+  const panelRef = useRef<HTMLDivElement>(null);
 
   const toggleGrayscale = () => {
     if (contrast.color) {
@@ -56,6 +57,18 @@ const AccessabilityPanel = () => {
       document.body.classList.toggle("setContrast");
     }
   }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (open && panelRef.current && !panelRef.current.contains(event.target as Node)) {
+        setOpen(false); 
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [open]);
 
   const toggleZoom = () => {
     const newZoom = (zoom.zoom + 0.2) % 3;
@@ -101,8 +114,8 @@ const AccessabilityPanel = () => {
         </Tooltip>
       </button>
       {open && (
-        <>
-          <ElementFrame
+        <><div ref={panelRef}>
+          <ElementFrame 
             height="250px"
             width="250px"
             padding="2"
@@ -157,6 +170,7 @@ const AccessabilityPanel = () => {
               </div>
             </div>
           </ElementFrame>
+          </div>
         </>
       )}
     </>

@@ -4,12 +4,13 @@ import { colors } from "../Constants/Patterns";
 import { useSearch } from "../CustomHooks/useSearch";
 import { FaSearch, FaUserTag } from "react-icons/fa";
 
-import { IUserSelector } from "../Types/@UserTypes";
-import { IPostSelector } from "../Types/@StructureTypes";
+
 import { FaKey, FaUser } from "react-icons/fa6";
 import { AiOutlineUserDelete, AiOutlineUsergroupDelete } from "react-icons/ai";
 import { MdOutlineTitle } from "react-icons/md";
 import { RiSignpostFill } from "react-icons/ri";
+import { TbArrowsDownUp } from "react-icons/tb";
+import { IPostSelector, IUserSelector } from "../ContextAPI/SearchContext";
 
 function FilterBar() {
   const [selectedUser, setSelectedUser] = useState(false);
@@ -24,6 +25,7 @@ function FilterBar() {
     UserName: false,
     Title: false,
     KeyWords: false,
+    Voted: false,
   });
   const [searchActive, setSearchActive] = useState(false);
 
@@ -52,7 +54,7 @@ function FilterBar() {
       if (
         postSelector.KeyWords ||
         postSelector.Title ||
-        postSelector.UserName
+        postSelector.UserName 
       ) {
         setSearchActive(true);
       } else {
@@ -92,6 +94,7 @@ function FilterBar() {
       UserName: false,
       Title: false,
       KeyWords: false,
+      Voted: false,
     });
     if (selectedUser == true) {
       await setSelectedUser(false);
@@ -114,6 +117,7 @@ function FilterBar() {
       UserName: false,
       Title: false,
       KeyWords: false,
+      Voted: false,
       [key]: true,
     });
     searchFilter.searchToggleFunctions.togglePostSearch(key);
@@ -214,6 +218,17 @@ function FilterBar() {
               <Tooltip title="Key Words">
                 <FaKey className="md:hidden" size={18} />
                 <p className="hidden md:block">Key Words</p>
+              </Tooltip>
+            </button>
+            <button
+              className={` ${
+                postSelector.Voted ? colors.ActiveText : null
+              } p-1 mt-1 text-sm`}
+              onClick={() => togglePostSelector("Voted")}
+            >
+              <Tooltip title="Voted on">
+                <TbArrowsDownUp  className="md:hidden" size={18} />
+                <p className="hidden md:block">Voted on</p>
               </Tooltip>
             </button>
           </>
