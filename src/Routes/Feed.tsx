@@ -32,7 +32,7 @@ const Feed = () => {
 
   useEffect(() => {
     getSearchParams();
-  }, [searchParams]);
+  }, [searchParams.toString()]);
 
 const getSinglePost = async (postParams : string|null) => {
   if (postParams) {
