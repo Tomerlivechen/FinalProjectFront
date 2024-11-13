@@ -11,7 +11,7 @@ function SearchTitleComponent() {
     if (
       SearchContext.postSearch.KeyWords ||
       SearchContext.postSearch.Title ||
-      SearchContext.postSearch.UserName
+      SearchContext.postSearch.UserName || SearchContext.postSearch.Voted
     ) {
       setMainTitle("Post");
       if (SearchContext.postSearch.KeyWords) {
@@ -22,6 +22,9 @@ function SearchTitleComponent() {
       }
       if (SearchContext.postSearch.UserName) {
         setSearchElement("UserName");
+      }
+      if (SearchContext.postSearch.Voted) {
+        setSearchElement("Voted on");
       }
     }
     if (
@@ -47,6 +50,7 @@ function SearchTitleComponent() {
     SearchContext.userSearch.FirstName,
     SearchContext.userSearch.LastName,
     SearchContext.userSearch.UserName,
+    SearchContext.postSearch.Voted
   ]);
 
   return (
