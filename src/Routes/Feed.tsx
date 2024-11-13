@@ -33,6 +33,7 @@ const Feed = () => {
   useEffect(() => {
     getSearchParams();
     setLoading(true);
+    setSingularPost(null)
   }, [searchParams]);
 
 const getSinglePost = async (postParams : string|null) => {
