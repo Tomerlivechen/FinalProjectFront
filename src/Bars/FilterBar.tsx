@@ -54,7 +54,8 @@ function FilterBar() {
       if (
         postSelector.KeyWords ||
         postSelector.Title ||
-        postSelector.UserName 
+        postSelector.UserName ||
+        postSelector.Voted
       ) {
         setSearchActive(true);
       } else {
@@ -224,7 +225,7 @@ function FilterBar() {
               className={` ${
                 postSelector.Voted ? colors.ActiveText : null
               } p-1 mt-1 text-sm`}
-              onClick={() => togglePostSelector("Voted")}
+              onClick={() => { togglePostSelector("Voted"); handleSearch()}}
             >
               <Tooltip title="Voted on">
                 <TbArrowsDownUp  className="md:hidden" size={18} />
