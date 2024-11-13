@@ -63,6 +63,7 @@ function FilterBar() {
       }
     }
   }, [
+    postSelector.Voted,
     postSelector.KeyWords,
     postSelector.Title,
     postSelector.UserName,
