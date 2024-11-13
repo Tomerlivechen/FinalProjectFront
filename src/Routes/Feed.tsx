@@ -20,7 +20,7 @@ const Feed = () => {
 
   useEffect(() => {
     getSearchParams();
-  }, [searchParams]);
+  }, [searchParams.toString()]);
 
   const getSearchParams = () => {
     const _postId = searchParams.get("postId");
