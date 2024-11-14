@@ -1,3 +1,4 @@
+import GroupPage from "../Components/GroupPage";
 import { NotificationObject } from "../Components/Objects/NotificationObject";
 import UserCard from "../Components/Objects/UserCard";
 import UserTab from "../Components/Objects/UserTab";
@@ -52,6 +53,8 @@ function TestSpace() {
         <UserTab UserDisplay={card} />
         <DinoSpinner size={60} />
         <NotificationObject NotificationData={note} />
+
+        <GroupPage/>
       </div>
       <div>---------------------------</div>
       <div>Test Space Elemens</div>
