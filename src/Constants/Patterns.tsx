@@ -100,7 +100,7 @@ export const isValidURL = (url: string) => {
   }
 };
 
-export const getFlowingPosts = async (userlist: string[] | null) => {
+export const getFlowingPosts = async () => {
   const JWTtoken = localStorage.getItem("token");
   let newAuthState: IUserValues = {
     userInfo: {
@@ -122,12 +122,7 @@ export const getFlowingPosts = async (userlist: string[] | null) => {
     };
   }
   const followingUserIdsRespons = await auth.GetFollowingIds();
-  let followingUserIds;
-  if (userlist !== null) {
-    followingUserIds = followingUserIdsRespons.data;
-  } else {
-    followingUserIds = userlist;
-  }
+  const followingUserIds = followingUserIdsRespons.data;
   const followingPosts: IPostDisplay[] = [];
   for (const userId of followingUserIds) {
     try {

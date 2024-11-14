@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Tooltip } from "react-bootstrap";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { categories, colors, getFlowingPosts } from "../Constants/Patterns";
 
 import { FaCircleUp } from "react-icons/fa6";
@@ -15,7 +15,6 @@ import { IPostDisplay } from "../Models/Interaction";
 
 import { isEqual } from "lodash";
 import {
-  IPostFrameParams,
   IPostOrderProps,
   IPostSortingProps,
   PostListValues,
@@ -23,38 +22,26 @@ import {
 import { NoMorePosts } from "./Objects/NoMorePosts";
 import DinoSpinner from "../Spinners/DinoSpinner";
 
-const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
+const PostFrame = () => {
   const location = useLocation();
-  const [searchParams] = useSearchParams();
-  const [userIdState, setUserIdState] = useState<string | null>(null);
-  const [groupIdState, setGroupIdState] = useState<string | null>(null);
-  const [postIdState, setPostIdState] = useState<string | null>(null);
-  const [usersIds, setusersIds] = useState<string[] | null>(
-    PostFrameParams?.UserList ? PostFrameParams?.UserList : null
-  );
+  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [userIdState, setUserIdState] = useState<string | null>();
+  const [groupIdState, setGroupIdState] = useState<string | null>();
+  const [postIdState, setPostIdState] = useState<string | null>();
   const [loadingPosts, setLoadingPosts] = useState(true);
-  const [postList, setPostList] = useState<PostListValues | null>(null);
-  const [mainPostList, setMainPostList] = useState<IPostDisplay[] | null>(null);
+  const [postList, setPostList] = useState<PostListValues | null>();
+  const [mainPostList, setMainPostList] = useState<IPostDisplay[] | null>();
   const [catFilter, setCatFilter] = useState<number>(0);
-
-  const [userId, setUserId] = useState<null | string>(null);
-  const [groupId, setGroupId] = useState<null | string>(null);
-  const [postId, setPostId] = useState<null | string>(null);
-
-  useEffect(() => {
-    if (PostFrameParams) {
-      setusersIds(PostFrameParams.UserList);
-    } else {
-      getSearchParams();
-    }
-  }, [PostFrameParams]);
+  const [userId, setUserId] = useState<null | string>();
+  const [groupId, setGroupId] = useState<null | string>();
+  const [postId, setPostId] = useState<null | string>();
 
   const clearAllElements = () => {
     setLoadingPosts(true);
     setUserIdState(null);
     setGroupIdState(null);
     setPostIdState(null);
-    setusersIds(null);
     setPostList(null);
     setMainPostList(null);
     setCatFilter(0);
@@ -63,10 +50,14 @@ const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
     setPostId(null);
   };
 
+  const refresh = () => {
+    updatePostList();
+  };
+
   useEffect(() => {
     clearAllElements();
     getSearchParams();
-  }, [searchParams, PostFrameParams]);
+  }, [searchParams]);
 
   const getSearchParams = async () => {
     const _userId = searchParams.get("userId");
@@ -130,7 +121,7 @@ const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
       const groupPosts = await Posts.GetGroupPosts(groupIdState);
       updatePostListIfChanged(groupPosts?.data);
     } else if (location.pathname === "/feed" && !postIdState) {
-      const followingPosts = await getFlowingPosts(usersIds);
+      const followingPosts = await getFlowingPosts();
       updatePostListIfChanged(followingPosts);
     } else if (location.pathname.startsWith("/feed") && postIdState) {
       const PostbyId = await Posts.getPostById(postIdState);
@@ -185,8 +176,7 @@ const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
   useEffect(() => {
     if (postList) {
       setLoadingPosts(false);
-    }
-    if (mainPostList && mainPostList.length < 0) {
+    } else if (mainPostList && mainPostList.length < 0) {
       setLoadingPosts(false);
     }
   }, [postList, mainPostList]);
@@ -268,7 +258,7 @@ const PostFrame: React.FC<IPostFrameParams | null> = (PostFrameParams) => {
             tooltip="Sort by comments"
           />
           <div className="flex-1 w-32"></div>
-          <button onClick={() => updatePostList()}>
+          <button onClick={() => refresh()}>
             <Tooltip title="Sync">
               <MdCloudSync size={26} />
             </Tooltip>
