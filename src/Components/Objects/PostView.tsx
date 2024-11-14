@@ -11,7 +11,7 @@ import { IPostDisplay } from "../../Models/Interaction";
 import { CommentList } from "./CommentList";
 import AddPostCommentModal from "../../Modals/AddPostCommentModal";
 import { FaCommentMedical } from "react-icons/fa";
-import { colors, isValidURL } from "../../Constants/Patterns";
+import { categories, colors, isValidURL } from "../../Constants/Patterns";
 import { FaKey } from "react-icons/fa";
 import EditPostModal from "../../Modals/EditPostModal";
 import { MdEdit } from "react-icons/md";
@@ -30,6 +30,7 @@ const PostView: React.FC<IPostDisplay> = (postDisplay) => {
   const copy = useCopy();
   const navagate = useNavigate();
   const [showModal, setShowModal] = useState(false);
+  const [catName, setCatName] = useState("");
   const [showEditModal, setShowEditModal] = useState(false);
   const [groupInfo, setGroupInfo] = useState<ISocialGroupDisplay | null>(null);
   const [groupAdminId, setGroupAdminId] = useState("");
@@ -53,6 +54,9 @@ const PostView: React.FC<IPostDisplay> = (postDisplay) => {
       setPostDisplayState(postDisplay);
       getPostAuther();
       getUpdatedPost();
+      if (postDisplay.categoryId){
+      getCatName(postDisplay.categoryId);
+      }
     }
   }, []);
 
@@ -118,6 +122,16 @@ const PostView: React.FC<IPostDisplay> = (postDisplay) => {
     await copy(postId);
   };
 
+const getCatName = (categoryId : number) => {
+  const category = categories.find(cat => cat.id === categoryId);
+  if (category) {
+    setCatName(category.name);
+  } else {
+    setCatName("Uncategorized");
+  }
+};
+
+
   return (
     <>
       {postDisplayState && (
@@ -177,7 +191,9 @@ const PostView: React.FC<IPostDisplay> = (postDisplay) => {
                   </>
                 )}
               </div>
-
+                <div className="flex items-start">
+                - {catName}
+                </div>
               <div
                 className=" font-bold flex justify-evenly"
                 style={{
