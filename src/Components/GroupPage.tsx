@@ -83,7 +83,7 @@ const GroupPage = () => {
             <div className="w-fit lg:w-fit pl-2 pr-2">
               <PostFrame UserList={[]} />
             </div>
-            <div className="hidden xl:block lg:w-fit pl-2 ">
+            <div className="hidden xl:block lg:w-[20rem] pl-2 ">
               <ResizableFrame
                 title={"Rules"}
                 show={true}
