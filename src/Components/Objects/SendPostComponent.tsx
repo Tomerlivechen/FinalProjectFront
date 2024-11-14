@@ -69,7 +69,7 @@ function SendPostComponent() {
     imageURL: "",
     text: "",
     authorId: "",
-    categoryId: 0,
+    categoryId: 1,
     group: groupIdState ?? "",
     keyWords: "",
     datetime: "",
