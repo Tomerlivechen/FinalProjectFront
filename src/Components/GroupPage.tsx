@@ -68,7 +68,7 @@ const GroupPage = () => {
             <GroupProfileSection />
           </div>
           <div className=" w-full px-2 min-w-[40rem]  sm:w-[40rem] md:w-[55rem] lg:w-[72rem] xl:w-[99rem] ">
-            <div className="flex flex-col md:flex-row justify-between w-full md:w-8/12   ">
+          <div className="flex flex-col md:flex-row justify-between w-full">
             <div className="hidden lg:block lg:w-fit pl-2 pr-2 h-1/2">
               {!loadingUsers && MemberList && (
                 <ResizableFrame
@@ -92,7 +92,7 @@ const GroupPage = () => {
                 {groupState?.groupRules}
               </ResizableFrame>
             </div>
-          </div>
+            </div>
           </div>
         </div>
       </div>
