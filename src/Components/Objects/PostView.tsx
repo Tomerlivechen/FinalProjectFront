@@ -57,6 +57,9 @@ const PostView: React.FC<IPostDisplay> = (postDisplay) => {
       if (postDisplay.categoryId){
       getCatName(postDisplay.categoryId);
       }
+      else {
+        setCatName("Uncategorized")
+      }
     }
   }, []);
 
