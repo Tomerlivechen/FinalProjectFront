@@ -137,7 +137,7 @@ const getCatName = (categoryId : number) => {
       {postDisplayState && (
         <>
           <ElementFrame
-            height={`${postDisplayState?.imageURL ? "450px" : "230px"}`}
+            tailwind="h-fit"
             width="400px"
             padding="2 mt-2"
           >
