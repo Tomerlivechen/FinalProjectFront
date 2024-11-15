@@ -72,7 +72,7 @@ const GroupCard: React.FC<{
         <>
           <div className="hover:cursor-pointer" onClick={() => goToGroup()}>
             <ElementFrame
-              tailwind={`h-48 w-48 border-2 border-y-amber-700  border-x-teal-500 flex flex-col items-center justify-center `}
+              tailwind={`h-40 w-40 border-2 border-y-amber-700  border-x-teal-500 flex flex-col items-center justify-center `}
             >
               {(userContext.userInfo.IsAdmin == "true" ||
                 userContext.userInfo.UserId == GroupCard.admin.id) && (

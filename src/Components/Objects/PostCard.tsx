@@ -9,7 +9,7 @@ import { useUser } from "../../CustomHooks/useUser";
 import { IPostDisplay } from "../../Models/Interaction";
 
 import { BsArrowsFullscreen } from "react-icons/bs";
-import { colors } from "../../Constants/Patterns";
+import { colors, convertUTCToLocalTime } from "../../Constants/Patterns";
 import PostView from "./PostView";
 import { Posts } from "../../Services/post-service";
 
@@ -75,7 +75,9 @@ const PostCard: React.FC<IPostDisplay> = (postDisplay) => {
               className={` font-bold ${colors.InteractionText} ml-16 -mt-2`}
             />
 
-            <div className="flex justify-end">{postDisplay.datetime}</div>
+            <div className="flex justify-end">
+              {convertUTCToLocalTime(postDisplay.datetime, false)}
+            </div>
           </div>
         </ElementFrame>
       ) : (

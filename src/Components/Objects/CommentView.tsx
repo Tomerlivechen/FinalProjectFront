@@ -15,7 +15,7 @@ import { useLogin } from "../../CustomHooks/useLogin";
 import { CommentList } from "./CommentList";
 import AddCommentCommentModal from "../../Modals/AddCommentCommentModal";
 import { FaCommentMedical } from "react-icons/fa";
-import { colors } from "../../Constants/Patterns";
+import { colors, convertUTCToLocalTime } from "../../Constants/Patterns";
 import EditCommentModal from "../../Modals/EditCommentModal";
 import { TbMobiledataOff } from "react-icons/tb";
 
@@ -222,7 +222,7 @@ const CommentView: React.FC<ICommentDisplay> = (commentDisplay) => {
                   commentDisplayState.comments.length}
               </div>
               <div className="flex justify-end">
-                {commentDisplayState?.datetime}
+                {convertUTCToLocalTime(commentDisplayState?.datetime, false)}
               </div>
             </div>
           </ElementFrame>

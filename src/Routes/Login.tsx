@@ -97,6 +97,7 @@ const LoginPage = () => {
       userContext.userInfo.UserId &&
       userContext.userInfo.UserId.length > 10
     ) {
+      setIsLoading(false);
       navigate("/feed");
     }
   }, [
@@ -143,10 +144,6 @@ const LoginPage = () => {
                   } else {
                     dialogs.error("An error occurred. Please try again.");
                   }
-                })
-                .finally(() => {
-                  setIsLoading(false);
-                  console.log();
                 });
             }}
           >

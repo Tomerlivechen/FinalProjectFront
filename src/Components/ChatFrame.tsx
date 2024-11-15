@@ -141,7 +141,7 @@ const ChatFrame: React.FC<ChatFrameProps> = ({ chatID }) => {
           </div>
           <div
             ref={scrollableDivRef}
-            className={`${colors.ElementFrame} ${frameHeight}   pb-4 gap-4 rounded-b-xl overflow-y-auto`}
+            className={`${colors.ElementFrame} ${frameHeight}   pb-4 gap-4 rounded-b-xl overflow-y-auto dark:scrollbar-dark scrollbar-light scrollbar`}
           >
             {chatInfo?.messages ? (
               chatInfo.messages

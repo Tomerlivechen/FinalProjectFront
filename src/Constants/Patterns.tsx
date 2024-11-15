@@ -25,7 +25,7 @@ const colors = {
     "bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-200", // Neutral for content-focused sections like comments
   PostColors: "bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-300", // Simple, clean background for posts to highlight content
   ElementFrame:
-    "bg-blue-100 text-blue-900 dark:bg-gray-900 dark:text-orange-400 shadow-lg  dark:shadow-black", // Solid, professional look with subtle pops of color
+    "bg-blue-100 text-blue-900 dark:bg-gray-900 dark:text-orange-400 shadow-lg dark:scrollbar-webkit-dark scrollbar-webkit-light dark:shadow-black dark:scrollbar-dark scrollbar-light ", // Solid, professional look with subtle pops of color
   TextBox: "bg-gray-50 text-gray-800 dark:bg-blue-950 dark:text-gray-300", // Calming blue tones for input fields, enhancing focus
   Buttons: "bg-blue-500 text-white dark:bg-orange-600 dark:text-gray-100", // Action buttons use blue in light mode and warm orange in dark mode
   ButtonFont: "text-blue-900 dark:text-orange-400",
@@ -51,6 +51,21 @@ export const categories: ICategory[] = [
   { id: 1, name: "Uncategorized" },
   { id: 9, name: "Visuals" },
 ];
+
+export function convertUTCToLocalTime(utcTime: string, full: boolean) {
+  const utcDate = new Date(utcTime + "Z");
+
+  const year = utcDate.getFullYear();
+  const month = String(utcDate.getMonth() + 1).padStart(2, "0");
+  const day = String(utcDate.getDate()).padStart(2, "0");
+  const hours = String(utcDate.getHours()).padStart(2, "0");
+  const minutes = String(utcDate.getMinutes()).padStart(2, "0");
+  const seconds = String(utcDate.getSeconds()).padStart(2, "0");
+  if (full) {
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  }
+  return `${year}-${month}-${day} ${hours}:${minutes}`;
+}
 
 export const sortByProperty = <T,>(
   property: keyof T,
@@ -137,23 +152,6 @@ export const getFlowingPosts = async () => {
     followingPosts.push(...userPosts.data);
   }
   return followingPosts;
-};
-
-export const post1: IPostDisplay = {
-  id: "000000",
-  link: "",
-  imageURL: "",
-  text: "This is the end of the feed",
-  authorName: "No one",
-  authorId: "00000",
-  totalVotes: 10000,
-  datetime: "0-01-01T01:01:01Z",
-  comments: [],
-  hasVoted: false,
-  title: "This is the last post",
-  categoryId: 0,
-  keyWords: [],
-  groupId: "",
 };
 
 const stringToAppUserDisplay = (

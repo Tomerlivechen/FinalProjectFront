@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { IMessage } from "../../Models/ChatModels";
-import { colors } from "../../Constants/Patterns";
+import { colors, convertUTCToLocalTime } from "../../Constants/Patterns";
 import ElementFrame from "../../Constructors/ElementFrame";
 import { useUser } from "../../CustomHooks/useUser";
 import { BiSolidMessageAltX, BiSolidMessageEdit } from "react-icons/bi";
@@ -42,7 +42,12 @@ const MessageComponent: React.FC<IMessage> = (MessageDisplay) => {
               colors.ActiveText
             } text-xs ${yours ? "text-start" : "text-end flex-row-reverse"}`}
           >
-            <span>
+            <span
+              className="hover: cursor-pointer"
+              onClick={() => {
+                window.location.href = `/profile?userId=${MessageDisplay.userId}`;
+              }}
+            >
               {MessageDisplay.userName.slice(0, 15)}
               {MessageDisplay.userName.length > 15 && "..."}
             </span>
@@ -65,7 +70,7 @@ const MessageComponent: React.FC<IMessage> = (MessageDisplay) => {
               yours ? "text-end" : "text-start"
             }`}
           >
-            {MessageDisplay.datetime}
+            {convertUTCToLocalTime(MessageDisplay.datetime, true)}
           </div>
         </div>
       </ElementFrame>

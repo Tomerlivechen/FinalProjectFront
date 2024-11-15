@@ -140,19 +140,21 @@ const GroupProfileSection = () => {
                       />
                     </button>
                   )}
-                  <button
-                    className={`${
-                      colors.ElementFrame
-                    } mt-2 p-2 rounded-xl flex items-center gap-2 ${
-                      userContext.userInfo.UserId == groupInfo.adminId
-                        ? ""
-                        : "mt-20 mr-4"
-                    }  `}
-                    onClick={ShowRules}
-                  >
-                    <GiClawHammer size={25} />
-                    <span> Rules</span>
-                  </button>
+                  {groupInfo?.groupRules && groupInfo?.groupRules.length > 1 && (
+                    <button
+                      className={`${
+                        colors.ElementFrame
+                      } mt-2 p-2 rounded-xl flex items-center gap-2 ${
+                        userContext.userInfo.UserId == groupInfo.adminId
+                          ? ""
+                          : "mt-20 mr-4"
+                      }  `}
+                      onClick={ShowRules}
+                    >
+                      <GiClawHammer size={25} />
+                      <span> Rules</span>
+                    </button>
+                  )}
                 </div>
               </div>
               <div className={` pt-16 px-6 pb-6 ${colors.ButtonFont}`}>

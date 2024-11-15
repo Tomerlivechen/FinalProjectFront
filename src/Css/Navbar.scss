@@ -311,3 +311,32 @@
     overflow-y: auto;
   }
 }
+
+
+.dark::-webkit-scrollbar  {
+  width : 8px
+}
+
+.dark::-webkit-scrollbar-track  {
+  background : black
+}
+
+.dark::-webkit-scrollbar-thumb  {
+  background : rgb(00 80 80);
+  border-radius: 20px,
+
+}
+
+::-webkit-scrollbar  {
+  width : 8px
+}
+
+::-webkit-scrollbar-track  {
+  background : rgb(224 242 254)
+}
+
+::-webkit-scrollbar-thumb  {
+  background : rgb(3 105 161);
+  border-radius: 20px,
+
+}

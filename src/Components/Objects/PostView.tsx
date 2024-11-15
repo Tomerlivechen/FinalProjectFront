@@ -11,7 +11,12 @@ import { IPostDisplay } from "../../Models/Interaction";
 import { CommentList } from "./CommentList";
 import AddPostCommentModal from "../../Modals/AddPostCommentModal";
 import { FaCommentMedical } from "react-icons/fa";
-import { categories, colors, isValidURL } from "../../Constants/Patterns";
+import {
+  categories,
+  colors,
+  convertUTCToLocalTime,
+  isValidURL,
+} from "../../Constants/Patterns";
 import { FaKey } from "react-icons/fa";
 import EditPostModal from "../../Modals/EditPostModal";
 import { MdEdit } from "react-icons/md";
@@ -318,7 +323,7 @@ const PostView: React.FC<IPostDisplay> = (postDisplay) => {
                   postDisplayState.comments.length}
               </div>
               <div className="flex justify-end">
-                {postDisplayState?.datetime}
+                {convertUTCToLocalTime(postDisplayState?.datetime, false)}
               </div>
             </div>
           </ElementFrame>
