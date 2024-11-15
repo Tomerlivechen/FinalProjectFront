@@ -99,6 +99,7 @@ const LoginPage = () => {
     ) {
       setIsLoading(false);
       navigate("/feed");
+      window.location.reload();
     }
   }, [
     loginContext.isLoggedin,
@@ -130,6 +131,7 @@ const LoginPage = () => {
                 .then((response) => {
                   dialogs.success("Login Succefull").then(() => {
                     login(response.data.token);
+                    window.location.reload();
                   });
                 })
                 .catch((error) => {
