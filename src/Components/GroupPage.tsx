@@ -68,30 +68,30 @@ const GroupPage = () => {
             <GroupProfileSection />
           </div>
           <div className="flex px-2 min-w-[40rem] sm:w-[40rem] md:w-[55rem] lg:w-[72rem] xl:w-[99rem] ">
-          <div className="flex flex-col md:flex-row justify-between w-fit">
-            <div className="hidden lg:block lg:w-fit pl-2 pr-2 h-1/2">
-              {!loadingUsers && MemberList && (
+            <div className="flex flex-col md:flex-row justify-between w-fit">
+              <div className="hidden lg:block lg:w-fit pl-2 pr-2 h-1/2">
+                {!loadingUsers && MemberList && (
+                  <ResizableFrame
+                    title={"Members"}
+                    show={true}
+                    tailwindProps=" w-fit h-full"
+                  >
+                    <UserTabList users={MemberList} />
+                  </ResizableFrame>
+                )}
+              </div>
+              <div className="w-fit lg:w-fit pl-2 pr-2">
+                <PostFrame />
+              </div>
+              <div className="hidden xl:block lg:w-[20rem] pl-2 ">
                 <ResizableFrame
-                  title={"Members"}
+                  title={"Rules"}
                   show={true}
-                  tailwindProps=" w-fit h-full"
+                  tailwindProps="w-fit h-full"
                 >
-                  <UserTabList users={MemberList} />
+                  {groupState?.groupRules}
                 </ResizableFrame>
-              )}
-            </div>
-            <div className="w-fit lg:w-fit pl-2 pr-2">
-              <PostFrame UserList={[]} />
-            </div>
-            <div className="hidden xl:block lg:w-[20rem] pl-2 ">
-              <ResizableFrame
-                title={"Rules"}
-                show={true}
-                tailwindProps="w-fit h-full"
-              >
-                {groupState?.groupRules}
-              </ResizableFrame>
-            </div>
+              </div>
             </div>
           </div>
         </div>

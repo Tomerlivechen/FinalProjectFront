@@ -130,7 +130,7 @@ const Profile = () => {
                     )}
                   </div>
                   <div className="w-full lg:w-fit pl-2 pr-2">
-                    <PostFrame UserList={[]} />
+                    <PostFrame />
                   </div>
                 </>
               )}

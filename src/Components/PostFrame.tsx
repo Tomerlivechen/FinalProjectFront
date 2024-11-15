@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Tooltip } from "react-bootstrap";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import { categories, colors, getFlowingPosts } from "../Constants/Patterns";
 
 import { FaCircleUp } from "react-icons/fa6";
@@ -24,8 +24,7 @@ import DinoSpinner from "../Spinners/DinoSpinner";
 
 const PostFrame = () => {
   const location = useLocation();
-  const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const [userIdState, setUserIdState] = useState<string | null>();
   const [groupIdState, setGroupIdState] = useState<string | null>();
   const [postIdState, setPostIdState] = useState<string | null>();
