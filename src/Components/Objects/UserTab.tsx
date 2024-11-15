@@ -46,7 +46,7 @@ const UserTab: React.FC<UserTabProps> = (TabProps: UserTabProps) => {
             } ${following && "bg-green-400 bg-opacity-15 rounded-full"} `}
           >
             <img
-              className={`rounded-full h-14 w-14 shadow-2xl  flex-shrink-0 ${
+              className={`rounded-full h-14 w-14 shadow-2xl  flex-shrink-0 hover:cursor-pointer ${
                 userInfo.online
                   ? `border-4 border-emerald-500`
                   : `border-4 border-amber-500`
@@ -63,9 +63,13 @@ const UserTab: React.FC<UserTabProps> = (TabProps: UserTabProps) => {
             <div
               className={`col-span-4 font-extrabold p-4 flex items-center gap-2 ${colors.ButtonFont}`}
             >
-              {userInfo.userName.slice(0, 15)}
-              {userInfo.userName.length > 15 && "..."}
-
+              <div
+                className={`hover:cursor-pointer`}
+                onClick={() => navigate(`/profile?userId=${userInfo.id}`)}
+              >
+                {userInfo.userName.slice(0, 15)}
+                {userInfo.userName.length > 15 && "..."}
+              </div>
               {userInfo.chatId ? (
                 <Tooltip title="Open Chat">
                   <button

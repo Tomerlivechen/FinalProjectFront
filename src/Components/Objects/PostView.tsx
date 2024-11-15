@@ -54,11 +54,10 @@ const PostView: React.FC<IPostDisplay> = (postDisplay) => {
       setPostDisplayState(postDisplay);
       getPostAuther();
       getUpdatedPost();
-      if (postDisplay.categoryId){
-      getCatName(postDisplay.categoryId);
-      }
-      else {
-        setCatName("Uncategorized")
+      if (postDisplay.categoryId) {
+        getCatName(postDisplay.categoryId);
+      } else {
+        setCatName("Uncategorized");
       }
     }
   }, []);
@@ -125,25 +124,20 @@ const PostView: React.FC<IPostDisplay> = (postDisplay) => {
     await copy(postId);
   };
 
-const getCatName = (categoryId : number) => {
-  const category = categories.find(cat => cat.id === categoryId);
-  if (category) {
-    setCatName(category.name);
-  } else {
-    setCatName("Uncategorized");
-  }
-};
-
+  const getCatName = (categoryId: number) => {
+    const category = categories.find((cat) => cat.id === categoryId);
+    if (category) {
+      setCatName(category.name);
+    } else {
+      setCatName("Uncategorized");
+    }
+  };
 
   return (
     <>
       {postDisplayState && (
         <>
-          <ElementFrame
-            tailwind="h-fit"
-            width="400px"
-            padding="2 mt-2"
-          >
+          <ElementFrame tailwind="h-fit" width="400px" padding="2 mt-2">
             <div>
               <div className="flex justify-between items-center">
                 <div className="flex items-center space-x-2">
@@ -194,9 +188,7 @@ const getCatName = (categoryId : number) => {
                   </>
                 )}
               </div>
-                <div className="flex items-start">
-                - {catName}
-                </div>
+              <div className="flex items-start">- {catName}</div>
               <div
                 className=" font-bold flex justify-evenly"
                 style={{

@@ -117,7 +117,7 @@ function Register() {
                 <div className="md:w-6/12 w-7/12 md:pl-2 pr-2">
                   <FormikElementBuilder {...passwordValues} />
                 </div>
-                <div className="md:w-1/12 w-7/12  md:mt-6 md:-ml-16 -mt-20 ml-52">
+                <div className="md:w-1/12 w-7/12  md:mt-1 md:-ml-16 -mt-20 ml-52">
                   {viewPassword == "text" ? (
                     <FaRegEye size={25} onClick={viewPass} />
                   ) : (

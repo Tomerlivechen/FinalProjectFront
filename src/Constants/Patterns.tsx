@@ -38,18 +38,18 @@ const colors = {
   ForkikField: "rounded-md hover:border-2 border-2 px-2 py-2",
 };
 export const categories: ICategory[] = [
-  { id: 1, name: "Uncategorized" },
-  { id: 2, name: "Educational" },
-  { id: 3, name: "Personal" },
-  { id: 4, name: "Inspirational" },
-  { id: 5, name: "Entertainment" },
-  { id: 6, name: "Promotional" },
-  { id: 7, name: "News" },
-  { id: 8, name: "Interactive" },
-  { id: 9, name: "Visuals" },
-  { id: 10, name: "Advocacy" },
-  { id: 11, name: "Health" },
   { id: 12, name: "AI" },
+  { id: 10, name: "Advocacy" },
+  { id: 2, name: "Educational" },
+  { id: 5, name: "Entertainment" },
+  { id: 11, name: "Health" },
+  { id: 8, name: "Interactive" },
+  { id: 4, name: "Inspirational" },
+  { id: 7, name: "News" },
+  { id: 3, name: "Personal" },
+  { id: 6, name: "Promotional" },
+  { id: 1, name: "Uncategorized" },
+  { id: 9, name: "Visuals" },
 ];
 
 export const sortByProperty = <T,>(

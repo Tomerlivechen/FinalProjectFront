@@ -6,7 +6,7 @@ import * as Yup from "yup";
 
 import { dialogs } from "../Constants/AlertsConstant";
 import { useLogin } from "../CustomHooks/useLogin";
-import { catchError, colors } from "../Constants/Patterns";
+import { catchError, categories, colors } from "../Constants/Patterns";
 
 import ElementFrame from "../Constructors/ElementFrame";
 
@@ -44,7 +44,9 @@ const EditPostModal: React.FC<EditPostModalProps> = ({
   const [isLoading, setIsLoading] = useState(false);
   const loggedInContext = useLogin();
   const [imageUrl, holdFile, setHoldFile, setImageURL, clear] = useCloudinary();
-  const [PostToEdit, setPostToEdit] = useState(post);
+  const [PostToEdit, setPostToEdit] = useState<IPostDisplay>(post);
+  const [catFilter, setCatFilter] = useState<number>(0);
+  const [catName, setCatName] = useState("");
 
   const handleclose = () => {
     setPostValues(PostToEdit);
@@ -64,6 +66,7 @@ const EditPostModal: React.FC<EditPostModalProps> = ({
   const getUpdatedPost = async () => {
     const response = await Posts.getPostById(post.id);
     setPostToEdit(response.data);
+    getCatName(response.data.categoryId);
   };
 
   const validationScheme = Yup.object({
@@ -116,6 +119,9 @@ const EditPostModal: React.FC<EditPostModalProps> = ({
       if (holdFile) {
         updatedValues = { ...values, imageURL: imageUrl };
       }
+      if (catFilter != updatedValues.categoryId) {
+        updatedValues = { ...values, categoryId: catFilter };
+      }
 
       try {
         clear();
@@ -158,6 +164,15 @@ const EditPostModal: React.FC<EditPostModalProps> = ({
       ...prevPostValues,
       [element]: e.target.value,
     }));
+  };
+
+  const getCatName = (categoryId: number) => {
+    const category = categories.find((cat) => cat.id === categoryId);
+    if (category) {
+      setCatName(category.name);
+    } else {
+      setCatName("Uncategorized");
+    }
   };
 
   useEffect(() => {
@@ -210,6 +225,31 @@ const EditPostModal: React.FC<EditPostModalProps> = ({
                       fieldChange(e, "text")
                     }
                   />
+                  <select
+                    className={`rounded-md border-1 px-2 py-2  ${colors.ElementFrame} font-bold w-[18rem]  my-1 `}
+                    id="category"
+                    name="category"
+                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                      setCatFilter(Number(e.target.value))
+                    }
+                  >
+                    <option
+                      value={postValues.categoryId}
+                      className={`${colors.ElementFrame} font-bold`}
+                    >
+                      {catName}
+                    </option>
+                    {categories.map((category) => (
+                      <option
+                        className={`${colors.ElementFrame} font-bold`}
+                        key={category.id}
+                        value={category.id}
+                      >
+                        {category.name}
+                      </option>
+                    ))}
+                  </select>
+
                   <div className="font-semibold  flex justify-evenly items-center w-full mx-auto text-lg -mt-4">
                     <div className=" pb-4 pt-3">
                       <p>Image Upload</p>

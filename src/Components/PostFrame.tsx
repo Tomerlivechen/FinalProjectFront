@@ -276,7 +276,7 @@ const PostFrame = () => {
           />
         </div>
         <select
-          className={`rounded-md border-1 px-2 py-2  ${colors.ElementFrame} font-bold w-[25rem] `}
+          className={`rounded-md border-1 px-2 py-2  ${colors.ElementFrame} font-bold w-[25rem] mb-1 `}
           id="category"
           name="category"
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
