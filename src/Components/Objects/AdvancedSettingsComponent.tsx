@@ -15,6 +15,7 @@ import {
   newPasswordValues,
   oldPasswordValues,
 } from "../../Models/FormikModels";
+import { dialogs } from "../../Constants/AlertsConstant";
 
 const AdvancedSettingsComponent: React.FC<AdvancedSettingsComponentProps> = (
   props
@@ -92,7 +93,12 @@ const AdvancedSettingsComponent: React.FC<AdvancedSettingsComponentProps> = (
         ? values.permissionLevel
         : userToEdit.permissionLevel,
     };
-    await auth.manage(AdvancedUserEdit);
+    const response = await auth.manage(AdvancedUserEdit);
+    if (response.status === 200) {
+      dialogs.success(
+        "Advanced Settings changed successfully, login is needed for changes to take effect "
+      );
+    }
     setIsLoading(false);
   };
 
@@ -112,7 +118,7 @@ const AdvancedSettingsComponent: React.FC<AdvancedSettingsComponentProps> = (
                     <div className="w-3/12 pl-2 pr-2">
                       <FormikElementBuilder {...oldPasswordValues} />
                     </div>
-                    <div className="w-1/12  mt-6 -ml-16 ">
+                    <div className="w-1/12  mt-1 -ml-16 ">
                       {viewPassword == "text" ? (
                         <FaRegEye size={25} onClick={viewPass} />
                       ) : (

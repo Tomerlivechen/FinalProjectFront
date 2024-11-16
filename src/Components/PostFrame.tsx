@@ -256,7 +256,12 @@ const PostFrame = () => {
             type="comments"
             tooltip="Sort by comments"
           />
-          <div className="flex-1 w-32"></div>
+
+          <div
+            className={` w-32 ${colors.ActiveText} text-lg flex items-center justify-center `}
+          >
+            Posts
+          </div>
           <button onClick={() => refresh()}>
             <Tooltip title="Sync">
               <MdCloudSync size={26} />

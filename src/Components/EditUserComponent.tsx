@@ -127,7 +127,8 @@ const EditUserComponent: React.FC<{ userInfo: IAppUserDisplay }> = ({
   };
 
   const handleSubmit = async (values: IAppUserEdit) => {
-    setUserValues(values);
+    console.log(values);
+    console.log(userValues);
     if (LoggedInContext.token) {
       if (HoldImage || HoldBanner) {
         if (HoldImage) {
@@ -148,7 +149,7 @@ const EditUserComponent: React.FC<{ userInfo: IAppUserDisplay }> = ({
         }
         setIsLoading(true);
       } else {
-        await PutUser(values);
+        await PutUser(userValues);
       }
     } else {
       dialogs.error("Comment not sent user not logged in");
@@ -209,6 +210,16 @@ const EditUserComponent: React.FC<{ userInfo: IAppUserDisplay }> = ({
     }));
   };
 
+  const fieldChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    element: keyof IAppUserEdit
+  ) => {
+    setUserValues((prevUserValues) => ({
+      ...prevUserValues,
+      [element]: e.target.value,
+    }));
+  };
+
   return (
     <>
       <div className="flex justify-center">
@@ -234,7 +245,13 @@ const EditUserComponent: React.FC<{ userInfo: IAppUserDisplay }> = ({
                   <FormikElementBuilder {...emailValues} value={emailValue} />
                 </div>
                 <div className="w-1/2 pl-2 pr-2">
-                  <FormikElementBuilder {...userNameValues} />
+                  <FormikElementBuilder
+                    {...userNameValues}
+                    value={userValues.userName}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      fieldChange(e, "userName")
+                    }
+                  />
                 </div>
               </div>
 
@@ -346,24 +363,54 @@ const EditUserComponent: React.FC<{ userInfo: IAppUserDisplay }> = ({
 
               <div className="flex flex-wrap justify-between">
                 <div className="w-1/2 pr-2 pl-2">
-                  <FormikElementBuilder {...prefixValues} />
+                  <FormikElementBuilder
+                    {...prefixValues}
+                    value={userValues.prefix}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      fieldChange(e, "prefix")
+                    }
+                  />
                 </div>
                 <div className="w-1/2 pl-2 pr-2">
-                  <FormikElementBuilder {...firstNameValues} />
+                  <FormikElementBuilder
+                    {...firstNameValues}
+                    value={userValues.first_Name}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      fieldChange(e, "first_Name")
+                    }
+                  />
                 </div>
               </div>
 
               <div className="flex flex-wrap justify-between">
                 <div className="w-1/2 pr-2 pl-2">
-                  <FormikElementBuilder {...lastNameValues} />
+                  <FormikElementBuilder
+                    {...lastNameValues}
+                    value={userValues.last_Name}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      fieldChange(e, "last_Name")
+                    }
+                  />
                 </div>
                 <div className="w-1/2 pl-2 pr-2">
-                  <FormikElementBuilder {...pronounsValues} />
+                  <FormikElementBuilder
+                    {...pronounsValues}
+                    value={userValues.pronouns}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      fieldChange(e, "pronouns")
+                    }
+                  />
                 </div>
               </div>
               <div className="flex w-full ">
                 <div className=" w-full pl-2 pr-2">
-                  <FormikElementBuilder {...bioValues} />
+                  <FormikElementBuilder
+                    {...bioValues}
+                    value={userValues.bio}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      fieldChange(e, "bio")
+                    }
+                  />
                 </div>{" "}
               </div>
 
@@ -374,6 +421,10 @@ const EditUserComponent: React.FC<{ userInfo: IAppUserDisplay }> = ({
                     type="checkbox"
                     name="hideEmail"
                     className="form-checkbox"
+                    values={userValues.hideEmail}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      fieldChange(e, "hideEmail")
+                    }
                   />
                 </div>
 
@@ -383,6 +434,10 @@ const EditUserComponent: React.FC<{ userInfo: IAppUserDisplay }> = ({
                     type="checkbox"
                     name="hideName"
                     className="form-checkbox"
+                    values={userValues.hideName}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      fieldChange(e, "hideName")
+                    }
                   />
                 </div>
 
@@ -392,6 +447,10 @@ const EditUserComponent: React.FC<{ userInfo: IAppUserDisplay }> = ({
                     type="checkbox"
                     name="hideBlocked"
                     className="form-checkbox"
+                    values={userValues.hideBlocked}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      fieldChange(e, "hideBlocked")
+                    }
                   />
                 </div>
               </div>

@@ -8,7 +8,7 @@ import { GroupCardList } from "./Objects/GroupCardList";
 import { useUser } from "../CustomHooks/useUser";
 
 const GroupSearch = () => {
-  const userContext = useUser()
+  const userContext = useUser();
   const [groupFilter, setGroupFilter] = useState<string | null>(null);
   const [usersGroups, setUsersGroups] = useState<boolean>(false);
 
@@ -43,11 +43,18 @@ const GroupSearch = () => {
 
   return (
     <>
-      <div className="flex flex-col md:flex-row">
-        <div className="p-8 md:w-1/4 w-full">
-        {userContext.userInfo.PermissionLevel !== "User"  &&
-          <GroupCreation />}
-        </div>
+      <div
+        className={`flex flex-col md:flex-row ${
+          userContext.userInfo.PermissionLevel !== "User"
+            ? ""
+            : "justify-center"
+        }`}
+      >
+        {userContext.userInfo.PermissionLevel !== "User" && (
+          <div className="p-8 md:w-1/4 w-full">
+            <GroupCreation />
+          </div>
+        )}
         <div className="p-8 md:w-3/4 w-full">
           <div className="flex">
             <input

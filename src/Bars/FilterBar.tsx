@@ -4,7 +4,6 @@ import { colors } from "../Constants/Patterns";
 import { useSearch } from "../CustomHooks/useSearch";
 import { FaSearch, FaUserTag } from "react-icons/fa";
 
-
 import { FaKey, FaUser } from "react-icons/fa6";
 import { AiOutlineUserDelete, AiOutlineUsergroupDelete } from "react-icons/ai";
 import { MdOutlineTitle } from "react-icons/md";
@@ -226,18 +225,23 @@ function FilterBar() {
               className={` ${
                 postSelector.Voted ? colors.ActiveText : null
               } p-1 mt-1 text-sm`}
-              onClick={() => { togglePostSelector("Voted"); handleSearch()}}
+              onClick={() => {
+                togglePostSelector("Voted");
+                handleSearch();
+              }}
             >
               <Tooltip title="Voted on">
-                <TbArrowsDownUp  className="md:hidden" size={18} />
+                <TbArrowsDownUp className="md:hidden" size={18} />
                 <p className="hidden md:block">Voted on</p>
               </Tooltip>
             </button>
           </>
         )}
         {!searchActive && (
-          <div className={`animate-pulse ${colors.ActiveText} pt-2`}>
-            Select Search Category and Subcategory
+          <div
+            className={`animate-pulse ${colors.ActiveText} pt-2 text-xs md:text-sm text-wrap lg:text-base`}
+          >
+            <p> Select Search Category and Subcategory</p>
           </div>
         )}
         <div className="absolute md:left-[40%] md:center-auto left-auto right-4">

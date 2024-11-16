@@ -19,7 +19,12 @@ import {
 } from "../../Constants/Patterns";
 import { FaKey } from "react-icons/fa";
 import EditPostModal from "../../Modals/EditPostModal";
-import { MdEdit } from "react-icons/md";
+import {
+  MdEdit,
+  MdExpand,
+  MdOpenWith,
+  MdOutlineCompress,
+} from "react-icons/md";
 import { Posts } from "../../Services/post-service";
 import { useNavigate } from "react-router-dom";
 import { ISocialGroupDisplay } from "../../Models/SocialGroup";
@@ -43,6 +48,10 @@ const PostView: React.FC<IPostDisplay> = (postDisplay) => {
   const [postDisplayState, setPostDisplayState] = useState<IPostDisplay | null>(
     null
   );
+  const [longText, setLongText] = useState({
+    textLength: 0,
+    OpenTextBox: false,
+  });
   const handleClose = () => setShowModal(false);
   const userContext = useUser();
   const loginContex = useLogin();
@@ -125,6 +134,15 @@ const PostView: React.FC<IPostDisplay> = (postDisplay) => {
     }
   }, []);
 
+  useEffect(() => {
+    if (postDisplayState) {
+      setLongText((prev) => ({
+        ...prev,
+        textLength: postDisplayState.text.length,
+      }));
+    }
+  }, [postDisplayState]);
+
   const handleCopy = async (postId: string) => {
     await copy(postId);
   };
@@ -136,6 +154,11 @@ const PostView: React.FC<IPostDisplay> = (postDisplay) => {
     } else {
       setCatName("Uncategorized");
     }
+  };
+
+  const toggleExpandText = () => {
+    const openBox = longText.OpenTextBox;
+    setLongText((prev) => ({ ...prev, OpenTextBox: !openBox }));
   };
 
   return (
@@ -204,7 +227,24 @@ const PostView: React.FC<IPostDisplay> = (postDisplay) => {
               >
                 {postDisplayState?.title}
               </div>
-
+              {longText.textLength > 180 && (
+                <div className="flex items-center justify-end p-1">
+                  <button
+                    className="flex items-center justify-center"
+                    onClick={() => toggleExpandText()}
+                  >
+                    {longText.OpenTextBox ? (
+                      <Tooltip title="Shrink text">
+                        <MdOutlineCompress size={22} />
+                      </Tooltip>
+                    ) : (
+                      <Tooltip title="Expand text">
+                        <MdExpand size={22} />
+                      </Tooltip>
+                    )}
+                  </button>
+                </div>
+              )}
               <div className="relative  " />
               <div className="flex justify-evenly ">
                 {postDisplayState?.imageURL && (
@@ -216,11 +256,15 @@ const PostView: React.FC<IPostDisplay> = (postDisplay) => {
 
               <div className="p-0.5" />
               <div
-                className={`${colors.TextBox}`}
+                className={`${
+                  colors.TextBox
+                } dark:scrollbar-dark scrollbar-light text-wrap ${
+                  longText.OpenTextBox ? "h-fit" : "h-20"
+                }`}
                 style={{
-                  height: "80px",
                   overflowY: "auto",
                   whiteSpace: "pre-wrap",
+                  wordBreak: "break-word",
                 }}
               >
                 {postDisplayState?.text}
@@ -269,7 +313,16 @@ const PostView: React.FC<IPostDisplay> = (postDisplay) => {
                     />
                   </div>
                 </div>
-                <div className="flex items-center">
+                <div className="flex items-center gap-1">
+                  <Tooltip title="Open post seperatly">
+                    <button
+                      onClick={() =>
+                        navagate(`/feed?postId=${postDisplayState.id}`)
+                      }
+                    >
+                      <MdOpenWith size={24} />
+                    </button>
+                  </Tooltip>
                   <Tooltip title="Copy post link">
                     <button
                       onClick={() =>

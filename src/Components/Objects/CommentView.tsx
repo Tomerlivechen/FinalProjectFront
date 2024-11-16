@@ -7,7 +7,7 @@ import { BiSolidDownvote } from "react-icons/bi";
 import ElementFrame from "../../Constructors/ElementFrame";
 import { dialogs } from "../../Constants/AlertsConstant";
 import { TiDelete } from "react-icons/ti";
-import { MdEdit } from "react-icons/md";
+import { MdEdit, MdExpand, MdOutlineCompress } from "react-icons/md";
 import { useUser } from "../../CustomHooks/useUser";
 import { CommentService } from "../../Services/comment-service";
 import { useLogin } from "../../CustomHooks/useLogin";
@@ -18,6 +18,7 @@ import { FaCommentMedical } from "react-icons/fa";
 import { colors, convertUTCToLocalTime } from "../../Constants/Patterns";
 import EditCommentModal from "../../Modals/EditCommentModal";
 import { TbMobiledataOff } from "react-icons/tb";
+import { Tooltip } from "react-bootstrap";
 
 const CommentView: React.FC<ICommentDisplay> = (commentDisplay) => {
   const [showModal, setShowModal] = useState(false);
@@ -32,7 +33,10 @@ const CommentView: React.FC<ICommentDisplay> = (commentDisplay) => {
     setCommentDisplayState,
   ] = useState<ICommentDisplay | null>(null);
   const CommentAPI = CommentService;
-
+  const [longText, setLongText] = useState({
+    textLength: 0,
+    OpenTextBox: false,
+  });
   const unvote = async () => {
     if (commentDisplayState) {
       const respons = await CommentService.unvoteComment(
@@ -88,12 +92,26 @@ const CommentView: React.FC<ICommentDisplay> = (commentDisplay) => {
     }
   };
 
+  useEffect(() => {
+    if (commentDisplayState) {
+      setLongText((prev) => ({
+        ...prev,
+        textLength: commentDisplayState.text.length,
+      }));
+    }
+  }, [commentDisplayState]);
+
+  const toggleExpandText = () => {
+    const openBox = longText.OpenTextBox;
+    setLongText((prev) => ({ ...prev, OpenTextBox: !openBox }));
+  };
+
   return (
     <>
       {commentDisplayState && (
         <>
           <ElementFrame
-            height="190px"
+            tailwind="h-fit"
             width="400px"
             padding="2"
             position="relative"
@@ -131,12 +149,34 @@ const CommentView: React.FC<ICommentDisplay> = (commentDisplay) => {
                   </>
                 )}
               </div>
+              {longText.textLength > 180 && (
+                <div className="flex items-center justify-end p-1">
+                  <button
+                    className="flex items-center justify-center"
+                    onClick={() => toggleExpandText()}
+                  >
+                    {longText.OpenTextBox ? (
+                      <Tooltip title="Shrink text">
+                        <MdOutlineCompress size={22} />
+                      </Tooltip>
+                    ) : (
+                      <Tooltip title="Expand text">
+                        <MdExpand size={22} />
+                      </Tooltip>
+                    )}
+                  </button>
+                </div>
+              )}
               <div
-                className={`${colors.TextBox}`}
+                className={`${
+                  colors.TextBox
+                } dark:scrollbar-dark scrollbar-light ${
+                  longText.OpenTextBox ? "h-fit" : "h-20"
+                }`}
                 style={{
-                  height: "80px",
                   overflowY: "auto",
                   whiteSpace: "pre-wrap",
+                  wordBreak: "break-word",
                 }}
               >
                 {commentDisplayState?.text}

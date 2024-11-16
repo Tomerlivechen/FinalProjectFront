@@ -21,7 +21,9 @@ const FormikElementBuilder = (initalValues: MYFormikValues) => {
           <label htmlFor={initalValues.element}>{initalValues.Title}</label>
         )}
         <Field
-          className={`${fieldClassName} ${initalValues.tailwind} ${
+          className={`${fieldClassName} ${
+            initalValues.tailwind
+          } dark:scrollbar-dark scrollbar-light ${
             initalValues.textbox && textboxParams
           } ${initalValues.classes}`}
           id={initalValues.element}
