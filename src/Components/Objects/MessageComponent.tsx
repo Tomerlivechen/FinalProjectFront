@@ -30,7 +30,7 @@ const MessageComponent: React.FC<IMessage> = (MessageDisplay) => {
   return (
     <>
       <ElementFrame
-        tailwind={`h-auto text-wrap w-12/12 p-2 flex justify-between `}
+        tailwind={`h-auto text-wrap w-12/12 p-2 flex justify-between rounded-s-none `}
       >
         <div
           className={`rounded-2xl p-2  bg-opacity-25 ${

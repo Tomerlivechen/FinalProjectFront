@@ -112,9 +112,9 @@ const ChatFrame: React.FC<ChatFrameProps> = ({ chatID }) => {
       {!size.closed ? (
         <>
           <div
-            className={`${colors.ElementFrame} h-14 p-4 pb-4 gap-4 rounded-b-xl flex justify-between items-center `}
+            className={`${colors.ElementFrame} h-14 p-4 pb-4 gap-4 rounded-t-xl flex justify-between items-center `}
           >
-            <div className="flex justify-center items-center pl-8">
+            <div className="flex justify-center items-center pl-8 ">
               {!loading ? (
                 ` ${userNames}`
               ) : (
@@ -141,7 +141,7 @@ const ChatFrame: React.FC<ChatFrameProps> = ({ chatID }) => {
           </div>
           <div
             ref={scrollableDivRef}
-            className={`${colors.ElementFrame} ${frameHeight}   pb-4 gap-4 rounded-b-xl overflow-y-auto dark:scrollbar-dark scrollbar-light scrollbar`}
+            className={`${colors.ElementFrame} ${frameHeight}   pb-4 gap-4 rounded-b-xl overflow-y-auto dark:scrollbar-dark scrollbar-light scrollbar px-1`}
           >
             {chatInfo?.messages ? (
               chatInfo.messages
