@@ -71,6 +71,12 @@ const EditUserComponent: React.FC<{ userInfo: IAppUserDisplay }> = ({
         newPassword: "",
         permissionLevel: userContext.userInfo.PermissionLevel,
       };
+      setBoolValues({
+        hideEmail: userInfo.hideEmail,
+        hideName: userInfo.hideName,
+        hideBlocked: userInfo.hideBlocked,
+      });
+
       setEmailValue(userInfo.email);
       setUserValues(userinfuValues);
     }
@@ -80,6 +86,11 @@ const EditUserComponent: React.FC<{ userInfo: IAppUserDisplay }> = ({
     show: false,
   });
   const [userValues, setUserValues] = useState<IAppUserEdit>(initalValues);
+  const [boolValues, setBoolValues] = useState({
+    hideEmail: false,
+    hideName: false,
+    hideBlocked: false,
+  });
 
   const [
     imageUrl,
@@ -181,6 +192,9 @@ const EditUserComponent: React.FC<{ userInfo: IAppUserDisplay }> = ({
         if (HoldBanner) {
           values.banerImageURL = bannerImageUrl;
         }
+        values.hideBlocked = boolValues.hideBlocked;
+        values.hideEmail = boolValues.hideEmail;
+        values.hideName = boolValues.hideName;
         clear();
         clearbanner();
         console.log("sent", values);
@@ -217,6 +231,13 @@ const EditUserComponent: React.FC<{ userInfo: IAppUserDisplay }> = ({
     setUserValues((prevUserValues) => ({
       ...prevUserValues,
       [element]: e.target.value,
+    }));
+  };
+
+  const boolChange = (element: "hideEmail" | "hideName" | "hideBlocked") => {
+    setBoolValues((prevBoolValues) => ({
+      ...prevBoolValues,
+      [element]: !prevBoolValues[element],
     }));
   };
 
@@ -421,10 +442,8 @@ const EditUserComponent: React.FC<{ userInfo: IAppUserDisplay }> = ({
                     type="checkbox"
                     name="hideEmail"
                     className="form-checkbox"
-                    values={userValues.hideEmail}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      fieldChange(e, "hideEmail")
-                    }
+                    checked={boolValues.hideEmail}
+                    onClick={() => boolChange("hideEmail")}
                   />
                 </div>
 
@@ -434,10 +453,8 @@ const EditUserComponent: React.FC<{ userInfo: IAppUserDisplay }> = ({
                     type="checkbox"
                     name="hideName"
                     className="form-checkbox"
-                    values={userValues.hideName}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      fieldChange(e, "hideName")
-                    }
+                    checked={boolValues.hideName}
+                    onClick={() => boolChange("hideName")}
                   />
                 </div>
 
@@ -447,10 +464,8 @@ const EditUserComponent: React.FC<{ userInfo: IAppUserDisplay }> = ({
                     type="checkbox"
                     name="hideBlocked"
                     className="form-checkbox"
-                    values={userValues.hideBlocked}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      fieldChange(e, "hideBlocked")
-                    }
+                    checked={boolValues.hideBlocked}
+                    onClick={() => boolChange("hideBlocked")}
                   />
                 </div>
               </div>
