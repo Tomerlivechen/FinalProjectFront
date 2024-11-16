@@ -70,24 +70,30 @@ const GroupCard: React.FC<{
       {loading && <DinoSpinner size={30} />}
       {!loading && GroupCard && (
         <>
-          <div className="hover:cursor-pointer" onClick={() => goToGroup()}>
+          <div
+            className="hover:cursor-pointer z-10"
+            onClick={() => goToGroup()}
+          >
             <ElementFrame
-              tailwind={`h-40 w-40 border-2 border-y-amber-700  border-x-teal-500 flex flex-col items-center justify-center `}
+              tailwind={`h-40 w-40 border-2 border-y-amber-700  border-x-teal-500 flex flex-col items-center justify-center z-10 `}
             >
               {(userContext.userInfo.IsAdmin == "true" ||
                 userContext.userInfo.UserId == GroupCard.admin.id) && (
-                <div className="absolute top-1 right-0 hover:cursor-pointer">
+                <div
+                  className="absolute top-2 right-2 hover:cursor-pointer z-20"
+                  onClick={(e) => e.stopPropagation()}
+                >
                   <button
                     className={`${colors.CommentColors} rounded-xl`}
                     onClick={() => deleteGroup()}
                   >
                     <Tooltip title="delete">
-                      <IoClose size={18} />
+                      <IoClose size={28} className="z-50" />
                     </Tooltip>
                   </button>
                 </div>
               )}
-              <div className="h-1/2 w-full relative overflow-hidden">
+              <div className="h-1/2 w-full relative overflow-hidden z-10">
                 <img
                   src={GroupCard.banerImageURL}
                   className="w-full h-full object-cover"
