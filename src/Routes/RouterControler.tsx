@@ -25,6 +25,8 @@ import PasswordRecoveryPage from "./PasswordRecovery";
 import MainPage from "./MainPage";
 import { NotFound } from "./NotFould";
 
+
+
 function RouterControler() {
   return (
     <>

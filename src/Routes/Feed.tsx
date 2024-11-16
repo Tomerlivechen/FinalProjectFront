@@ -10,6 +10,7 @@ import { ProfileGroupsList } from "../Components/Objects/ProfileGroupsList";
 import { InteractingUsersLists } from "../Components/InteractingUsersLists";
 import { isEqual } from "lodash";
 import DinoSpinner from "../Spinners/DinoSpinner";
+import { MotionFrame } from "../Constants/Patterns";
 
 const Feed = () => {
   const [searchParams] = useSearchParams();
@@ -64,37 +65,39 @@ const Feed = () => {
 
   return (
     <>
-      <div className="flex  ">
-        <div className="w-16 "></div>
-        <div className="flex flex-wrap w-11/12 justify-between ">
-          <div className="hidden lg:block lg:w-fit xl:w-fit pr-2 pl-2">
-            <UserLane />
-            <ResizableFrame
-              whidth={"auto"}
-              title={"Groups"}
-              show={true}
-              overflowX={false}
-              tailwindProps="h-auto"
-            >
-              <ProfileGroupsList />
-            </ResizableFrame>
-          </div>
-          <div className="w-full sm:w-full md:w-1/2 lg:w-4/12 xl:w-4/12 pl-2 pr-2">
-            <div>
-              {loading && <DinoSpinner size={60} />}
-              {!loading && !postId && <PostFrame />}
-              {!loading && postId && singularPost && (
-                <PostView {...singularPost} />
-              )}
+      <MotionFrame>
+        <div className="flex  ">
+          <div className="w-16 "></div>
+          <div className="flex flex-wrap w-11/12 justify-between ">
+            <div className="hidden lg:block lg:w-fit xl:w-fit pr-2 pl-2">
+              <UserLane />
+              <ResizableFrame
+                whidth={"auto"}
+                title={"Groups"}
+                show={true}
+                overflowX={false}
+                tailwindProps="h-auto"
+              >
+                <ProfileGroupsList />
+              </ResizableFrame>
+            </div>
+            <div className="w-full sm:w-full md:w-1/2 lg:w-4/12 xl:w-4/12 pl-2 pr-2">
+              <div>
+                {loading && <DinoSpinner size={60} />}
+                {!loading && !postId && <PostFrame />}
+                {!loading && postId && singularPost && (
+                  <PostView {...singularPost} />
+                )}
+              </div>
+            </div>
+            <div className=" hidden md:block w-fit pr-2 pl-2">
+              <>
+                <InteractingUsersLists />
+              </>
             </div>
           </div>
-          <div className=" hidden md:block w-fit pr-2 pl-2">
-            <>
-              <InteractingUsersLists />
-            </>
-          </div>
         </div>
-      </div>
+      </MotionFrame>
     </>
   );
 };

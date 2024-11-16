@@ -4,6 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import { MemberEditTabList } from "../Components/MemberEditTabList";
 import { isEqual } from "lodash";
 import DinoSpinner from "../Spinners/DinoSpinner";
+import { MotionFrame } from "../Constants/Patterns";
 
 const GroupSettings = () => {
   const [searchParams] = useSearchParams();
@@ -41,10 +42,12 @@ const GroupSettings = () => {
         <DinoSpinner size={30} />
       ) : (
         <>
-          <div className="flex justify-center items-start space-x-4 mt-8">
-            <GroupEditComponent />
-            <MemberEditTabList GroupId={GroupId} />
-          </div>
+          <MotionFrame>
+            <div className="flex justify-center items-start space-x-4 mt-8">
+              <GroupEditComponent />
+              <MemberEditTabList GroupId={GroupId} />
+            </div>
+          </MotionFrame>
         </>
       )}
     </>

@@ -11,6 +11,8 @@ import { jwtDecode } from "jwt-decode";
 
 import { AxiosError } from "axios";
 import { IDecodedToken, IUserValues } from "../Types/@UserTypes";
+import { motion as m } from "framer-motion";
+import { ReactNode } from "react";
 
 const colors = {
   NavBarColor: "bg-blue-300 dark:bg-gray-800",
@@ -36,6 +38,18 @@ const colors = {
   FormikDivTight:
     "font-extralight form-group flex flex-col gap-2 mx-auto text-lg",
   ForkikField: "rounded-md hover:border-2 border-2 px-2 py-2",
+};
+
+export const MotionFrame = ({ children }: { children: ReactNode }) => {
+  return (
+    <m.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+    >
+      {children}
+    </m.div>
+  );
 };
 
 export const categories: ICategory[] = [

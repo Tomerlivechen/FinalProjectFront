@@ -4,6 +4,7 @@ import { useUser } from "../CustomHooks/useUser";
 import EditUserComponent from "../Components/EditUserComponent";
 import { IAppUserDisplay } from "../Models/UserModels";
 import DinoSpinner from "../Spinners/DinoSpinner";
+import { MotionFrame } from "../Constants/Patterns";
 
 const UserSettings = () => {
   const userinfo = useUser();
@@ -32,7 +33,9 @@ const UserSettings = () => {
       {loading ? (
         <DinoSpinner size={60} />
       ) : (
-        <EditUserComponent userInfo={editedUser as IAppUserDisplay} />
+        <MotionFrame>
+          <EditUserComponent userInfo={editedUser as IAppUserDisplay} />
+        </MotionFrame>
       )}
     </>
   );

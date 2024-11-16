@@ -361,10 +361,11 @@ function SendPostComponent() {
             <div className="flex justify-evenly">
               <label className="text-4xl font-bold  mb-1 ">New Post</label>
               <button
-                className={`rounded-md  m-1 p-1  ${colors.Buttons}`}
+                className={`rounded-md  m-1 p-1  ${colors.Buttons} 
+                `}
                 onClick={toggelOpen}
               >
-                {open ? "Close" : "Write"}
+                {open ? "Close" : "Create"}
               </button>
             </div>
           </ElementFrame>

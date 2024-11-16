@@ -4,7 +4,7 @@ import UserCard from "../Components/Objects/UserCard";
 import SearchTitleComponent from "../Components/SearchTitleComponent";
 import PostCard from "../Components/Objects/PostCard";
 import ElementFrame from "../Constructors/ElementFrame";
-import { colors } from "../Constants/Patterns";
+import { colors, MotionFrame } from "../Constants/Patterns";
 import { FaLongArrowAltUp } from "react-icons/fa";
 import { SearchBackGround } from "../Components/Objects/SearchBackGround";
 
@@ -28,48 +28,50 @@ function SearchPage() {
 
   return (
     <>
-      <div className="flex flex-col items-center pt-11">
-        <SearchTitleComponent />
-      </div>
+      <MotionFrame>
+        <div className="flex flex-col items-center pt-11">
+          <SearchTitleComponent />
+        </div>
 
-      {searchContext.loadingData && (
+        {searchContext.loadingData && (
+          <div className=" flex flex-col items-center">
+            <SearchBackGround />
+          </div>
+        )}
+        {!activeSearch && (
+          <div
+            className={` absolute top-12 p-2 flex flex-row ${colors.ActiveText} animate-bounce`}
+          >
+            <FaLongArrowAltUp />
+            Select Search fields <FaLongArrowAltUp />
+          </div>
+        )}
         <div className=" flex flex-col items-center">
-          <SearchBackGround />
+          <ElementFrame tailwind={`h-fit w-fit `} padding="2" overflowY="auto">
+            {activeSearch == "user" && (
+              <div className=" flex flex-col items-center">
+                {searchContext.filterUserList.map((user) => (
+                  <>
+                    <UserCard key={user.id} UserDisplay={user} />
+                    <hr />
+                  </>
+                ))}
+              </div>
+            )}
+            {activeSearch == "post" && (
+              <div className=" flex flex-col items-center">
+                {searchContext.filterPostList.map((post) => (
+                  <>
+                    <div className="pt-5 ">
+                      <PostCard key={post.id} {...post} />
+                    </div>
+                  </>
+                ))}
+              </div>
+            )}
+          </ElementFrame>
         </div>
-      )}
-      {!activeSearch && (
-        <div
-          className={` absolute top-12 p-2 flex flex-row ${colors.ActiveText} animate-bounce`}
-        >
-          <FaLongArrowAltUp />
-          Select Search fields <FaLongArrowAltUp />
-        </div>
-      )}
-      <div className=" flex flex-col items-center">
-        <ElementFrame tailwind={`h-fit w-fit `} padding="2" overflowY="auto">
-          {activeSearch == "user" && (
-            <div className=" flex flex-col items-center">
-              {searchContext.filterUserList.map((user) => (
-                <>
-                  <UserCard key={user.id} UserDisplay={user} />
-                  <hr />
-                </>
-              ))}
-            </div>
-          )}
-          {activeSearch == "post" && (
-            <div className=" flex flex-col items-center">
-              {searchContext.filterPostList.map((post) => (
-                <>
-                  <div className="pt-5 ">
-                    <PostCard key={post.id} {...post} />
-                  </div>
-                </>
-              ))}
-            </div>
-          )}
-        </ElementFrame>
-      </div>
+      </MotionFrame>
     </>
   );
 }
