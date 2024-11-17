@@ -24,8 +24,7 @@ import GroupSettings from "./GroupSettings";
 import PasswordRecoveryPage from "./PasswordRecovery";
 import MainPage from "./MainPage";
 import { NotFound } from "./NotFould";
-
-
+import { HelpPage } from "./HelpPage";
 
 function RouterControler() {
   return (
@@ -43,6 +42,7 @@ function RouterControler() {
                       <Route path="/" element={<MainPage />} />
                       <Route path="about" element={<About />} />
                       <Route path="test" element={<TestSpace />} />
+                      <Route path="help" element={<HelpPage />} />
                       <Route
                         path="feed"
                         element={

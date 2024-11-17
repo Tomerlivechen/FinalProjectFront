@@ -19,6 +19,7 @@ import { AppLogo } from "../Components/Objects/AppLogo";
 import { GiChatBubble } from "react-icons/gi";
 import { InteractingUsersLists } from "../Components/InteractingUsersLists";
 import { useUser } from "../CustomHooks/useUser";
+import { MdHelp } from "react-icons/md";
 function NavBar() {
   const navigate = useNavigate();
   const [filter, setFilter] = useState(false);
@@ -142,6 +143,12 @@ function NavBar() {
             )}
           </>
         )}
+        <NavLink className="md:p-3 p-1 pt-2" to="help">
+          <Tooltip title="Help">
+            <MdHelp className="md:hidden" size={24} />
+            <p className="hidden md:block">Help</p>
+          </Tooltip>
+        </NavLink>
         <div className=" flex-1"></div>
 
         {!isLoggedin && (
