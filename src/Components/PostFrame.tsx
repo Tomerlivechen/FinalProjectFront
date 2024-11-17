@@ -3,7 +3,7 @@ import { Tooltip } from "react-bootstrap";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { categories, colors, getFlowingPosts } from "../Constants/Patterns";
 
-import { FaCircleUp } from "react-icons/fa6";
+import { FaChevronDown, FaCircleUp } from "react-icons/fa6";
 import { IoSparkles } from "react-icons/io5";
 import { GoCommentDiscussion } from "react-icons/go";
 import { MdCloudSync } from "react-icons/md";
@@ -31,10 +31,11 @@ const PostFrame = () => {
   const [loadingPosts, setLoadingPosts] = useState(true);
   const [postList, setPostList] = useState<PostListValues | null>();
   const [mainPostList, setMainPostList] = useState<IPostDisplay[] | null>();
-  const [catFilter, setCatFilter] = useState<number>(0);
+  const [catFilter, setCatFilter] = useState<number[]>([0]);
   const [userId, setUserId] = useState<null | string>();
   const [groupId, setGroupId] = useState<null | string>();
   const [postId, setPostId] = useState<null | string>();
+  const [openFilter, setOpenFilter] = useState<boolean>(false);
 
   const clearAllElements = () => {
     setLoadingPosts(true);
@@ -43,7 +44,7 @@ const PostFrame = () => {
     setPostIdState(null);
     setPostList(null);
     setMainPostList(null);
-    setCatFilter(0);
+    setCatFilter([0]);
     setUserId(null);
     setGroupId(null);
     setPostId(null);
@@ -161,7 +162,7 @@ const PostFrame = () => {
         sortElement: sortelement,
         orderBy: feedDirection.ascending ? "asc" : "desc",
         posts: mainPostList,
-        filter: catFilter == 0 ? null : catFilter,
+        filter: Array.isArray(catFilter) && catFilter.length === 1 && catFilter[0] === 0 ? null : catFilter,
       };
       if (!isEqual(newPostList, postList)) {
         setLoadingPosts(true);
@@ -232,6 +233,26 @@ const PostFrame = () => {
     );
   };
 
+  const handleCheckboxChange = (categoryId: number) => {
+    setCatFilter((prev) =>
+      prev.includes(categoryId)
+        ? prev.filter((id) => id !== categoryId) 
+        : [...prev, categoryId] 
+    );
+  };
+
+const toggleCatigoryFilter = () => {
+  if(openFilter){
+    setOpenFilter(false)
+    updatePostList()
+  }
+  else{
+    setOpenFilter(true);
+  }
+
+}
+
+
   return (
     <>
       <div className="flex flex-col">
@@ -280,27 +301,24 @@ const PostFrame = () => {
             tooltip="Sort descending"
           />
         </div>
-        <select
-          className={`rounded-md border-1 px-2 py-2  ${colors.ElementFrame} font-bold w-[25rem] mb-1 `}
-          id="category"
-          name="category"
-          onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-            setCatFilter(Number(e.target.value))
-          }
-        >
-          <option value={0} className={`${colors.ElementFrame} font-bold`}>
-            Category filter
-          </option>
-          {categories.map((category) => (
-            <option
-              className={`${colors.ElementFrame} font-bold`}
-              key={category.id}
-              value={category.id}
-            >
-              {category.name}
-            </option>
-          ))}
-        </select>
+        
+        <button className={`font-bold mb-2 ${colors.ElementFrame}`} onClick={()=> toggleCatigoryFilter()}> <div className="flex items-center justify-center "> Select Category Filter <FaChevronDown size={24} className="p-1" /> </div></button>
+        {openFilter &&
+        <><div className={`grid grid-cols-2 gap-1 ${colors.ElementFrame}`}>
+      {categories.map((category) => (
+        
+        <label key={category.id} className=" flex items-center space-x-2 px-3">
+          <input
+            type="checkbox"
+            value={category.id}
+            checked={catFilter.includes(category.id)}
+            onChange={() => handleCheckboxChange(category.id)}
+          />
+          <span className={`${colors.ActiveText} font-bold `}>{category.name}</span>
+        </label>
+      ))}
+      </div></>
+}
         {!userIdState && <SendPostComponent />}
         <div className="w-full">
           {mainPostList && mainPostList?.length < 1 && (

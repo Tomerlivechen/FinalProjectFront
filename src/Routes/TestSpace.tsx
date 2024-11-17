@@ -2,6 +2,7 @@ import GroupPage from "../Components/GroupPage";
 import { NotificationObject } from "../Components/Objects/NotificationObject";
 import UserCard from "../Components/Objects/UserCard";
 import UserTab from "../Components/Objects/UserTab";
+import { PostFrame } from "../Components/PostFrame";
 import { IAppUserDisplay } from "../Models/UserModels";
 import DinoSpinner from "../Spinners/DinoSpinner";
 import { INotificationDisplay } from "../Types/@NotificationTyoe";
@@ -53,7 +54,7 @@ function TestSpace() {
         <UserTab UserDisplay={card} />
         <DinoSpinner size={60} />
         <NotificationObject NotificationData={note} />
-
+<PostFrame/>
         <GroupPage/>
       </div>
       <div>---------------------------</div>

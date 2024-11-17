@@ -4,6 +4,7 @@ import { sortByProperty } from "../../Constants/Patterns";
 import PostView from "./PostView";
 import { PostListValues } from "../../Types/@PostTypes";
 
+
 const PostList: React.FC<{ postListValue: PostListValues }> = ({
   postListValue,
 }) => {
@@ -29,11 +30,19 @@ const PostList: React.FC<{ postListValue: PostListValues }> = ({
     } else {
       setSortedPosts(posts);
       if (filterId) {
+        if(Array.isArray(filterId)){
+          let multyFiler: IPostDisplay[] = [];
+          filterId.forEach((filter: number) => {
+            const filteredPosts = posts.filter((post) => post.categoryId === filter);
+            multyFiler = multyFiler.concat(filteredPosts)
+          })
+          setSortedPosts(multyFiler);
+        }else{
         const filtered = posts.filter((post) => post.categoryId === filterId);
-
         setSortedPosts(filtered);
       }
     }
+  }
   }, [postListValue]);
 
   useEffect(() => {
