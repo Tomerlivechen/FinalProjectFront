@@ -162,7 +162,12 @@ const PostFrame = () => {
         sortElement: sortelement,
         orderBy: feedDirection.ascending ? "asc" : "desc",
         posts: mainPostList,
-        filter: Array.isArray(catFilter) && catFilter.length === 1 && catFilter[0] === 0 ? null : catFilter,
+        filter:
+          Array.isArray(catFilter) &&
+          catFilter.length === 1 &&
+          catFilter[0] === 0
+            ? null
+            : catFilter,
       };
       if (!isEqual(newPostList, postList)) {
         setLoadingPosts(true);
@@ -236,22 +241,19 @@ const PostFrame = () => {
   const handleCheckboxChange = (categoryId: number) => {
     setCatFilter((prev) =>
       prev.includes(categoryId)
-        ? prev.filter((id) => id !== categoryId) 
-        : [...prev, categoryId] 
+        ? prev.filter((id) => id !== categoryId)
+        : [...prev, categoryId]
     );
   };
 
-const toggleCatigoryFilter = () => {
-  if(openFilter){
-    setOpenFilter(false)
-    updatePostList()
-  }
-  else{
-    setOpenFilter(true);
-  }
-
-}
-
+  const toggleCatigoryFilter = () => {
+    if (openFilter) {
+      setOpenFilter(false);
+      updatePostList();
+    } else {
+      setOpenFilter(true);
+    }
+  };
 
   return (
     <>
@@ -301,24 +303,44 @@ const toggleCatigoryFilter = () => {
             tooltip="Sort descending"
           />
         </div>
-        
-        <button className={`font-bold mb-2 ${colors.ElementFrame} w-[400px]`} onClick={()=> toggleCatigoryFilter()}> <div className="flex items-center justify-center "> Select Category Filter <FaChevronDown size={24} className="p-1" /> </div></button>
-        {openFilter &&
-        <><div className={`grid grid-cols-2 gap-1 ${colors.ElementFrame} w-[400px]`}>
-      {categories.map((category) => (
-        
-        <label key={category.id} className=" flex items-center space-x-2 px-3">
-          <input
-            type="checkbox"
-            value={category.id}
-            checked={catFilter.includes(category.id)}
-            onChange={() => handleCheckboxChange(category.id)}
-          />
-          <span className={`${colors.ActiveText} font-bold `}>{category.name}</span>
-        </label>
-      ))}
-      </div></>
-}
+
+        <button
+          className={`font-bold mb-2 ${colors.ElementFrame} w-[400px]`}
+          onClick={() => toggleCatigoryFilter()}
+        >
+          {" "}
+          <div className="flex items-center justify-center ">
+            {" "}
+            Select Category Filter <FaChevronDown
+              size={24}
+              className="p-1"
+            />{" "}
+          </div>
+        </button>
+        {openFilter && (
+          <>
+            <div
+              className={`grid grid-cols-2 gap-1 ${colors.ElementFrame} w-[400px]`}
+            >
+              {categories.map((category) => (
+                <label
+                  key={category.id}
+                  className=" flex items-center space-x-2 px-3"
+                >
+                  <input
+                    type="checkbox"
+                    value={category.id}
+                    checked={catFilter.includes(category.id)}
+                    onChange={() => handleCheckboxChange(category.id)}
+                  />
+                  <span className={`${colors.ActiveText} font-bold `}>
+                    {category.name}
+                  </span>
+                </label>
+              ))}
+            </div>
+          </>
+        )}
         {!userIdState && <SendPostComponent />}
         <div className="w-full">
           {mainPostList && mainPostList?.length < 1 && (

@@ -54,16 +54,16 @@ export const MotionFrame = ({ children }: { children: ReactNode }) => {
 
 export const categories: ICategory[] = [
   { id: 12, name: "AI" },
-  { id: 10, name: "Advocacy" },
-  { id: 2, name: "Educational" },
-  { id: 5, name: "Entertainment" },
-  { id: 11, name: "Health" },
-  { id: 8, name: "Interactive" },
   { id: 4, name: "Inspirational" },
+  { id: 10, name: "Advocacy" },
   { id: 7, name: "News" },
+  { id: 2, name: "Educational" },
   { id: 3, name: "Personal" },
+  { id: 5, name: "Entertainment" },
   { id: 6, name: "Promotional" },
+  { id: 11, name: "Health" },
   { id: 1, name: "Uncategorized" },
+  { id: 8, name: "Interactive" },
   { id: 9, name: "Visuals" },
 ];
 

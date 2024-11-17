@@ -128,16 +128,16 @@ const EditPostModal: React.FC<EditPostModalProps> = ({
         console.log("Form submitted with values: ", updatedValues);
         const response = await Posts.EditPost(updatedValues as IPostDisplay);
         console.log(response);
-        dialogs.success("Comment Sent");
+        dialogs.success("Post updated successfully");
       } catch (error) {
-        catchError(error as AxiosError, "Commenting");
+        catchError(error as AxiosError, "Post updating");
       } finally {
         setPostValues(postValues);
         handleclose();
         setIsLoading(false);
       }
     } else {
-      dialogs.error("Comment not sent user not logged in");
+      dialogs.error("Post not sent user not logged in");
       setIsLoading(false);
       handleclose();
     }
