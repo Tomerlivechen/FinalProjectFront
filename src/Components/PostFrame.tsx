@@ -302,7 +302,7 @@ const toggleCatigoryFilter = () => {
           />
         </div>
         
-        <button className={`font-bold mb-2 ${colors.ElementFrame} w-32`} onClick={()=> toggleCatigoryFilter()}> <div className="flex items-center justify-center "> Select Category Filter <FaChevronDown size={24} className="p-1" /> </div></button>
+        <button className={`font-bold mb-2 ${colors.ElementFrame} w-[400px]`} onClick={()=> toggleCatigoryFilter()}> <div className="flex items-center justify-center "> Select Category Filter <FaChevronDown size={24} className="p-1" /> </div></button>
         {openFilter &&
         <><div className={`grid grid-cols-2 gap-1 ${colors.ElementFrame}`}>
       {categories.map((category) => (
