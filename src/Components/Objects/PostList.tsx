@@ -9,32 +9,34 @@ const PostList: React.FC<{ postListValue: PostListValues }> = ({
 }) => {
   const [posts, setPosts] = useState<IPostDisplay[]>(postListValue.posts);
   const order = postListValue.orderBy;
-  const sort = postListValue.sortElement;
+  const sort = postListValue.sortElement as keyof IPostDisplay;
   const filterId = postListValue.filter;
   const [sortedPosts, setSortedPosts] = useState<IPostDisplay[]>(
     postListValue.posts
   );
   useEffect(() => {
-    if (order && sort) {
+    if (order && sort && !filterId) {
       const sorted = postListValue.posts
         .slice()
         .sort(sortByProperty(sort, order));
       setSortedPosts(sorted);
-      if (filterId) {
+    }
+      if (order && sort && filterId) {
+        let multyFilter: IPostDisplay[] = [];
         if (Array.isArray(filterId)) {
-          let multyFiler: IPostDisplay[] = [];
           filterId.forEach((filter: number) => {
             const filteredPosts = posts.filter(
               (post) => post.categoryId === filter
             );
-            multyFiler = multyFiler.concat(filteredPosts);
+            multyFilter = multyFilter.concat(filteredPosts);
           });
-          setSortedPosts(multyFiler);
         } else {
-          const filtered = posts.filter((post) => post.categoryId === filterId);
-          setSortedPosts(filtered);
+          multyFilter = posts.filter((post) => post.categoryId === filterId);
         }
-      }
+        const sortedFilterd = multyFilter
+        .slice()
+        .sort(sortByProperty(sort, order));
+        setSortedPosts(sortedFilterd);
     }
   }, [postListValue]);
 
