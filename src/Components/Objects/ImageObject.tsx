@@ -135,7 +135,7 @@ const ImageObject: React.FC<{
                     onClick={() => openImage()}
                   />
                 </div>
-                <Tooltip title={`Delete Image`}>
+                <Tooltip title={`Copy Image Link`}>
                   <button
                     className={`${colors.Buttons} p-2 rounded-xl absolute bottom-6 right-2 z-10`}
                     onClick={copyImageLink}
