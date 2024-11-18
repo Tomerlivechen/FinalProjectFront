@@ -109,7 +109,7 @@ const ImageObject: React.FC<{
                       className={`${colors.CommentColors} rounded-xl`}
                       onClick={() => RenameImage()}
                     >
-                      <Tooltip title={`Delete Image`}>
+                      <Tooltip title={`Rename Image`}>
                         <BiEdit size={18} />
                       </Tooltip>
                     </button>

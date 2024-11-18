@@ -56,9 +56,9 @@ function About() {
           Enjoy the experience!
           <br />
         </p>
-        <p className="mb-4">
+        <p className="mb-4"> <span className="flex items-center gap-2">
           If you find any bugs, please reach out via chat to the <b>SysAdmin</b>{" "}
-          or by email at:ㅤ
+          or by email at:
           <a
             href="mailto:TomerLiveChen@gmail.com"
             className="font-bold underline decoration-teal-500 decoration-4 inline"
@@ -71,7 +71,7 @@ function About() {
               TomerLiveChen@gmail.com.
             </Tooltip>
           </a>
-        </p>
+       </span> </p>
       </ElementFrame>
     </MotionFrame>
   );
