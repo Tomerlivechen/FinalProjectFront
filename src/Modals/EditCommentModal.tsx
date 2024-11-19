@@ -98,17 +98,16 @@ const EditCommentModal: React.FC<EditCommentModalProps> = ({
 
   const postComment = async (values: ICommentDisplay) => {
     if (loggedInContext.token) {
-      console.log("Form submitted with values: ", values);
       setIsLoading(true);
       try {
         if (holdFile) {
           values.imageURL = imageUrl;
         }
         clear();
-        console.log("Form submitted with values: ", values);
-        const response = await CommentService.PutComment(values);
-        console.log(response);
-        dialogs.success("Comment Sent");
+        const respons = await CommentService.PutComment(values);
+        if (respons.status === 200) {
+          dialogs.success("Comment Sent");
+        }
       } catch (error) {
         catchError(error as AxiosError, "Commenting");
       } finally {

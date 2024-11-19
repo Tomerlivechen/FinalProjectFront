@@ -77,7 +77,6 @@ const GroupProfileSection = () => {
       groupInfo.isMemember == true &&
       userContext.userInfo.UserId
     ) {
-      console.log("toggle join");
       const response = await Groups.RemoveMember(
         groupInfo.id,
         userContext.userInfo.UserId

@@ -108,22 +108,20 @@ const SearchProvider: React.FC<ProviderProps> = ({ children }) => {
     await auth
       .getUsers()
       .then((response) => {
-        console.log("respons", response);
         const parsedUsers = stringToAppUserDisplay(response.data);
         setUserList(Array.isArray(parsedUsers) ? parsedUsers : [parsedUsers]);
       })
       .catch((error) => {
-        console.log(error, "Getting users");
+        console.error(error, "Getting users");
       });
 
     await Posts.getPosts()
       .then((response) => {
-        console.log("respons", response);
         const parsedPosts = stringToPostDisplay(response.data);
         setPostList(Array.isArray(parsedPosts) ? parsedPosts : [parsedPosts]);
       })
       .catch((error) => {
-        console.log(error, "Getting Posts");
+        console.error(error, "Getting Posts");
       });
 
     await getVotedon();
@@ -148,9 +146,6 @@ const SearchProvider: React.FC<ProviderProps> = ({ children }) => {
           user.userName.toLowerCase().includes(searchValue.toLowerCase())
         );
       }
-      console.log(searchValue);
-      console.log(userSearch);
-      console.log(filtering);
       setFilterUserList(filtering);
       setloadingData(false);
     }
@@ -196,9 +191,6 @@ const SearchProvider: React.FC<ProviderProps> = ({ children }) => {
         }
         filtering = firstFilter;
       }
-      console.log(searchValue);
-      console.log(userSearch);
-      console.log(filtering);
       setFilterPostList(filtering);
       setloadingData(false);
     }

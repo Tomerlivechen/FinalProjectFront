@@ -75,7 +75,6 @@ const GroupCreation = () => {
                     <button
                       disabled={isLoading}
                       type="submit"
-                      onClick={() => console.log("click")}
                       className={`${colors.Buttons} p-1`}
                     >
                       Submit

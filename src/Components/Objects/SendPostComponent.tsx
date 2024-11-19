@@ -80,7 +80,6 @@ function SendPostComponent() {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
       setHoldFile(event.target.files[0]);
-      console.log("File selected:", event.target.files[0]);
     }
   };
   const handleSubmit = async (values: INewPost) => {
@@ -109,15 +108,15 @@ function SendPostComponent() {
 
   const postPost = async (values: INewPost) => {
     if (loggedInContext.token) {
-      console.log("Form submitted with values: ", values);
       setIsLoading(true);
       try {
         values.link = Url;
         values.imageURL = imageUrl;
         clear();
         const response = await Posts.postPost(values);
-        console.log(response);
-        dialogs.success("Post Sent");
+        if (response.status === 200) {
+          dialogs.success("Post Sent");
+        }
       } catch (error) {
         catchError(error as AxiosError, "Posting");
       } finally {

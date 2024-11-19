@@ -32,13 +32,13 @@ const VoteOnComment = (Id: string, vote: number) =>
       method: "POST",
       data: newcomment,
     });
-    const PutComment = (Editcomment: ICommentDisplay) => {
+    const PutComment = (Editcomment: ICommentDisplay) => 
       request({
         url: `${CommentURL}/${Editcomment.id}`,
         method: "PUT",
         data: Editcomment,
       });
-    }
+    
 
     const unvoteComment = (PostId: string) =>
       request({

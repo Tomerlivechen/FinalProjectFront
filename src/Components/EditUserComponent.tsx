@@ -137,9 +137,7 @@ const EditUserComponent: React.FC<{ userInfo: IAppUserDisplay }> = ({
     }
   };
 
-  const handleSubmit = async (values: IAppUserEdit) => {
-    console.log(values);
-    console.log(userValues);
+  const handleSubmit = async () => {
     if (LoggedInContext.token) {
       if (HoldImage || HoldBanner) {
         if (HoldImage) {
@@ -183,7 +181,6 @@ const EditUserComponent: React.FC<{ userInfo: IAppUserDisplay }> = ({
 
   const PutUser = async (values: IAppUserEdit) => {
     if (LoggedInContext.token) {
-      console.log("sent", values);
       setIsLoading(true);
       try {
         if (HoldImage) {
@@ -197,10 +194,11 @@ const EditUserComponent: React.FC<{ userInfo: IAppUserDisplay }> = ({
         values.hideName = boolValues.hideName;
         clear();
         clearbanner();
-        console.log("sent", values);
+
         const response = await auth.manage(values);
-        console.log(response);
-        dialogs.success("Updated info");
+        if (response.status === 200) {
+          dialogs.success("Updated info");
+        }
       } catch (error) {
         catchError(error as AxiosError, "Updating info");
       } finally {
@@ -481,7 +479,6 @@ const EditUserComponent: React.FC<{ userInfo: IAppUserDisplay }> = ({
                 <button
                   disabled={isLoading}
                   type="submit"
-                  onClick={() => console.log("click")}
                   className={`${colors.Buttons} p-3`}
                 >
                   Save

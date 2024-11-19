@@ -46,7 +46,6 @@ const NotificationObject: React.FC<{
   }, [notification]);
 
   const GoToUser = () => {
-    console.log(`${notification?.notifierId}`);
     navigate(`/profile?userId=${notification?.notifierId}`);
   };
 

@@ -355,7 +355,6 @@ const GroupEditComponent = () => {
                   <button
                     disabled={subbmiting}
                     type="submit"
-                    onClick={() => console.log("click")}
                     className={`${colors.Buttons} p-3`}
                   >
                     Save

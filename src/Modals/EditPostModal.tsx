@@ -109,7 +109,6 @@ const EditPostModal: React.FC<EditPostModalProps> = ({
 
   const postPost = async (values: IPostDisplay) => {
     if (loggedInContext.token) {
-      console.log("Form submitted with values: ", values);
       setIsLoading(true);
       let updatedValues = { ...values };
       if (postValues.keyWords.length > 0) {
@@ -125,10 +124,10 @@ const EditPostModal: React.FC<EditPostModalProps> = ({
 
       try {
         clear();
-        console.log("Form submitted with values: ", updatedValues);
         const response = await Posts.EditPost(updatedValues as IPostDisplay);
-        console.log(response);
-        dialogs.success("Post updated successfully");
+        if (response.status === 200) {
+          dialogs.success("Post updated successfully");
+        }
       } catch (error) {
         catchError(error as AxiosError, "Post updating");
       } finally {

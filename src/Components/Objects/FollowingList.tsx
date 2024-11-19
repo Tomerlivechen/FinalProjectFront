@@ -9,7 +9,6 @@ const FollowingList = () => {
   useEffect(() => {
     const getUsers = async () => {
       auth.getUsers().then((response) => {
-        console.log("respons", response);
         const parsedUsers = response.data;
         setUsers(Array.isArray(parsedUsers) ? parsedUsers : [parsedUsers]);
       });

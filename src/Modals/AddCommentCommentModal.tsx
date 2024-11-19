@@ -93,14 +93,14 @@ const AddCommentCommentModal: React.FC<AddCommentCommentModalProps> = ({
 
   const postComment = async (values: INewComment) => {
     if (loggedInContext.token) {
-      console.log("Form submitted with values: ", values);
       setIsLoading(true);
       try {
         values.imageURL = imageUrl;
         clear();
         const response = await CommentService.PostComment(values);
-        console.log(response);
-        dialogs.success("Comment Sent");
+        if (response.status == 200) {
+          dialogs.success("Comment Sent");
+        }
       } catch (error) {
         catchError(error as AxiosError, "Commenting");
       } finally {

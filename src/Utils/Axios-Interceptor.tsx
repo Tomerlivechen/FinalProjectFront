@@ -9,7 +9,7 @@ const client = axios.create({
 });
 
 const OnSuccess = (type: string, response: AxiosResponse) => {
-  console.log(type, response);
+  console.info(type);
   return response;
 };
 

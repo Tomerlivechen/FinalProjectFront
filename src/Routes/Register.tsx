@@ -176,7 +176,6 @@ function Register() {
                 <button
                   disabled={isLoading}
                   type="submit"
-                  onClick={() => console.log("click")}
                   className={`${colors.Buttons} p-3`}
                 >
                   Register

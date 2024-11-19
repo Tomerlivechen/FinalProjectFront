@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 import ElementFrame from "../../Constructors/ElementFrame";
 import { auth } from "../../Services/auth-service";
-import { useLogin } from "../../CustomHooks/useLogin";
 import { dialogs } from "../../Constants/AlertsConstant";
 import { catchError, isValidURL } from "../../Constants/Patterns";
 import { useUser } from "../../CustomHooks/useUser";
@@ -12,78 +11,61 @@ import { UserCardProps } from "../../Types/@UserTypes";
 const UserCard: React.FC<UserCardProps> = ({ UserDisplay }) => {
   const [following, setFollowings] = useState(UserDisplay.following);
   const [blocking, setblocking] = useState(UserDisplay.blocked);
-  const loginContext = useLogin();
+
   const userContext = useUser();
   const navigate = useNavigate();
-  
+
   const handleFollow = () => {
-    console.log(loginContext.token ?? "", UserDisplay.id);
     auth
       .follow(UserDisplay.id.toString())
       .then((response) => {
-        console.log(response);
         if (response.status == 200)
-          dialogs
-            .success(`Following ${UserDisplay.userName}`)
-            .then((response) => {
-              console.log(response);
-              UserDisplay.following = true;
-              setFollowings(UserDisplay.following);
-            });
+          dialogs.success(`Following ${UserDisplay.userName}`).then(() => {
+            UserDisplay.following = true;
+            setFollowings(UserDisplay.following);
+          });
       })
       .catch((error) => {
         catchError(error, "Following");
       });
   };
   const handleUnfollow = () => {
-    console.log(UserDisplay.id);
     auth
       .unfollow(UserDisplay.id.toString())
       .then((response) => {
         if (response.status == 200)
-          dialogs
-            .success(`Unfollowing ${UserDisplay.userName}`)
-            .then((response) => {
-              console.log(response);
-              UserDisplay.following = false;
-              setFollowings(UserDisplay.following);
-            });
+          dialogs.success(`Unfollowing ${UserDisplay.userName}`).then(() => {
+            UserDisplay.following = false;
+            setFollowings(UserDisplay.following);
+          });
       })
       .catch((error) => {
         catchError(error, "Unfollowing");
       });
   };
   const handleBlock = () => {
-    console.log(UserDisplay.id);
     auth
       .block(UserDisplay.id.toString())
       .then((response) => {
         if (response.status == 200)
-          dialogs
-            .success(`Blocked ${UserDisplay.userName}`)
-            .then((response) => {
-              console.log(response);
-              UserDisplay.blocked = true;
-              setblocking(UserDisplay.blocked);
-            });
+          dialogs.success(`Blocked ${UserDisplay.userName}`).then(() => {
+            UserDisplay.blocked = true;
+            setblocking(UserDisplay.blocked);
+          });
       })
       .catch((error) => {
         catchError(error, "Blocking");
       });
   };
   const handleUnBlock = () => {
-    console.log(loginContext.token ?? "", UserDisplay.id);
     auth
       .unBlock(UserDisplay.id.toString())
       .then((response) => {
         if (response.status == 200)
-          dialogs
-            .success(`Unblocked ${UserDisplay.userName}`)
-            .then((response) => {
-              console.log(response);
-              UserDisplay.blocked = false;
-              setblocking(UserDisplay.blocked);
-            });
+          dialogs.success(`Unblocked ${UserDisplay.userName}`).then(() => {
+            UserDisplay.blocked = false;
+            setblocking(UserDisplay.blocked);
+          });
       })
       .catch((error) => {
         catchError(error, "Unblocking");

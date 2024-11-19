@@ -35,14 +35,14 @@ const SendRecoveyEmail = async (paswwordReset : ReSetPassword) => {
         "GAL26WnyuEimicz1J"
       )
       .then(
-        (response) => {
-          console.log("SUCCESS!",response);
+        () => {
+          console.log("SUCCESS!");
         },
         (error) => {
-          console.log("FAILED...",error);
+          console.error("FAILED...",error);
         }
       );
-  } catch (error ) { console.log("FAILED...",error);}
+  } catch (error ) { console.error("FAILED...",error);}
 };
 
 export { SendRecoveyEmail };

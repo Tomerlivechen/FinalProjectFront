@@ -60,9 +60,6 @@ const AdvancedSettingsComponent: React.FC<AdvancedSettingsComponentProps> = (
       .required("Please select an option")
       .notOneOf([""], "Please select a valid option"),
   });
-  const handleClick = () => {
-    console.log("Button clicked");
-  };
 
   const userValues: IEditUser = {
     oldPassword: "",
@@ -72,8 +69,6 @@ const AdvancedSettingsComponent: React.FC<AdvancedSettingsComponentProps> = (
 
   const handleSubmit = async (values: IEditUser) => {
     setIsLoading(true);
-    console.log("Form submitted with values: ", values);
-    handleClick();
     const AdvancedUserEdit: IAppUserEdit = {
       id: userToEdit.id,
       userName: userToEdit.userName,
@@ -155,7 +150,6 @@ const AdvancedSettingsComponent: React.FC<AdvancedSettingsComponentProps> = (
                   <button
                     disabled={isLoading}
                     type="submit"
-                    onClick={() => console.log("click")}
                     className={`${colors.Buttons} p-3`}
                   >
                     Save
