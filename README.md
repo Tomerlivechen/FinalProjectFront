@@ -82,7 +82,7 @@ The app will now be running on [http://localhost:5173](http://localhost:5173).
 
 ### Using the Hosted Website
 
-The website is hosted on Render. You can access it using the following link: <a href="https://finalprojectfront-6dxw.onrender.com" target="_blank" rel="noopener noreferrer">Deinonychus</a>
+The website is hosted on Render. You can access it using the following link: [Deinonychus](https://finalprojectfront-6dxw.onrender.com)
 
 ---
 
