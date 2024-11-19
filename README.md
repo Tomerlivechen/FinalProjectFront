@@ -2,7 +2,7 @@
 
 ## Table of Contents
 
-- [Cloning] (#cloning)
+- [Cloning](#cloning)
 - [Installation](#installation)
 - [Using the Hosted Website](#using-the-hosted-website)
 - [Registration and Login](#registration-and-login)
