@@ -129,7 +129,7 @@ function FilterBar() {
     <>
       <Navbar
         id="app-filter-bar"
-        className={`fixed top-12 z-40 w-full shadow-2xl shadow-slate-800 text-black flex gap-3 ${colors.Filter} ${colors.NavText}`}
+        className={`fixed top-12 z-30 w-full shadow-2xl shadow-slate-800 text-black flex gap-3 ${colors.Filter} ${colors.NavText}`}
       >
         <button
           className={`${selectedUser ? colors.ActiveText : null} text-lg p-2`}

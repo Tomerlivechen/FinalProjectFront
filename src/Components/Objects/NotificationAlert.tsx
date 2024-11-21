@@ -57,8 +57,8 @@ const NotificationAlert = () => {
       {open && (
         <ElementFrame
           overflowY="auto"
-          overflowX="hidden"
-          tailwind="absolute z-50 right-2 top-16 h-fit"
+          overflowX="auto"
+          tailwind="absolute z-50 right-2 top-16 h-fit max-h-[50vh]"
         >
           <NotificationList />
         </ElementFrame>
