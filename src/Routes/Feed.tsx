@@ -67,7 +67,7 @@ const Feed = () => {
     <>
       <MotionFrame>
         <div className="flex  ">
-          <div className="w-16 "></div>
+          <div className="md:w-16 hidden "></div>
           <div className="flex flex-wrap w-11/12 justify-between ">
             <div className="hidden lg:block lg:w-fit xl:w-fit pr-2 pl-2">
               <UserLane />

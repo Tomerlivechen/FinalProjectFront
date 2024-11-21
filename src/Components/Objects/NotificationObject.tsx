@@ -56,60 +56,73 @@ const NotificationObject: React.FC<{
     }
   }, [NotificationData]);
 
-  const activateNotification = () => {
+  const activateNotification = async () => {
+    if (notification?.id) {
+      await Notification.UpdateNotification(notification?.id, false);
+    }
     if (actionPathName == "Chat" && notification?.referenceId) {
       chatContext.addChat(notification?.referenceId);
     }
     if (actionPathName == "Post" && notification?.referenceId) {
       navigate(`/feed?postId=${notification?.referenceId}`);
     }
-
-    if (notification?.id) {
-      Notification.UpdateNotification(notification?.id, false);
-    }
+    GetSingleNotification();
   };
 
   const deleteNotification = async () => {
     if (notification?.id) {
-     const response = await Notification.UpdateNotification(notification?.id, true);
-     if (response.status === 200){
-      setNotification(null)
-     }
+      const response = await Notification.UpdateNotification(
+        notification?.id,
+        true
+      );
+      if (response.status === 200) {
+        setNotification(null);
+      }
+    }
+  };
+
+  const GetSingleNotification = async () => {
+    if (notification?.id) {
+      const response = await Notification.GetNotificationById(notification?.id);
+      if (response.status === 200) {
+        setNotification(response.data);
+      }
     }
   };
 
   return (
     <>
-    {notification && 
-      <div>
-        <div className={`${colors.ElementFrame} h-24 w-64 p-2 m-1 relative`}>
-          <div className="absolute top-1 right-0">
-            <button
-              className={`${colors.CommentColors}`}
-              onClick={deleteNotification}
-            >
-              <Tooltip title="delete">
-                <IoClose size={18} />
-              </Tooltip>
+      {notification && (
+        <div className={`${!notification.seen ? "bg-lime-500" : ""}`}>
+          <div className={`${colors.ElementFrame} h-24 w-64 p-2 m-1 relative`}>
+            <div className="absolute top-1 right-0">
+              <button
+                className={`${colors.CommentColors}`}
+                onClick={deleteNotification}
+              >
+                <Tooltip title="delete">
+                  <IoClose size={18} />
+                </Tooltip>
+              </button>
+            </div>
+
+            <button className={`${colors.ActiveText}`} onClick={GoToUser}>
+              {nameOfNotifier}
             </button>
+            {notificationTypeText}
+
+            <button
+              className={`${colors.ActiveText}`}
+              onClick={activateNotification}
+            >
+              {" "}
+              {postDisplay && postDisplay.title.slice(0, 15)}
+              {postDisplay && postDisplay.title.length > 15 && "..."}
+            </button>
+            <div className="text-xs absolute right-0">{notification?.date}</div>
           </div>
-
-          <button className={`${colors.ActiveText}`} onClick={GoToUser}>
-            {nameOfNotifier}
-          </button>
-          {notificationTypeText}
-
-          <button
-            className={`${colors.ActiveText}`}
-            onClick={activateNotification}
-          >
-            {" "}
-            {postDisplay && postDisplay.title.slice(0, 15)}
-            {postDisplay && postDisplay.title.length > 15 && "..."}
-          </button>
-          <div className="text-xs absolute right-0">{notification?.date}</div>
         </div>
-      </div>}
+      )}
     </>
   );
 };

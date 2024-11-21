@@ -21,22 +21,22 @@ const PostList: React.FC<{ postListValue: PostListValues }> = ({
         .sort(sortByProperty(sort, order));
       setSortedPosts(sorted);
     }
-      if (order && sort && filterId) {
-        let multyFilter: IPostDisplay[] = [];
-        if (Array.isArray(filterId)) {
-          filterId.forEach((filter: number) => {
-            const filteredPosts = posts.filter(
-              (post) => post.categoryId === filter
-            );
-            multyFilter = multyFilter.concat(filteredPosts);
-          });
-        } else {
-          multyFilter = posts.filter((post) => post.categoryId === filterId);
-        }
-        const sortedFilterd = multyFilter
+    if (order && sort && filterId) {
+      let multyFilter: IPostDisplay[] = [];
+      if (Array.isArray(filterId)) {
+        filterId.forEach((filter: number) => {
+          const filteredPosts = posts.filter(
+            (post) => post.categoryId === filter
+          );
+          multyFilter = multyFilter.concat(filteredPosts);
+        });
+      } else {
+        multyFilter = posts.filter((post) => post.categoryId === filterId);
+      }
+      const sortedFilterd = multyFilter
         .slice()
         .sort(sortByProperty(sort, order));
-        setSortedPosts(sortedFilterd);
+      setSortedPosts(sortedFilterd);
     }
   }, [postListValue]);
 

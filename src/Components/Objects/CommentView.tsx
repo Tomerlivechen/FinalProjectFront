@@ -37,6 +37,8 @@ const CommentView: React.FC<ICommentDisplay> = (commentDisplay) => {
     textLength: 0,
     OpenTextBox: false,
   });
+
+  //remove vote
   const unvote = async () => {
     if (commentDisplayState) {
       const respons = await CommentService.unvoteComment(
@@ -45,19 +47,20 @@ const CommentView: React.FC<ICommentDisplay> = (commentDisplay) => {
       setCommentDisplayState(respons.data);
     }
   };
-
+  //update comment on mount
   useEffect(() => {
     if (commentDisplay) {
       updateComment();
     }
   }, []);
 
+  // open image
   const handelImage = () => {
     if (commentDisplayState) {
       dialogs.showImage("", commentDisplayState.imageURL);
     }
   };
-
+  //vote on coment
   const handleVote = async (vote: number) => {
     if (loginContex.token && commentDisplayState) {
       const respons = await CommentAPI.VoteOnComment(
@@ -67,20 +70,21 @@ const CommentView: React.FC<ICommentDisplay> = (commentDisplay) => {
       setCommentDisplayState(respons.data);
     }
   };
+  //update comment
   const handleShowEdit = async () => {
     await updateComment();
     setShowEditModal((prevshowEditModal) => !prevshowEditModal);
   };
-
+  //update comment
   const updateComment = async () => {
     const respons = await CommentService.GetCommentByID(commentDisplay.id);
     setCommentDisplayState(respons.data);
   };
-
+  //update coment when modal closes
   useEffect(() => {
     updateComment();
   }, [showEditModal, showModal]);
-
+  // delete comment and remove comment once confirmed deleteion
   const handleDelete = async () => {
     if (commentDisplayState) {
       const respons = await CommentService.DeleteComment(
@@ -100,7 +104,7 @@ const CommentView: React.FC<ICommentDisplay> = (commentDisplay) => {
       }));
     }
   }, [commentDisplayState]);
-
+  // expand text box size
   const toggleExpandText = () => {
     const openBox = longText.OpenTextBox;
     setLongText((prev) => ({ ...prev, OpenTextBox: !openBox }));

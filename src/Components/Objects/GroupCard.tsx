@@ -43,19 +43,19 @@ const GroupCard: React.FC<{
       });
     }
   }, [GroupCard]);
-
+  // delete group
   const deleteGroup = async () => {
     if (GroupCard) {
       await Groups.DeleteGroup(GroupCard.id);
     }
   };
-
+  // open group if you are a member
   const goToGroup = () => {
     if (GroupCard?.isMemember) {
       navigate(`/group?groupId=${GroupCard?.id}`);
     }
   };
-
+  //open join group modal
   const OpenJoinGroup = async () => {
     if (modalProps) {
       const respons = await dialogs.ConfirmJoinGroup(modalProps);

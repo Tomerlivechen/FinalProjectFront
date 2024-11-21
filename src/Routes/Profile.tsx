@@ -85,7 +85,7 @@ const Profile = () => {
     <>
       <MotionFrame>
         <div className="flex flex-wrap overflow-hidden w-full">
-          <div className="w-full md:w-1/12 px-2"></div>
+          <div className="w-full md:w-1/12 px-2 hidden"></div>
           <div className="w-full md:w-11/12 px-2">
             <div className=" w-full px-2 min-w-[40rem]  sm:w-[40rem] md:w-[55rem] lg:w-[72rem] xl:w-[99rem] ">
               {userIdState && <ProfileUserSection userId={userIdState} />}

@@ -30,7 +30,7 @@ const GroupProfileSection = () => {
   useEffect(() => {
     getSearchParams();
   }, [searchParams]);
-
+  //get the group ID form the search params
   const getSearchParams = () => {
     const _groupId = searchParams.get("groupId");
     if (_groupId && !isEqual(groupId, _groupId)) {
@@ -39,7 +39,7 @@ const GroupProfileSection = () => {
       setGroupId(null);
     }
   };
-
+  // once you have the ID get group information
   const getGroupInfo = async (GroupId: string) => {
     const response = await Groups.GetGroupbyId(GroupId);
     SetGroupInfo(response.data);
@@ -70,7 +70,7 @@ const GroupProfileSection = () => {
       setLoading(false);
     }
   }, [groupAdmin, searchParams]);
-
+  // initialy this enabled joining and leaving the group, but now its only for leaving joining reqiers agreeing to the group rules
   const toggleJoin = async () => {
     if (
       groupInfo &&

@@ -1,7 +1,7 @@
-import { FaCircleUp, FaEye, FaKey } from "react-icons/fa6";
+import { FaCircleUp, FaComments, FaEye, FaKey } from "react-icons/fa6";
 import { colors } from "../../Constants/Patterns";
 import ElementFrame from "../../Constructors/ElementFrame";
-import { IoSparkles } from "react-icons/io5";
+import { IoImage, IoSparkles } from "react-icons/io5";
 import { GoCommentDiscussion } from "react-icons/go";
 import { FaAngleDoubleDown, FaAngleDoubleUp } from "react-icons/fa";
 import { MdExpand, MdOutlineContentCopy } from "react-icons/md";
@@ -189,7 +189,42 @@ const HelpPageComponent: React.FC = () => {
             </ul>
           </ul>
         </section>
+        <section className="mb-6">
+          <h1 className={`text-xl font-semibold ${colors.ActiveText} `}>
+            Managing Comments
+          </h1>
+          <p className={`list-disc  mt-2 ${colors.ButtonFont}`}>
+            To interact with comments effectively, follow these steps:
+          </p>
+          <strong className="underline">Opening Comments:</strong>
+          <ul className="list-disc ml-6">
+            <li className="mb-2">
+              <span className="flex gap-2 flex-wrap">
+                Click the Comment <FaComments size={22} /> button to view the
+                comments section. Comments load
+                <strong>five at a time</strong> by default. To see more
+                comments, click the <strong>More</strong> button.
+              </span>
+            </li>
+          </ul>
+          <strong className="underline">Controls for Comments:</strong>
 
+          <ul className="list-disc ml-6">
+            <li>
+              The controls for managing comments are similar to those for posts,
+              with one key difference:
+            </li>
+            <li>
+              Unlike posts, images within comments do not display automatically.
+            </li>
+            <li>
+              <span className="flex items-center gap-2 flex-wrap">
+                To view an image in a comment, click the Image button
+                <IoImage size={22} />.
+              </span>
+            </li>
+          </ul>
+        </section>
         <section className="mb-6">
           <h2 className={`text-xl font-semibold ${colors.ActiveText} `}>
             Groups

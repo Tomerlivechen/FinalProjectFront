@@ -23,7 +23,7 @@ const ImageList: React.FC<{
   const [open, setOpen] = useState(false);
 
   const [userId, setUserId] = useState<null | string>(null);
-
+  // get userID from the search params
   const getSearchParams = () => {
     const _userId = searchParams.get("userId");
     if (_userId) {
@@ -32,14 +32,11 @@ const ImageList: React.FC<{
       }
     }
   };
-  const refreshParamas = 1000;
-  useEffect(() => {
-    const interval = setInterval(() => {
-      getSearchParams();
-    }, refreshParamas);
-    return () => clearInterval(interval);
-  }, []);
 
+  useEffect(() => {
+    getSearchParams();
+  }, []);
+  // get user image list from the database
   const getImages = async (userId: string) => {
     const respons = await Images.getUserImages(userId);
     setImageList(respons.data);
@@ -55,7 +52,7 @@ const ImageList: React.FC<{
     }
     setOpen(ImageListProps.open);
   }, [userId]);
-
+  //sort the images by age
   useEffect(() => {
     if (imageList) {
       if (!isEqual(imageList, displayImageList)) {
@@ -72,17 +69,7 @@ const ImageList: React.FC<{
     if (userIdState) {
       getImages(userIdState);
     }
-  }, [userIdState]);
-
-  const intervalTime = 10000;
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (userIdState) {
-        getImages(userIdState);
-      }
-    }, intervalTime);
-    return () => clearInterval(interval);
-  }, []);
+  }, [userIdState, open]);
 
   const toggleImages = () => {
     setOpen((prev) => !prev);

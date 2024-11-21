@@ -19,4 +19,13 @@ const notificationURL = "/Notification";
         data: null,
       });
 
-  export const Notification = {UpdateNotification, GetNotification}
+      const GetNotificationById = (id: string,) =>
+        request({
+          url: `${notificationURL}/ByNotificationID/${id}`,
+          method: "Get",
+          data: null,
+        });
+
+
+
+  export const Notification = {UpdateNotification, GetNotification,GetNotificationById}

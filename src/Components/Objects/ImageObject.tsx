@@ -21,11 +21,13 @@ const ImageObject: React.FC<{
   const [isLoading, setIsLoading] = useState(true);
   const [imageObject, setImageObject] = useState<IAppImage | null>(null);
 
+  // delete the image
   const deleteImage = async () => {
     if (imageObject) {
       const respons = await dialogs.ConfirmImageDelete(imageObject.id);
       if (respons === 200) {
         dialogs.success("image deleted successfully");
+        setImageObject(null);
       } else {
         dialogs.error(`Unable to delete image , ${respons}`);
       }
@@ -36,19 +38,22 @@ const ImageObject: React.FC<{
       dialogs.showImage(imageObject.title, imageObject.url);
     }
   };
+
+  // copy image link to clip bored
   const copyImageLink = async () => {
     if (imageObject) {
       await navigator.clipboard.writeText(imageObject.url);
       dialogs.success("Image copied to clipboard");
     }
   };
-
+  // rename image
   const RenameImage = async () => {
     if (imageObject) {
       const newName = await dialogs.getName();
       const respons = await Images.RenameImage(imageObject.id, newName);
       if (respons.status === 200) {
         dialogs.success("image renamed successfully");
+        setImageObject(respons.data);
       } else {
         dialogs.error(`Unable to rename image , ${respons}`);
       }
@@ -65,7 +70,7 @@ const ImageObject: React.FC<{
       }
     }
   };
-
+  // open image in new window
   const openInNewWindow = async () => {
     if (imageObject) {
       window.open(imageObject.url, "_blank");

@@ -9,6 +9,7 @@
 - [Navigation and Discovery](#navigation-and-discovery)
 - [Interacting with Posts](#interacting-with-posts)
 - [Creating Posts](#creating-posts)
+- [Managing Comments](#managing-comments)
 - [Groups](#groups)
 - [Profile Customization](#profile-customization)
 - [Notifications](#notifications)
@@ -150,6 +151,18 @@ The website is hosted on Render. You can access it using the following link: [De
   - Open full size in a new window.
   - Share a link.
   - Delete forever.
+
+## Managing Comments  
+To interact with comments effectively, follow these steps:  
+
+- **Opening Comments:**  
+  Click the Comment button on the post to view the comments section. Comments load **five at a time** by default. To see more comments, click the **More** button.  
+
+- **Controls for Comments:**  
+  The controls for managing comments are similar to those for posts, with one key difference:  
+  - Unlike posts, images within comments do not display automatically.  
+  - To view an image in a comment, click the Image button. This action will reveal the image associated with the comment.  
+
 
 
 ## Groups

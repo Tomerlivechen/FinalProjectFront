@@ -10,9 +10,9 @@ import { CommentListValues } from "../../Types/@CommentTypes";
 const CommentList: React.FC<CommentListValues> = ({ index, commmentList }) => {
   const comments = commmentList;
 
-  const [next20Comments, setnext20Comments] = useState<
-    ICommentDisplay[] | null
-  >(null);
+  const [nextComments, setNextComments] = useState<ICommentDisplay[] | null>(
+    null
+  );
   const [passedIndex, setpassedIndex] = useState(0);
   const [open, setOpen] = useState(false);
   const [next, setNext] = useState(false);
@@ -23,7 +23,7 @@ const CommentList: React.FC<CommentListValues> = ({ index, commmentList }) => {
       setNext(true);
     }
   }, [index]);
-
+  // set commentlest when amount of comments to view changes
   useEffect(() => {
     if (commmentList) {
       const left = commmentList.length - index;
@@ -32,26 +32,26 @@ const CommentList: React.FC<CommentListValues> = ({ index, commmentList }) => {
           index,
           index + Math.min(amount, left)
         );
-        setnext20Comments(nextComments);
+        setNextComments(nextComments);
         setpassedIndex(index + Math.min(amount, left));
       } else {
-        setnext20Comments(null);
+        setNextComments(null);
       }
     }
   }, [commmentList, index, amount]);
-
+  // open 5 comments
   const toggelOpen = () => {
     setOpen((prevOpen) => !prevOpen);
     setAmount(5);
   };
-
+  // open next 5 comments
   const increasAmount = () => {
     setAmount((prevAmount) => prevAmount + 5);
   };
 
   return (
     <>
-      {next20Comments ? (
+      {nextComments ? (
         <>
           <button
             className={`rounded-lg ${colors.ElementFrame}  relative bottom-0 left-10`}
@@ -73,7 +73,7 @@ const CommentList: React.FC<CommentListValues> = ({ index, commmentList }) => {
                   top: "10px",
                 }}
               >
-                {next20Comments.map((comment) => (
+                {nextComments.map((comment) => (
                   <CommentView key={comment.id} {...comment} />
                 ))}
                 {comments && passedIndex != comments.length && (
@@ -85,7 +85,7 @@ const CommentList: React.FC<CommentListValues> = ({ index, commmentList }) => {
                   </button>
                 )}
 
-                {passedIndex == next20Comments.length && (
+                {passedIndex == nextComments.length && (
                   <>
                     <button
                       className={`rounded-lg ${colors.ElementFrame} w-24 ml-6 mb-3 mt-3 h-auto`}
@@ -101,7 +101,7 @@ const CommentList: React.FC<CommentListValues> = ({ index, commmentList }) => {
         </>
       ) : (
         <>
-          {!next20Comments && (
+          {!nextComments && (
             <button
               className={`rounded-lg ${colors.ElementFrame}  relative bottom-0 left-5`}
             >
