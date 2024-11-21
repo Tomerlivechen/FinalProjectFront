@@ -25,25 +25,26 @@ const NotificationObject: React.FC<{
   const [postDisplay, setPostDisplay] = useState<IPostDisplay | null>(null);
 
   useEffect(() => {
-    const getUsername = async () => {
-      if (notification) {
-        const Notifier = await auth.getUser(notification.notifierId);
-
-        setNameOfNotifier(Notifier.data.userName);
-        if (notification.type == "Comment") {
-          const post = await Posts.getPostById(notification.referenceId);
-          setPostDisplay(post.data);
-          setNotificationTypeText(" has commented on your post ");
-          setActionPathName("Post");
-        }
-        if (notification.type == "Message") {
-          setNotificationTypeText(" has sent you a message ");
-          setActionPathName("Chat");
-        }
-      }
-    };
-    getUsername();
+    getNotificationData();
   }, [notification]);
+
+  const getNotificationData = async () => {
+    if (notification) {
+      const Notifier = await auth.getUser(notification.notifierId);
+
+      setNameOfNotifier(Notifier.data.userName);
+      if (notification.type == "Comment") {
+        const post = await Posts.getPostById(notification.referenceId);
+        setPostDisplay(post.data);
+        setNotificationTypeText(" has commented on your post ");
+        setActionPathName("Post");
+      }
+      if (notification.type == "Message") {
+        setNotificationTypeText(" has sent you a message ");
+        setActionPathName("Chat");
+      }
+    }
+  };
 
   const GoToUser = () => {
     navigate(`/profile?userId=${notification?.notifierId}`);
@@ -79,6 +80,7 @@ const NotificationObject: React.FC<{
 
   return (
     <>
+    {notification && 
       <div>
         <div className={`${colors.ElementFrame} h-24 w-64 p-2 m-1 relative`}>
           <div className="absolute top-1 right-0">
@@ -107,7 +109,7 @@ const NotificationObject: React.FC<{
           </button>
           <div className="text-xs absolute right-0">{notification?.date}</div>
         </div>
-      </div>
+      </div>}
     </>
   );
 };
