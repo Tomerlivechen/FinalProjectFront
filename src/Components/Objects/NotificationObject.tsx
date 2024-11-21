@@ -68,9 +68,12 @@ const NotificationObject: React.FC<{
     }
   };
 
-  const deleteNotification = () => {
+  const deleteNotification = async () => {
     if (notification?.id) {
-      Notification.UpdateNotification(notification?.id, true);
+     const response = await Notification.UpdateNotification(notification?.id, true);
+     if (response.status === 200){
+      setNotification(null)
+     }
     }
   };
 

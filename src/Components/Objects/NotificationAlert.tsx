@@ -58,8 +58,7 @@ const NotificationAlert = () => {
         <ElementFrame
           overflowY="auto"
           overflowX="hidden"
-          height="500px"
-          tailwind="absolute z-50 right-2 top-16"
+          tailwind="absolute z-50 right-2 top-16 h-fit"
         >
           <NotificationList />
         </ElementFrame>

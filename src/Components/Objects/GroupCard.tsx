@@ -88,7 +88,7 @@ const GroupCard: React.FC<{
                     onClick={() => deleteGroup()}
                   >
                     <Tooltip title="delete">
-                      <IoClose size={28} className="z-50" />
+                      <IoClose size={28} className="z-30" />
                     </Tooltip>
                   </button>
                 </div>

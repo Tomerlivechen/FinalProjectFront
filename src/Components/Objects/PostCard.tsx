@@ -31,7 +31,7 @@ const PostCard: React.FC<IPostDisplay> = (postDisplay) => {
         className=" flex justify-center pl-2 -mb-10 "
         onClick={toggleCard}
       >
-        <BsArrowsFullscreen size={25} className={`z-50 ${colors.ButtonFont}`} />
+        <BsArrowsFullscreen size={25} className={`z-20 ${colors.ButtonFont}`} />
       </button>
       {card ? (
         <ElementFrame

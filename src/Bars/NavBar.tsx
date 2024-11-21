@@ -135,7 +135,7 @@ function NavBar() {
                   </button>
                 </Tooltip>
                 {chatFrame && (
-                  <div className={` block absolute right-5 top-14 z-50`}>
+                  <div className={` block absolute right-5 top-14 z-30`}>
                     <InteractingUsersLists />
                   </div>
                 )}
