@@ -63,6 +63,13 @@ function NavBar() {
   const toggleChat = () => {
     setChatFrame((prev) => !prev);
   };
+  const closeChat = () => {
+    setChatFrame(false);
+  };
+
+  useEffect(() => {
+    closeChat();
+  }, [location]);
 
   return (
     <>

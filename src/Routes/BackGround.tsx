@@ -25,7 +25,7 @@ const BackGround: React.FC<{ children: ReactNode }> = ({ children }) => {
         <div
           className={` inset-0 w-fit min-w-full md:min-h-screen min-h-[200vh] h-fit bg-cover bg-center overflow-y-auto overflow-x-visible=false  " ${colors.ElementFrame} `}
         >
-          <div className="pt-14 ">{children}</div>
+          <div className="pt-14 pl-14 ">{children}</div>
         </div>
       </div>
     </>

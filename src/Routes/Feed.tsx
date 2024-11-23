@@ -90,10 +90,8 @@ const Feed = () => {
                 )}
               </div>
             </div>
-            <div className=" hidden md:block w-fit pr-2 pl-2">
-              <>
-                <InteractingUsersLists />
-              </>
+            <div className=" hidden md:block w-fit  pr-2 ">
+              <InteractingUsersLists />
             </div>
           </div>
         </div>
