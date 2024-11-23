@@ -35,7 +35,7 @@ const ImageList: React.FC<{
 
   useEffect(() => {
     getSearchParams();
-  }, []);
+  }, [open]);
   // get user image list from the database
   const getImages = async (userId: string) => {
     const respons = await Images.getUserImages(userId);

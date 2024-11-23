@@ -61,10 +61,9 @@ const InteractingUsersLists = () => {
   return (
     <>
       <ResizableFrame
-        whidth={"100%"}
         title={"People"}
         show={true}
-        tailwindProps=" h-auto "
+        tailwindProps=" h-auto w-fit pl-8"
       >
         <div className={`${colors.ActiveText} text-center`}>Following</div>
         {!followingUsers && (

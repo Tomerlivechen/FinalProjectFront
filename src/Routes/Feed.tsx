@@ -67,9 +67,8 @@ const Feed = () => {
     <>
       <MotionFrame>
         <div className="flex  ">
-          <div className="md:w-16 hidden "></div>
-          <div className="flex flex-wrap w-11/12 justify-between ">
-            <div className="hidden lg:block lg:w-fit xl:w-fit pr-2 pl-2">
+          <div className="flex flex-wrap gap-8 ">
+            <div className="hidden lg:block lg:w-fit xl:w-fit  pl-2">
               <UserLane />
               <ResizableFrame
                 whidth={"auto"}
@@ -81,7 +80,7 @@ const Feed = () => {
                 <ProfileGroupsList />
               </ResizableFrame>
             </div>
-            <div className="w-full sm:w-full md:w-1/2 lg:w-4/12 xl:w-4/12 pl-2 pr-2">
+            <div className="w-full sm:w-full md:w-1/2 lg:w-4/12 xl:w-4/12  pr-2">
               <div>
                 {loading && <DinoSpinner size={60} />}
                 {!loading && !postId && <PostFrame />}
@@ -90,8 +89,10 @@ const Feed = () => {
                 )}
               </div>
             </div>
-            <div className=" hidden md:block w-fit  pr-2 ">
-              <InteractingUsersLists />
+            <div className="flex  justify-center  ">
+              <div className=" md:block hidden w-fit  pr-2 ">
+                <InteractingUsersLists />
+              </div>
             </div>
           </div>
         </div>

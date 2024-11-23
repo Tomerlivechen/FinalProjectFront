@@ -46,11 +46,13 @@ function Register() {
         /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*_-]).{8,30}$/,
         "Password must between 8 to 30 characters, have uppercase and lowecase letter, number and special character"
       ),
-    confirmPassword: Yup.string().oneOf(
-      [Yup.ref("password")],
-      "Must match password"
-    ),
-    prefix: Yup.string().min(2).max(5),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref("password")], "Must match password")
+      .required("The password confirmation is required"),
+    prefix: Yup.string()
+      .matches(/[^.]$/, "A period at the end of the prefix is unnecessary.")
+      .min(2, "Prefix must be at least 2 characters.")
+      .max(5, "Prefix must not exceed 5 characters."),
     first_Name: Yup.string().min(2).max(25).required("First name is required"),
     last_Name: Yup.string().min(2).max(30).required("Last name is required"),
     pronouns: Yup.string().min(2).max(10),
