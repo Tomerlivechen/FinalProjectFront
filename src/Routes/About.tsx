@@ -1,6 +1,6 @@
 import { Tooltip } from "react-bootstrap";
 import ElementFrame from "../Constructors/ElementFrame";
-import { MotionFrame } from "../Constants/Patterns";
+import { MotionFrame } from "../Components/Objects/MotionFrame";
 
 function About() {
   return (
@@ -55,23 +55,28 @@ function About() {
         <p>
           Enjoy the experience!
           <br />
+          Click on the <b>Help</b> button in the navigation bar for more details
+          on usage
         </p>
-        <p className="mb-4"> <span className="flex items-center gap-2">
-          If you find any bugs, please reach out via chat to the <b>SysAdmin</b>{" "}
-          or by email at:
-          <a
-            href="mailto:TomerLiveChen@gmail.com"
-            className="font-bold underline decoration-teal-500 decoration-4 inline"
-          >
-            <Tooltip
-              title="Send Email to Dr. Tomer Chen"
-              placement="top"
-              className="inline"
+        <p className="mb-4">
+          {" "}
+          <span className="flex items-center gap-2">
+            If you find any bugs, please reach out via chat to the{" "}
+            <b>SysAdmin</b> or by email at:
+            <a
+              href="mailto:TomerLiveChen@gmail.com"
+              className="font-bold underline decoration-teal-500 decoration-4 inline"
             >
-              TomerLiveChen@gmail.com.
-            </Tooltip>
-          </a>
-       </span> </p>
+              <Tooltip
+                title="Send Email to Dr. Tomer Chen"
+                placement="top"
+                className="inline"
+              >
+                TomerLiveChen@gmail.com.
+              </Tooltip>
+            </a>
+          </span>
+        </p>
       </ElementFrame>
     </MotionFrame>
   );

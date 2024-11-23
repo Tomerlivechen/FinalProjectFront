@@ -10,7 +10,7 @@ import { ProfileGroupsList } from "../Components/Objects/ProfileGroupsList";
 import { InteractingUsersLists } from "../Components/InteractingUsersLists";
 import { isEqual } from "lodash";
 import DinoSpinner from "../Spinners/DinoSpinner";
-import { MotionFrame } from "../Constants/Patterns";
+import { MotionFrame } from "../Components/Objects/MotionFrame";
 
 const Feed = () => {
   const [searchParams] = useSearchParams();

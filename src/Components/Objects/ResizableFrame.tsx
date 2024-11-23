@@ -26,7 +26,11 @@ const ResizableFrame: React.FC<ResizableFrameProps> = (
   const [frameHeight, setFrameHeight] = useState("h-fit");
 
   useEffect(() => {
-    if (selectedSize === "min" || selectedSize === "closed") {
+    if (selectedSize === "closed") {
+      setShow(false);
+    }
+
+    if (selectedSize === "min") {
       setFrameHeight("h-0");
     }
     if (selectedSize === "mid") {

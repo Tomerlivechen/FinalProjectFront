@@ -19,6 +19,7 @@ import {
 import { useLogin } from "../CustomHooks/useLogin";
 import { useUser } from "../CustomHooks/useUser";
 import DinoSpinner from "../Spinners/DinoSpinner";
+import { MotionFrame } from "../Components/Objects/MotionFrame";
 
 const emailValues: MYFormikValues = {
   Title: "Email Address",
@@ -109,97 +110,102 @@ const LoginPage = () => {
 
   return (
     <>
-      <div className="flex justify-center items-center">
-        <ElementFrame
-          tailwind="h-fit"
-          width="400px"
-          overflowY="auto"
-          padding="0 pb-4"
-        >
-          <div
-            className={`text-4xl font-bold  text-center ${colors.ButtonFont}`}
+      <MotionFrame>
+        <div className="flex justify-center items-center">
+          <ElementFrame
+            tailwind="h-fit"
+            width="400px"
+            overflowY="auto"
+            padding="0 pb-4"
           >
-            Login
-          </div>
-          <Formik
-            initialValues={initalValues}
-            validationSchema={validationScheme}
-            onSubmit={(o) => {
-              setIsLoading(true);
-              auth
-                .login(o.email, o.password)
-                .then((response) => {
-                  dialogs.success("Login Succefull").then(() => {
-                    login(response.data.token);
-                    window.location.reload();
-                  });
-                })
-                .catch((error) => {
-                  if (error && error.response && error.response.data) {
-                    const errorMessages = error.response.data["Login Failed"];
-                    if (Array.isArray(errorMessages)) {
-                      const message = errorMessages.join(" & ");
-                      dialogs.error(message);
-                    } else {
-                      dialogs.error("An unknown error occurred.");
-                    }
-                  } else {
-                    dialogs.error("An error occurred. Please try again.");
-                  }
-                });
-            }}
-          >
-            <Form className="mt-5">
-              <div className="flex flex-wrap justify-between">
-                <div className="w-full pr-2 pl-2">
-                  <FormikElementBuilder {...emailValues} />
-                </div>
-                <div className="w-full pl-6">
-                  <div className="w-1/12 absolute  mt-6 m-28 ml-9 ">
-                    {viewPassword == "text" ? (
-                      <FaRegEye size={25} onClick={viewPass} />
-                    ) : (
-                      <RxEyeClosed size={25} onClick={viewPass} />
-                    )}
-                  </div>
-                  <div className="w-12/12 -ml-6">
-                    <FormikElementBuilder {...passwordValues} />
-                  </div>
-                </div>
-              </div>
-
-              {isLoading && (
-                <>
-                  <div className=" flex flex-col items-center">
-                    <DinoSpinner size={40} /> <br />
-                  </div>
-                </>
-              )}
-              <div className="font-extralight rounded-md border-2 form-group flex flex-col gap-2 w-1/2 mx-auto text-lg mt-5">
-                <button
-                  disabled={isLoading}
-                  type="submit"
-                  className={`${colors.Buttons} p-3`}
-                >
-                  Login
-                </button>
-              </div>
-            </Form>
-          </Formik>
-          <div className="flex flex-col items-center space-y-4">
-            <button className={`${colors.ButtonFont}`} onClick={forgotPassword}>
-              {" "}
-              Forgot Password{" "}
-            </button>
-            <button
-              onClick={() => navigate("/register")}
-              className={`${colors.Buttons} p-3 rounded-xl`}
+            <div
+              className={`text-4xl font-bold  text-center ${colors.ButtonFont}`}
             >
-              Create New Account
-            </button>
-          </div>
-        </ElementFrame>
-      </div>
+              Login
+            </div>
+            <Formik
+              initialValues={initalValues}
+              validationSchema={validationScheme}
+              onSubmit={(o) => {
+                setIsLoading(true);
+                auth
+                  .login(o.email, o.password)
+                  .then((response) => {
+                    dialogs.success("Login Succefull").then(() => {
+                      login(response.data.token);
+                      window.location.reload();
+                    });
+                  })
+                  .catch((error) => {
+                    if (error && error.response && error.response.data) {
+                      const errorMessages = error.response.data["Login Failed"];
+                      if (Array.isArray(errorMessages)) {
+                        const message = errorMessages.join(" & ");
+                        dialogs.error(message);
+                      } else {
+                        dialogs.error("An unknown error occurred.");
+                      }
+                    } else {
+                      dialogs.error("An error occurred. Please try again.");
+                    }
+                  });
+              }}
+            >
+              <Form className="mt-5">
+                <div className="flex flex-wrap justify-between">
+                  <div className="w-full pr-2 pl-2">
+                    <FormikElementBuilder {...emailValues} />
+                  </div>
+                  <div className="w-full pl-6">
+                    <div className="w-1/12 absolute  mt-6 m-28 ml-9 ">
+                      {viewPassword == "text" ? (
+                        <FaRegEye size={25} onClick={viewPass} />
+                      ) : (
+                        <RxEyeClosed size={25} onClick={viewPass} />
+                      )}
+                    </div>
+                    <div className="w-12/12 -ml-6">
+                      <FormikElementBuilder {...passwordValues} />
+                    </div>
+                  </div>
+                </div>
+
+                {isLoading && (
+                  <>
+                    <div className=" flex flex-col items-center">
+                      <DinoSpinner size={40} /> <br />
+                    </div>
+                  </>
+                )}
+                <div className="font-extralight rounded-md border-2 form-group flex flex-col gap-2 w-1/2 mx-auto text-lg mt-5">
+                  <button
+                    disabled={isLoading}
+                    type="submit"
+                    className={`${colors.Buttons} p-3`}
+                  >
+                    Login
+                  </button>
+                </div>
+              </Form>
+            </Formik>
+            <div className="flex flex-col items-center space-y-4">
+              <button
+                className={`${colors.ButtonFont}`}
+                onClick={forgotPassword}
+              >
+                {" "}
+                Forgot Password{" "}
+              </button>
+              <button
+                onClick={() => navigate("/register")}
+                className={`${colors.Buttons} p-3 rounded-xl`}
+              >
+                Create New Account
+              </button>
+            </div>
+          </ElementFrame>
+        </div>
+      </MotionFrame>
     </>
   );
 };

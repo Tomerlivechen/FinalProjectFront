@@ -15,6 +15,7 @@ import { PasswordRecovery } from "../Models/AuthModels";
 import * as URLencode from "urlencode";
 import { isEqual } from "lodash";
 import DinoSpinner from "../Spinners/DinoSpinner";
+import { MotionFrame } from "../Components/Objects/MotionFrame";
 
 const emailValues: MYFormikValues = {
   Title: "Email Address",
@@ -102,64 +103,66 @@ function PasswordRecoveryPage() {
 
   return (
     <>
-      <div className="flex justify-center">
-        <ElementFrame
-          tailwind="h-fit"
-          width="700px"
-          overflowY="auto"
-          padding="0 pb-4"
-        >
-          <div
-            className={`text-4xl font-bold  text-center ${colors.ButtonFont}`}
+      <MotionFrame>
+        <div className="flex justify-center">
+          <ElementFrame
+            tailwind="h-fit"
+            width="700px"
+            overflowY="auto"
+            padding="0 pb-4"
           >
-            Reset Password
-          </div>
-          <Formik
-            initialValues={initalValues}
-            validationSchema={validationScheme}
-            onSubmit={(o) => {
-              handleSubmit(o);
-            }}
-          >
-            <Form className="mt-5">
-              <div className="flex flex-wrap justify-between">
-                <div className="w-full pr-2 pl-2">
-                  <FormikElementBuilder {...emailValues} />
-                </div>
-                <div className="w-full pl-6">
-                  <div className="w-1/12 absolute  mt-6 m-28 ">
-                    {viewPassword == "text" ? (
-                      <FaRegEye size={25} onClick={viewPass} />
-                    ) : (
-                      <RxEyeClosed size={25} onClick={viewPass} />
-                    )}
+            <div
+              className={`text-4xl font-bold  text-center ${colors.ButtonFont}`}
+            >
+              Reset Password
+            </div>
+            <Formik
+              initialValues={initalValues}
+              validationSchema={validationScheme}
+              onSubmit={(o) => {
+                handleSubmit(o);
+              }}
+            >
+              <Form className="mt-5">
+                <div className="flex flex-wrap justify-between">
+                  <div className="w-full pr-2 pl-2">
+                    <FormikElementBuilder {...emailValues} />
                   </div>
-                  <div className="w-12/12 -ml-6">
-                    <FormikElementBuilder {...passwordValues} />
+                  <div className="w-full pl-6">
+                    <div className="w-1/12 absolute  mt-6 m-28 ">
+                      {viewPassword == "text" ? (
+                        <FaRegEye size={25} onClick={viewPass} />
+                      ) : (
+                        <RxEyeClosed size={25} onClick={viewPass} />
+                      )}
+                    </div>
+                    <div className="w-12/12 -ml-6">
+                      <FormikElementBuilder {...passwordValues} />
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {isLoading && (
-                <>
-                  <div className=" flex flex-col items-center">
-                    <DinoSpinner size={50} /> <br />
-                  </div>
-                </>
-              )}
-              <div className="font-extralight rounded-md border-2 form-group flex flex-col gap-2 w-1/2 mx-auto text-lg mt-5">
-                <button
-                  disabled={isLoading}
-                  type="submit"
-                  className={`${colors.Buttons} p-3`}
-                >
-                  Submit
-                </button>
-              </div>
-            </Form>
-          </Formik>
-        </ElementFrame>
-      </div>
+                {isLoading && (
+                  <>
+                    <div className=" flex flex-col items-center">
+                      <DinoSpinner size={50} /> <br />
+                    </div>
+                  </>
+                )}
+                <div className="font-extralight rounded-md border-2 form-group flex flex-col gap-2 w-1/2 mx-auto text-lg mt-5">
+                  <button
+                    disabled={isLoading}
+                    type="submit"
+                    className={`${colors.Buttons} p-3`}
+                  >
+                    Submit
+                  </button>
+                </div>
+              </Form>
+            </Formik>
+          </ElementFrame>
+        </div>
+      </MotionFrame>
     </>
   );
 }

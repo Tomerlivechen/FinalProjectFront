@@ -1,4 +1,5 @@
 import GroupPage from "../Components/GroupPage";
+import { MotionFrame } from "../Components/Objects/MotionFrame";
 import { NotificationObject } from "../Components/Objects/NotificationObject";
 import UserCard from "../Components/Objects/UserCard";
 import UserTab from "../Components/Objects/UserTab";
@@ -45,20 +46,22 @@ const note: INotificationDisplay = {
 function TestSpace() {
   return (
     <>
-      <div>Test Space Elemens</div>
-      <div>---------------------------</div>
-      <div className="flex flex-wrap">
-        <div className="p-10"></div>
-        <UserCard UserDisplay={card} />
-        <div className="p-10"></div>
-        <UserTab UserDisplay={card} />
-        <DinoSpinner size={60} />
-        <NotificationObject NotificationData={note} />
-<PostFrame/>
-        <GroupPage/>
-      </div>
-      <div>---------------------------</div>
-      <div>Test Space Elemens</div>
+      <MotionFrame>
+        <div>Test Space Elemens</div>
+        <div>---------------------------</div>
+        <div className="flex flex-wrap">
+          <div className="p-10"></div>
+          <UserCard UserDisplay={card} />
+          <div className="p-10"></div>
+          <UserTab UserDisplay={card} />
+          <DinoSpinner size={60} />
+          <NotificationObject NotificationData={note} />
+          <PostFrame />
+          <GroupPage />
+        </div>
+        <div>---------------------------</div>
+        <div>Test Space Elemens</div>
+      </MotionFrame>
     </>
   );
 }

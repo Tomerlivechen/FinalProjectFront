@@ -23,17 +23,16 @@ const NotificationAlert = () => {
   };
 
   useEffect(() => {
-    // set notification active , initialy ment to have a number but couldent reaky set this well with the icons i wanted
-    getNotificatins();
-    let active = 0;
+    // set notification unseen , initialy ment to have a number but couldent reaky set this well with the icons i wanted
+    let unseen = 0;
     if (notifications)
       notifications.forEach((note) => {
         if (!note.seen) {
-          active += 1;
+          unseen += 1;
         }
       });
-    if (active > 0) setActive(true);
-  }, [notifications, active]);
+    if (unseen > 0) setActive(true);
+  }, [notifications]);
 
   const toggleList = () => {
     setOpen((prev) => !prev);
@@ -41,7 +40,7 @@ const NotificationAlert = () => {
 
   useEffect(() => {
     getNotificatins();
-  }, []);
+  }, [open]);
 
   return (
     <>

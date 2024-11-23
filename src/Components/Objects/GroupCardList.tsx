@@ -60,7 +60,7 @@ const GroupCardList: React.FC<{
     }
   };
 
-  const intervalTime = 10000;
+  const intervalTime = 5000;
   useEffect(() => {
     const interval = setInterval(() => {
       getGroupCards();

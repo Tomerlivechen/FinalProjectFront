@@ -1,11 +1,11 @@
 import { HelpPageComponent } from "../Components/Objects/HelpPageComponent";
-import { MotionFrame } from "../Constants/Patterns";
+import { MotionFrame } from "../Components/Objects/MotionFrame";
 
 const HelpPage = () => {
   return (
     <>
       <MotionFrame>
-      <HelpPageComponent/>
+        <HelpPageComponent />
       </MotionFrame>
     </>
   );

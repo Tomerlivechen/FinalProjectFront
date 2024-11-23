@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { colors, MotionFrame } from "../Constants/Patterns";
+import { colors } from "../Constants/Patterns";
+import { MotionFrame } from "../Components/Objects/MotionFrame";
 
 const NotFound = () => {
   const navigate = useNavigate();

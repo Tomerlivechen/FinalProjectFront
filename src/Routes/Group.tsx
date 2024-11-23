@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { GroupSearch } from "../Components/GroupSearch";
 import GroupPage from "../Components/GroupPage";
 import { isEqual } from "lodash";
-import { MotionFrame } from "../Constants/Patterns";
+import { MotionFrame } from "../Components/Objects/MotionFrame";
 
 const Group = () => {
   const [searchParams] = useSearchParams();

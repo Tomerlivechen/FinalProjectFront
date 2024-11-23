@@ -4,9 +4,10 @@ import UserCard from "../Components/Objects/UserCard";
 import SearchTitleComponent from "../Components/SearchTitleComponent";
 import PostCard from "../Components/Objects/PostCard";
 import ElementFrame from "../Constructors/ElementFrame";
-import { colors, MotionFrame } from "../Constants/Patterns";
+import { colors } from "../Constants/Patterns";
 import { FaLongArrowAltUp } from "react-icons/fa";
 import { SearchBackGround } from "../Components/Objects/SearchBackGround";
+import { MotionFrame } from "../Components/Objects/MotionFrame";
 
 function SearchPage() {
   const searchContext = useSearch();

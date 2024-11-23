@@ -10,7 +10,7 @@ import { IAppUserDisplay } from "../Models/UserModels";
 import { ProfileGroupsList } from "../Components/Objects/ProfileGroupsList";
 import { ImageList } from "../Components/Objects/ImageList";
 import { isEqual } from "lodash";
-import { MotionFrame } from "../Constants/Patterns";
+import { MotionFrame } from "../Components/Objects/MotionFrame";
 
 const Profile = () => {
   const location = useLocation();

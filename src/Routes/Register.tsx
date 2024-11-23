@@ -21,6 +21,7 @@ import {
   userNameValues,
 } from "../Models/FormikModels";
 import DinoSpinner from "../Spinners/DinoSpinner";
+import { MotionFrame } from "../Components/Objects/MotionFrame";
 
 function Register() {
   const [viewPassword, setviewPassword] = useState("password");
@@ -87,106 +88,108 @@ function Register() {
 
   return (
     <>
-      <div className="flex justify-center">
-        <ElementFrame
-          tailwind="h-fit"
-          width="700px"
-          overflowY="auto"
-          padding="0 pb-4"
-        >
-          <div
-            className={`text-4xl font-bold  text-center ${colors.ButtonFont}`}
+      <MotionFrame>
+        <div className="flex justify-center">
+          <ElementFrame
+            tailwind="h-fit"
+            width="700px"
+            overflowY="auto"
+            padding="0 pb-4"
           >
-            Register
-          </div>
-          <Formik
-            initialValues={initalValues}
-            validationSchema={validationScheme}
-            onSubmit={(o) => {
-              submiteRegister(o);
-            }}
-          >
-            <Form className="mt-5">
-              <div className="flex flex-wrap md:justify-between justify-center">
-                <div className="md:w-1/2 w-7/12 pr-2 md:pl-2">
-                  <FormikElementBuilder {...emailValues} />
-                </div>
-                <div className="md:w-1/2 w-7/12 md:pl-2 pr-2">
-                  <FormikElementBuilder {...userNameValues} />
-                </div>
-              </div>
-              <div className="flex flex-wrap md:justify-between justify-center">
-                <div className="md:w-6/12 w-7/12 md:pl-2 pr-2">
-                  <FormikElementBuilder {...passwordValues} />
-                </div>
-                <div className="md:w-1/12 w-7/12  md:mt-1 md:-ml-16 -mt-20 ml-52">
-                  {viewPassword == "text" ? (
-                    <FaRegEye size={25} onClick={viewPass} />
-                  ) : (
-                    <RxEyeClosed size={25} onClick={viewPass} />
-                  )}
-                </div>
-                <div className="md:w-6/12 w-7/12 pr-2">
-                  <FormikElementBuilder {...confirmPasswordValues} />
-                </div>
-              </div>
-              <div className="flex flex-wrap md:justify-between justify-center">
-                <div className="md:w-1/2 w-7/12 pr-2 md:pl-2">
-                  <FormikElementBuilder {...prefixValues} />
-                </div>
-                <div className="md:w-1/2 w-7/12 md:pl-2 pr-2">
-                  <FormikElementBuilder {...firstNameValues} />
-                </div>
-              </div>
-
-              <div className="flex flex-wrap md:justify-between justify-center">
-                <div className="md:w-1/2 w-7/12 pr-2 md:pl-2">
-                  <FormikElementBuilder {...lastNameValues} />
-                </div>
-                <div className="md:w-1/2 w-7/12 md:pl-2 pr-2">
-                  <FormikElementBuilder {...pronounsValues} />
-                </div>
-              </div>
-              <div className="font-extralight form-group flex flex-col gap-2 md:w-1/2 w-7/12 mx-auto text-lg mt-5">
-                <label htmlFor="permissionlevel">User Type</label>
-                <Field
-                  className={`rounded-md hover:border-2 border-2 px-2 py-2 ${colors.TextBox}`}
-                  id="permissionlevel"
-                  name="permissionlevel"
-                  as="select"
-                  required
-                >
-                  <option value="">Select a user type</option>
-                  <option value="User">Basic User</option>
-                  <option value="PowerUser">Power User</option>
-                </Field>
-                <ErrorMessage
-                  name="permissionlevel"
-                  component="div"
-                  className="text-red-500"
-                />
-              </div>
-
-              {isLoading && (
-                <>
-                  <div className=" flex flex-col items-center">
-                    <DinoSpinner size={40} /> <br />
+            <div
+              className={`text-4xl font-bold  text-center ${colors.ButtonFont}`}
+            >
+              Register
+            </div>
+            <Formik
+              initialValues={initalValues}
+              validationSchema={validationScheme}
+              onSubmit={(o) => {
+                submiteRegister(o);
+              }}
+            >
+              <Form className="mt-5">
+                <div className="flex flex-wrap md:justify-between justify-center">
+                  <div className="md:w-1/2 w-7/12 pr-2 md:pl-2">
+                    <FormikElementBuilder {...emailValues} />
                   </div>
-                </>
-              )}
-              <div className="font-extralight rounded-md border-2 form-group flex flex-col gap-2 w-1/2 mx-auto text-lg mt-5">
-                <button
-                  disabled={isLoading}
-                  type="submit"
-                  className={`${colors.Buttons} p-3`}
-                >
-                  Register
-                </button>
-              </div>
-            </Form>
-          </Formik>
-        </ElementFrame>
-      </div>
+                  <div className="md:w-1/2 w-7/12 md:pl-2 pr-2">
+                    <FormikElementBuilder {...userNameValues} />
+                  </div>
+                </div>
+                <div className="flex flex-wrap md:justify-between justify-center">
+                  <div className="md:w-6/12 w-7/12 md:pl-2 pr-2">
+                    <FormikElementBuilder {...passwordValues} />
+                  </div>
+                  <div className="md:w-1/12 w-7/12  md:mt-1 md:-ml-16 -mt-20 ml-52">
+                    {viewPassword == "text" ? (
+                      <FaRegEye size={25} onClick={viewPass} />
+                    ) : (
+                      <RxEyeClosed size={25} onClick={viewPass} />
+                    )}
+                  </div>
+                  <div className="md:w-6/12 w-7/12 pr-2">
+                    <FormikElementBuilder {...confirmPasswordValues} />
+                  </div>
+                </div>
+                <div className="flex flex-wrap md:justify-between justify-center">
+                  <div className="md:w-1/2 w-7/12 pr-2 md:pl-2">
+                    <FormikElementBuilder {...prefixValues} />
+                  </div>
+                  <div className="md:w-1/2 w-7/12 md:pl-2 pr-2">
+                    <FormikElementBuilder {...firstNameValues} />
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap md:justify-between justify-center">
+                  <div className="md:w-1/2 w-7/12 pr-2 md:pl-2">
+                    <FormikElementBuilder {...lastNameValues} />
+                  </div>
+                  <div className="md:w-1/2 w-7/12 md:pl-2 pr-2">
+                    <FormikElementBuilder {...pronounsValues} />
+                  </div>
+                </div>
+                <div className="font-extralight form-group flex flex-col gap-2 md:w-1/2 w-7/12 mx-auto text-lg mt-5">
+                  <label htmlFor="permissionlevel">User Type</label>
+                  <Field
+                    className={`rounded-md hover:border-2 border-2 px-2 py-2 ${colors.TextBox}`}
+                    id="permissionlevel"
+                    name="permissionlevel"
+                    as="select"
+                    required
+                  >
+                    <option value="">Select a user type</option>
+                    <option value="User">Basic User</option>
+                    <option value="PowerUser">Power User</option>
+                  </Field>
+                  <ErrorMessage
+                    name="permissionlevel"
+                    component="div"
+                    className="text-red-500"
+                  />
+                </div>
+
+                {isLoading && (
+                  <>
+                    <div className=" flex flex-col items-center">
+                      <DinoSpinner size={40} /> <br />
+                    </div>
+                  </>
+                )}
+                <div className="font-extralight rounded-md border-2 form-group flex flex-col gap-2 w-1/2 mx-auto text-lg mt-5">
+                  <button
+                    disabled={isLoading}
+                    type="submit"
+                    className={`${colors.Buttons} p-3`}
+                  >
+                    Register
+                  </button>
+                </div>
+              </Form>
+            </Formik>
+          </ElementFrame>
+        </div>
+      </MotionFrame>
     </>
   );
 }

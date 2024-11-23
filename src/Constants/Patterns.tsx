@@ -11,10 +11,8 @@ import { jwtDecode } from "jwt-decode";
 
 import { AxiosError } from "axios";
 import { IDecodedToken, IUserValues } from "../Types/@UserTypes";
-import { motion as m } from "framer-motion";
-import { ReactNode } from "react";
 
-const colors = {
+export const colors = {
   NavBarColor: "bg-blue-300 dark:bg-gray-800",
   NavBarText: "dark:text-gray-100 text-gray-900",
   Nav: "bg-blue-300 dark:bg-gray-800", // Blue for professionalism and trust, with a neutral dark gray for dark mode
@@ -40,18 +38,6 @@ const colors = {
   ForkikField: "rounded-md hover:border-2 border-2 px-2 py-2",
 };
 
-export const MotionFrame = ({ children }: { children: ReactNode }) => {
-  return (
-    <m.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-    >
-      {children}
-    </m.div>
-  );
-};
-
 export const categories: ICategory[] = [
   { id: 12, name: "AI" },
   { id: 4, name: "Inspirational" },
@@ -66,6 +52,16 @@ export const categories: ICategory[] = [
   { id: 8, name: "Interactive" },
   { id: 9, name: "Visuals" },
 ];
+
+export const updateScale = (scale: number) => {
+  const metaViewPort = document.querySelector('meta[name="viewport"]');
+  if (metaViewPort) {
+    metaViewPort.setAttribute(
+      "content",
+      `width=device-width, initial-scale=${scale}`
+    );
+  }
+};
 
 export function convertUTCToLocalTime(utcTime: string, full: boolean) {
   const utcDate = new Date(utcTime + "Z");
@@ -169,7 +165,7 @@ export const getFlowingPosts = async () => {
   return followingPosts;
 };
 
-const stringToAppUserDisplay = (
+export const stringToAppUserDisplay = (
   userDisplay: IAppUserDisplay | IAppUserDisplay[] | undefined
 ): IAppUserDisplay | IAppUserDisplay[] => {
   if (!userDisplay) {
@@ -182,7 +178,7 @@ const stringToAppUserDisplay = (
   }
 };
 
-const stringToPostDisplay = (
+export const stringToPostDisplay = (
   postDisplay: IPostDisplay | IPostDisplay[] | undefined
 ): IPostDisplay | IPostDisplay[] => {
   if (!postDisplay) {
@@ -197,7 +193,7 @@ const stringToPostDisplay = (
 interface ErrorResponse {
   [key: string]: string[] | undefined;
 }
-const catchError = (error: AxiosError, action: string) => {
+export const catchError = (error: AxiosError, action: string) => {
   if (error && error.response && error.response.data) {
     const data = error.response.data as ErrorResponse;
     const errorMessages = data[`${action} Failed`];
@@ -211,4 +207,3 @@ const catchError = (error: AxiosError, action: string) => {
     dialogs.error("An error occurred. Please try again.");
   }
 };
-export { colors, stringToAppUserDisplay, catchError, stringToPostDisplay };
