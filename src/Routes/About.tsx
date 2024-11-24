@@ -60,7 +60,7 @@ function About() {
         </p>
         <p className="mb-4">
           
-          <span className="flex items-center gap-2">
+
             If you find any bugs, please reach out via chat to the
             <b>SysAdmin</b> or by email at:
             <a
@@ -69,7 +69,7 @@ function About() {
             >
                 TomerLiveChen@gmail.com.
             </a>
-          </span>
+
         </p>
       </ElementFrame>
     </MotionFrame>
