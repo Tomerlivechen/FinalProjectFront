@@ -1,4 +1,4 @@
-import { Tooltip } from "react-bootstrap";
+
 import ElementFrame from "../Constructors/ElementFrame";
 import { MotionFrame } from "../Components/Objects/MotionFrame";
 
