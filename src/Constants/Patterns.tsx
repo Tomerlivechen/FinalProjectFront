@@ -58,7 +58,7 @@ export const updateScale = (scale: number) => {
   if (metaViewPort) {
     metaViewPort.setAttribute(
       "content",
-      `width=device-width, initial-scale=${scale}`
+      `width=device-width, initial-scale=${scale}, maximum-scale=${scale},`
     );
   }
 };

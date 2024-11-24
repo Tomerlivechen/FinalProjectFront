@@ -42,6 +42,7 @@ function NavBar() {
     }
   };
   useEffect(() => {
+    document.body.style.zoom = "1";
     updateScale(1);
   }, [location]);
 
