@@ -12,6 +12,7 @@ import GroupProfileSection from "./Objects/GroupProfileSection";
 import ResizableFrame from "./Objects/ResizableFrame";
 import { PostFrame } from "./PostFrame";
 import { isEqual } from "lodash";
+import { updateScale } from "../Constants/Patterns";
 
 const GroupPage = () => {
   const [searchParams] = useSearchParams();
@@ -30,7 +31,10 @@ const GroupPage = () => {
       }
     }
   };
-
+  useEffect(() => {
+    document.body.style.zoom = "1";
+    updateScale(0.7);
+  }, [location]);
   const [groupState, setGroupState] = useState<ISocialGroupDisplay | null>(
     null
   );
