@@ -62,7 +62,7 @@ function About() {
           
 
             If you find any bugs, please reach out via chat to the
-            <b>SysAdmin</b> or by email at:
+            <b> SysAdmin</b> or by email at: 
             <a
               href="mailto:TomerLiveChen@gmail.com"
               className="font-bold underline decoration-teal-500 decoration-4 inline"
