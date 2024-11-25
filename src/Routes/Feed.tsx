@@ -68,7 +68,7 @@ const Feed = () => {
       <MotionFrame>
         <div className="flex  ">
           <div className="flex flex-wrap gap-8 ">
-            <div className="hidden lg:block lg:w-fit xl:w-fit  pl-2">
+            <aside className="hidden lg:block lg:w-fit xl:w-fit  pl-2">
               <UserLane />
               <ResizableFrame
                 whidth={"auto"}
@@ -79,8 +79,8 @@ const Feed = () => {
               >
                 <ProfileGroupsList />
               </ResizableFrame>
-            </div>
-            <div className="w-full sm:w-full md:w-1/2 lg:w-4/12 xl:w-4/12  pr-2">
+            </aside>
+            <main className="w-full sm:w-full md:w-1/2 lg:w-4/12 xl:w-4/12  pr-2">
               <div>
                 {loading && <DinoSpinner size={60} />}
                 {!loading && !postId && <PostFrame />}
@@ -88,12 +88,12 @@ const Feed = () => {
                   <PostView {...singularPost} />
                 )}
               </div>
-            </div>
-            <div className="flex  justify-center  ">
+            </main>
+            <section className="flex  justify-center  ">
               <div className=" md:block hidden w-fit  pr-2 ">
                 <InteractingUsersLists />
               </div>
-            </div>
+            </section>
           </div>
         </div>
       </MotionFrame>

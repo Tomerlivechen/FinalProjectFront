@@ -60,7 +60,7 @@ function SearchPage() {
               </div>
             )}
             {activeSearch == "post" && (
-              <div className=" flex flex-col items-center">
+              <main className=" flex flex-col items-center">
                 {searchContext.filterPostList.map((post) => (
                   <>
                     <div className="pt-5 ">
@@ -68,7 +68,7 @@ function SearchPage() {
                     </div>
                   </>
                 ))}
-              </div>
+              </main>
             )}
           </ElementFrame>
         </div>
