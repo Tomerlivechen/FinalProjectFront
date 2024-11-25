@@ -56,6 +56,7 @@ const NotificationObject: React.FC<{
     }
   }, [NotificationData]);
 
+  // do the approrate action for the notification
   const activateNotification = async () => {
     if (notification?.id) {
       await Notification.UpdateNotification(notification?.id, false);

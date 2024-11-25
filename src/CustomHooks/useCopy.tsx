@@ -1,5 +1,5 @@
 import { dialogs } from "../Constants/AlertsConstant";
-
+// hook made to post link to clipboard
 const useCopy = () => {
   return async (postId: string) => {
     const basePath = window.location.origin;

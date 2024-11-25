@@ -52,7 +52,7 @@ export const categories: ICategory[] = [
   { id: 8, name: "Interactive" },
   { id: 9, name: "Visuals" },
 ];
-
+//updating scale for mobile users
 export const updateScale = (scale: number) => {
   const metaViewPort = document.querySelector('meta[name="viewport"]');
   if (metaViewPort) {
@@ -62,6 +62,7 @@ export const updateScale = (scale: number) => {
     );
   }
 };
+//the backend uses UTC , in order to convers UTC to local user time.
 
 export function convertUTCToLocalTime(utcTime: string, full: boolean) {
   const utcDate = new Date(utcTime + "Z");
@@ -77,6 +78,8 @@ export function convertUTCToLocalTime(utcTime: string, full: boolean) {
   }
   return `${year}-${month}-${day} ${hours}:${minutes}`;
 }
+
+//sort any list by any parameter (this was a patchork until made complately generic)
 
 export const sortByProperty = <T,>(
   property: keyof T,
@@ -126,6 +129,7 @@ export const isValidURL = (url: string) => {
   }
 };
 
+// get all the posts of the users the loggind in user
 export const getFlowingPosts = async () => {
   const JWTtoken = localStorage.getItem("token");
   let newAuthState: IUserValues = {
@@ -165,6 +169,7 @@ export const getFlowingPosts = async () => {
   return followingPosts;
 };
 
+// in somae cases requerd for parsing for typescript
 export const stringToAppUserDisplay = (
   userDisplay: IAppUserDisplay | IAppUserDisplay[] | undefined
 ): IAppUserDisplay | IAppUserDisplay[] => {
@@ -177,7 +182,7 @@ export const stringToAppUserDisplay = (
     return userDisplay;
   }
 };
-
+// in somae cases requerd for parsing for typescript
 export const stringToPostDisplay = (
   postDisplay: IPostDisplay | IPostDisplay[] | undefined
 ): IPostDisplay | IPostDisplay[] => {
@@ -193,6 +198,8 @@ export const stringToPostDisplay = (
 interface ErrorResponse {
   [key: string]: string[] | undefined;
 }
+
+//consisntant error message
 export const catchError = (error: AxiosError, action: string) => {
   if (error && error.response && error.response.data) {
     const data = error.response.data as ErrorResponse;

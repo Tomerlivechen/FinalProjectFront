@@ -13,6 +13,7 @@ const SendMessageComponent: React.FC<ISendMessageComponent> = (chatInfo) => {
   const fieldChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setText(e.target.value);
   };
+  // send message when enter is clicked but not shift+enter
   const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();

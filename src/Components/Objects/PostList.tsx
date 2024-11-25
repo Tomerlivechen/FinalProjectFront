@@ -14,6 +14,8 @@ const PostList: React.FC<{ postListValue: PostListValues }> = ({
   const [sortedPosts, setSortedPosts] = useState<IPostDisplay[]>(
     postListValue.posts
   );
+
+  // sort and filter posts
   useEffect(() => {
     if (order && sort && !filterId) {
       const sorted = postListValue.posts

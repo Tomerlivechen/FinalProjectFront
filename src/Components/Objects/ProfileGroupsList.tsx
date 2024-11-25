@@ -30,7 +30,7 @@ const ProfileGroupsList = () => {
   useEffect(() => {
     getSearchParams();
   }, [searchParams]);
-
+  // get the groups the user belongs to
   const GetUserGroups = async (userId: string) => {
     if (userContext.userInfo.UserId) {
       const response = await auth.GetUsersGroups(userId);

@@ -21,11 +21,12 @@ const GroupCardList: React.FC<{
   const [groupFilter, setGroupFilter] = useState<string | null>(null);
   const [, setuserGroup] = useState(false);
 
+  // gets all groups from database
   const GetGroupCards = async () => {
     const response = await Groups.GetGroups();
     setGroupCardData(response.data);
   };
-
+  // gest all groups user is in
   const GetUserGroups = async () => {
     if (userContext.userInfo.UserId) {
       const response = await auth.GetUsersGroups(userContext.userInfo.UserId);
@@ -36,6 +37,8 @@ const GroupCardList: React.FC<{
   useEffect(() => {
     getGroupCards();
   }, [GroupCardListProps.GroupFilter, GroupCardListProps.usersGroups]);
+
+  // detremsains which groups to get from database acording to user input
 
   const getGroupCards = async () => {
     if (
@@ -60,7 +63,9 @@ const GroupCardList: React.FC<{
     }
   };
 
-  const intervalTime = 5000;
+  // refershes groups every 10 seconds
+
+  const intervalTime = 10000;
   useEffect(() => {
     const interval = setInterval(() => {
       getGroupCards();
@@ -68,6 +73,7 @@ const GroupCardList: React.FC<{
     return () => clearInterval(interval);
   }, []);
 
+  // filter groups by user input
   useEffect(() => {
     if (groupCardData && groupFilter) {
       if (groupFilter.length > 0) {

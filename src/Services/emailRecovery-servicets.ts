@@ -16,8 +16,6 @@ export interface ReSetPassword {
 }
 
 const SendRecoveyEmail = async (paswwordReset : ReSetPassword) => {
-
-
   const basePath = window.location.origin;
   const templateParams = {
     to_name: paswwordReset.userInfo.first_Name,

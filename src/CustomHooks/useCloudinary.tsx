@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { dialogs } from "../Constants/AlertsConstant";
 import { Images } from "../Services/image-service";
-
+// hook made to interact comfertibly with the Cloudinary API
 const useCloudinary = (): [
   string, // imageUrl
   File | null, // file

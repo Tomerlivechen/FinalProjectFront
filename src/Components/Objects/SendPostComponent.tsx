@@ -82,6 +82,8 @@ function SendPostComponent() {
       setHoldFile(event.target.files[0]);
     }
   };
+
+  // make sure images are sent to coldery before sending a post
   const handleSubmit = async (values: INewPost) => {
     setPostValues(values);
     if (loggedInContext.token) {
@@ -97,6 +99,7 @@ function SendPostComponent() {
     }
   };
 
+  // once images are saved and a link is receved send the post to backend
   useEffect(() => {
     const submitPost = async () => {
       if (imageUrl) {
@@ -106,6 +109,7 @@ function SendPostComponent() {
     submitPost();
   }, [imageUrl]);
 
+  // send the post to backend fill in the vlaues the formik has troble with
   const postPost = async (values: INewPost) => {
     if (loggedInContext.token) {
       setIsLoading(true);
