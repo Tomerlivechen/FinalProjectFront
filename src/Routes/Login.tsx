@@ -20,6 +20,8 @@ import { useLogin } from "../CustomHooks/useLogin";
 import { useUser } from "../CustomHooks/useUser";
 import DinoSpinner from "../Spinners/DinoSpinner";
 import { MotionFrame } from "../Components/Objects/MotionFrame";
+import { LoginInfo } from "../Types/@UserTypes";
+import { AxiosError } from "axios";
 
 const emailValues: MYFormikValues = {
   Title: "Email Address",
@@ -108,6 +110,27 @@ const LoginPage = () => {
     userContext.userInfo.UserId,
   ]);
 
+  const loginUser = async (o: LoginInfo) => {
+    setIsLoading(true);
+    try {
+      const response = await auth.login(o.email, o.password);
+      if (response.status === 200) {
+        await dialogs.success("Login Succefull");
+        login(response.data.token);
+        window.location.reload();
+      }
+    } catch (error) {
+      const axiosError = error as AxiosError;
+      if (axiosError.response?.status === 401) {
+        await dialogs.error("Password or email incorrect");
+      } else {
+        await dialogs.error("An unknown error occurred. Please try again.");
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <>
       <MotionFrame>
@@ -127,28 +150,7 @@ const LoginPage = () => {
               initialValues={initalValues}
               validationSchema={validationScheme}
               onSubmit={(o) => {
-                setIsLoading(true);
-                auth
-                  .login(o.email, o.password)
-                  .then((response) => {
-                    dialogs.success("Login Succefull").then(() => {
-                      login(response.data.token);
-                      window.location.reload();
-                    });
-                  })
-                  .catch((error) => {
-                    if (error && error.response && error.response.data) {
-                      const errorMessages = error.response.data["Login Failed"];
-                      if (Array.isArray(errorMessages)) {
-                        const message = errorMessages.join(" & ");
-                        dialogs.error(message);
-                      } else {
-                        dialogs.error("An unknown error occurred.");
-                      }
-                    } else {
-                      dialogs.error("An error occurred. Please try again.");
-                    }
-                  });
+                loginUser(o);
               }}
             >
               <Form className="mt-5">

@@ -22,7 +22,9 @@
     show: boolean;
   }
   
-  
+  export interface LoginInfo {
+    email: string; password: string;
+  }
 
   export interface IAuthinitalValues {
     isLoggedin: boolean;
