@@ -97,102 +97,8 @@ function NavBar() {
               </Tooltip>
             </NavLink>
           )}
-          <NavLink className="md:p-3 p-1 pt-2" to="about">
-            <Tooltip title="About">
-              <FaInfo className="md:hidden" size={24} />
-              <p className="hidden md:block">About</p>
-            </Tooltip>
-          </NavLink>
-<<<<<<< Updated upstream
-        )}
-
-        {isLoggedin && (
-          <>
-
-<Tooltip title="search">
-              <button
-                className={` rounded-lg m-2 p-1  ${
-                  !filter ? colors.Nav : colors.SearchButtonActive
-                } 
-              `}
-                onClick={handelsearch}
-              >
-                <FaSearch className="md:hidden" size={24} />
-                <p className="hidden md:block">Search</p>
-              </button>
-            </Tooltip>
-
-            <NavLink
-              className="md:p-3 p-1 pt-2"
-              to={`/profile?userId=${userinfo.userInfo.UserId}`}
-            >
-              <Tooltip title="Profile">
-                <FaUser className="md:hidden" size={24} />
-                <p className="hidden md:block">Profile</p>
-              </Tooltip>
-            </NavLink>
-
-            <NavLink className="md:p-3 p-1 pt-2" to="group">
-              <Tooltip title="Group">
-                <FaPeopleGroup className="md:hidden" size={24} />
-                <p className="hidden md:block">Group</p>
-              </Tooltip>
-            </NavLink>
-
-            {notFeedOrSearch && (
-              <>
-                <Tooltip title="chat">
-                  <button
-                    className={` rounded-lg m-2 p-1  ${colors.Nav} 
-              `}
-                    onClick={toggleChat}
-                  >
-                    <p className="hidden md:block">Chat</p>
-                    <GiChatBubble className="block md:hidden" size={24} />
-                  </button>
-                </Tooltip>
-                {chatFrame && (
-                  <div className={` block absolute right-5 top-14 z-30`}>
-                    <InteractingUsersLists />
-                  </div>
-                )}
-              </>
-            )}
-          </>
-        )}
-        <NavLink className="md:p-3 p-1 pt-2" to="help">
-          <Tooltip title="Help">
-            <MdHelp className="md:hidden" size={24} />
-            <p className="hidden md:block">Help</p>
-          </Tooltip>
-        </NavLink>
-        <NavLink className="md:p-3 p-1 pt-2" to="about">
-          <Tooltip title="About">
-            <FaInfo className="md:hidden" size={24} />
-            <p className="hidden md:block">About</p>
-          </Tooltip>
-        </NavLink>
-        <div className=" flex-1"></div>
-=======
           {isLoggedin && (
             <>
-              <NavLink
-                className="md:p-3 p-1 pt-2"
-                to={`/profile?userId=${userinfo.userInfo.UserId}`}
-              >
-                <Tooltip title="Profile">
-                  <FaUser className="md:hidden" size={24} />
-                  <p className="hidden md:block">Profile</p>
-                </Tooltip>
-              </NavLink>
-              <NavLink className="md:p-3 p-1 pt-2" to="group">
-                <Tooltip title="Group">
-                  <FaPeopleGroup className="md:hidden" size={24} />
-                  <p className="hidden md:block">Group</p>
-                </Tooltip>
-              </NavLink>
->>>>>>> Stashed changes
-
               <Tooltip title="search">
                 <button
                   className={` rounded-lg m-2 p-1  ${
@@ -205,6 +111,24 @@ function NavBar() {
                   <p className="hidden md:block">Search</p>
                 </button>
               </Tooltip>
+
+              <NavLink
+                className="md:p-3 p-1 pt-2"
+                to={`/profile?userId=${userinfo.userInfo.UserId}`}
+              >
+                <Tooltip title="Profile">
+                  <FaUser className="md:hidden" size={24} />
+                  <p className="hidden md:block">Profile</p>
+                </Tooltip>
+              </NavLink>
+
+              <NavLink className="md:p-3 p-1 pt-2" to="group">
+                <Tooltip title="Group">
+                  <FaPeopleGroup className="md:hidden" size={24} />
+                  <p className="hidden md:block">Group</p>
+                </Tooltip>
+              </NavLink>
+
               {notFeedOrSearch && (
                 <>
                   <Tooltip title="chat">
@@ -230,6 +154,12 @@ function NavBar() {
             <Tooltip title="Help">
               <MdHelp className="md:hidden" size={24} />
               <p className="hidden md:block">Help</p>
+            </Tooltip>
+          </NavLink>
+          <NavLink className="md:p-3 p-1 pt-2" to="about">
+            <Tooltip title="About">
+              <FaInfo className="md:hidden" size={24} />
+              <p className="hidden md:block">About</p>
             </Tooltip>
           </NavLink>
         </div>
