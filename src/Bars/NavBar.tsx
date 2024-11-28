@@ -78,23 +78,32 @@ function NavBar() {
     <>
       <Navbar
         id="app-navbar"
-        className={` fixed z-40 w-full flex-row shadow-2xl shadow-slate-800  text-black flex md:gap-3 gap-0 ${colors.Nav} ${colors.NavText}`}
+        className={` fixed z-40 w-full pt-1 flex justify-between items-center flex-row shadow-2xl shadow-slate-800  text-black  md:gap-3 gap-0 ${colors.Nav} ${colors.NavText}`}
       >
-        <Navbar.Brand
-          onClick={brandNav}
-          className="flex-shrink-0 hover:cursor-pointer"
-        >
-          <div className="pt-1 pl-1">
-            <AppLogo Size={"35"} />
-          </div>
-        </Navbar.Brand>
-        {isLoggedin && (
-          <NavLink className="md:p-3 p-1 pt-2" to="feed">
-            <Tooltip title="Feed">
-              <CgFeed className="md:hidden" size={24} />
-              <p className="hidden md:block">Feed</p>
+        <div className="flex space-x-1 ">
+          <Navbar.Brand
+            onClick={brandNav}
+            className="flex-shrink-0 hover:cursor-pointer"
+          >
+            <div className="pt-1 pl-1">
+              <AppLogo Size={"35"} />
+            </div>
+          </Navbar.Brand>
+          {isLoggedin && (
+            <NavLink className="md:p-3 p-1 pt-2" to="feed">
+              <Tooltip title="Feed">
+                <CgFeed className="md:hidden" size={24} />
+                <p className="hidden md:block">Feed</p>
+              </Tooltip>
+            </NavLink>
+          )}
+          <NavLink className="md:p-3 p-1 pt-2" to="about">
+            <Tooltip title="About">
+              <FaInfo className="md:hidden" size={24} />
+              <p className="hidden md:block">About</p>
             </Tooltip>
           </NavLink>
+<<<<<<< Updated upstream
         )}
 
         {isLoggedin && (
@@ -164,38 +173,99 @@ function NavBar() {
           </Tooltip>
         </NavLink>
         <div className=" flex-1"></div>
+=======
+          {isLoggedin && (
+            <>
+              <NavLink
+                className="md:p-3 p-1 pt-2"
+                to={`/profile?userId=${userinfo.userInfo.UserId}`}
+              >
+                <Tooltip title="Profile">
+                  <FaUser className="md:hidden" size={24} />
+                  <p className="hidden md:block">Profile</p>
+                </Tooltip>
+              </NavLink>
+              <NavLink className="md:p-3 p-1 pt-2" to="group">
+                <Tooltip title="Group">
+                  <FaPeopleGroup className="md:hidden" size={24} />
+                  <p className="hidden md:block">Group</p>
+                </Tooltip>
+              </NavLink>
+>>>>>>> Stashed changes
 
-        {!isLoggedin && (
-          <>
-            <NavLink className="md:p-3 p-1 pt-2" to="register">
-              Register
-            </NavLink>
-            <NavLink className="md:p-3 p-1 pt-2" to="login">
-              <Tooltip title="Log In">
-                <LuLogIn size={24} />
+              <Tooltip title="search">
+                <button
+                  className={` rounded-lg m-2 p-1  ${
+                    !filter ? colors.Nav : colors.SearchButtonActive
+                  } 
+              `}
+                  onClick={handelsearch}
+                >
+                  <FaSearch className="md:hidden" size={24} />
+                  <p className="hidden md:block">Search</p>
+                </button>
               </Tooltip>
-            </NavLink>
-          </>
-        )}
-        {isLoggedin && (
-          <>
-            <div className="mr-6">
-              <NotificationAlert />
-            </div>
-            <button className="md:p-3 p-1 pt-2" onClick={handelLogout}>
-              <Tooltip title="Log out">
-                <LuLogOut size={24} />
-              </Tooltip>
-            </button>
-          </>
-        )}
-        <button onClick={toggleTheme} className="rounded-lg p-2">
-          {Theme == "dark" ? (
-            <BsFillLightbulbFill size={24} />
-          ) : (
-            <BsFillLightbulbOffFill size={24} />
+              {notFeedOrSearch && (
+                <>
+                  <Tooltip title="chat">
+                    <button
+                      className={` rounded-lg m-2 p-1  ${colors.Nav} 
+              `}
+                      onClick={toggleChat}
+                    >
+                      <p className="hidden md:block">Chat</p>
+                      <GiChatBubble className="block md:hidden" size={24} />
+                    </button>
+                  </Tooltip>
+                  {chatFrame && (
+                    <div className={` block absolute right-5 top-14 z-30`}>
+                      <InteractingUsersLists />
+                    </div>
+                  )}
+                </>
+              )}
+            </>
           )}
-        </button>
+          <NavLink className="md:p-3 p-1 pt-2" to="help">
+            <Tooltip title="Help">
+              <MdHelp className="md:hidden" size={24} />
+              <p className="hidden md:block">Help</p>
+            </Tooltip>
+          </NavLink>
+        </div>
+        <div className="flex space-x-1">
+          {!isLoggedin && (
+            <>
+              <NavLink className="md:p-3 p-1 pt-2" to="register">
+                Register
+              </NavLink>
+              <NavLink className="md:p-3 p-1 pt-2" to="login">
+                <Tooltip title="Log In">
+                  <LuLogIn size={24} />
+                </Tooltip>
+              </NavLink>
+            </>
+          )}
+          {isLoggedin && (
+            <>
+              <div className="mr-3">
+                <NotificationAlert />
+              </div>
+              <button className="md:p-3 p-1 pt-2" onClick={handelLogout}>
+                <Tooltip title="Log out">
+                  <LuLogOut size={24} />
+                </Tooltip>
+              </button>
+            </>
+          )}
+          <button onClick={toggleTheme} className="rounded-lg p-2">
+            {Theme == "dark" ? (
+              <BsFillLightbulbFill size={24} />
+            ) : (
+              <BsFillLightbulbOffFill size={24} />
+            )}
+          </button>
+        </div>
       </Navbar>
       {filter && <FilterBar />}
     </>
