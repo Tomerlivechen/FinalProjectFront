@@ -96,31 +96,11 @@ function NavBar() {
             </Tooltip>
           </NavLink>
         )}
-        <NavLink className="md:p-3 p-1 pt-2" to="about">
-          <Tooltip title="About">
-            <FaInfo className="md:hidden" size={24} />
-            <p className="hidden md:block">About</p>
-          </Tooltip>
-        </NavLink>
+
         {isLoggedin && (
           <>
-            <NavLink
-              className="md:p-3 p-1 pt-2"
-              to={`/profile?userId=${userinfo.userInfo.UserId}`}
-            >
-              <Tooltip title="Profile">
-                <FaUser className="md:hidden" size={24} />
-                <p className="hidden md:block">Profile</p>
-              </Tooltip>
-            </NavLink>
-            <NavLink className="md:p-3 p-1 pt-2" to="group">
-              <Tooltip title="Group">
-                <FaPeopleGroup className="md:hidden" size={24} />
-                <p className="hidden md:block">Group</p>
-              </Tooltip>
-            </NavLink>
 
-            <Tooltip title="search">
+<Tooltip title="search">
               <button
                 className={` rounded-lg m-2 p-1  ${
                   !filter ? colors.Nav : colors.SearchButtonActive
@@ -132,6 +112,24 @@ function NavBar() {
                 <p className="hidden md:block">Search</p>
               </button>
             </Tooltip>
+
+            <NavLink
+              className="md:p-3 p-1 pt-2"
+              to={`/profile?userId=${userinfo.userInfo.UserId}`}
+            >
+              <Tooltip title="Profile">
+                <FaUser className="md:hidden" size={24} />
+                <p className="hidden md:block">Profile</p>
+              </Tooltip>
+            </NavLink>
+
+            <NavLink className="md:p-3 p-1 pt-2" to="group">
+              <Tooltip title="Group">
+                <FaPeopleGroup className="md:hidden" size={24} />
+                <p className="hidden md:block">Group</p>
+              </Tooltip>
+            </NavLink>
+
             {notFeedOrSearch && (
               <>
                 <Tooltip title="chat">
@@ -157,6 +155,12 @@ function NavBar() {
           <Tooltip title="Help">
             <MdHelp className="md:hidden" size={24} />
             <p className="hidden md:block">Help</p>
+          </Tooltip>
+        </NavLink>
+        <NavLink className="md:p-3 p-1 pt-2" to="about">
+          <Tooltip title="About">
+            <FaInfo className="md:hidden" size={24} />
+            <p className="hidden md:block">About</p>
           </Tooltip>
         </NavLink>
         <div className=" flex-1"></div>
