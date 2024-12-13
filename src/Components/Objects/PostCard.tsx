@@ -65,7 +65,14 @@ const PostCard: React.FC<IPostDisplay> = (postDisplay) => {
             <div className="flex justify-evenly ">
               {postDisplay.imageURL && (
                 <button className="" onClick={handelImage}>
-                  <img className="h-32 " src={postDisplay.imageURL} />
+                  <img
+                    className={`h-32 ${
+                      (postDisplay.categoryId == 13 ||
+                        postDisplay.categoryId == 14) &&
+                      `blur-xl`
+                    } `}
+                    src={postDisplay.imageURL}
+                  />
                 </button>
               )}
             </div>

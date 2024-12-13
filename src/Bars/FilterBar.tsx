@@ -10,6 +10,7 @@ import { MdOutlineTitle } from "react-icons/md";
 import { RiSignpostFill } from "react-icons/ri";
 import { TbArrowsDownUp } from "react-icons/tb";
 import { IPostSelector, IUserSelector } from "../ContextAPI/SearchContext";
+import { dialogs } from "../Constants/AlertsConstant";
 
 function FilterBar() {
   const [selectedUser, setSelectedUser] = useState(false);
@@ -29,11 +30,15 @@ function FilterBar() {
   const [searchActive, setSearchActive] = useState(false);
 
   const handleSearch = () => {
-    if (selectedUser) {
-      searchFilter.filterUsers();
-    }
-    if (selectedPost) {
-      searchFilter.filterPosts();
+    if (searchFilter.searchValue.length > 1) {
+      if (selectedUser) {
+        searchFilter.filterUsers();
+      }
+      if (selectedPost) {
+        searchFilter.filterPosts();
+      }
+    } else {
+      dialogs.error("Please write at least two characters");
     }
   };
 
@@ -79,26 +84,26 @@ function FilterBar() {
     }
   };
   const toggleUser = async () => {
-    await setSelectedUser((prevselectedUser) => !prevselectedUser);
-    await setUserSelector({
+    setSelectedUser((prevselectedUser) => !prevselectedUser);
+    setUserSelector({
       UserName: false,
       FirstName: false,
       LastName: false,
     });
     if (selectedPost == true) {
-      await setSelectedPost(false);
+      setSelectedPost(false);
     }
   };
   const togglePost = async () => {
-    await setSelectedPost((prevselectedPost) => !prevselectedPost);
-    await setPostSelector({
+    setSelectedPost((prevselectedPost) => !prevselectedPost);
+    setPostSelector({
       UserName: false,
       Title: false,
       KeyWords: false,
       Voted: false,
     });
     if (selectedUser == true) {
-      await setSelectedUser(false);
+      setSelectedUser(false);
     }
   };
 

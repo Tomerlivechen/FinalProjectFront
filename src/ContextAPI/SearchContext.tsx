@@ -10,6 +10,7 @@ import {
 } from "../Constants/Patterns";
 import { Posts } from "../Services/post-service";
 import { ProviderProps } from "../Types/@StructureTypes";
+import { dialogs } from "../Constants/AlertsConstant";
 
 export interface IUserSelector {
   UserName: boolean;
@@ -147,6 +148,9 @@ const SearchProvider: React.FC<ProviderProps> = ({ children }) => {
         );
       }
       setFilterUserList(filtering);
+      if (filtering.length == 0) {
+        dialogs.error("Nothing found!");
+      }
       setloadingData(false);
     }
   };
@@ -192,6 +196,9 @@ const SearchProvider: React.FC<ProviderProps> = ({ children }) => {
         filtering = firstFilter;
       }
       setFilterPostList(filtering);
+      if (filtering.length == 0) {
+        dialogs.error("Nothing found!");
+      }
       setloadingData(false);
     }
   };

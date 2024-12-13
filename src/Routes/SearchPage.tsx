@@ -53,7 +53,9 @@ function SearchPage() {
               <div className=" flex flex-col items-center">
                 {searchContext.filterUserList.map((user) => (
                   <>
-                    <UserCard key={user.id} UserDisplay={user} />
+                    <div className="pt-5" key={user.id}>
+                      <UserCard UserDisplay={user} />
+                    </div>
                     <hr />
                   </>
                 ))}
@@ -63,8 +65,8 @@ function SearchPage() {
               <main className=" flex flex-col items-center">
                 {searchContext.filterPostList.map((post) => (
                   <>
-                    <div className="pt-5 ">
-                      <PostCard key={post.id} {...post} />
+                    <div className="pt-5" key={post.id}>
+                      <PostCard {...post} />
                     </div>
                   </>
                 ))}

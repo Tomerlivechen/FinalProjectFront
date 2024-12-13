@@ -152,6 +152,11 @@ const HelpPageComponent: React.FC = () => {
                 keywords, link, and image (up to 2MB).
               </li>
               <li>
+                NSFW and Explicit posts should be categorized accordingly. NSFW
+                will censor the image when not selected, while Explicit will
+                censor both the image and text unless selected.
+              </li>
+              <li>
                 Click Submit to publish your post. It will appear on your feed
                 and on the feeds of your followers.
               </li>
