@@ -138,6 +138,7 @@ The website is hosted on Render. You can access it using the following link: [De
 ### New Post
 - Go to the *New Post* tab and click the "Create" button.
 - Fill in the post details: title, text, category, and optional keywords, link, and image (up to 2MB).
+- NSFW and Explicit posts should be categorized accordingly. NSFW will censor the image when not selected, while Explicit will censor both the image and text unless selected.
 - Click *Submit* to publish your post. It will appear on your feed and on the feeds of your followers.
 
 ### Editing and Deleting Posts
