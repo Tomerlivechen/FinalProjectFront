@@ -45,7 +45,7 @@ const EditPostModal: React.FC<EditPostModalProps> = ({
   const loggedInContext = useLogin();
   const [imageUrl, holdFile, setHoldFile, setImageURL, clear] = useCloudinary();
   const [PostToEdit, setPostToEdit] = useState<IPostDisplay>(post);
-  const [catFilter, setCatFilter] = useState<number>();
+  const [catFilter, setCatFilter] = useState<number>(0);
   const [catName, setCatName] = useState("");
 
   const handleclose = () => {

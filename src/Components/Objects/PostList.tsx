@@ -38,6 +38,7 @@ const PostList: React.FC<{ postListValue: PostListValues }> = ({
       const sortedFilterd = multyFilter
         .slice()
         .sort(sortByProperty(sort, order));
+      console.log(sortedFilterd);
       setSortedPosts(sortedFilterd);
     }
   }, [postListValue]);
