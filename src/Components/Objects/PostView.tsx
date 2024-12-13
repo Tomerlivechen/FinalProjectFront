@@ -227,7 +227,25 @@ const PostView: React.FC<IPostDisplay> = (postDisplay) => {
               >
                 {postDisplayState?.title}
               </div>
-              {longText.textLength > 180 && (
+
+              <div className="relative  " />
+              <div className="flex justify-evenly ">
+                {postDisplayState?.imageURL && (
+                  <button className="" onClick={handelImage}>
+                    <img
+                      className={`h-56 ${
+                        postDisplayState?.categoryId === 14 ||
+                        postDisplayState?.categoryId === 13
+                          ? `blur-xl`
+                          : ``
+                      } `}
+                      src={postDisplayState.imageURL}
+                    />
+                  </button>
+                )}
+              </div>
+              {(longText.textLength > 180 ||
+                postDisplayState?.categoryId === 13) && (
                 <div className="flex items-center justify-end p-1">
                   <button
                     className="flex items-center justify-center"
@@ -245,21 +263,16 @@ const PostView: React.FC<IPostDisplay> = (postDisplay) => {
                   </button>
                 </div>
               )}
-              <div className="relative  " />
-              <div className="flex justify-evenly ">
-                {postDisplayState?.imageURL && (
-                  <button className="" onClick={handelImage}>
-                    <img className="h-56 " src={postDisplayState.imageURL} />
-                  </button>
-                )}
-              </div>
-
               <div className="p-0.5" />
               <div
                 className={`${
                   colors.TextBox
                 } dark:scrollbar-dark scrollbar-light text-wrap ${
-                  longText.OpenTextBox ? "h-fit" : "h-20"
+                  postDisplayState?.categoryId === 13 && !longText.OpenTextBox
+                    ? `h-0`
+                    : longText.OpenTextBox
+                    ? `h-fit`
+                    : `h-20`
                 }`}
                 style={{
                   overflowY: "auto",

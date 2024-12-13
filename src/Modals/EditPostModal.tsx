@@ -45,7 +45,7 @@ const EditPostModal: React.FC<EditPostModalProps> = ({
   const loggedInContext = useLogin();
   const [imageUrl, holdFile, setHoldFile, setImageURL, clear] = useCloudinary();
   const [PostToEdit, setPostToEdit] = useState<IPostDisplay>(post);
-  const [catFilter, setCatFilter] = useState<number>(0);
+  const [catFilter, setCatFilter] = useState<number>();
   const [catName, setCatName] = useState("");
 
   const handleclose = () => {
@@ -60,6 +60,9 @@ const EditPostModal: React.FC<EditPostModalProps> = ({
   useEffect(() => {
     if (!isEqual(PostToEdit, postValues)) {
       setPostValues(PostToEdit);
+    }
+    if (PostToEdit.categoryId) {
+      setCatFilter(PostToEdit.categoryId);
     }
   }, [PostToEdit]);
 
@@ -121,7 +124,6 @@ const EditPostModal: React.FC<EditPostModalProps> = ({
       if (catFilter != updatedValues.categoryId) {
         updatedValues = { ...values, categoryId: catFilter };
       }
-
       try {
         clear();
         const response = await Posts.EditPost(updatedValues as IPostDisplay);
