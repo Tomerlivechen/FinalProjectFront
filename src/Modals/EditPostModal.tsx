@@ -155,6 +155,7 @@ const EditPostModal: React.FC<EditPostModalProps> = ({
 
   const handleRemoveImage = () => {
     setPostValues((prevPostValues) => ({ ...prevPostValues, imageURL: "" }));
+    clear();
   };
 
   const fieldChange = (
@@ -267,7 +268,7 @@ const EditPostModal: React.FC<EditPostModalProps> = ({
                           hidden
                         />
                         <div className="flex justify-evenly">
-                          {post.imageURL || holdFile ? (
+                          {postValues.imageURL || holdFile ? (
                             <>
                               <FcEditImage
                                 onClick={() => {

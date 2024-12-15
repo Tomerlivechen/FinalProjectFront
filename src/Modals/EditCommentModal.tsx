@@ -135,6 +135,7 @@ const EditCommentModal: React.FC<EditCommentModalProps> = ({
       ...prevCommentValues,
       imageURL: "",
     }));
+    clear();
   };
 
   useEffect(() => {
