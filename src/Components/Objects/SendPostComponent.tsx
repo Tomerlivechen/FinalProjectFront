@@ -147,7 +147,11 @@ function SendPostComponent() {
     <>
       {open ? (
         <>
-          <ElementFrame height="auto" width="400px" padding="1">
+          <ElementFrame
+            height="auto"
+            padding="1"
+            tailwind="md:w-[400px] w-[370px]"
+          >
             <Formik
               initialValues={NewPost}
               validationSchema={validationScheme}
@@ -155,7 +159,7 @@ function SendPostComponent() {
             >
               {({ handleSubmit }) => (
                 <Form className="mt-1" onSubmit={handleSubmit}>
-                  <div className="font-extralight form-group flex flex-col gap-2 w-full mx-auto text-lg mt-1">
+                  <div className="font-extralight form-group flex flex-col gap-2 md:w-[400px] w-[370px] mx-auto text-lg mt-1">
                     <div className="flex justify-evenly">
                       <label className="text-4xl font-bold  text-center">
                         New Post
@@ -167,23 +171,24 @@ function SendPostComponent() {
                         {open ? "Close" : "Write"}
                       </button>
                     </div>
+
+                    <div className="font-extralight form-group flex flex-col gap-2 w-full mx-auto text-lg mt-1">
+                      <Field
+                        className={`rounded-md hover:border-2 border-2 px-2 py-2 md:mx-1 mx-4  ${colors.TextBox}`}
+                        id="title"
+                        name="title"
+                        type="text"
+                        placeholder="Title"
+                        required
+                      />
+                      <ErrorMessage
+                        name="title"
+                        component="div"
+                        className="text-red-500"
+                      />
+                    </div>
                     <Field
-                      className={`rounded-md hover:border-2 border-2 px-2 py-2  ${colors.TextBox}`}
-                      id="title"
-                      name="title"
-                      type="text"
-                      placeholder="Title"
-                      required
-                    />
-                    <ErrorMessage
-                      name="title"
-                      component="div"
-                      className="text-red-500"
-                    />
-                  </div>
-                  <div className="font-extralight form-group flex flex-col gap-2 w-full mx-auto text-lg mt-1">
-                    <Field
-                      className={`rounded-md hover:border-2 border-2 px-2 py-2  ${colors.TextBox}`}
+                      className={`rounded-md hover:border-2 border-2 px-2 py-2 md:mx-1 mx-4  ${colors.TextBox}`}
                       id="text"
                       name="text"
                       type="text"
@@ -206,7 +211,7 @@ function SendPostComponent() {
 
                   <div className="font-extralight form-group flex flex-col gap-2 w-full mx-auto text-lg mt-1">
                     <Field
-                      className={`rounded-md hover:border-2 border-2 px-2 py-2  ${colors.TextBox}`}
+                      className={`rounded-md hover:border-2 border-2 px-2 py-2 md:mx-1 mx-4  ${colors.TextBox}`}
                       id="keyWords"
                       name="keyWords"
                       type="text"
@@ -360,7 +365,11 @@ function SendPostComponent() {
         </>
       ) : (
         <>
-          <ElementFrame height="55px" width="400px" padding="1">
+          <ElementFrame
+            height="55px"
+            tailwind="md:w-[400px] w-[370px]"
+            padding="1"
+          >
             <div className="flex justify-evenly">
               <label className="text-4xl font-bold  mb-1 ">New Post</label>
               <button

@@ -259,7 +259,7 @@ const PostFrame = () => {
     <>
       <div className="flex flex-col">
         <div
-          className={`${colors.ElementFrame} h-14 w-fit flex justify-between p-4 pb-4  gap-4 rounded-b-xl `}
+          className={`${colors.ElementFrame} h-14 w-fit flex justify-between md:p-4 pb-4  gap-4 rounded-b-xl `}
         >
           <IconSortButton
             icon={FaCircleUp}
@@ -305,7 +305,7 @@ const PostFrame = () => {
         </div>
 
         <button
-          className={`font-bold mb-2 ${colors.ElementFrame} w-[400px]`}
+          className={`font-bold mb-2 ${colors.ElementFrame} md:w-[400px] w-[370px]`}
           onClick={() => toggleCatigoryFilter()}
         >
           {" "}
@@ -320,7 +320,7 @@ const PostFrame = () => {
         {openFilter && (
           <>
             <div
-              className={`grid grid-cols-2 gap-1 ${colors.ElementFrame} w-[400px]`}
+              className={`grid grid-cols-2 gap-1 ${colors.ElementFrame} md:w-[400px] w-[370px]`}
             >
               {categories.map((category) => (
                 <label

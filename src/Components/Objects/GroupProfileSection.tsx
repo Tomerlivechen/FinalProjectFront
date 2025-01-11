@@ -126,7 +126,7 @@ const GroupProfileSection = () => {
                     </Tooltip>
                   </div>
                 </div>
-                <div className="absolute right-0 p-2 flex flex-col items-end">
+                <div className="absolute right-0 p-2 flex flex-col items-end md:mt-0  mt-9">
                   {userContext.userInfo.UserId == groupInfo.adminId && (
                     <button
                       onClick={() =>

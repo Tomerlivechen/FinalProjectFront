@@ -196,7 +196,7 @@ const GroupEditComponent = () => {
       {!loading && newGroupData && (
         <div className="flex justify-center">
           <ElementFrame
-            tailwind="h-fit"
+            tailwind="h-fit md:w-[700px] w-[350px]"
             width="700px"
             overflowY="auto"
             padding="0 pb-4"

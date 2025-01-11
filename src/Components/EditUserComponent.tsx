@@ -244,7 +244,7 @@ const EditUserComponent: React.FC<{ userInfo: IAppUserDisplay }> = ({
       <div className="flex justify-center">
         <ElementFrame
           height="800px"
-          width="700px"
+          tailwind="md:w-[700px] w-350"
           overflowY="auto"
           padding="0 pb-4"
         >

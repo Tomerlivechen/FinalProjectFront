@@ -97,7 +97,7 @@ const ImageObject: React.FC<{
           <div>
             <Tooltip title={`image of ${imageObject.title}`}>
               <ElementFrame
-                tailwind={`h-48 w-48 border-2 border-y-amber-700  border-x-teal-500 flex flex-col items-center justify-center hover:cursor-pointer`}
+                tailwind={`md:h-48 md:w-48 h-40 w-40  border-2 border-y-amber-700  border-x-teal-500 flex flex-col items-center justify-center hover:cursor-pointer`}
               >
                 <div className="flex">
                   <Tooltip title={imageObject.title}>

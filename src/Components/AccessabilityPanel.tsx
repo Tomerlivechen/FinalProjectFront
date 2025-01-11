@@ -60,14 +60,18 @@ const AccessabilityPanel = () => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (open && panelRef.current && !panelRef.current.contains(event.target as Node)) {
-        setOpen(false); 
+      if (
+        open &&
+        panelRef.current &&
+        !panelRef.current.contains(event.target as Node)
+      ) {
+        setOpen(false);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
 
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [open]);
 
   const toggleZoom = () => {
@@ -101,7 +105,7 @@ const AccessabilityPanel = () => {
   };
   return (
     <>
-      <button className="fixed top-40 left-0 z-50 ">
+      <button className="fixed top-24 left-0 z-50 ">
         <Tooltip
           title="Accessibility"
           aria-description="Accessibility Panel"
@@ -114,62 +118,62 @@ const AccessabilityPanel = () => {
         </Tooltip>
       </button>
       {open && (
-        <><div ref={panelRef}>
-          <ElementFrame 
-            height="250px"
-            width="250px"
-            padding="2"
-            tailwind="fixed top-36 left-10 border-2  border-orange-500"
-            zindex={1000}
-          >
-            <div
-              className={`${colors.ActiveText}  flex justify-center text-center space-x-2 `}
+        <>
+          <div ref={panelRef}>
+            <ElementFrame
+              width="250px"
+              padding="2"
+              tailwind="fixed top-36 left-10 border-2 h-[180px] md:h-[250px]  border-orange-500"
+              zindex={1000}
             >
-              <div className="flex items-center">Accessibility Panel</div>
-            </div>
-            <div className="h-5"></div>
-            <div>
-              <button
-                className={`flex items-center gap-3 space-x-2 ${colors.ButtonFont} font-bold pl-1`}
-                onClick={() => toggleContrast()}
+              <div
+                className={`${colors.ActiveText}  flex justify-center text-center space-x-2 `}
               >
-                {contrast.colorContrast ? (
-                  <IoColorPaletteOutline size={40} />
-                ) : (
-                  <IoIosColorPalette size={40} />
-                )}
-                Color Contrast
-              </button>
-              <div className="h-5"></div>
-              <button
-                className={`flex items-center gap-3 space-x-2 ${colors.ButtonFont} font-bold pl-1`}
-                onClick={() => toggleGrayscale()}
-              >
-                {contrast.color ? (
-                  <MdInvertColorsOff size={40} />
-                ) : (
-                  <MdInvertColors size={40} />
-                )}
-                Gray Scale
-              </button>
-              <div className="h-5"></div>
-              <div className="flex space-x-4">
-                <button
-                  className={`flex items-center gap-3 space-x-2 ${colors.ButtonFont} font-bold pl-1`}
-                  onClick={() => toggleZoom()}
-                >
-                  <GrZoomIn size={35} />
-                  Adjust zoom {Math.round(zoom.zoom * 100)}%
-                </button>
-                <button
-                  className={`flex items-center gap-3 space-x-2 ${colors.ButtonFont} font-bold pl-1`}
-                  onClick={() => toggleZoomOut()}
-                >
-                  <GrZoomOut size={35} />
-                </button>
+                <div className="flex items-center">Accessibility Panel</div>
               </div>
-            </div>
-          </ElementFrame>
+              <div className="h-5"></div>
+              <div>
+                <button
+                  className={`flex items-center gap-3 space-x-2 ${colors.ButtonFont} font-bold pl-1`}
+                  onClick={() => toggleContrast()}
+                >
+                  {contrast.colorContrast ? (
+                    <IoColorPaletteOutline size={40} />
+                  ) : (
+                    <IoIosColorPalette size={40} />
+                  )}
+                  Color Contrast
+                </button>
+                <div className="h-5"></div>
+                <button
+                  className={`flex items-center gap-3 space-x-2 ${colors.ButtonFont} font-bold pl-1`}
+                  onClick={() => toggleGrayscale()}
+                >
+                  {contrast.color ? (
+                    <MdInvertColorsOff size={40} />
+                  ) : (
+                    <MdInvertColors size={40} />
+                  )}
+                  Gray Scale
+                </button>
+                <div className="h-5"></div>
+                <div className="hidden md:flex space-x-4">
+                  <button
+                    className={`flex items-center gap-3 space-x-2 ${colors.ButtonFont} font-bold pl-1`}
+                    onClick={() => toggleZoom()}
+                  >
+                    <GrZoomIn size={35} />
+                    Adjust zoom {Math.round(zoom.zoom * 100)}%
+                  </button>
+                  <button
+                    className={`flex items-center gap-3 space-x-2 ${colors.ButtonFont} font-bold pl-1`}
+                    onClick={() => toggleZoomOut()}
+                  >
+                    <GrZoomOut size={35} />
+                  </button>
+                </div>
+              </div>
+            </ElementFrame>
           </div>
         </>
       )}

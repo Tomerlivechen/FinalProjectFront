@@ -115,8 +115,7 @@ const CommentView: React.FC<ICommentDisplay> = (commentDisplay) => {
       {commentDisplayState && (
         <>
           <ElementFrame
-            tailwind="h-fit"
-            width="400px"
+            tailwind="h-fit w-[340px] md:w-[400px]"
             padding="2"
             position="relative"
             margin="t-2"

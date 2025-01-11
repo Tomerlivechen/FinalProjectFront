@@ -53,7 +53,7 @@ const GroupCreation = () => {
 
         {open && (
           <div className="mt-4">
-            <ElementFrame padding={"3"}>
+            <ElementFrame padding={"3"} tailwind="w-[320px] md:w-[200px]">
               <Formik
                 initialValues={groupValues}
                 validationSchema={validationScheme}
@@ -61,17 +61,17 @@ const GroupCreation = () => {
                   createGroup(o);
                 }}
               >
-                <Form className="mt-5">
+                <Form className="mt-5 ">
                   <div className="w-full">
-                    <div className={`w-full pr-2 pl-2 `}>
+                    <div className={`w-72 md:w-full pr-2 pl-2 `}>
                       <FormikElementBuilder {...nameValues} />
                     </div>
-                    <div className="w-full pl-2 pr-2">
+                    <div className="w-72 md:w-full pl-2 pr-2">
                       <FormikElementBuilder {...descriptionlValues} />
                     </div>
                   </div>
 
-                  <div className="font-extralight rounded-md border-2 form-group flex flex-col  text-lg mt-5">
+                  <div className="w-72 md:w-full font-extralight rounded-md border-2 form-group flex flex-col  text-lg mt-5">
                     <button
                       disabled={isLoading}
                       type="submit"

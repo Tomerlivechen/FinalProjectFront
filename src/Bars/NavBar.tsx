@@ -90,7 +90,7 @@ function NavBar() {
             </div>
           </Navbar.Brand>
           {isLoggedin && (
-            <NavLink className="md:p-3 p-1 pt-2" to="feed">
+            <NavLink className="md:p-3 p-0 pt-2" to="feed">
               <Tooltip title="Feed">
                 <CgFeed className="md:hidden" size={24} />
                 <p className="hidden md:block">Feed</p>
@@ -101,7 +101,7 @@ function NavBar() {
             <>
               <Tooltip title="search">
                 <button
-                  className={` rounded-lg m-2 p-1  ${
+                  className={` rounded-lg m-2 md:p-1 px-1  ${
                     !filter ? colors.Nav : colors.SearchButtonActive
                   } 
               `}
@@ -113,7 +113,7 @@ function NavBar() {
               </Tooltip>
 
               <NavLink
-                className="md:p-3 p-1 pt-2"
+                className="md:p-3 p-0 pt-2"
                 to={`/profile?userId=${userinfo.userInfo.UserId}`}
               >
                 <Tooltip title="Profile">
@@ -122,7 +122,7 @@ function NavBar() {
                 </Tooltip>
               </NavLink>
 
-              <NavLink className="md:p-3 p-1 pt-2" to="group">
+              <NavLink className="md:p-3 p-0 pt-2" to="group">
                 <Tooltip title="Group">
                   <FaPeopleGroup className="md:hidden" size={24} />
                   <p className="hidden md:block">Group</p>
@@ -133,7 +133,7 @@ function NavBar() {
                 <>
                   <Tooltip title="chat">
                     <button
-                      className={` rounded-lg m-2 p-1  ${colors.Nav} 
+                      className={` rounded-lg m-2 md:p-1 p-0  ${colors.Nav} 
               `}
                       onClick={toggleChat}
                     >
@@ -150,13 +150,13 @@ function NavBar() {
               )}
             </>
           )}
-          <NavLink className="md:p-3 p-1 pt-2" to="help">
+          <NavLink className="md:p-3 p-0 pt-2" to="help">
             <Tooltip title="Help">
               <MdHelp className="md:hidden" size={24} />
               <p className="hidden md:block">Help</p>
             </Tooltip>
           </NavLink>
-          <NavLink className="md:p-3 p-1 pt-2" to="about">
+          <NavLink className="md:p-3 p-0 pt-2" to="about">
             <Tooltip title="About">
               <FaInfo className="md:hidden" size={24} />
               <p className="hidden md:block">About</p>
@@ -166,10 +166,10 @@ function NavBar() {
         <div className="flex space-x-1">
           {!isLoggedin && (
             <>
-              <NavLink className="md:p-3 p-1 pt-2" to="register">
+              <NavLink className="md:p-3 p-0 md:pt-2" to="register">
                 Register
               </NavLink>
-              <NavLink className="md:p-3 p-1 pt-2" to="login">
+              <NavLink className="md:p-3 p-0 md:pt-2" to="login">
                 <Tooltip title="Log In">
                   <LuLogIn size={24} />
                 </Tooltip>
@@ -178,17 +178,17 @@ function NavBar() {
           )}
           {isLoggedin && (
             <>
-              <div className="mr-3">
+              <div className=" mr-3 -mt-2 md:-mt-1">
                 <NotificationAlert />
               </div>
-              <button className="md:p-3 p-1 pt-2" onClick={handelLogout}>
+              <button className="md:p-3 p-0 md:pt-2 " onClick={handelLogout}>
                 <Tooltip title="Log out">
                   <LuLogOut size={24} />
                 </Tooltip>
               </button>
             </>
           )}
-          <button onClick={toggleTheme} className="rounded-lg p-2">
+          <button onClick={toggleTheme} className="rounded-lg md:p-2 pr-1">
             {Theme == "dark" ? (
               <BsFillLightbulbFill size={24} />
             ) : (

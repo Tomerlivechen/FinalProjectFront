@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Notification } from "../../Services/notification-service";
 import { NotificationObject } from "./NotificationObject";
 import { INotificationDisplay } from "../../Types/@NotificationTyoe";
+import { sortByProperty } from "../../Constants/Patterns";
 
 const NotificationList = () => {
   const [notifications, setNotifications] = useState<
@@ -11,7 +12,9 @@ const NotificationList = () => {
   const [loading, setLoading] = useState(true);
   const getNotificatins = async () => {
     const noteList = await Notification.GetNotification();
-    setNotifications(noteList.data);
+    setNotifications(
+      noteList.data.slice().sort(sortByProperty("date", "desc"))
+    );
   };
 
   useEffect(() => {

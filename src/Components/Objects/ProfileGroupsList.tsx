@@ -56,7 +56,7 @@ const ProfileGroupsList = () => {
   return (
     <>
       {!loading && groupCardData && (
-        <div className="grid grid-cols-1 gap-4">
+        <div className="grid md:grid-cols-1 grid-cols-2 gap-4">
           {groupCardData.map((group) => (
             <div className="p-2" key={group.id}>
               <GroupCard GroupCardData={group} />

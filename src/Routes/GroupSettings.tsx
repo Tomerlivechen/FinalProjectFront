@@ -43,9 +43,11 @@ const GroupSettings = () => {
           <DinoSpinner size={30} />
         ) : (
           <>
-            <div className="flex justify-center items-start space-x-4 mt-8">
-              <GroupEditComponent />
-              <MemberEditTabList GroupId={GroupId} />
+            <div className="mt-8">
+              <div className="flex flex-col md:flex-row justify-center items-start md:space-x-4">
+                <GroupEditComponent />
+                <MemberEditTabList GroupId={GroupId} />
+              </div>
             </div>
           </>
         )}

@@ -190,7 +190,7 @@ const ProfileUserSection: React.FC<ProfileUserSectionProps> = ({ userId }) => {
                     )}
                   </p>
                 </div>
-                <div className="absolute right-0 p-2">
+                <div className="absolute right-0 p-2 md:mt-0 mt-10">
                   {userContex.userInfo.UserId == user.id && (
                     <button onClick={() => navigate("/settings")}>
                       <FaUserGear

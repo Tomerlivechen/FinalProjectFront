@@ -41,7 +41,7 @@ const MemberEditTab: React.FC<{ METProps: IMemberEditTabProps }> = ({
   return (
     <>
       {!loading && userData && !userData.blockedYou ? (
-        <ElementFrame height="62px" tailwind="w-fit" padding="0">
+        <ElementFrame height="62px" tailwind="md:w-fit w-[350px]" padding="0">
           <div className={`flex `}>
             <img
               className="rounded-full border-2 h-14 w-14 shadow-2xl p-1 "
@@ -55,7 +55,7 @@ const MemberEditTab: React.FC<{ METProps: IMemberEditTabProps }> = ({
             >
               {userData.userName}
               <button
-                className="flex items-center"
+                className="flex items-center pl-20 md:p-0"
                 onClick={() => deleteUser()}
               >
                 <MdPersonOff size={24} />

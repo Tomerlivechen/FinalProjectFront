@@ -57,7 +57,7 @@ const MemberEditTabList: React.FC<{ GroupId: string }> = ({ GroupId }) => {
             Members List
           </div>
           {memberList.map((member) => (
-            <div key={member.id} className="p-2">
+            <div key={member.id} className="md:p-2">
               <MemberEditTab
                 METProps={{ userInfo: member, socialGroupId: groupId }}
               />

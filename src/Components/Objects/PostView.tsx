@@ -165,7 +165,10 @@ const PostView: React.FC<IPostDisplay> = (postDisplay) => {
     <>
       {postDisplayState && (
         <>
-          <ElementFrame tailwind="h-fit" width="400px" padding="2 mt-2">
+          <ElementFrame
+            tailwind="h-fit w-[350px] md:w-[400px]"
+            padding="2 mt-2"
+          >
             <div>
               <div className="flex justify-between items-center">
                 <div className="flex items-center space-x-2">

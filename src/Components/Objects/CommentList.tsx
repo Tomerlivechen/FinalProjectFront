@@ -69,7 +69,7 @@ const CommentList: React.FC<CommentListValues> = ({ index, commmentList }) => {
                 className="-mt-1.5"
                 style={{
                   position: "relative",
-                  left: "20px",
+                  left: "5px",
                   top: "10px",
                 }}
               >

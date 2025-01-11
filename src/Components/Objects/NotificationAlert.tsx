@@ -45,10 +45,18 @@ const NotificationAlert = () => {
   return (
     <>
       <div>
-        <button onClick={toggleList} className={`${open && colors.ActiveText}`}>
+        <button
+          onClick={toggleList}
+          className={`${open && colors.ActiveText} ${
+            active ? `mr-4 mb-8` : ``
+          }`}
+        >
           <Tooltip title="Notifications">
             {active ? (
-              <GiHummingbird className="absolute animate-bounce " size={30} />
+              <GiHummingbird
+                className="absolute animate-bounce mr-8 "
+                size={30}
+              />
             ) : (
               <BsEgg size={24} className="mt-3" />
             )}

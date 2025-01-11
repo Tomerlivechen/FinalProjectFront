@@ -5,7 +5,7 @@ const NoMorePosts = () => {
     <>
       <div>
         <div
-          className={`rounded-md  px-2 py-2  ${colors.ActiveText} font-bold w-[25rem] justify-center text-center`}
+          className={`rounded-md  px-2 py-2  ${colors.ActiveText} font-bold md:w-[25rem] w-[22rem] justify-center text-center`}
         >
           No Posts
           <img
