@@ -90,7 +90,7 @@ const Feed = () => {
               </div>
             </main>
             <section className="flex  justify-center  ">
-              <div className=" md:block hidden w-fit  pr-2 ">
+              <div className=" md:block hidden w-fit  pr-4 ">
                 <InteractingUsersLists />
               </div>
             </section>
