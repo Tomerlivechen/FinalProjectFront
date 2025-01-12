@@ -90,10 +90,9 @@ const Profile = () => {
   return (
     <>
       <MotionFrame>
-        <div className="flex flex-wrap overflow-hidden w-full">
-          <div className="w-full md:w-1/12 md:px-2 hidden"></div>
+        <div className="flex flex-wrap   w-full">
           <div className="w-full md:w-11/12 md:px-2">
-            <div className="  md:px-2 min-w-[25rem]  w-[35rem] md:w-[55rem] lg:w-[72rem] xl:w-[99rem] ">
+            <div className="  md:px-2 min-w-[25rem]  w-[35rem] md:w-[57rem] lg:w-[99rem] xl:w-[99rem] ">
               {userIdState && <ProfileUserSection userId={userIdState} />}
             </div>
 
@@ -113,38 +112,41 @@ const Profile = () => {
                     </>
                   </div>
                 )}
-                <div
-                  className={`${
-                    imagesOpen ? "md:w-full w-[370px]" : "md:w-fit"
-                  } md:w-[26rem] w-[370px] `}
-                >
-                  <ImageList
-                    ImageListProps={{
-                      open: imagesOpen,
-                      setOpen: setImagesOpen,
-                    }}
-                  />
+                <div className="flex flex-col lg:flex-row ">
+                  <div
+                    className={`${
+                      imagesOpen ? "md:w-full w-[370px]" : ""
+                    } lg:w-[160px] w-[370px] md:ml-8 lg:ml-0 `}
+                  >
+                    <ImageList
+                      ImageListProps={{
+                        open: imagesOpen,
+                        setOpen: setImagesOpen,
+                      }}
+                    />
+                  </div>
+                  {!imagesOpen && (
+                    <>
+                      <div className="  lg:w-fit md:pl-2 md:ml-6 lg:ml-0 ">
+                        {!loadingUsers && usersList && (
+                          <>
+                            <ResizableFrame
+                              title={"Following"}
+                              show={true}
+                              tailwindProps="w-[370px]  lg:w-fit h-fit"
+                            >
+                              <UserTabList users={usersList} />
+                            </ResizableFrame>
+                          </>
+                        )}
+                      </div>
+
+                      <div className="w-full lg:w-fit md:pl-2 pr-2 md:ml-2 lg:ml-0">
+                        <PostFrame />
+                      </div>
+                    </>
+                  )}
                 </div>
-                {!imagesOpen && (
-                  <>
-                    <div className="  lg:w-fit md:pl-2 ">
-                      {!loadingUsers && usersList && (
-                        <>
-                          <ResizableFrame
-                            title={"Following"}
-                            show={true}
-                            tailwindProps="w-[370px]  md:w-fit h-fit"
-                          >
-                            <UserTabList users={usersList} />
-                          </ResizableFrame>
-                        </>
-                      )}
-                    </div>
-                    <div className="w-full lg:w-fit md:pl-2 pr-2">
-                      <PostFrame />
-                    </div>
-                  </>
-                )}
               </div>
             </div>
           </div>

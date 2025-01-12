@@ -19,11 +19,12 @@ import { colors, convertUTCToLocalTime } from "../../Constants/Patterns";
 import EditCommentModal from "../../Modals/EditCommentModal";
 import { TbMobiledataOff } from "react-icons/tb";
 import { Tooltip } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const CommentView: React.FC<ICommentDisplay> = (commentDisplay) => {
   const [showModal, setShowModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
-
+  const navagate = useNavigate();
   const handleShow = () => setShowModal((prevshowModal) => !prevshowModal);
   const handleClose = () => setShowModal(false);
   const userContext = useUser();
@@ -96,6 +97,12 @@ const CommentView: React.FC<ICommentDisplay> = (commentDisplay) => {
     }
   };
 
+  const GoToUser = () => {
+    if (commentDisplayState) {
+      navagate(`/profile?userId=${commentDisplayState.authorId}`);
+    }
+  };
+
   useEffect(() => {
     if (commentDisplayState) {
       setLongText((prev) => ({
@@ -122,7 +129,10 @@ const CommentView: React.FC<ICommentDisplay> = (commentDisplay) => {
           >
             <div>
               <div className="flex justify-between items-center">
-                <button className=" text-sm font-bold">
+                <button
+                  className=" text-sm font-bold"
+                  onClick={() => GoToUser()}
+                >
                   {commentDisplayState?.authorName}
                 </button>
                 {(commentDisplayState?.authorId ==
