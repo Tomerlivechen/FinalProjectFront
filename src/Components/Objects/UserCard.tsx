@@ -77,7 +77,7 @@ const UserCard: React.FC<UserCardProps> = ({ UserDisplay }) => {
   } else {
     return (
       <>
-        <ElementFrame tailwind="h-fit w-[260px] md:w-[650px]" padding="2">
+        <ElementFrame tailwind="h-fit w-[280px] md:w-[650px]" padding="2">
           <div className="flex">
             <div className="col-span-5 md:col-span-2 md:w-24 flex items-center justify-center ">
               <img
@@ -95,25 +95,27 @@ const UserCard: React.FC<UserCardProps> = ({ UserDisplay }) => {
                 aria-description={`Profile picture of ${UserDisplay.first_Name} ${UserDisplay.last_Name}`}
               />
             </div>
-            <div className=" ml-6 col-span-5 md:col-span-4 font-extrabold text-emerald-800 md:flex p-3 items-center">
-              {UserDisplay.userName.slice(0, 15)}
-              {UserDisplay.userName.length > 15 && "..."}
-            </div>
-            <div className="hidden md:flex items-center">
-              {!UserDisplay.hideName && (
-                <div className=" ml-4 col-span-4 font-extrabold p-3 ">
-                  {`${UserDisplay.prefix}. ${UserDisplay.first_Name.slice(
-                    0,
-                    10
-                  )}
+            <div className="flex-row md:flex md:col-span-4">
+              <div className=" ml-6  font-extrabold text-emerald-800 md:flex p-3 items-center">
+                {UserDisplay.userName.slice(0, 15)}
+                {UserDisplay.userName.length > 15 && "..."}
+              </div>
+              <div className=" md:flex items-center justify-center">
+                {!UserDisplay.hideName && (
+                  <div className=" ml-4 col-span-4 font-extrabold p-3 ">
+                    {`${UserDisplay.prefix}. ${UserDisplay.first_Name.slice(
+                      0,
+                      10
+                    )}
               ${
                 UserDisplay.first_Name.length > 10 ? "..." : ""
               } ${UserDisplay.last_Name.slice(0, 10)}
               ${UserDisplay.last_Name.length > 10 ? "..." : ""} (${
-                    UserDisplay.pronouns
-                  })`}
-                </div>
-              )}
+                      UserDisplay.pronouns
+                    })`}
+                  </div>
+                )}
+              </div>
               <div className=" ml-auto col-span-2 font-extrabold p-3 flex gap-3">
                 {!UserDisplay.blockedYou &&
                   userContext.userInfo.UserId !== UserDisplay.id && (

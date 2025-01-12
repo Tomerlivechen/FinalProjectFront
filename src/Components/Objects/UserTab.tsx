@@ -39,9 +39,9 @@ const UserTab: React.FC<UserTabProps> = (TabProps: UserTabProps) => {
   return (
     <>
       {!blockedYou ? (
-        <ElementFrame tailwind="h-fit w-[260px]" padding="2">
+        <ElementFrame tailwind=" h-fit w-[260px]" padding="2">
           <div
-            className={`flex  ${
+            className={`flex   ${
               blocking && "bg-stone-500 bg-opacity-15 rounded-full"
             } ${following && "bg-green-400 bg-opacity-15 rounded-full"} `}
           >
@@ -61,7 +61,7 @@ const UserTab: React.FC<UserTabProps> = (TabProps: UserTabProps) => {
             />
 
             <div
-              className={`col-span-4 font-extrabold p-4 flex items-center gap-2 ${colors.ButtonFont}`}
+              className={` col-span-4 font-extrabold p-4 flex items-center gap-2 ${colors.ButtonFont}`}
             >
               <div
                 className={`hover:cursor-pointer`}
