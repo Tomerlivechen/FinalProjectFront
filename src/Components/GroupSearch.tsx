@@ -58,7 +58,7 @@ const GroupSearch = () => {
         <div className="p-8 md:w-3/4 w-full">
           <div className="flex">
             <input
-              className={`m-0.5 p-2 w-72 ${colors.TextBox}`}
+              className={`m-0.5 p-2 md:w-72  w-48 ${colors.TextBox}`}
               type="search"
               placeholder="Search"
               aria-label="Search"

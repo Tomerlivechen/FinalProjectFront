@@ -78,7 +78,7 @@ function NavBar() {
     <>
       <Navbar
         id="app-navbar"
-        className={` fixed z-40 w-full pt-1 flex justify-between items-center flex-row shadow-2xl shadow-slate-800  text-black  md:gap-3 gap-0 ${colors.Nav} ${colors.NavText}`}
+        className={` fixed z-40 w-full pt-1 flex md:justify-between items-center flex-row shadow-2xl shadow-slate-800  text-black  md:gap-3 gap-0 ${colors.Nav} ${colors.NavText}`}
       >
         <div className="flex space-x-1 ">
           <Navbar.Brand
@@ -178,6 +178,9 @@ function NavBar() {
           )}
           {isLoggedin && (
             <>
+              <div
+                className={`md:hidden ${notFeedOrSearch ? `w-8` : `w-12`}`}
+              ></div>
               <div className=" mr-3 -mt-2 md:-mt-1">
                 <NotificationAlert />
               </div>
