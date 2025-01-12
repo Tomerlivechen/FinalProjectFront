@@ -29,8 +29,8 @@ function FilterBar() {
   });
   const [searchActive, setSearchActive] = useState(false);
 
-  const handleSearch = () => {
-    if (searchFilter.searchValue.length > 1) {
+  const handleSearch = (flag: boolean = false) => {
+    if (searchFilter.searchValue.length > 1 || flag) {
       if (selectedUser) {
         searchFilter.filterUsers();
       }
@@ -78,6 +78,15 @@ function FilterBar() {
     userSelector.UserName,
   ]);
 
+  useEffect(() => {
+    if (postSelector.Voted) {
+      searchFilter.fillLists();
+      if (searchFilter.votedOnPosts.length > 1) {
+        handleSearch(true);
+      }
+    }
+  }, [postSelector, searchFilter.votedOnPosts]);
+
   const handleKeyDown = (event: { key: string }) => {
     if (event.key === "Enter") {
       handleSearch();
@@ -108,6 +117,7 @@ function FilterBar() {
   };
 
   const toggleUserSelector = (key: keyof IUserSelector) => {
+    searchFilter.clearLists();
     setUserSelector({
       UserName: false,
       FirstName: false,
@@ -119,6 +129,7 @@ function FilterBar() {
   };
 
   const togglePostSelector = (key: keyof IPostSelector) => {
+    searchFilter.clearLists();
     setPostSelector({
       UserName: false,
       Title: false,
@@ -232,7 +243,6 @@ function FilterBar() {
               } p-1 mt-1 text-sm`}
               onClick={() => {
                 togglePostSelector("Voted");
-                handleSearch();
               }}
             >
               <Tooltip title="Voted on">
@@ -261,7 +271,7 @@ function FilterBar() {
             value={searchFilter.searchValue}
             disabled={!searchActive}
           />
-          <button className=" pl-3" onClick={handleSearch}>
+          <button className=" pl-3" onClick={() => handleSearch()}>
             {searchActive && <FaSearch />}
           </button>
         </div>

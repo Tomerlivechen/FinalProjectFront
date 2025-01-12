@@ -60,11 +60,13 @@ export interface ISearchContext {
   setSearchValue: (searchTerm: string) => void;
   userList: IAppUserDisplay[];
   postList: IPostDisplay[];
+  votedOnPosts: IPostDisplay[];
   filterUserList: IAppUserDisplay[];
   filterPostList: IPostDisplay[];
   fillLists: () => void;
   filterUsers: () => void;
   filterPosts: () => void;
+  clearLists: () => void;
   loadingData: boolean;
 }
 const searchTermBase = "";
@@ -76,11 +78,13 @@ const SearchContext = createContext<ISearchContext>({
   setSearchValue: () => {},
   userList: [],
   postList: [],
+  votedOnPosts: [],
   filterUserList: [],
   filterPostList: [],
   fillLists: () => {},
   filterUsers: () => {},
   filterPosts: () => {},
+  clearLists: () => {},
   loadingData: false,
 });
 
@@ -93,13 +97,17 @@ const SearchProvider: React.FC<ProviderProps> = ({ children }) => {
   const [loadingData, setloadingData] = useState(true);
   const [filterUserList, setFilterUserList] = useState<IAppUserDisplay[]>([]);
   const [filterPostList, setFilterPostList] = useState<IPostDisplay[]>([]);
-  const [votedOnePosts, setVotedOnePosts] = useState<IPostDisplay[]>([]);
+  const [votedOnPosts, setVotedOnPosts] = useState<IPostDisplay[]>([]);
 
   useEffect(() => {
+    clearLists();
+  }, [userSearch, postSearch]);
+
+  const clearLists = () => {
     setFilterUserList([]);
     setFilterPostList([]);
-    setVotedOnePosts([]);
-  }, [userSearch, postSearch]);
+    setVotedOnPosts([]);
+  };
 
   useEffect(() => {
     fillLists();
@@ -157,7 +165,7 @@ const SearchProvider: React.FC<ProviderProps> = ({ children }) => {
 
   const getVotedon = async () => {
     const respons = await Posts.GetVotedOn();
-    setVotedOnePosts(respons.data as IPostDisplay[]);
+    setVotedOnPosts(respons.data as IPostDisplay[]);
   };
 
   const filterPosts = async () => {
@@ -185,11 +193,11 @@ const SearchProvider: React.FC<ProviderProps> = ({ children }) => {
       if (postSearch.Voted) {
         let firstFilter;
         if (searchValue.length > 1) {
-          firstFilter = votedOnePosts.filter((post) =>
+          firstFilter = votedOnPosts.filter((post) =>
             post.title.toLowerCase().includes(searchValue.toLowerCase())
           );
         } else {
-          firstFilter = votedOnePosts
+          firstFilter = votedOnPosts
             .slice()
             .sort(sortByProperty<IPostDisplay>("datetime", "desc"));
         }
@@ -251,10 +259,12 @@ const SearchProvider: React.FC<ProviderProps> = ({ children }) => {
         userSearch,
         searchToggleFunctions,
         searchValue,
+        votedOnPosts,
         setSearchValue,
         fillLists,
         filterUsers,
         filterPosts,
+        clearLists,
         filterUserList,
         filterPostList,
         loadingData,
