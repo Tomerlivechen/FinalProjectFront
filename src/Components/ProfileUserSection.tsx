@@ -235,7 +235,7 @@ const ProfileUserSection: React.FC<ProfileUserSectionProps> = ({ userId }) => {
                       </div>
                     )}
                   </div>
-                  <div className=" flex flex-col items-end space-y-4 ml-auto mr-12 md:mr-0 ">
+                  <div className=" flex flex-col items-end space-y-4 ml-auto mr-20 md:mr-0 ">
                     {!user.blockedYou &&
                       userContex.userInfo.UserId !== user.id && (
                         <>

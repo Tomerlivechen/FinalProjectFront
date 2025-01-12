@@ -20,6 +20,7 @@ import { InteractingUsersLists } from "../Components/InteractingUsersLists";
 import { useUser } from "../CustomHooks/useUser";
 import { MdHelp } from "react-icons/md";
 function NavBar() {
+  const [windowWidth, setWindowWidth] = useState<string>("");
   const navigate = useNavigate();
   const [filter, setFilter] = useState(false);
   const [chatFrame, setChatFrame] = useState(false);
@@ -74,11 +75,15 @@ function NavBar() {
     closeChat();
   }, [location]);
 
+  useEffect(() => {
+    setWindowWidth(`w-${window.innerWidth + 25}px`);
+  }, []);
+
   return (
     <>
       <Navbar
         id="app-navbar"
-        className={` fixed z-40 w-full pt-1 flex md:justify-between items-center flex-row shadow-2xl shadow-slate-800  text-black  md:gap-3 gap-0 ${colors.Nav} ${colors.NavText}`}
+        className={` fixed z-40  ${windowWidth} md:w-full pt-1 flex md:justify-between items-center flex-row shadow-2xl shadow-slate-800  text-black  md:gap-3 gap-0 ${colors.Nav} ${colors.NavText}`}
       >
         <div className="flex space-x-1 ">
           <Navbar.Brand
