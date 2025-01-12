@@ -149,7 +149,7 @@ const ProfileUserSection: React.FC<ProfileUserSectionProps> = ({ userId }) => {
         {!loading && user && !user.blockedYou && (
           <>
             <div
-              className={`${colors.ElementFrame} shadow-lg rounded-lg overflow-hidden w-2/3`}
+              className={`${colors.ElementFrame} shadow-lg rounded-lg md:overflow-hidden w-2/3`}
             >
               <div className="relative">
                 <img
