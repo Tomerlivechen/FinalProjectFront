@@ -1,10 +1,10 @@
-import axios from "axios";
+
 import { request } from "../Utils/Axios-Interceptor";
 import {  IAppUserEdit } from "../Models/UserModels";
 import { IAppUserRegister } from "../Models/AuthModels";
 import { ReNewPasswordDTO } from "./emailRecovery-servicets";
 
-const baseURL = import.meta.env.VITE_BASE_URL;
+
 
 const AuthURL = "/Auth";
 
@@ -17,13 +17,18 @@ const register = (user : IAppUserRegister) =>
   });
 
 
-const login = (email: string, password: string) =>
-  axios.post(`${baseURL}${AuthURL}/login`, { email, password }).then((response) => {
-    if (response.data.token) {
-      localStorage.setItem("token", response.data.token);
-    }
-    return response;
-  });
+  const login = async (email: string, password: string) => {
+    return request({
+      url: `${AuthURL}/login`,
+      method: "POST",
+      data: { email, password },
+    }).then((response) => {
+      if (response.data.token) {
+        localStorage.setItem("token", response.data.token);
+      }
+      return response;
+    });
+  };
 
   const validate = () =>
     request({
