@@ -117,7 +117,6 @@ const LoginPage = () => {
       if (response.status === 200) {
         await dialogs.success("Login Succefull");
         login(response.data.token);
-        window.location.reload();
       }
     } catch (error) {
       const axiosError = error as AxiosError;
