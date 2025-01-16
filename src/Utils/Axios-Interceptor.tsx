@@ -6,7 +6,9 @@ const client = axios.create({
   baseURL: baseUrl,
   timeout: 10000,
   headers: {
-    Authorization: `Bearer ${localStorage.getItem("token")}`,
+    Authorization: localStorage.getItem("token")
+? `Bearer ${localStorage.getItem("token")}`
+: "",
   },
 });
 
@@ -15,3 +17,5 @@ const request = async (Options: AxiosRequestConfig) => {
 };
 
 export { request };
+
+
