@@ -9,6 +9,7 @@ const BackGround: React.FC<{ children: ReactNode }> = ({ children }) => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    window.location.reload();
   }, [pathname]);
 
   return (
