@@ -1,16 +1,17 @@
-import React, { ReactNode, useEffect } from "react";
+import React, { ReactNode,  useEffect } from "react";
 import { colors } from "../Constants/Patterns";
 
 import { MotionFrame } from "../Components/Objects/MotionFrame";
 import { useLocation } from "react-router-dom";
+
 
 const BackGround: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { pathname } = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    window.location.reload();
   }, [pathname]);
+
 
   return (
     <>

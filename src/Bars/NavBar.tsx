@@ -61,6 +61,7 @@ function NavBar() {
 
   const brandNav = () => {
     navigate("feed");
+    window.location.reload();
   };
 
   const toggleChat = () => {
