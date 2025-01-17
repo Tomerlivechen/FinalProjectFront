@@ -49,7 +49,7 @@ const LoginPage = () => {
   const loginContext = useLogin();
   const userContext = useUser();
   const [isLoading, setIsLoading] = useState(false);
-  const { login } = useContext(LoggedInContext);
+  const { browser, login } = useContext(LoggedInContext);
   const navigate = useNavigate();
   const viewPass = () => {
     setviewPassword((prevviewPassword) =>
@@ -115,6 +115,14 @@ const LoginPage = () => {
       if (response.status === 200) {
         await dialogs.success("Login Succefull");
         login(response.data.token);
+        if (browser == "Chrome") {
+          window.location.reload();
+        } else if (browser == "Edge" || browser == "Firefox") {
+          dialogs.showToast(
+            "Edge and Firefox users need to refresh the site",
+            "info"
+          );
+        }
       }
     } catch (error) {
       const axiosError = error as AxiosError;

@@ -31,6 +31,7 @@
     token: string | null;
     login: (token: string) => void;
     logout: () => void;
+    browser : string ;
   }
   
   export interface IUserValues {

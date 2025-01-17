@@ -188,6 +188,28 @@ const showtext = (text: string) => {
   });
 };
 
+export const showToast = (
+  message: string,
+  type: "success" | "error" | "info" | "question" | "warning"
+) => {
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "bottom",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    },
+  });
+
+  Toast.fire({
+    icon: type,
+    title: message,
+  });
+};
+
 export default {
   showErrorDialog,
   showSuccessDialog,
@@ -208,4 +230,5 @@ export const dialogs = {
   getName,
   getEmail,
   ConfirmRemoveFromGroup,
+  showToast,
 };
