@@ -23,7 +23,7 @@ interface AddPostCommentModalProps {
   Mshow: boolean;
   onHide: () => void;
 }
-
+// modal to add comment to post
 const AddPostCommentModal: React.FC<AddPostCommentModalProps> = ({
   postId,
   Mshow,

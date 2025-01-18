@@ -13,7 +13,7 @@ const BackGround: React.FC<{ children: ReactNode }> = ({ children }) => {
   useEffect(() => {
     document.body.style.zoom = "1";
     updateScale(0.7);
-  }, [location]);
+  }, [pathname]);
 
   return (
     <>

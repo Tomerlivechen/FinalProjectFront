@@ -28,7 +28,7 @@ interface EditCommentModalProps {
   onHide: () => void;
   comment: ICommentDisplay;
 }
-
+//modal to edit comment
 const EditCommentModal: React.FC<EditCommentModalProps> = ({
   Mshow,
   onHide,

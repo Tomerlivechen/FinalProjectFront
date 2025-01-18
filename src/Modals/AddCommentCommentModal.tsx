@@ -25,7 +25,7 @@ interface AddCommentCommentModalProps {
   Mshow: boolean;
   onHide: () => void;
 }
-
+// modal to add comment to comment
 const AddCommentCommentModal: React.FC<AddCommentCommentModalProps> = ({
   commentId,
   Mshow,

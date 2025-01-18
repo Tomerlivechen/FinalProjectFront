@@ -34,7 +34,7 @@ interface EditPostModalProps {
   onHide: () => void;
   post: IPostDisplay;
 }
-
+//modal to edit post
 const EditPostModal: React.FC<EditPostModalProps> = ({
   Mshow,
   onHide,

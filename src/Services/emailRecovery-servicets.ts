@@ -14,7 +14,7 @@ export interface ReSetPassword {
     tokenDTO : ReNewPasswordDTO;
     userInfo : IAppUserDisplay;
 }
-
+// using emailjs service to send recovery email
 const SendRecoveyEmail = async (paswwordReset : ReSetPassword) => {
   const basePath = window.location.origin;
   const templateParams = {

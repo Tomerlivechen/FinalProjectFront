@@ -79,7 +79,7 @@ const PostFrame = () => {
       setPostId(null);
     }
   };
-
+  // detect what path is viewd
   useEffect(() => {
     if (location.pathname.startsWith("/profile") && userId) {
       setUserIdState(userId);
@@ -111,6 +111,7 @@ const PostFrame = () => {
     }
   }, [userIdState, groupIdState, postIdState]);
 
+  // detect what kind of page is viewd
   const updatePostList = async () => {
     const updatePostListIfChanged = (parsedPosts: IPostDisplay[]) => {
       if (!isEqual(parsedPosts, mainPostList)) {
@@ -155,6 +156,7 @@ const PostFrame = () => {
     return element;
   };
 
+  // sort and orgenize the posts list parameters
   useEffect(() => {
     if (mainPostList) {
       const sortelement = getSoretElement();
