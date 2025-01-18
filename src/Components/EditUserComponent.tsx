@@ -161,7 +161,7 @@ const EditUserComponent: React.FC<{ userInfo: IAppUserDisplay }> = ({
         await PutUser(userValues);
       }
     } else {
-      dialogs.error("Comment not sent user not logged in");
+      dialogs.error("Comment not sent; user not logged in");
       setIsLoading(false);
     }
   };
@@ -207,7 +207,7 @@ const EditUserComponent: React.FC<{ userInfo: IAppUserDisplay }> = ({
         navigate(`/profile?userId=${values.id}`);
       }
     } else {
-      dialogs.error("Comment not sent user not logged in");
+      dialogs.error("Comment not sent; user not logged in");
       setIsLoading(false);
     }
   };

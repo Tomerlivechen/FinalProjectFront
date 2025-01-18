@@ -6,7 +6,7 @@ const useCopy = () => {
     const postLink = `${basePath}/feed?postId=${postId}`;
     try {
       await navigator.clipboard.writeText(postLink);
-      dialogs.success("link copied to clipboard!");
+      dialogs.success("Link copied to clipboard!");
     } catch (err) {
       console.error("Failed to copy: ", err);
       dialogs.error("Failed to copy to clipboard!");

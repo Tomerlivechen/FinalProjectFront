@@ -17,7 +17,7 @@ const LoggedInProvider: React.FC<ProviderProps> = ({ children }) => {
   const [isLoggedin, setIsLoggedIn] = useState(initialValues.isLoggedin);
   const [token, setToken] = useState(initialValues.token);
   const [browser, setBrowser] = useState("");
-
+  //detects what brouser the user is using, some have probelms with refersh and local storage
   useEffect(() => {
     const userAgent = navigator.userAgent;
 

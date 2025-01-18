@@ -81,7 +81,7 @@ const EditCommentModal: React.FC<EditCommentModalProps> = ({
         await postComment(commentValues);
       }
     } else {
-      dialogs.error("Comment not sent user not logged in");
+      dialogs.error("Comment not sent; user not logged in");
       setIsLoading(false);
       handleclose();
     }
@@ -106,7 +106,7 @@ const EditCommentModal: React.FC<EditCommentModalProps> = ({
         clear();
         const respons = await CommentService.PutComment(values);
         if (respons.status === 200) {
-          dialogs.success("Comment Sent");
+          dialogs.success("Comment sent");
         }
       } catch (error) {
         catchError(error as AxiosError, "Commenting");
@@ -116,7 +116,7 @@ const EditCommentModal: React.FC<EditCommentModalProps> = ({
         setIsLoading(false);
       }
     } else {
-      dialogs.error("Comment not sent user not logged in");
+      dialogs.error("Comment not sent; user not logged in");
       setIsLoading(false);
       handleclose();
     }

@@ -24,11 +24,11 @@ const GroupCreation = () => {
       .min(2)
       .required("The group description is required"),
   });
-
+  // opens the group creation component
   const toggleOpen = () => {
     setOpen((prev) => !prev);
   };
-
+  // save group to the server
   const createGroup = async (submitValues: INewSocialGroup) => {
     setIsLoading(true);
     await Groups.CreateGroup(submitValues);

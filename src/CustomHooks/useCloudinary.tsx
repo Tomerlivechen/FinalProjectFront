@@ -23,7 +23,7 @@ const useCloudinary = (): [
       const fileSizeInBytes = file.size;
       const fileSizeInMB = fileSizeInBytes / 1048576;
       if (fileSizeInMB > 2) {
-        dialogs.error("File Larger than Limit (2MB)");
+        dialogs.error("File larger than limit (2MB)");
         clear();
       }
     }

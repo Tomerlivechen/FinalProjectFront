@@ -24,14 +24,14 @@ const ChatProvider: React.FC<ProviderProps> = ({ children }) => {
   //open chat window
   const addChat = (chatId: string) => {
     if (chatIds.includes(chatId)) {
-      dialogs.error("Chat alredy open");
+      dialogs.error("Chat already open");
       return false;
     } //limit amount of chats open (to avoid overlapping on screen or off screen)
     if (chatIds.length < maxChats) {
       setChatIds((prev) => [...prev, chatId]);
       return true;
     }
-    dialogs.error("Chat max amount exceeded");
+    dialogs.error("Open chats max amount reached");
     return false;
   };
 

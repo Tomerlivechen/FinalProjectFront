@@ -113,13 +113,14 @@ const LoginPage = () => {
     try {
       const response = await auth.login(o.email, o.password);
       if (response.status === 200) {
-        await dialogs.success("Login Succefull");
+        await dialogs.success("Login successful");
         login(response.data.token);
+        // seems there is a problem with Edge and Firefox refersh system, this is the solution i found
         if (browser == "Chrome") {
           window.location.reload();
         } else if (browser == "Edge" || browser == "Firefox") {
           dialogs.showToast(
-            "Edge and Firefox users need to refresh the site",
+            "Edge and Firefox users may need to refresh the site",
             "info"
           );
         }

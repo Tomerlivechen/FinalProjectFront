@@ -26,7 +26,7 @@ const ImageObject: React.FC<{
     if (imageObject) {
       const respons = await dialogs.ConfirmImageDelete(imageObject.id);
       if (respons === 200) {
-        dialogs.success("image deleted successfully");
+        dialogs.success("Image deleted successfully");
         setImageObject(null);
       } else {
         dialogs.error(`Unable to delete image , ${respons}`);
@@ -52,7 +52,7 @@ const ImageObject: React.FC<{
       const newName = await dialogs.getName();
       const respons = await Images.RenameImage(imageObject.id, newName);
       if (respons.status === 200) {
-        dialogs.success("image renamed successfully");
+        dialogs.success("Image renamed successfully");
         setImageObject(respons.data);
       } else {
         dialogs.error(`Unable to rename image , ${respons}`);

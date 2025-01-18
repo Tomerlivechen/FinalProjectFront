@@ -4,7 +4,8 @@ import { ThemeContext } from "../ContextAPI/ThemeContext";
 import { LuLogIn, LuLogOut } from "react-icons/lu";
 import { useNavigate, useLocation, NavLink } from "react-router-dom";
 import { BsFillLightbulbFill, BsFillLightbulbOffFill } from "react-icons/bs";
-import { colors, updateScale } from "../Constants/Patterns";
+//import { updateScale } from "../Constants/Patterns";
+import { colors } from "../Constants/Patterns";
 import { LoggedInContext } from "../ContextAPI/LoggedInContext";
 import FilterBar from "./FilterBar";
 import { FaSearch } from "react-icons/fa";
@@ -41,10 +42,10 @@ function NavBar() {
       navigate("/");
     }
   };
-  useEffect(() => {
-    document.body.style.zoom = "1";
-    updateScale(0.7);
-  }, [location]);
+  //  useEffect(() => {
+  //    document.body.style.zoom = "1";
+  //    updateScale(0.7);
+  //  }, [location]);
 
   useEffect(() => {
     if (location.pathname != "/search") {

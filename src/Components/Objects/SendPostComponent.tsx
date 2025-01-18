@@ -94,7 +94,7 @@ function SendPostComponent() {
         await postPost(values);
       }
     } else {
-      dialogs.error("Comment not sent user not logged in");
+      dialogs.error("Comment not sent; user not logged in");
       setIsLoading(false);
     }
   };
@@ -129,7 +129,7 @@ function SendPostComponent() {
         toggelOpen();
       }
     } else {
-      dialogs.error("Post not sent user not logged in");
+      dialogs.error("Post not sent; user not logged in");
       setIsLoading(false);
       toggelOpen();
     }

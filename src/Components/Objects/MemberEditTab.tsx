@@ -33,7 +33,7 @@ const MemberEditTab: React.FC<{ METProps: IMemberEditTabProps }> = ({
       const confirm = await dialogs.ConfirmRemoveFromGroup(userData);
       if (confirm) {
         await Groups.RemoveMember(groupId, userData.id);
-        dialogs.success("User Removed successfully");
+        dialogs.success("User removed successfully");
       }
     }
   };

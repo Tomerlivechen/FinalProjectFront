@@ -20,7 +20,7 @@ const MessageComponent: React.FC<IMessage> = (MessageDisplay) => {
   }, []);
   //edits message using modal
   const editMessage = async (message: string) => {
-    const newMessage = await dialogs.getText("Edit Message", message, message);
+    const newMessage = await dialogs.getText("Edit message", message, message);
     Chat.updateMessage(newMessage, MessageDisplay.id);
   };
 

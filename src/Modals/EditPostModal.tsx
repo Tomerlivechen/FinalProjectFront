@@ -73,7 +73,7 @@ const EditPostModal: React.FC<EditPostModalProps> = ({
   };
 
   const validationScheme = Yup.object({
-    title: Yup.string().min(2).required("Must have a text"),
+    title: Yup.string().min(2).required("Must have a title"),
     link: Yup.string().url(),
     text: Yup.string().min(2).required("Must have some text"),
   });
@@ -95,7 +95,7 @@ const EditPostModal: React.FC<EditPostModalProps> = ({
         await postPost(postValues);
       }
     } else {
-      dialogs.error("Comment not sent user not logged in");
+      dialogs.error("Comment not sent; user not logged in");
       setIsLoading(false);
       handleclose();
     }
@@ -138,7 +138,7 @@ const EditPostModal: React.FC<EditPostModalProps> = ({
         setIsLoading(false);
       }
     } else {
-      dialogs.error("Post not sent user not logged in");
+      dialogs.error("Post not sent; user not logged in");
       setIsLoading(false);
       handleclose();
     }

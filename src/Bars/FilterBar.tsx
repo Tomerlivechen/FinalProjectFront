@@ -29,6 +29,7 @@ function FilterBar() {
   });
   const [searchActive, setSearchActive] = useState(false);
 
+  // search when search button is clicked
   const handleSearch = (flag: boolean = false) => {
     if (searchFilter.searchValue.length > 1 || flag) {
       if (selectedUser) {
@@ -41,7 +42,7 @@ function FilterBar() {
       dialogs.error("Please write at least two characters");
     }
   };
-
+  //clear search properties
   useEffect(() => {
     if (selectedUser) {
       if (
@@ -87,11 +88,13 @@ function FilterBar() {
     }
   }, [postSelector, searchFilter.votedOnPosts]);
 
+  // search when enter key is clicked
   const handleKeyDown = (event: { key: string }) => {
     if (event.key === "Enter") {
       handleSearch();
     }
   };
+  // set serach for users
   const toggleUser = async () => {
     setSelectedUser((prevselectedUser) => !prevselectedUser);
     setUserSelector({
@@ -103,6 +106,7 @@ function FilterBar() {
       setSelectedPost(false);
     }
   };
+  // set serach for posts
   const togglePost = async () => {
     setSelectedPost((prevselectedPost) => !prevselectedPost);
     setPostSelector({
@@ -115,7 +119,7 @@ function FilterBar() {
       setSelectedUser(false);
     }
   };
-
+  // select user property to search
   const toggleUserSelector = (key: keyof IUserSelector) => {
     searchFilter.clearLists();
     setUserSelector({
@@ -127,7 +131,7 @@ function FilterBar() {
     searchFilter.searchToggleFunctions.toggleUserSearch(key);
     searchFilter.searchToggleFunctions.togglePostSearch(null);
   };
-
+  // select post proerty to search
   const togglePostSelector = (key: keyof IPostSelector) => {
     searchFilter.clearLists();
     setPostSelector({

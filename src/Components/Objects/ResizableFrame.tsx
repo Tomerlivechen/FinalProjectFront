@@ -25,11 +25,11 @@ const ResizableFrame: React.FC<ResizableFrameProps> = (
   });
   const [frameHeight, setFrameHeight] = useState("h-fit");
 
+  //change size of frame acording to chjanges in selectedSize
   useEffect(() => {
     if (selectedSize === "closed") {
       setShow(false);
     }
-
     if (selectedSize === "min") {
       setFrameHeight("h-0");
     }

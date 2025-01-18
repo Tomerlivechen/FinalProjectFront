@@ -31,7 +31,7 @@ const NotificationObject: React.FC<{
   const getNotificationData = async () => {
     if (notification) {
       const Notifier = await auth.getUser(notification.notifierId);
-
+      // sets type of notificatioin according to notification properties
       setNameOfNotifier(Notifier.data.userName);
       if (notification.type == "Comment") {
         const post = await Posts.getPostById(notification.referenceId);
@@ -56,7 +56,7 @@ const NotificationObject: React.FC<{
     }
   }, [NotificationData]);
 
-  // do the approrate action for the notification
+  // do the approrate action for the notification, open post or chat
   const activateNotification = async () => {
     if (notification?.id) {
       await Notification.UpdateNotification(notification?.id, false);

@@ -73,7 +73,7 @@ const AddPostCommentModal: React.FC<AddPostCommentModalProps> = ({
         await postComment(values);
       }
     } else {
-      dialogs.error("Comment not sent user not logged in");
+      dialogs.error("Comment not sent; user not logged in");
       setIsLoading(false);
       handleclose();
     }
@@ -96,7 +96,7 @@ const AddPostCommentModal: React.FC<AddPostCommentModalProps> = ({
         clear();
         const response = await CommentService.PostComment(values);
         if (response.status == 200) {
-          dialogs.success("Comment Sent");
+          dialogs.success("Comment sent");
         }
       } catch (error) {
         catchError(error as AxiosError, "Commenting");
@@ -106,7 +106,7 @@ const AddPostCommentModal: React.FC<AddPostCommentModalProps> = ({
         setIsLoading(false);
       }
     } else {
-      dialogs.error("Comment not sent user not logged in");
+      dialogs.error("Comment not sent; user not logged in");
       setIsLoading(false);
       handleclose();
     }

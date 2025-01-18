@@ -23,7 +23,7 @@ const NotificationAlert = () => {
   };
 
   useEffect(() => {
-    // set notification unseen , initialy ment to have a number but couldent reaky set this well with the icons i wanted
+    // count unseen notifications, if relavent to show user new notification
     let unseen = 0;
     if (notifications)
       notifications.forEach((note) => {

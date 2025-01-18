@@ -1,6 +1,7 @@
 import { colors } from "../../Constants/Patterns";
 
 const NoMorePosts = () => {
+  // presents an image if user has no posts on their feed
   return (
     <>
       <div>

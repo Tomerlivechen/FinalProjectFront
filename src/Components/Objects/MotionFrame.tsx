@@ -2,6 +2,7 @@ import { motion as m } from "framer-motion";
 import { ReactNode } from "react";
 
 export const MotionFrame = ({ children }: { children: ReactNode }) => {
+  // gives fad in amination to objects
   return (
     <m.div
       initial={{ opacity: 0 }}
