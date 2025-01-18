@@ -1,9 +1,8 @@
-import React, { ReactNode,  useEffect } from "react";
-import { colors } from "../Constants/Patterns";
+import React, { ReactNode, useEffect } from "react";
+import { colors, updateScale } from "../Constants/Patterns";
 
 import { MotionFrame } from "../Components/Objects/MotionFrame";
 import { useLocation } from "react-router-dom";
-
 
 const BackGround: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { pathname } = useLocation();
@@ -11,7 +10,10 @@ const BackGround: React.FC<{ children: ReactNode }> = ({ children }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
-
+  useEffect(() => {
+    document.body.style.zoom = "1";
+    updateScale(0.7);
+  }, [location]);
 
   return (
     <>

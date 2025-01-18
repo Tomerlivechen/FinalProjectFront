@@ -11,7 +11,6 @@ import { ProfileGroupsList } from "../Components/Objects/ProfileGroupsList";
 import { ImageList } from "../Components/Objects/ImageList";
 import { isEqual } from "lodash";
 import { MotionFrame } from "../Components/Objects/MotionFrame";
-import { updateScale } from "../Constants/Patterns";
 
 const Profile = () => {
   const location = useLocation();
@@ -36,11 +35,6 @@ const Profile = () => {
       setUserId(null);
     }
   };
-
-  useEffect(() => {
-    document.body.style.zoom = "1";
-    updateScale(0.7);
-  }, [location]);
 
   const GetFollowing = async (profileId: string) => {
     const response = await auth.GetUsersFollowing(profileId);
