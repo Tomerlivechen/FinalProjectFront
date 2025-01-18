@@ -64,12 +64,12 @@ const GroupPage = () => {
       <div className="flex flex-wrap overflow-hidden w-full">
         <div className="w-full md:w-1/12 px-2"></div>
         <div className="w-full md:w-11/12 md:px-2">
-          <div className="  md:px-2 min-w-[35rem]  w-[35rem] md:w-[55rem] lg:w-[72rem] xl:w-[99rem] ">
+          <div className="  md:px-2 min-w-[370px]  w-[400px] md:w-[57rem] lg:w-[99rem] xl:w-[99rem] ">
             <GroupProfileSection />
           </div>
-          <div className="flex md:px-2 min-w-[35rem] w-[35rem] md:w-[55rem] lg:w-[72rem] xl:w-[99rem] ">
+          <div className="  md:px-2 min-w-[370px]  w-[400px] md:w-[55rem] lg:w-[72rem] xl:w-[99rem] ">
             <div className="flex flex-col md:flex-row justify-between w-fit">
-              <div className="lg:w-fit md:pl-2 md:pr-2 h-1/2">
+              <div className="lg:w-fit md:pl-2 md:pr-2 md:h-1/2">
                 {!loadingUsers && MemberList && (
                   <ResizableFrame
                     title={"Members"}

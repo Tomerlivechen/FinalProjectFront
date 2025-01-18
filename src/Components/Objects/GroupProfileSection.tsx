@@ -103,7 +103,7 @@ const GroupProfileSection = () => {
         {!loading && groupInfo && !groupAdmin?.blockedYou && (
           <>
             <div
-              className={`${colors.ElementFrame} shadow-lg rounded-lg overflow-hidden w-2/3`}
+              className={`${colors.ElementFrame} shadow-lg rounded-lg md:overflow-hidden w-11/12 md:w-2/3`}
             >
               <div className="relative">
                 <img
