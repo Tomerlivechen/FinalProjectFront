@@ -84,16 +84,16 @@ const Profile = () => {
   return (
     <>
       <MotionFrame>
-        <div className="flex flex-wrap   w-full">
+        <div className="flex flex-wrap w-full">
           <div className="w-full md:w-11/12 md:px-2">
-            <div className="  md:px-2 min-w-[25rem]  w-[35rem] md:w-[57rem] lg:w-[99rem] xl:w-[99rem] ">
+            <div className="  md:px-2 min-w-[25rem]  w-fit md:w-[57rem] lg:w-[99rem] xl:w-[99rem] ">
               {userIdState && <ProfileUserSection userId={userIdState} />}
             </div>
 
-            <div className="  md:px-2 min-w-[40rem]  w-[35rem] md:w-[55rem] lg:w-[72rem] xl:w-[99rem] ">
+            <div className="  md:px-2 min-w-[25rem]  w-fit md:w-[55rem] lg:w-[72rem] xl:w-[99rem] ">
               <div className="flex flex-col md:flex-row justify-between w-full md:w-8/12   ">
                 {!imagesOpen && (
-                  <div className=" lg:w-fit md:pl-2 md:pr-2 h-1/2">
+                  <div className=" lg:w-fit md:pl-2 md:pr-2 md:h-1/2">
                     <>
                       <ResizableFrame
                         title={"Groups"}
