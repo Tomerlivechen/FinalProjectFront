@@ -23,7 +23,7 @@ import {
 import DinoSpinner from "../Spinners/DinoSpinner";
 import { MotionFrame } from "../Components/Objects/MotionFrame";
 
-function Register() {
+const Register = () => {
   const [viewPassword, setviewPassword] = useState("password");
   passwordValues.type = viewPassword;
   confirmPasswordValues.type = viewPassword;
@@ -76,6 +76,8 @@ function Register() {
   };
 
   const submiteRegister = async (user: IAppUserRegister) => {
+    // eslint-disable-next-line no-debugger
+    debugger;
     setIsLoading(true);
     const response = await auth.register(user);
     if (response.status === 200) {
@@ -192,6 +194,6 @@ function Register() {
       </MotionFrame>
     </>
   );
-}
+};
 
 export default Register;
