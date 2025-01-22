@@ -71,7 +71,12 @@ const ChatFrame: React.FC<ChatFrameProps> = ({ chatID }) => {
     if (chatInfo) {
       setLoading(false);
       if (userNames.length < 1) {
-        setUserNames(`${chatInfo.user1Name} , ${chatInfo.user2Name}`);
+        setUserNames(
+          `${chatInfo.user1Name.slice(0, 10)} , ${chatInfo.user2Name.slice(
+            0,
+            10
+          )}`
+        );
       }
     }
   }, [chatInfo]);

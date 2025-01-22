@@ -67,8 +67,8 @@ const UserTab: React.FC<UserTabProps> = (TabProps: UserTabProps) => {
                 className={`hover:cursor-pointer`}
                 onClick={() => navigate(`/profile?userId=${userInfo.id}`)}
               >
-                {userInfo.userName.slice(0, 15)}
-                {userInfo.userName.length > 15 && "..."}
+                {userInfo.userName.slice(0, 10)}
+                {userInfo.userName.length > 10 && "..."}
               </div>
               {userInfo.chatId ? (
                 <Tooltip title="Open Chat">
